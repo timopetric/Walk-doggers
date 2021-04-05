@@ -501,10 +501,10 @@ ___
 ## 7. Osnutki zaslonskih mask
 
 **TO-DO**
-### Registracija / Prijava v sistem
+### Prijava / Registracija
 <p float="left">
-  <img src="images/zaslonske-maske/register.png" width="300" />
   <img src="images/zaslonske-maske/login.png" width="300" />
+  <img src="images/zaslonske-maske/register.png" width="300" />
 </p>
 
 ### Prijava na oglas
@@ -514,20 +514,85 @@ ___
   <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
 </p>
 
-#### Explore
-![image](./images/zaslonske-maske/explore-filter.png)
+### Potrditev sprehajalca
+**TO-DO**
 
-#### Inbox
-![image](./images/zaslonske-maske/inbox-all.png)
+### Kontaktiranje sprehajalca za dodatne informacije
+<p float="left">
+  <img src="images/zaslonske-maske/inbox-applied-listing-1.png" width="300" />
+</p>
 
-#### Blog
-![image](./images/zaslonske-maske/blog.png)
 
-#### Listings
-![image](./images/zaslonske-maske/listings-my.png)
+### Kontaktiranje lastnika za dodatne informacije
+<p float="left">
+  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+</p>
 
-#### Profile
-![image](./images/zaslonske-maske/profile.png)
+### Pregled podrobnosti prijavljenih oglasov
+<p float="left">
+  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+</p>
+
+### Podajanje ocene
+**TO-DO**
+
+### Objava oglasa
+<p float="left">
+  <img src="images/zaslonske-maske/listings-my.png" width="300" />
+  <img src="images/zaslonske-maske/listings-add.png" width="300" />
+</p>
+
+### Dodajanje profila psa
+<p float="left">
+  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
+  <img src="images/zaslonske-maske/profile-dogs-add.png" width="300" />
+</p>
+
+### Urejanje profila psa
+<p float="left">
+  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
+  <img src="images/zaslonske-maske/profile-dogs-edit.png.png" width="300" />
+</p>
+
+### Pregledovanje filtriranih oglasov
+<p float="left">
+  <img src="images/zaslonske-maske/explore.png" width="300" />
+  <img src="images/zaslonske-maske/explore-filter.png" width="300" />
+</p>
+
+### Urejanje nastavitev prijavljenega
+<p float="left">
+  <img src="images/zaslonske-maske/profile.png" width="300" />
+  <img src="images/zaslonske-maske/profile-edit-profile.png" width="300" />
+</p>
+
+### Postani pisec bloga
+<p float="left">
+  <img src="images/zaslonske-maske/profile.png" width="300" />
+  <img src="images/zaslonske-maske/profile-become-reporter.png" width="300" />
+</p>
+
+### Pisanje objav na blogu
+<p float="left">
+  <img src="images/zaslonske-maske/blog.png" width="300" />
+  <img src="images/zaslonske-maske/blog-new.png" width="300" />
+</p>
+
+### Potrjevanje objav
+<p float="left">
+  <img src="images/zaslonske-maske/blog.png" width="300" />
+  <img src="images/zaslonske-maske/blog-post.png" width="300" />
+</p>
+
+### Brisanje oglasov
+<p float="left">
+  <img src="images/zaslonske-maske/explore.png" width="300" />
+</p>
+
+### Brisanje Blogov
+<p float="left">
+  <img src="images/zaslonske-maske/blog-post.png" width="300" />
+</p>
 
 ## 8. Prototipi vmesnikov
 
