@@ -2,7 +2,7 @@
 
 |                             |                                                         |
 | :-------------------------- | :------------------------------------------------------ |
-| **Naziv projekta**          | Dog Walkers |
+| **Naziv projekta**          | Walk Doggers |
 | **Člani projektne skupine** | Matic Bregar, Domen Vilar, Timotej Petrič, Mustafa Grabus in Domen Bukovac |
 | **Kraj in datum** | Ljubljana, 05.04.2021 |                              |
 
