@@ -177,7 +177,7 @@ Neprijavljen uporabnik se lahko prijavi v sistem. Ko je prijavljen, lahko dostop
 
 Podatki o prijavi se pošiljajo po varni povezavi.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 
 MUST HAVE
 
@@ -225,7 +225,7 @@ Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
 
 Posebnosti ni.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 
 MUST HAVE
 
@@ -284,7 +284,7 @@ Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
 
 Posebnosti ni.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 
 MUST HAVE
 
@@ -336,7 +336,7 @@ Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
 #### Posebnosti
 Posebnosti ni.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 SHOULD HAVE
 
 #### Sprejemni testi
@@ -394,7 +394,7 @@ Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
 
 Komunikacija med sprehajalcem ter lastnikom mora potekati po varni povezavi.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 
 SHOULD HAVE
 
@@ -435,7 +435,7 @@ Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
 #### Posebnosti
 Posebnosti ni.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 SHOULD HAVE
 
 #### Sprejemni testi
@@ -472,7 +472,7 @@ Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
 #### Posebnosti
 Posebnosti ni.
 
-#### Prioriteta
+#### Prioritete identificiranih funkcionalnosti
 COULD HAVE
 
 #### Sprejemni testi
