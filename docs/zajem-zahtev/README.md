@@ -986,6 +986,40 @@ ___
 - Navedite splošne omejitve, ki jih moramo upoštevati v več funkcionalnostih ali celo skozi celoten razvoj aplikacije.
 
 ## 7. Osnutki zaslonskih mask
+### Prijava / Registracija
+<p float="left">
+  <img src="images/zaslonske-maske/login.png" width="300" />
+  <img src="images/zaslonske-maske/register.png" width="300" />
+</p>
+
+### Prijava na oglas
+<p float="left">
+  <img src="images/zaslonske-maske/explore-filter.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
+</p>
+
+### Potrditev sprehajalca
+**TO-DO**
+
+### Kontaktiranje sprehajalca za dodatne informacije
+<p float="left">
+  <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
+</p>
+
+
+### Kontaktiranje lastnika za dodatne informacije
+<p float="left">
+  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+</p>
+
+### Pregled podrobnosti prijavljenih oglasov
+<p float="left">
+  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+</p>
+
+### Podajanje ocene
+**TO-DO**
 
 ### Objava oglasa
 <p float="left">
