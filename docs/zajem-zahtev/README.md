@@ -997,6 +997,10 @@ Od aplikacije se poleg funkcionalnosti zahteva še nekaj nefunkcionalnih zahtev.
 ___
 
 ## 7. Osnutki zaslonskih mask
+
+#### Povezava do mockupa aplikacije
+[Dog Walkers](https://www.figma.com/proto/WvGwddLeH82MrKwrrb11Ub/Walk-Doggers?node-id=0%3A3&viewport=458%2C236%2C0.5257039666175842&scaling=scale-down&page-id=0%3A1)
+
 ### Prijava / Registracija
 <p float="left">
   <img src="images/zaslonske-maske/login.png" width="300" />
