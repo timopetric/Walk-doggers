@@ -1095,7 +1095,7 @@ ___
 
 ### Brisanje blog objav
 <p float="left">
-  <img src="images/zaslonske-maske/blog-post.png" width="300" />
+  <img src="images/zaslonske-maske/blog-post-delete.png" width="300" />
 </p>
 
 
