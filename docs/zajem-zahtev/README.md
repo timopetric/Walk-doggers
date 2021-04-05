@@ -998,16 +998,18 @@ ___
 
 ## 7. Osnutki zaslonskih mask
 
-#### Povezava do mockupa aplikacije
+Spodaj je več zaslonskih mask, ki so z naslovi direktno vezane na imena funkcionalnih zahtev. Sledi še povezava do mockupa aplikacije, dostopne na naslovu:
 [Walk Doggers](https://www.figma.com/proto/WvGwddLeH82MrKwrrb11Ub/Walk-Doggers?node-id=0%3A3&viewport=458%2C236%2C0.5257039666175842&scaling=scale-down&page-id=0%3A1)
 
 ### Prijava / Registracija
+* **Akterji:** neprijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/login.png" width="300" />
   <img src="images/zaslonske-maske/register.png" width="300" />
 </p>
 
 ### Prijava na oglas
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/explore-listing.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
@@ -1015,6 +1017,7 @@ ___
 </p>
 
 ### Potrditev sprehajalca
+* **Akterji:** prijavljen uporabnik (lastnik)
 <p float="left">
   <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat-confirm-walker.png" width="300" />
@@ -1022,6 +1025,7 @@ ___
 </p>
 
 ### Kontaktiranje sprehajalca za dodatne informacije
+* **Akterji:** prijavljen uporabnik (lastnik)
 <p float="left">
   <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat-confirm-walker.png" width="300" />
@@ -1029,16 +1033,19 @@ ___
 
 
 ### Kontaktiranje lastnika za dodatne informacije
+* **Akterji:** prijavljen uporabnik 
 <p float="left">
   <img src="images/zaslonske-maske/listings-applied-short.png" width="300" />
 </p>
 
 ### Pregled podrobnosti prijavljenih oglasov
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/listings-applied-short.png" width="300" />
 </p>
 
 ### Podajanje ocene
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/inbox-chat-completed.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat-completed-leave-feedback.png" width="300" />
@@ -1046,58 +1053,68 @@ ___
 
 
 ### Objava oglasa
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/listings-my-short.png" width="300" />
   <img src="images/zaslonske-maske/listings-add.png" width="300" />
 </p>
 
 ### Dodajanje profila psa
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
   <img src="images/zaslonske-maske/profile-dogs-add.png" width="300" />
 </p>
 
 ### Urejanje profila psa
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
   <img src="images/zaslonske-maske/profile-dogs-edit.png" width="300" />
 </p>
 
 ### Pregledovanje filtriranih oglasov
+* **Akterji:** neprijavljen uporabnik, prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/explore-filter.png" width="300" />
 </p>
 
-### Urejanje nastavitev prijavljenega
+### Urejanje profila
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/profile.png" width="300" />
   <img src="images/zaslonske-maske/profile-edit-profile.png" width="300" />
 </p>
 
 ### Postani pisec bloga
+* **Akterji:** prijavljen uporabnik
 <p float="left">
   <img src="images/zaslonske-maske/profile.png" width="300" />
   <img src="images/zaslonske-maske/profile-become-reporter.png" width="300" />
 </p>
 
 ### Pisanje objav na blogu
+* **Akterji:** pisec bloga
 <p float="left">
   <img src="images/zaslonske-maske/blog.png" width="300" />
   <img src="images/zaslonske-maske/blog-new.png" width="300" />
 </p>
 
 ### Potrjevanje objav
+* **Akterji:** moderator
 <p float="left">
   <img src="images/zaslonske-maske/blog.png" width="300" />
   <img src="images/zaslonske-maske/blog-post.png" width="300" />
 </p>
 
 ### Brisanje oglasov
+* **Akterji:** administrator
 <p float="left">
   <img src="images/zaslonske-maske/explore.png" width="300" />
 </p>
 
 ### Brisanje blog objav
+* **Akterji:** administrator
 <p float="left">
   <img src="images/zaslonske-maske/blog-post-delete.png" width="300" />
 </p>
