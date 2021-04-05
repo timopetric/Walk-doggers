@@ -40,45 +40,48 @@ Aplikacija bo vsebovala intuitiven uporabniški vmesnik, ki bo omogočal enostav
 
 ## 5. Funkcionalne zahteve
 
-V tem razdelku podrobno opišite posamezne funkcionalnosti, ki jih vaša aplikacija ponuja svojim uporabnikom. Za vsako funkcionalnost navedite naslednje podatke:
+### Registracija
 
-### TO-DO Naziv zahteve
-
-#### Povzetek funkcionalnosti
-
-**TO-DO**
-
-- **Povzetek funkcionalnosti** v enem ali največ nekaj stavkih.
-- Prvi stavek naj se prične z nazivom uporabniške vloge (ali uporabniških vlog, če se funkcionalnost nanaša na več kot eno vlogo), nato pa naj sledita beseda **lahko** in navedba funkcionalnosti.
+Neprijavljen uporabnik se lahko registrira na strani. Ob registraciji vpiše ime, priimek, email in geslo.
 
 #### Osnovni tok
 
-**TO-DO**
+1. Neprijavljen uporabnik izbere funkcionalnost registracija.
+2. Aplikacija mu ponudi registracijski obrazec.
+3. Neprijavljen uporabnik izpolni registracijski obrazec. Vpiše svoje ime, priimek, email in geslo. Geslo je dolgo vsaj 8 znakov in sestavljeno iz velikih in malih črk, številk ter vsaj enega posebnega znaka.
+4. Neprijavljen uporabnik odda registracijski obrazec.
+5. Aplikacija prikaže obvestilo o uspešni registraciji.
 
-#### Alternativni tok(ovi)
+#### Alternativni tok
 
-**TO-DO**
+**Alternativni tok 1**,
 
-- Navesti je potrebno vse alternativne tokove, ki jih označite kot **Alternativni tok 1**, **Alternativni tok 2**, itd.
+1. Neprijavljen uporabnik želi dostopati do funkcionalnosti, ki je na voljo le prijavljenim uporabnikom.
+2. Aplikacija neprijavljenemu uporabniku prikaže obvestilo, da je zahtevana funkcionalnost na voljo le prijavljenim uporabnikom. Aplikacija ponudi možnost preusmeritve na registracijsko stran.
+3. Neprijavljen uporabnik izbere možnost za preusmeritev na stran za registracijo (funkcionalnost registracija).
+4. Aplikacija mu ponudi registracijski obrazec.
+5. Neprijavljen uporabnik izpolni registracijski obrazec. Vpiše svoje ime, priimek, email in geslo. Geslo je dolgo vsaj 8 znakov in sestavljeno iz velikih in malih črk, številk ter vsaj enega posebnega znaka.
+6. Neprijavljen uporabnik odda registracijski obrazec.
+7. Aplikacija prikaže obvestilo o uspešni registraciji.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+Neprijavljen uporabnik je za registracijo uporabil email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija vrne obvestilo o že uporabljenem email naslovu in ga pozove k uporabi drugega.
+
+**Izjemni  tok 2**
+Neprijavljen uporabnik vnese geslo, ki ni sestavljeno iz velikih in malih črk, številk ter vsaj enega posebnega znaka in ni dolgo vsaj 8 znakov. Obrazec odda. Aplikacija prikaže obvestilo o neprimernem geslu.
 
 #### Pogoji
-
-**TO-DO**
-
-- Navesti je potrebno pogoje, ki morajo biti izpolnjeni, da se funkcionalnost lahko prične izvajati?
+Neprijavljen uporabnik aplikacije za uspešno izvedeno registracijo še ne sme biti prijavljen ali registriran v sistem z email naslovom, ki ga je vpisal v registracijski obrazec.
 
 #### Posledice
+Če neprijavljen uporabnik dobi obvestilo o uspešni registraciji, je uspešno registriran. Sedaj se lahko prijavi v aplikacijo s svojim email naslovom in geslom, ki ga je vnesel ob registraciji v registracijski obrazec. Po uspešni prijavi dobi dostop do več funkcionalnosti aplikacije.
 
-**TO-DO**
-
-- Navedite, kakšen je rezultat izvedbe osnovnega toka funkcionalnosti?
 
 #### Posebnosti
 
-**TO-DO**
-
-- Ali realizacija funkcionalnosti zahteva kakšne posebnosti, kot je npr. dodatna strojna oprema?
-- Se je potrebno držati kakšnih posebnih standardov?
+Registracijski podatki se med aplikacijo in strežnikom prenašajo po varni povezavi. V bazi so shranjeni z upoštevanje priporočil dobre in varne prakse hranjenja občutljivih podatkov.
 
 #### Prioritete identificiranih funkcionalnosti
 
@@ -88,13 +91,13 @@ V tem razdelku podrobno opišite posamezne funkcionalnosti, ki jih vaša aplikac
 
 #### Sprejemni testi
 
-**TO-DO**
+-[Osnovni tok] Neprijavljen uporabnik izpolne registracijski obrazec. Sedaj se lahko prijavi v sistem.
 
-- Navedite sprejmne teste, kjer opišete:
-  - funkcijo, ki se testira,
-  - začetno stanje sistema,
-  - vhod in
-  - pričakovan rezultat.
+-[Alternativni tok 1] Neprijavljen uporabnik želi dostopati do funkcionalnosti, ki je na voljo le prijavljenim uporabnikom. Aplikacija mu ponudi možnost preusmeritve na registracijsko stran.
+
+-[Izjemni tok 1] Neprijavljeni uporabnik je za registracijo uporabi email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija mu prepreči registracijo s tem email naslovom in mu prikaže obvestilo o že uporabljenem email naslovu ter ga pozove k uporabi drugega.
+
+-[Izjemni tok 2] Neprijavljen uporabnik vnese geslo, ki ni pravilne oblike. Po oddaji obrazca dobi obvestilo o neprimernem geslu.
 
 ## 6. Nefunkcionalne zahteve
 
@@ -102,7 +105,11 @@ V tem razdelku podrobno opišite posamezne funkcionalnosti, ki jih vaša aplikac
 
 - Navedite splošne omejitve, ki jih moramo upoštevati v več funkcionalnostih ali celo skozi celoten razvoj aplikacije.
 
-## 7. Prototipi vmesnikov
+## 7. Osnutki zaslonskih mask
+
+**TO-DO**
+
+## 8. Prototipi vmesnikov
 
 **TO-DO**
 
