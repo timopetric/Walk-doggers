@@ -1011,11 +1011,15 @@ ___
 </p>
 
 ### Potrditev sprehajalca
-**TO-DO**
+<p float="left">
+  <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-confirm-walker.png" width="300" />
+</p>
 
 ### Kontaktiranje sprehajalca za dodatne informacije
 <p float="left">
   <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-confirm-walker.png" width="300" />
 </p>
 
 
@@ -1084,25 +1088,11 @@ ___
   <img src="images/zaslonske-maske/explore.png" width="300" />
 </p>
 
-### Brisanje Blogov
+### Brisanje blog objav
 <p float="left">
   <img src="images/zaslonske-maske/blog-post.png" width="300" />
 </p>
 
-#### Explore
-![image](./images/zaslonske-maske/explore-filter.png)
-
-#### Inbox
-![image](./images/zaslonske-maske/inbox-all.png)
-
-#### Blog
-![image](./images/zaslonske-maske/blog.png)
-
-#### Listings
-![image](./images/zaslonske-maske/listings-my.png)
-
-#### Profile
-![image](./images/zaslonske-maske/profile.png)
 
 ___
 
