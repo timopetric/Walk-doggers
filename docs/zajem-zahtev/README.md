@@ -1026,12 +1026,12 @@ ___
 
 ### Kontaktiranje lastnika za dodatne informacije
 <p float="left">
-  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+  <img src="images/zaslonske-maske/listings-applied-short.png" width="300" />
 </p>
 
 ### Pregled podrobnosti prijavljenih oglasov
 <p float="left">
-  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
+  <img src="images/zaslonske-maske/listings-applied-short.png" width="300" />
 </p>
 
 ### Podajanje ocene
