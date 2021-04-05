@@ -1027,15 +1027,15 @@ ___
 </p>
 
 ### Podajanje ocene
-**TO-DO**
 <p float="left">
   <img src="images/zaslonske-maske/inbox-chat-completed.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-completed-leave-feedback.png" width="300" />
 </p>
 
 
 ### Objava oglasa
 <p float="left">
-  <img src="images/zaslonske-maske/listings-my.png" width="300" />
+  <img src="images/zaslonske-maske/listings-my-short.png" width="300" />
   <img src="images/zaslonske-maske/listings-add.png" width="300" />
 </p>
 
