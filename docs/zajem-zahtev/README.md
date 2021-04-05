@@ -7,12 +7,10 @@
 | **Kraj in datum** | Ljubljana, 05.04.2021 |                              |
 
 ## Povzetek projekta
+Zaradi hitrega tempa življenja današnje družbe, ljudje velikokrat zapostavljamo domače živali, za katere smo si na začetku, ko so prišle v naš dom vzeli veliko časa. 
+Zaradi te težave bomo razvili aplikacijo, ki bo lastnikom psov, ki nimajo veliko prostega časa omogočila, da na enostaven način najdejo sprehajalca, ki svojega ljubljenčka še nima, ali pa se trenutno ne počuti dovolj sposobnega za vsakodnevno skrblenje za domačo žival.
 
-Sedaj, ko se je tempo življenja v času epidemije covid-19 malo upočasnil, mnogo ljudi preživi veliko časa doma. Menimo, da je zdaj morda primeren čas za posvojitev kakšne domače živali, saj lahko več časa namenijo skrbi in vzgajanju le-te. 
-
-Kaj pa se bo zgodilo, ko se bo življenje vrnilo na stare tirnice in bodo spet morali v službo, kdo bo takrat skrbel za domače živali? Veliko ljudi pa si morda želi samo ukvarjati se z živalmi, ne želijo pa jih posvojiti, ker je to za njih prevelika odgovornost, zato mi ponujamo rešitev. Uporabniki, ki bodo preživeli veliko časa zdoma, bodo lahko na naši platformi izbrali primerno osebo, ki bo njihove žival peljala na sprehod ali pa na njih popazila, medtem ko bodo oni zdoma ali pa zaradih drugih razlogov nimajo dovolj časa za skrb hišnih ljubljenčkov.
-
-Aplikacija bo vsebovala intuitiven uporabniški vmesnik, ki bo omogočal enostavno iskanje primernih sprehajalcev oz skrbnikov.
+Lastniki psov bodo lahko objavili oglase za sprehajanje psa, na katere se bodo lahko prijavili vsi zainteresirani. Med vsemi kandidati bodo lastniki izbrali najbolj primernega sprehajalca na podlagi profila te osebe ter pogovora preko sporočil. S tem želimo omogočiti, da bodo pasji ljubljenčki imeli primerno družbo. Hkrati bomo tudi zavetiščem ponuditi rešitev, da bodo njihovi psi preživeli več časa zunaj in hitreje našli nov dom. Sprehajalci, ki se trenutno še odločajo za psa, pa bodo lahko izkusili, kako je skrbeti za njih in imeti eno odgovornost več.
 
 
 ## 1. Uvod
@@ -503,6 +501,21 @@ ___
 ## 7. Osnutki zaslonskih mask
 
 **TO-DO**
+
+#### Explore
+![image](./images/zaslonske-maske/explore-filter.png)
+
+#### Inbox
+![image](./images/zaslonske-maske/inbox-all.png)
+
+#### Blog
+![image](./images/zaslonske-maske/blog.png)
+
+#### Listings
+![image](./images/zaslonske-maske/listings-my.png)
+
+#### Profile
+![image](./images/zaslonske-maske/profile.png)
 
 ## 8. Prototipi vmesnikov
 
