@@ -476,6 +476,493 @@ COULD HAVE
 * **[Osnovni tok]** Prijavljeni uporabnik izbere oglas, ki ga še ni ocenil in sprehajalca oz. lastnika oglasa oceni.
 ___
 
+### Objava oglasa
+
+Prijavljeni uporabnik lahko objavi oglas za sprehajanje svojega psa.
+
+#### Osnovni tok
+
+1. Prijavljeni uporabnik izbere razdelek Listings in zavihek My listings.
+1. Prijavljeni uporabnik klikne na gumb za dodajanje.
+1. Aplikacija uporabniku prikaže novo okno, kjer prijavljeni uporabnik vnese podrobnosti oglasa. Podrobnosti oglasa vključujejo ime oglasa, izbranega psa, opis oglasa, časovni okvir.
+1. Aplikacija pridobi uporabnikovo lokacijo.
+1. Prijavljeni uporabnik potrdi objavo oglasa. 
+1. Prijavljenemu uporabniku se oglas prikaže v Listings pod razdelkom My listings in dobi status Listed.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Prijavljeni uporabnik ne vnese vseh podrobnosti oglasa. Aplikacija mu sporoči, da naj izpolni vsa potrebna polja za objavo oglasa.
+
+**Izjemni  tok 2**
+* Uporabnik ne potrdi soglasja za uporabo lokacije. Aplikacija prikaže obvestilo, da je ta nujno potrebna za delovanje.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen v sistem in imeti v profilu vnešenega vsaj enega psa. Uporabnik mora potrditi uporabo lokacije. Neprijavljenemu uporabniku ta funkcionalnost ni na voljo.
+
+#### Posledice
+* Prijavljen uporabnik ima objavljen en oglas več za sprehajanje psa v Listings, pod zavihkom My listings. Oglas je po objavi viden tudi ostalim uporabnikom.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+MUST HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljen uporabnik doda nov oglas in ta se prikaže v razdelku Listings, pod zavihkom My Listings s statusom Listed in v razdelku Explore je javno viden ostalim uporabnikom.
+
+* **[Izjemni tok 1]** Prijavljen uporabnik doda nov oglas in eno od polj pusti prazno. Aplikacija mu sporoči, da morajo biti vsa polja izpolnjena, da lahko uporabnik objavi oglas.
+
+* **[Izjemni tok 2]** Prijavljen uporabnik se ob dodajanju novega oglasa ne strinja z uporabo lokacije. Prikaže se obvestilo, da je ta nujno potrebna za delovanje. Dokler se uporabnik ne strinja z uporabo lokacije, se obvestilo vedno znova prikazuje.
+
+
+___
+
+### Dodajanje profila psa
+
+Prijavljeni uporabnik lahko ustvari profil za svojega psa.
+
+#### Osnovni tok
+
+1. Prijavljeni uporabnik izbere razdelek Profil.
+1. Prijavljeni uporabnik izbere zavihek My dogs.
+1. Prijavljeni uporabnik klikne na gumb za dodajanje psa.
+1. Aplikacija prikaže okno, kamor lahko prijavljeni uporabnik vnese podatke o svojem psu.
+1. Prijavljeni uporabnik doda ime, opis, velikost in sliko svojega psa.
+1. Prijavljeni uporabnik potrdi ustvarjanje profila za psa s klikom na gumb Add.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Prijavljen uporabnik pod razdelkom profile izbere profil psa, ki ga želi urediti, eno polje pri urejanju pusti prazno, ko skuša profil posodobiti, mu prikažemo opozorilo, da morajo biti vsa polja izpolnjena.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen v sistem. Neprijavljenemu uporabniki ta funkcionalnost ni na voljo.
+
+#### Posledice
+* Prijavljen uporabnik, ima v okviru svojega profila pod zavihkom My dogs enega psa več, ki je kasneje na voljo za objavo na oglasu. 
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+MUST HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Uporabnik se prijavi v sistem, doda novega psa in ta se prikaže v profilu pod zavihkom My Dogs.
+* **[Izjemni tok 1]** Uporabnik se prijavi v sistem, klikne gumb za dodajanje psa, uporabnik pusti neko polje prazno. Prikaže se mu opozorilo, da morajo biti vsa polja izpolnjena.
+
+___
+
+### Urejanje profila psa
+
+Prijavljeni uporabnik lahko spreminja podrobnosti profila svojih psov.
+
+#### Osnovni tok
+
+1. Prijavljen uporabnik pod razdelkom Settings v zavihku My Dogs izbere profil psa, ki ga želi urediti in klikne Edit.
+1. Prikaže se okno za urejanje profila psa. Uporabnik lahko spremeni sliko, ime, opis in  velikost svojega psa.
+1. Ko je zadovoljen s spremembami jih potrdi.
+1. Prikaže se obvestilo o uspešno urejenem profilu psa.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Prijavljen uporabnik pod razdelkom Settings v zavihku My Dogs izbere profil psa, ki ga želi urediti. Eno polje pri urejanju pusti prazno. Ko skuša profil posodobiti, se mu prikaže opozorilo, da morajo biti vsa polja izpolnjena.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen in imeti vsaj enega dodanega psa.
+
+#### Posledice
+* Profil psa je posodobljen.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+COULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljen uporabnik gre na razdelek Settings pod zavihek My Dogs in klikne Edit. V oknu za urejanje profila psa spremeni ime psa. Potrdi spremembe. Ime psa je posodobljeno.
+* **[Izjemni tok 1]** Prijavljen uporabnik gre na razdelek Settings pod zavihek My Dogs in klikne Edit. V oknu za urejanje profila psa pusti vnosno polje za ime psa prazno. Ko želi potrditi spremembe, se pokaže obvestilo, da morajo biti vsa polja izpolnjena.
+
+___
+
+### Pregledovanje filtriranih oglasov
+
+Prijavljeni ali neprijavljeni uporabnik lahko pregleduje in filtrira oglase po oddaljenosti in velikosti psa.
+
+#### Osnovni tok
+
+1. Prijavljen ali neprijavljen uporabnik izbere razdelek Explore.
+1. Izbere željeno velikost psa.
+1. Izbere željeno največjo oddaljenost začetka sprehoda.
+1. Aplikacija pridobi uporabnikovo lokacijo.
+1. Oglasi se samodejno posodobijo glede na izbrane filtre.
+1. Uporabnik zdaj vidi filtirane oglase.
+
+
+#### Alternativni tok
+
+**Alternativni tok 1**
+
+1. Prijavljen ali neprijavljen uporabnik izbere razdelek Explore.
+1. Uporabnik zdaj vidi oglase.
+
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Uporabnik ne potrdi soglasja za uporabo lokacije. Aplikacija prikaže obvestilo, da je ta nujno potrebna za delovanje.
+
+#### Pogoji
+* Uporabnik se mora strinjati z uporabo lokacije.
+
+#### Posledice
+* Glede na izbran filter se uporabniku prikažejo oglasi.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+SHOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljen ali neprijavljen uporabnik v razdelku Explore nastavi želene filtre. Prikažejo se mu samo oglasi, ki odražajo stanje filtrov. Recimo: Filter za oddaljenost začetnega mesta nastavljen na 20km - v rezultatih ni oglasov, ki bi bili oddaljeni več kot 20 km.
+* **[Alternativni tok 1]** Prijavljen ali neprijavljen uporabnik odpre razdelek Search. Na strani se prikažejo oglasi, ki so razvrščeni po geografski oddaljenosti.
+* **[Izjemni tok 1]** Prijavljen ali neprijavljen uporabnik se pri pregledovanju oglasov v razdelku Explorene ne strinja z uporabo lokacije. Prikaže se obvestilo, da je ta nujno potrebna za delovanje. Dokler se uporabnik ne strinja z uporabo lokacije, se obvestilo vedno znova prikazuje.
+
+
+___
+
+### Iskanje oglasov na mapi
+
+Prijavljeni ali neprijavljeni uporabnik lahko išče oglase po mapi.
+
+#### Osnovni tok
+
+1. Prijavljen ali neprijavljen uporabnik izbere razdelek Explore.
+1. Uporabnik klikne na gumb z ikono zemljevida.
+1. Aplikacija pozove uporabnika k soglasju za uporabo njegove lokacije, če je ta še ni sprejel.
+1. Uporabnik potrdi uporabo lokacije. Če je ne potrdi se prikazuje obvestilo toliko časa, dokler je ne potrdi.
+1. Odpre se zemljevid in na njem prikazani bližnji oglasi, ki jih uporabnik lahko klikne, da se odprejo podrobnosti oglasa.
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
+
+#### Pogoji
+* Prijavljeni ali neprijavljeni uporabnik se strinja z uporabo lokacije. Če uporabe lokacije ne sprejme, mu ta funkcionalnost ni na voljo.
+
+#### Posledice
+* Uporabniku se na zemljevidu prikažejo bližnji oglasi.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+WOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljeni ali neprijavljeni uporabnik izbere razdelek Explore. Klikne gumb zemljevida. Strinja se z uporabo lokacije. Zemljevid prikaže lokacijo uporabnika in okoli njega bližnje oglase.
+
+___
+
+### Urejanje profila
+
+Prijavljeni uporabnik lahko uredi svoj profil.
+
+#### Osnovni tok
+
+1. Prijavljen uporabnik izbere razdelek Settings in zavihek Profile.
+1. Prikaže se okno za urejanje profila. Uporabnik lahko spremeni sliko, ime, priimek in svoj opis.
+1. Prijavljen uporabnik lahko vnese opis, ki ima največ 140 znakov. Aplikacija uporabniku interaktivno sporoča, koliko znakov ima še na voljo za vnosno polje opis.
+1. Ko je zadovoljen s spremembami jih potrdi s klikom na gumb Save Changes.
+1. Prikaže se obvestilo o uspešno urejenem profilu.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Prijavljen uporabnik pod razdelkom Settings izbere zavihek Profile, pri urejanju pusti vsaj eno polje prazno. Ko želi posodobiti profil, se mu prikaže opozorilo, da morajo biti vsa polja izpolnjena.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen v sistem. Neprijavljenemu uporabniku ta funkcionalnost ni na voljo.
+
+#### Posledice
+* Izbran profil uporabnika ima posodobljene podatke.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+SHOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljen uporabnik gre na razdelek Settings v zavihek Profile. Odpre se okno kjer lahko ureja svoje podatke. V oknu za urejanje profila spremeni ime. Potrdi spremembe. Če se še enkrat premakne v zavihek Profile sedaj vidi posodobljeno ime.
+* **[Izjemni tok 1]** Prijavljen uporabnik gre na razdelek Settings v zavihek Profile. Odpre se okno, kjer lahko ureja svoje podatke. V oknu za urejanje profila spremeni svoje  podatke, vendar je nekje pustil prazno polje. Ko želi potrditi spremembe, se mu prikaže opozorilo, da morajo biti vsa polja izpolnjena.
+
+___
+
+### Pisanje objav na blogu
+
+Pisec bloga lahko ustvari novo objavo na razdelku blog.
+
+#### Osnovni tok
+
+1. Pisec bloga izbere razdelek Blog.
+1. Klikne na gumb za dodajanje nove objave.
+1. Odpre se okno za dodajanje nove objave.
+1. Pisec bloga izpolni naslov, besedilo in naloži sliko objave.
+1. Pisec bloga potrdi objavo objave s klikom na Create Blog Post.
+1. V razdelku Blog je sedaj vidna nova objava, ki ima status Waiting for approval.
+1. Ko moderator potrdi objavo, bo objava javno vidna vsem uporabnikom. Pred tem bo vidna samo piscu bloga, moderatorjem objav in administratorjem.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Pisec bloga želi objaviti objavo, ki ima eno od vnosnih polj prazno. Aplikacija ne pusti objave, saj morajo biti vsa vnosna polja objave izpolnjena.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen in imeti vlogo pisca objav - funkcionalnost Postani pisec bloga.
+
+#### Posledice
+* Objava postane vidna moderatorju objav. Če moderator potrdi objavo, postane javno vidna.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+SHOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Pisec bloga izbere razdelek blog. Klikne na dodajanje nove objave. Vpiše naslov, besedilo in doda sliko. Klikne na Create Blog Post. Objava je vidna v Blog razdelku in ima status Waiting for approval. Moderator mora potrditi objavo, da je ta javno vidna (funkcionalnost Potrjevanje objav).
+* **[Izjemni tok 1]** Pisec bloga izbere razdelek blog. Klikne na dodajanje nove objave. Vpiše naslov in doda sliko, besedilo pa pusti prazno. Klikne na Create Blog Post. Prikaže se obvestilo, da morajo biti vsa polja izpolnjena.
+
+___
+
+### Postani pisec bloga
+
+Prijavljeni uporabnik lahko postane pisec bloga s spremembo nastavitev v svojem profilu.
+
+#### Osnovni tok
+
+1. Prijavljeni uporabnik izbere razdelek Settings.
+1. Uporabnik klikne Become a Reporter
+1. Odpre se okno s pogoji uporabe.
+1. Uporabnik potrdi strinjanje s pogoji z označitvijo potrditvenega polja I accept and agree to the Terms & conditions.
+1. Uporabnik klikne na gumb Become a Reporter.
+1. Uporabnik ima sedaj vlogo pisca bloga.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+Aplikacija ne podpira izjemnih tokov za to funkcionalnost.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen in še ne sme imeti vloge pisca bloga.
+
+#### Posledice
+* Prijavljeni uporabnik ima novo vlogo pisca bloga in pod razdelkom Settings je možnost izbire Become a Reporter onemogočena.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+SHOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Prijavljeni uporabnik v razdelku Settings izbere zavihek Become a Reporter. Strinja se s pogoji z označitvijo potrditvenega polja I accept and agree to the Terms & conditions in klikne Become a Reporter. V razdelku Settings je sedaj onemogočena izbira Become a Reporter.
+
+___
+
+### Potrjevanje objav
+
+Moderator ima omogočeno funkcionalnost potrjevanja objav. Po potrditvi objave ta postane javno vidna prijavljenim in neprijavljenim uporabnikom.
+
+#### Osnovni tok
+
+1. Moderator klikne na razdelek Blog.
+1. Aplikacija prikaže vse objave v blogu. Najprej se prikažejo objave, ki še niso potrjene in imajo status Waiting for approval.
+1. Moderator klikne na gumb Read more pri objavi, ki ima status Waiting for approval in še ni potrjena.
+1. Moderator klikne na gumb Accept in potrdi objavo.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Moderator klikne na gumb Reject in zavrne objavo. Objava se izbriše in ni nikjer več vidna.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen in ima vlogo moderatorja.
+
+#### Posledice
+* Potrjena objava postane javno vidna prijavljenim in neprijavljenim uporabnikom. Status Waiting for approval pri potrjeni objavi izgine.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+SHOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** V aplikacijo se prijavimo v vlogi moderatorja, kliknemo na razdelek Blog in izberemo objavo, ki ima status Waiting for approval. V podrobnostih objave kliknemo na Accept. Objava postane javno vidna prijavljenim in neprijavljenim uporabnikom.
+* **[Izjemni tok 1]** V aplikacijo se prijavimo v vlogi moderatorja, kliknemo na razdelek Blog in izberemo objavo, ki ima status Waiting for approval. V podrobnostih objave kliknemo na Reject. Objava se izbriše in ni nikjer več vidna.
+
+___
+
+### Brisanje oglasov 
+
+Administrator lahko briše oglase.
+
+#### Osnovni tok
+
+1. Administrator se premakne na razdelek Explore.
+1. Administrator poišče oglas, ki ga želi izbrisati.
+1. Administrator klikne na gumb “x” v desnem zgornjem kotu oglasa, ki bo izbrisal oglas.
+1. Prikaže se pojavno okno, ki sprašuje po potrditvi izbrisa.
+1. Administrator potrdi brisanje oglas.
+1. Oglas je izbrisan in ni več viden nikomur.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Administrator v pojavnem oknu, ki sprašuje po potrditvi izbrisa, klikne No. Oglas ni izbrisan in je še vedno viden v razdelku Explore.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen kot administrator.
+
+#### Posledice
+* Izbran oglas je izbrisan in ni nikjer več prikazan.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+MUST HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Administrator gre na razdelek Explore. Poišče oglas, ki ga želi izbrisati. Klikne gumb “x” na oglasu. Prikaže se okno, ki sprašuje po potrditvi izbrisa. Administrator klikne Yes. Oglas je izbrisan in ni več viden v razdelku Explore.
+* **[Izjemni tok 1]** Administrator klikne na razdelek Explore. Poišče oglas, ki ga želi izbrisati. Klikne gumb “x” na oglasu. Prikaže se okno, ki sprašuje po potrditvi izbrisa. Administrator klikne No. Oglas ni izbrisan in je še vedno viden v razdelku Explore.
+
+___
+
+### Brisanje blog objav
+
+Administrator lahko briše posamezne objave na blogu.
+
+#### Osnovni tok
+
+1. Administrator klikne na razdelek Blog.
+1. Administratorju se prikaže seznam vseh objav.
+1. Administrator lahko neprimerne objave izbriše s klikom na gumb “x”, v desnem zgornjem kotu izbrane objave.
+1. Administratorju se prikaže obvestilo, da je izbris objave nepreklicna operacija.
+1. Administrator potrdi brisanje objave s klikom na gumb Yes.
+
+
+#### Alternativni tok
+
+Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
+
+#### Izjemni tok
+
+**Izjemni  tok 1**
+* Administrator po kliku na “x” ne potrdi brisanja objave, klikne No. Objava ni izbrisana.
+
+#### Pogoji
+* Uporabnik mora biti prijavljen in je imeti vlogo administratorja.
+
+#### Posledice
+* Izbrisan blog se izbriše iz baze.
+
+#### Posebnosti
+
+Posebnosti ni.
+
+#### Prioritete identificiranih funkcionalnosti
+
+WOULD HAVE
+
+#### Sprejemni testi
+
+* **[Osnovni tok]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog in na gumb “x” na enem od oglasov. Administrator potrdi izbris. Objava ni več vidna v blogu.
+* **[Izjemni tok 1]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog in na gumb “x” na enem od oglasov. Administrator ne potrdi izbrisa. Objava je še vedno vidna v blogu.
+
+___
+
+
 ## 6. Nefunkcionalne zahteve
 
 **TO-DO**
