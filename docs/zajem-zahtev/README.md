@@ -147,6 +147,21 @@ MUST HAVE
 
 **TO-DO**
 
+#### Explore
+![image](./images/zaslonske-maske/explore-filter.png)
+
+#### Inbox
+![image](./images/zaslonske-maske/inbox-all.png)
+
+#### Blog
+![image](./images/zaslonske-maske/blog.png)
+
+#### Listings
+![image](./images/zaslonske-maske/listings-my.png)
+
+#### Profile
+![image](./images/zaslonske-maske/profile.png)
+
 ## 8. Prototipi vmesnikov
 
 **TO-DO**
