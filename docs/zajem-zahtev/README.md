@@ -1103,6 +1103,20 @@ ___
 
 ## 8. Prototipi vmesnikov
 
-**TO-DO**
+### Geolocation API
 
-- Navesti je potrebno: zaslonske maske, sistemske vmesnike in vmesnike do naprav, vključno z referencami do primerov uporabe.
+Z uporabo API-ja bomo uporabniku aplikacije poenostavili objavo oglasa. Uporabniku ne bo treba vnesti točne lokacije objave oglasa, temveč bomo pridobili koordinate od uporabnika z uporabo gps in jih pretvorili s pomočjo API-ja v polja mesto, okrožje in država. Uporabnik se mora strinjati z uporabo lokacije. Odločili smo se, da se v objavi oglasa prikaže samo mesto in ne tudi točna uporabnikova lokacija, saj ne želimo, da lahko kdorkoli vidi točen naslov našega uporabnika. 
+
+Ko bo prijavljen uporabnik izbral funkcionalnost objave oglasa, ga bo aplikacija najprej vprašala za dovoljenje za dostop do lokacije. Ko uporabnik oglas objavi z Geolocation API iz koordinat pridobimo okviren naslov, ki ne bo razkril točne lokacije lastnika npr. Ljubljana, Slovenija. Podatke o naslovu dobimo v JSON formatu v poljih ‘country’ in  ‘city’. Pridobljeni naslov in koordinate shranimo v podatkovno bazo in na objavljenem oglasu prikažemo naslov.
+Primer poizvedbe: https://geocode.xyz/46.020052,14.382740?json=1. 
+
+
+### DogWalkers API
+
+Zunanji sistemi bodo lahko dostopali do vseh objavljenih oglasov na naši aplikaciji in jih integrirali v svoj sistem. Omogočili bomo dostop do oglasov na DogWalkers na končnih naslovih:
+GET /oglasi/ - vrnemo JSON objekt z vsemi oglasi 
+GET /oglasi/:id - vrnemo JSON objekt s podrobnostmi izbranega oglasa
+GET /oglasi?geolocation=[city]&distance=[number_km] vrnemo JSON objekt z oglasi na določeni lokaciji
+Naš API bi lahko uporabljal kdorkoli, ki bi želel prikazovati naše oglase, torej ne potrebuje privatnega ključa.
+
+
