@@ -1014,6 +1014,7 @@ ___
 <p float="left">
   <img src="images/zaslonske-maske/inbox-my-listing-1.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat-confirm-walker.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-confirmed-walker.png" width="300" />
 </p>
 
 ### Kontaktiranje sprehajalca za dodatne informacije
@@ -1035,6 +1036,10 @@ ___
 
 ### Podajanje ocene
 **TO-DO**
+<p float="left">
+  <img src="images/zaslonske-maske/inbox-chat-completed.png" width="300" />
+</p>
+
 
 ### Objava oglasa
 <p float="left">
