@@ -43,7 +43,7 @@ Aplikacija ne sme biti žaljiva ter rasisitična, zato bodo morali naši moderat
 
 ## 2. Uporabniške vloge
 
-V aplikaciji Dog Walkers obstaja 5 tipov uporabnikov: 
+V aplikaciji Walk Doggers obstaja 5 tipov uporabnikov: 
 - **neprijavljen uporabnik**: Bo imel dostop do objavljenih oglasov in blogov, ki si jih bo lahko ogledal. Oglasov ne bo mogel objaviti ali se na njih prijaviti dokler si ne bo ustvaril uporabniškega računa. Prav tako to velja za objave na blogu, ki jih ne bo mogel pisati in objaviti. Dostop do vseh ostalih funkcionalnosti mu bo onemogočen dokler se ne bo registriral in prijavil.
 - **prijavljen uporabnik (sprehajalec/lastnik)**: Ima na voljo vse funkcionalnosti enake kot neprijavljeni uporabnik. Lahko se sam poviša v pisca bloga. Poleg tega pa mu bo omogočeno objavljanje oglasov ter prijavljanje na oglase. Prijavljeni uporabniki si bodo lahko izmenjali sporočila in se dogovoril o vseh podrobnostih psa, srečanja, sprehoda itd. Lahko bo ocenil sprehajalca, če oddaja oglas oz. lastnika, če se je na oglas prijavil. Na enem mestu si bo lahko ogledal oglase na katere se je prijavil in oglase, ki jih oddaja. Imel bo tudi možnost urejanja, svojega profila in profila psov.
 - **pisec bloga**: Ima na voljo vse funkcionalnost kot prijavljeni uporabnik. Poleg tega lahko še piše objave, ki so po odobritvi moderatorja vidne vsem uporabnikom v razdelku Blog.
