@@ -1103,7 +1103,7 @@ ___
 
 ## 8. Prototipi vmesnikov
 
-### Geolocation API
+### Reverse geocoding API
 
 Z uporabo API-ja bomo uporabniku aplikacije poenostavili objavo oglasa. Uporabniku ne bo treba vnesti točne lokacije objave oglasa, temveč bomo pridobili koordinate od uporabnika z uporabo gps in jih pretvorili s pomočjo API-ja v polja mesto, okrožje in država. Uporabnik se mora strinjati z uporabo lokacije. Odločili smo se, da se v objavi oglasa prikaže samo mesto in ne tudi točna uporabnikova lokacija, saj ne želimo, da lahko kdorkoli vidi točen naslov našega uporabnika. 
 
@@ -1119,7 +1119,7 @@ Zunanji sistemi bodo lahko dostopali do vseh objavljenih oglasov na naši aplika
 
 **GET /oglasi/:id** - vrnemo JSON objekt s podrobnostmi izbranega oglasa
 
-**GET /oglasi?geolocation=[city]&distance=[number_km]** - vrnemo JSON objekt z oglasi na določeni lokaciji
+**GET /oglasi?geolocation=[city]** - vrnemo JSON objekt z oglasi na določeni lokaciji
 
 Naš API bi lahko uporabljal kdorkoli, ki bi želel prikazovati naše oglase, torej ne potrebuje privatnega ključa.
 
