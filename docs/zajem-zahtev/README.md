@@ -1114,9 +1114,13 @@ Primer poizvedbe: https://geocode.xyz/46.020052,14.382740?json=1.
 ### DogWalkers API
 
 Zunanji sistemi bodo lahko dostopali do vseh objavljenih oglasov na naši aplikaciji in jih integrirali v svoj sistem. Omogočili bomo dostop do oglasov na DogWalkers na končnih naslovih:
-GET /oglasi/ - vrnemo JSON objekt z vsemi oglasi 
-GET /oglasi/:id - vrnemo JSON objekt s podrobnostmi izbranega oglasa
-GET /oglasi?geolocation=[city]&distance=[number_km] vrnemo JSON objekt z oglasi na določeni lokaciji
+
+**GET /oglasi/** - vrnemo JSON objekt z vsemi oglasi 
+
+**GET /oglasi/:id** - vrnemo JSON objekt s podrobnostmi izbranega oglasa
+
+**GET /oglasi?geolocation=[city]&distance=[number_km]** - vrnemo JSON objekt z oglasi na določeni lokaciji
+
 Naš API bi lahko uporabljal kdorkoli, ki bi želel prikazovati naše oglase, torej ne potrebuje privatnega ključa.
 
 
