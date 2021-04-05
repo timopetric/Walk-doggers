@@ -987,18 +987,61 @@ ___
 
 ## 7. Osnutki zaslonskih mask
 
-**TO-DO**
-### Registracija / Prijava v sistem
+### Objava oglasa
 <p float="left">
-  <img src="images/zaslonske-maske/register.png" width="300" />
-  <img src="images/zaslonske-maske/login.png" width="300" />
+  <img src="images/zaslonske-maske/listings-my.png" width="300" />
+  <img src="images/zaslonske-maske/listings-add.png" width="300" />
 </p>
 
-### Prijava na oglas
+### Dodajanje profila psa
+<p float="left">
+  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
+  <img src="images/zaslonske-maske/profile-dogs-add.png" width="300" />
+</p>
+
+### Urejanje profila psa
+<p float="left">
+  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
+  <img src="images/zaslonske-maske/profile-dogs-edit.png" width="300" />
+</p>
+
+### Pregledovanje filtriranih oglasov
 <p float="left">
   <img src="images/zaslonske-maske/explore-filter.png" width="300" />
-  <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
-  <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
+</p>
+
+### Urejanje nastavitev prijavljenega
+<p float="left">
+  <img src="images/zaslonske-maske/profile.png" width="300" />
+  <img src="images/zaslonske-maske/profile-edit-profile.png" width="300" />
+</p>
+
+### Postani pisec bloga
+<p float="left">
+  <img src="images/zaslonske-maske/profile.png" width="300" />
+  <img src="images/zaslonske-maske/profile-become-reporter.png" width="300" />
+</p>
+
+### Pisanje objav na blogu
+<p float="left">
+  <img src="images/zaslonske-maske/blog.png" width="300" />
+  <img src="images/zaslonske-maske/blog-new.png" width="300" />
+</p>
+
+### Potrjevanje objav
+<p float="left">
+  <img src="images/zaslonske-maske/blog.png" width="300" />
+  <img src="images/zaslonske-maske/blog-post.png" width="300" />
+</p>
+
+### Brisanje oglasov
+<p float="left">
+  <img src="images/zaslonske-maske/explore.png" width="300" />
+</p>
+
+### Brisanje Blogov
+<p float="left">
+  <img src="images/zaslonske-maske/blog-post.png" width="300" />
 </p>
 
 #### Explore
