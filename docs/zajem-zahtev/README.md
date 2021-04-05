@@ -968,25 +968,33 @@ ___
 
 ## 6. Nefunkcionalne zahteve
 
-**TO-DO**
+Od aplikacije se poleg funkcionalnosti zahteva še nekaj nefunkcionalnih zahtev.
 
-- Navedite splošne omejitve, ki jih moramo upoštevati v več funkcionalnostih ali celo skozi celoten razvoj aplikacije.
+**[Zahteva izdelka]** Aplikacija uporabnikom, ki nimajo vloge administratorja ali moderatorja ne sme dopuščati brisanja oglasov ali objav na blogu.
 
-## 7. Osnutki zaslonskih mask
+**[Zahteva izdelka]** Aplikacija mora biti na voljo najmanj 99 odstotkov časa. To pomeni, da naša aplikacija letno ne bo na voljo približno 87 ur.
 
-**TO-DO**
+**[Zahteva izdelka]** Aplikacija mora biti zmožna podpirati najmanj 300 sočasnih uporabnikov.
 
-## 8. Prototipi vmesnikov
+**[Zahteva izdelka]** Aplikacija mora zahteve neregistriranih uporabnikov in registriranih uporabnikov obdelati v največ 3 sekundah.
 
-**TO-DO**
+**[Zahteva izdelka]** V vsak pogled v spletni aplikaciji po tem, ko je uporabnik prijavljen je možno priti v manj kot 5 ih klikih.
 
-- Navesti je potrebno: zaslonske maske, sistemske vmesnike in vmesnike do naprav, vključno z referencami do primerov uporabe.
+**[Zahteva izdelka]** Zaledni sistem mora biti dosegljiv na javno dostopnem spletnem naslovu.
 
-## 6. Nefunkcionalne zahteve
+**[Organizacijska zahteva]** V razvoju aplikacije bo uporabljeno orodje Git za upravljanje z izvorno kodo.
 
-**TO-DO**
+**[Organizacijska zahteva]** Dostop do podatkov, dnevniških zapisov in strežnikov imajo zaradi zaupnosti podatkov le administratorji.
 
-- Navedite splošne omejitve, ki jih moramo upoštevati v več funkcionalnostih ali celo skozi celoten razvoj aplikacije.
+**[Organizacijska zahteva]** Za sledenje trenutnega stanja projekta bomo uporabili Kanban tablo.
+
+**[Zunanja zahteva]** Aplikacija ne sme imeti žaljivih vsebin, oz. morajo biti odstranjene v manj kot 1 dnevu.
+
+**[Zunanja zahteva]** Hranjenje podatkov mora biti implementirano skladno z zakoni o varstvu podatkov, ki veljajo na področju republike Slovenije. Med drugim tudi z GDPR.
+
+**[Zunanja zahteva]** Dostop, do aplikacije je omogočen vsem, ki se se strinjajo s pogoji uporabe. Te morajo biti napisani nepristransko do rase lastnikov, ter pasme psov.
+
+___
 
 ## 7. Osnutki zaslonskih mask
 ### Prijava / Registracija
@@ -1091,8 +1099,28 @@ ___
 </p>
 
 
+___
+
 ## 8. Prototipi vmesnikov
 
-**TO-DO**
+### Geolocation API
 
-- Navesti je potrebno: zaslonske maske, sistemske vmesnike in vmesnike do naprav, vključno z referencami do primerov uporabe.
+Z uporabo API-ja bomo uporabniku aplikacije poenostavili objavo oglasa. Uporabniku ne bo treba vnesti točne lokacije objave oglasa, temveč bomo pridobili koordinate od uporabnika z uporabo gps in jih pretvorili s pomočjo API-ja v polja mesto, okrožje in država. Uporabnik se mora strinjati z uporabo lokacije. Odločili smo se, da se v objavi oglasa prikaže samo mesto in ne tudi točna uporabnikova lokacija, saj ne želimo, da lahko kdorkoli vidi točen naslov našega uporabnika. 
+
+Ko bo prijavljen uporabnik izbral funkcionalnost objave oglasa, ga bo aplikacija najprej vprašala za dovoljenje za dostop do lokacije. Ko uporabnik oglas objavi z Geolocation API iz koordinat pridobimo okviren naslov, ki ne bo razkril točne lokacije lastnika npr. Ljubljana, Slovenija. Podatke o naslovu dobimo v JSON formatu v poljih ‘country’ in  ‘city’. Pridobljeni naslov in koordinate shranimo v podatkovno bazo in na objavljenem oglasu prikažemo naslov.
+Primer poizvedbe: https://geocode.xyz/46.020052,14.382740?json=1. 
+
+
+### DogWalkers API
+
+Zunanji sistemi bodo lahko dostopali do vseh objavljenih oglasov na naši aplikaciji in jih integrirali v svoj sistem. Omogočili bomo dostop do oglasov na DogWalkers na končnih naslovih:
+
+**GET /oglasi/** - vrnemo JSON objekt z vsemi oglasi 
+
+**GET /oglasi/:id** - vrnemo JSON objekt s podrobnostmi izbranega oglasa
+
+**GET /oglasi?geolocation=[city]&distance=[number_km]** - vrnemo JSON objekt z oglasi na določeni lokaciji
+
+Naš API bi lahko uporabljal kdorkoli, ki bi želel prikazovati naše oglase, torej ne potrebuje privatnega ključa.
+
+
