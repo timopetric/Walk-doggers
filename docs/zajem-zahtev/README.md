@@ -52,9 +52,30 @@ Aplikacija ne sme biti žaljiva ter rasisitična, zato bodo morali naši moderat
 
 ## 3. Slovar pojmov
 
-**TO-DO**
+| **Pojem** | **Opredelitev** |
+| - | - | 
+|email | e-poštni naslov
+|sprehajalec | prijavljeni uporabnik, ki se je prijavil na oglas
+|lastnik oglasa | prijavljeni uporabnik, ki je objavil oglas
+|potrjeni oglas | lastnik oglasa je prijavljenega sprehajalca potrdil za oglas
+|Reporter | imenovanje vloge pisca bloga, v katero se lahko poviša vsak prijavljen uporabnik v nastavitvah
+|status Pending| status oglasa, ki pove, da lastnik oglasa še ni potrdil nobenega sprehajalca oz. sprehajalcu lastnik še ni potrdil prijave na oglas
+|status Completed | status oglasa, ki pove, da je imel oglas potrjenega sprehajalca in je časovno potekel
+|status Arranged | status oglasa, ki pove, da ima oglas potrjenega sprehajalca
+|status Requested | status oglasa, ki pove, da se sprehajalec zanima za oglas
+|status Listed | status oglasa
+|status Finished | status oglasa, ki pove, da je oglas končan (status Completed) in sprehajalec oz. lastnik je ocenjen
+|sporočilno okno | pogled v katerem dva prijavljena uporabnika lahko komunicirata med sabo
+|lastnik | prijavljen uporabnik, ki ima objavljen vsaj en oglas
+|sprehajalec | prijavljen uporabnik, ki se je prijavil na vsaj en oglas za sprehajanje psa
+|razdelek | Glavni meniji aplikacije. Vseh razdelkov je pet (od leve proti desni): Explore, Inbox, Blog, Listings, Settings. |Smiselno ločujejo aplikacijo.
+|razdelek Explore | prikazuje seznam oglasov
+|razdelek Inbox | prikazuje sporočila z ostalimi uporabniki
+|razdelek Blog | prikazuje seznam objav
+|razdelek Listings | prikazuje seznam oglasov na katere smo se prijavili in seznam oglasov, ki smo jih objavili
+|razdelek Settings | razdelek, kjer lahko prijavljen uporabnik ureja nastavitve svojega profila
+|Filtrirno okno oglasov | prvo mesto v filtrirnem oknu zasede All Messages, nasledna pa so v časovnem zaporedju razporejeni oglasi od najnovejših do najstarejših med katerimi se premikamo z drsnim potegom
 
-- Natančno opredelite vse têrmine, ki jih boste uporabljali v nadaljevanju dokumenta.
 
 ## 4. Diagram primerov uporabe
 
@@ -76,7 +97,7 @@ Neprijavljen uporabnik se lahko registrira na strani. Ob registraciji vpiše ime
 
 #### Alternativni tok
 
-**Alternativni tok 1**,
+**Alternativni tok 1**
 
 1. Neprijavljen uporabnik želi dostopati do funkcionalnosti, ki je na voljo le prijavljenim uporabnikom.
 2. Aplikacija neprijavljenemu uporabniku prikaže obvestilo, da je zahtevana funkcionalnost na voljo le prijavljenim uporabnikom. Aplikacija ponudi možnost preusmeritve na registracijsko stran.
@@ -89,16 +110,16 @@ Neprijavljen uporabnik se lahko registrira na strani. Ob registraciji vpiše ime
 #### Izjemni tok
 
 **Izjemni  tok 1**
-Neprijavljen uporabnik je za registracijo uporabil email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija vrne obvestilo o že uporabljenem email naslovu in ga pozove k uporabi drugega.
+* Neprijavljen uporabnik je za registracijo uporabil email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija vrne obvestilo o že uporabljenem email naslovu in ga pozove k uporabi drugega.
 
 **Izjemni  tok 2**
-Neprijavljen uporabnik vnese geslo, ki ni sestavljeno iz velikih in malih črk, številk ter vsaj enega posebnega znaka in ni dolgo vsaj 8 znakov. Obrazec odda. Aplikacija prikaže obvestilo o neprimernem geslu.
+* Neprijavljen uporabnik vnese geslo, ki ni sestavljeno iz velikih in malih črk, številk ter vsaj enega posebnega znaka in ni dolgo vsaj 8 znakov. Obrazec odda. Aplikacija prikaže obvestilo o neprimernem geslu.
 
 #### Pogoji
-Neprijavljen uporabnik aplikacije za uspešno izvedeno registracijo še ne sme biti prijavljen ali registriran v sistem z email naslovom, ki ga je vpisal v registracijski obrazec.
+* Neprijavljen uporabnik aplikacije za uspešno izvedeno registracijo še ne sme biti prijavljen ali registriran v sistem z email naslovom, ki ga je vpisal v registracijski obrazec.
 
 #### Posledice
-Če neprijavljen uporabnik dobi obvestilo o uspešni registraciji, je uspešno registriran. Sedaj se lahko prijavi v aplikacijo s svojim email naslovom in geslom, ki ga je vnesel ob registraciji v registracijski obrazec. Po uspešni prijavi dobi dostop do več funkcionalnosti aplikacije.
+* Če neprijavljen uporabnik dobi obvestilo o uspešni registraciji, je uspešno registriran. Sedaj se lahko prijavi v aplikacijo s svojim email naslovom in geslom, ki ga je vnesel ob registraciji v registracijski obrazec. Po uspešni prijavi dobi dostop do več funkcionalnosti aplikacije.
 
 
 #### Posebnosti
@@ -107,19 +128,14 @@ Registracijski podatki se med aplikacijo in strežnikom prenašajo po varni pove
 
 #### Prioritete identificiranih funkcionalnosti
 
-**TO-DO**
-
-- Za identificirane funkcionalnosti se z metodo **MoSCoW** (MUST have, SHOULD have, COULD have in WOULD have) določi prioritete.
+MUST HAVE
 
 #### Sprejemni testi
 
--[Osnovni tok] Neprijavljen uporabnik izpolne registracijski obrazec. Sedaj se lahko prijavi v sistem.
-
--[Alternativni tok 1] Neprijavljen uporabnik želi dostopati do funkcionalnosti, ki je na voljo le prijavljenim uporabnikom. Aplikacija mu ponudi možnost preusmeritve na registracijsko stran.
-
--[Izjemni tok 1] Neprijavljeni uporabnik je za registracijo uporabi email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija mu prepreči registracijo s tem email naslovom in mu prikaže obvestilo o že uporabljenem email naslovu ter ga pozove k uporabi drugega.
-
--[Izjemni tok 2] Neprijavljen uporabnik vnese geslo, ki ni pravilne oblike. Po oddaji obrazca dobi obvestilo o neprimernem geslu.
+* **[Osnovni tok]** Neprijavljen uporabnik izpolne registracijski obrazec. Sedaj se lahko prijavi v sistem.
+* **[Alternativni tok 1]** Neprijavljen uporabnik želi dostopati do funkcionalnosti, ki je na voljo le prijavljenim uporabnikom. Aplikacija mu ponudi možnost preusmeritve na registracijsko stran.
+* **[Izjemni tok 1]** Neprijavljeni uporabnik je za registracijo uporabi email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija mu prepreči registracijo s tem email naslovom in mu prikaže obvestilo o že uporabljenem email naslovu ter ga pozove k uporabi drugega.
+* **[Izjemni tok 2]** Neprijavljen uporabnik vnese geslo, ki ni pravilne oblike. Po oddaji obrazca dobi obvestilo o neprimernem geslu.
 
 ## 6. Nefunkcionalne zahteve
 
