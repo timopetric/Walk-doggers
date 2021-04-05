@@ -2,15 +2,18 @@
 
 |                             |                                                         |
 | :-------------------------- | :------------------------------------------------------ |
-| **Naziv projekta**          | **TO-DO** naziv projekta                                |
-| **Člani projektne skupine** | **TO-DO** 1. član, 2. član, 3. član, 4. član in 5. član |
-| **Kraj in datum**           | **TO-DO** kraj, datum                                   |
+| **Naziv projekta**          | Dog Walkers |
+| **Člani projektne skupine** | Matic Bregar, Domen Vilar, Timotej Petrič, Mustafa Grabus in Domen Bukovac |
+| **Kraj in datum** | Ljubljana, 05.04.2021 |                              |
 
 ## Povzetek projekta
 
-**TO-DO**
+Sedaj, ko se je tempo življenja v času epidemije covid-19 malo upočasnil, mnogo ljudi preživi veliko časa doma. Menimo, da je zdaj morda primeren čas za posvojitev kakšne domače živali, saj lahko več časa namenijo skrbi in vzgajanju le-te. 
 
-- Povzetek je, kot že vemo, celoten dokument, strnjen v največ 150 besed.
+Kaj pa se bo zgodilo, ko se bo življenje vrnilo na stare tirnice in bodo spet morali v službo, kdo bo takrat skrbel za domače živali? Veliko ljudi pa si morda želi samo ukvarjati se z živalmi, ne želijo pa jih posvojiti, ker je to za njih prevelika odgovornost, zato mi ponujamo rešitev. Uporabniki, ki bodo preživeli veliko časa zdoma, bodo lahko na naši platformi izbrali primerno osebo, ki bo njihove žival peljala na sprehod ali pa na njih popazila, medtem ko bodo oni zdoma ali pa zaradih drugih razlogov nimajo dovolj časa za skrb hišnih ljubljenčkov.
+
+Aplikacija bo vsebovala intuitiven uporabniški vmesnik, ki bo omogočal enostavno iskanje primernih sprehajalcev oz skrbnikov.
+
 
 ## 1. Uvod
 
