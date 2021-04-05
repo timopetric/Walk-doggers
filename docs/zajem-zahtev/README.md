@@ -501,8 +501,13 @@ ___
 ## 7. Osnutki zaslonskih mask
 
 **TO-DO**
+### Registracija / Prijava v sistem
+<p float="left">
+  <img src="images/zaslonske-maske/register.png" width="300" />
+  <img src="images/zaslonske-maske/login.png" width="300" />
+</p>
 
-#### Prijava na oglas
+### Prijava na oglas
 <p float="left">
   <img src="images/zaslonske-maske/explore-filter.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
