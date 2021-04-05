@@ -502,6 +502,13 @@ ___
 
 **TO-DO**
 
+#### Prijava na oglas
+<p float="left">
+  <img src="images/zaslonske-maske/explore-filter.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
+  <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
+</p>
+
 #### Explore
 ![image](./images/zaslonske-maske/explore-filter.png)
 
