@@ -1005,7 +1005,7 @@ ___
 
 ### Prijava na oglas
 <p float="left">
-  <img src="images/zaslonske-maske/explore-filter.png" width="300" />
+  <img src="images/zaslonske-maske/explore-listing.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat.png" width="300" />
   <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
 </p>
