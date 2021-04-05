@@ -81,7 +81,7 @@ Aplikacija ne sme biti žaljiva ter rasisitična, zato bodo morali naši moderat
 
 ## 5. Funkcionalne zahteve
 
-### Registracija
+### F1 Registracija
 
 Neprijavljen uporabnik se lahko registrira na strani. Ob registraciji vpiše ime, priimek, email in geslo.
 
@@ -135,7 +135,7 @@ MUST HAVE
 * **[Izjemni tok 1]** Neprijavljeni uporabnik je za registracijo uporabi email naslov, ki je že vezan na nek uspešno registriran račun. Aplikacija mu prepreči registracijo s tem email naslovom in mu prikaže obvestilo o že uporabljenem email naslovu ter ga pozove k uporabi drugega.
 * **[Izjemni tok 2]** Neprijavljen uporabnik vnese geslo, ki ni pravilne oblike. Po oddaji obrazca dobi obvestilo o neprimernem geslu.
 ___
-### Prijava
+### F2 Prijava
 
 Neprijavljen uporabnik se lahko prijavi v sistem. Ko je prijavljen, lahko dostopa do več funkcionalnosti.
 
@@ -186,7 +186,7 @@ MUST HAVE
 
 ___
 
-### Prijava na oglas
+### F3 Prijava na oglas
 
 Registriran uporabnik se lahko prijavi na oglas za sprehajanje psa.
 
@@ -234,7 +234,7 @@ MUST HAVE
 
 ___
 
-### Potrditev sprehajalca
+### F4 Potrditev sprehajalca
 
 Prijavljen uporabnik lahko potrdi sprehajalca za svoj oglas.
 
@@ -292,7 +292,7 @@ MUST HAVE
 
 ___
 
-### Kontaktiranje sprehajalca za dodatne informacije
+### F5 Kontaktiranje sprehajalca za dodatne informacije
 
 Prijavljeni uporabnik lahko kontaktira sprehajalca za dodatne informacije glede oglasa.
 
@@ -346,7 +346,7 @@ SHOULD HAVE
 
 ___
 
-### Kontaktiranje lastnika za dodatne informacije
+### F6 Kontaktiranje lastnika za dodatne informacije
 
 Prijavljeni uporabnik lahko kontaktira lastnika za dodatne informacije.
 
@@ -407,7 +407,7 @@ SHOULD HAVE
 
 ___
 
-### Pregled podrobnosti prijavljenih oglasov
+### F7 Pregled podrobnosti prijavljenih oglasov
 
 Prijavljeni uporabnik lahko pogleda podrobnosti oglasa na katerega se je prijavil.
 
@@ -441,7 +441,7 @@ SHOULD HAVE
 
 ___
 
-### Podajanje ocene
+### F8 Podajanje ocene
 
 Prijavljeni uporabnik lahko poda oceno sprehajalcu oz. lastniku.
 
@@ -476,7 +476,7 @@ COULD HAVE
 * **[Osnovni tok]** Prijavljeni uporabnik izbere oglas, ki ga še ni ocenil in sprehajalca oz. lastnika oglasa oceni.
 ___
 
-### Objava oglasa
+### F9 Objava oglasa
 
 Prijavljeni uporabnik lahko objavi oglas za sprehajanje svojega psa.
 
@@ -527,7 +527,7 @@ MUST HAVE
 
 ___
 
-### Dodajanje profila psa
+### F10 Dodajanje profila psa
 
 Prijavljeni uporabnik lahko ustvari profil za svojega psa.
 
@@ -571,7 +571,7 @@ MUST HAVE
 
 ___
 
-### Urejanje profila psa
+### F11 Urejanje profila psa
 
 Prijavljeni uporabnik lahko spreminja podrobnosti profila svojih psov.
 
@@ -613,7 +613,7 @@ COULD HAVE
 
 ___
 
-### Pregledovanje filtriranih oglasov
+### F12 Pregledovanje filtriranih oglasov
 
 Prijavljeni ali neprijavljeni uporabnik lahko pregleduje in filtrira oglase po oddaljenosti in velikosti psa.
 
@@ -663,7 +663,7 @@ SHOULD HAVE
 
 ___
 
-### Iskanje oglasov na mapi
+### F13 Iskanje oglasov na mapi
 
 Prijavljeni ali neprijavljeni uporabnik lahko išče oglase po mapi.
 
@@ -703,7 +703,7 @@ WOULD HAVE
 
 ___
 
-### Urejanje profila
+### F14 Urejanje profila
 
 Prijavljeni uporabnik lahko uredi svoj profil.
 
@@ -746,7 +746,7 @@ SHOULD HAVE
 
 ___
 
-### Pisanje objav na blogu
+### F15 Pisanje objav na blogu
 
 Pisec bloga lahko ustvari novo objavo na razdelku blog.
 
@@ -791,7 +791,7 @@ SHOULD HAVE
 
 ___
 
-### Postani pisec bloga
+### F16 Postani pisec bloga
 
 Prijavljeni uporabnik lahko postane pisec bloga s spremembo nastavitev v svojem profilu.
 
@@ -833,7 +833,7 @@ SHOULD HAVE
 
 ___
 
-### Potrjevanje objav
+### F17 Potrjevanje objav
 
 Moderator ima omogočeno funkcionalnost potrjevanja objav. Po potrditvi objave ta postane javno vidna prijavljenim in neprijavljenim uporabnikom.
 
@@ -875,7 +875,7 @@ SHOULD HAVE
 
 ___
 
-### Brisanje oglasov 
+### F18 Brisanje oglasov 
 
 Administrator lahko briše oglase.
 
@@ -919,7 +919,7 @@ MUST HAVE
 
 ___
 
-### Brisanje blog objav
+### F19 Brisanje blog objav
 
 Administrator lahko briše posamezne objave na blogu.
 
@@ -988,10 +988,10 @@ ___
 ## 7. Osnutki zaslonskih mask
 
 **TO-DO**
-### Prijava / Registracija
+### Registracija / Prijava v sistem
 <p float="left">
-  <img src="images/zaslonske-maske/login.png" width="300" />
   <img src="images/zaslonske-maske/register.png" width="300" />
+  <img src="images/zaslonske-maske/login.png" width="300" />
 </p>
 
 ### Prijava na oglas
@@ -1001,85 +1001,20 @@ ___
   <img src="images/zaslonske-maske/inbox-chat-requested.png" width="300" />
 </p>
 
-### Potrditev sprehajalca
-**TO-DO**
+#### Explore
+![image](./images/zaslonske-maske/explore-filter.png)
 
-### Kontaktiranje sprehajalca za dodatne informacije
-<p float="left">
-  <img src="images/zaslonske-maske/inbox-applied-listing-1.png" width="300" />
-</p>
+#### Inbox
+![image](./images/zaslonske-maske/inbox-all.png)
 
+#### Blog
+![image](./images/zaslonske-maske/blog.png)
 
-### Kontaktiranje lastnika za dodatne informacije
-<p float="left">
-  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
-</p>
+#### Listings
+![image](./images/zaslonske-maske/listings-my.png)
 
-### Pregled podrobnosti prijavljenih oglasov
-<p float="left">
-  <img src="images/zaslonske-maske/listings-applied.png" width="300" />
-</p>
-
-### Podajanje ocene
-**TO-DO**
-
-### Objava oglasa
-<p float="left">
-  <img src="images/zaslonske-maske/listings-my.png" width="300" />
-  <img src="images/zaslonske-maske/listings-add.png" width="300" />
-</p>
-
-### Dodajanje profila psa
-<p float="left">
-  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
-  <img src="images/zaslonske-maske/profile-dogs-add.png" width="300" />
-</p>
-
-### Urejanje profila psa
-<p float="left">
-  <img src="images/zaslonske-maske/profile-dogs.png" width="300" />
-  <img src="images/zaslonske-maske/profile-dogs-edit.png.png" width="300" />
-</p>
-
-### Pregledovanje filtriranih oglasov
-<p float="left">
-  <img src="images/zaslonske-maske/explore.png" width="300" />
-  <img src="images/zaslonske-maske/explore-filter.png" width="300" />
-</p>
-
-### Urejanje nastavitev prijavljenega
-<p float="left">
-  <img src="images/zaslonske-maske/profile.png" width="300" />
-  <img src="images/zaslonske-maske/profile-edit-profile.png" width="300" />
-</p>
-
-### Postani pisec bloga
-<p float="left">
-  <img src="images/zaslonske-maske/profile.png" width="300" />
-  <img src="images/zaslonske-maske/profile-become-reporter.png" width="300" />
-</p>
-
-### Pisanje objav na blogu
-<p float="left">
-  <img src="images/zaslonske-maske/blog.png" width="300" />
-  <img src="images/zaslonske-maske/blog-new.png" width="300" />
-</p>
-
-### Potrjevanje objav
-<p float="left">
-  <img src="images/zaslonske-maske/blog.png" width="300" />
-  <img src="images/zaslonske-maske/blog-post.png" width="300" />
-</p>
-
-### Brisanje oglasov
-<p float="left">
-  <img src="images/zaslonske-maske/explore.png" width="300" />
-</p>
-
-### Brisanje Blogov
-<p float="left">
-  <img src="images/zaslonske-maske/blog-post.png" width="300" />
-</p>
+#### Profile
+![image](./images/zaslonske-maske/profile.png)
 
 ## 8. Prototipi vmesnikov
 
