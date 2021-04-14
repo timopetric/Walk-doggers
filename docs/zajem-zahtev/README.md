@@ -929,8 +929,8 @@ Administrator lahko briše posamezne objave na blogu.
 #### Osnovni tok
 
 1. Administrator klikne na razdelek Blog.
-1. Administratorju se prikaže seznam vseh objav.
-1. Administrator lahko neprimerne objave izbriše s klikom na gumb “x”, v desnem zgornjem kotu izbrane objave.
+1. Administratorju se prikaže seznam vseh objav. Klikne na objavo, ki jo želi izbrisati.
+1. Administrator lahko neprimerno objavo izbriše s klikom na gumb “Remove blog post”, na dnu podrobnosti izbrane objave.
 1. Administratorju se prikaže obvestilo, da je izbris objave nepreklicna operacija.
 1. Administrator potrdi brisanje objave s klikom na gumb Yes.
 
@@ -942,7 +942,7 @@ Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
 #### Izjemni tok
 
 **Izjemni  tok 1**
-* Administrator po kliku na “x” ne potrdi brisanja objave, klikne No. Objava ni izbrisana.
+* Administrator po kliku na “Remove blog post” ne potrdi brisanja objave, klikne No. Objava ni izbrisana.
 
 #### Pogoji
 * Uporabnik mora biti prijavljen in je imeti vlogo administratorja.
@@ -960,8 +960,8 @@ WOULD HAVE
 
 #### Sprejemni testi
 
-* **[Osnovni tok]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog in na gumb “x” na enem od oglasov. Administrator potrdi izbris. Objava ni več vidna v blogu.
-* **[Izjemni tok 1]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog in na gumb “x” na enem od oglasov. Administrator ne potrdi izbrisa. Objava je še vedno vidna v blogu.
+* **[Osnovni tok]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog. Izbere objavo, in na dnu podrobnosti objave klikne na gumb “Remove blog post”. Administrator potrdi izbris. Objava ni več vidna v blogu.
+* **[Izjemni tok 1]** Uporabnik je prijavljen kot administrator. Klikne na razdelek Blog. Izbere objavo, in na dnu podrobnosti objave klikne na gumb “Remove blog post”. Administrator ne potrdi izbrisa. Objava je še vedno vidna v blogu.
 
 ___
 
