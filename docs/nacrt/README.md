@@ -34,11 +34,12 @@ Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC
 
 ## 2. Načrt strukture
 
+V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture sistema.
+
 ### 2.1 Razredni diagram
 
-**TO-DO**
+<img src="../img/lp3/razredni_diagram.png">
 
-- Izdelajte razredni diagram.
 
 ### 2.2 Opis razredov
 
