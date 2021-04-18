@@ -10,19 +10,18 @@
 Povzetek
 ===
 
-Ta dokument predstavlja podroben načrt sistema, katerega smo opisali v drugem delu projketa, v tem dokumentu bolj tehnično predstavimo posamezne komponente in delovanje sistema.
+Ta dokument predstavlja podroben načrt sistema, katerega smo opisali v drugem delu projeketa, v tem dokumentu pa bolj tehnično predstavimo posamezne komponente in delovanje sistema.
 
-Za načrta arhitekture smo uporabili vzorec **MVC**. Prikaz načrta arhitekture predstavimo z dvemi pogledi:<br> 
-**logični pogled:** predstavljen s pomočjo blokovnega diagrama<br>
-**razvojni pogled:** predstavljen z UML komponentnem diagramom.
+Za načrta arhitekture smo uporabili vzorec **MVC**. Prikaz načrta arhitekture predstavimo z dvemi pogledi, ki uporabljata blokovni diagram:<br> 
+**logični pogled** ,
+**razvojni pogled** 
 
-Načrt strukture sistema je prikazan z razrednim diagramom, kjer so prikazane povezave med razredi. Celotnemu diagramu zaporedja pa sledi tudi posamezen razedni diagram za vsako funkcionalnost, zaradi preglednosti.
+Načrt strukture sistema je prikazan z razrednim diagramom, kjer so prikazane povezave med razredi. Celotnemu diagramu zaporedja pa sledi tudi posamezen razredni diagram za vsako funkcionalnost, zaradi preglednosti.
 
-Pri načrtih obnašanja smo uporabili diagrame zaporedji, ki prikazejo zaporedje akcji, ki jih izvajlajo posamezne vloge uporabnikov, ter sistemske komponente. Za vsako funkcinalnost iz drugega dela projketa prikažemo osnove, alternativne ter izjemne tokove.
+Pri načrtih obnašanja smo uporabili diagrame zaporedji, ki prikažejo zaporedje akcji, ki jih izvajajo posamezne vloge uporabnikov, ter sistemske komponente. Za vsako funkcinalnost iz drugega dela projketa prikažemo osnovne, alternativne ter izjemne tokove.
 
 Uporabili smo dva načrtovalska vzorca, in sicer:
-**Singleton** in
-**State**
+**Singleton** in **State** več o njiju je napisano pri posameznih interakcijah z njima.
 
 ## 1. Načrt arhitekture
 
