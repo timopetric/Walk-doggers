@@ -65,6 +65,9 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 #### Razredni diagram za objavo oglasa F9 (akter: prijavljeni uporabnik)
 <img src="../img/lp3/F9 Razredni diagram.png">
 
+#### Razredni diagram za dodajanje in urejanje profila psa F10, F11 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F10F11 Razredni diagram.png">
+
 #### Razredni diagram za pregledocanje filtriranih objav F12 (akter: prijavljeni uporabnik)
 <img src="../img/lp3/F12_RD.png">
 
