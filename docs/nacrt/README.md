@@ -1114,8 +1114,12 @@ Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje lastnika, up
 
 <img src="../img/lp3/F6 Kontaktiranje lastnika ALT2.png">
 
-## F6 Pregled podrobnosti prijavljenih oglasov
+## F7 Pregled podrobnosti prijavljenih oglasov
 
 opis TODO
 <img src="../img/lp3/diagrami-zaporedja/F07.png">
 
+## F8 Podajanje ocene
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F08.png">
