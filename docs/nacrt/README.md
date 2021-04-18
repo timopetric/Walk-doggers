@@ -65,8 +65,27 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 #### Razredni diagram za objavo oglasa F9 (akter: prijavljeni uporabnik)
 <img src="../img/lp3/F9 Razredni diagram.png">
 
-#### Razredni diagram za dodajanje in urejanje profila psa F10, F11 (akter: prijavljeni uporabnik)
-<img src="../img/lp3/F10F11 Razredni diagram.png">
+#### Razredni diagram za pregledocanje filtriranih objav F12 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F12_RD.png">
+
+#### Razredni diagram za iskanje oglasov na mapi F13 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F13_RD.png">
+
+#### Razredni diagram za urejanje profila F14 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F14_RD.png">
+
+#### Razredni diagram za pisanje objav na blogu F15 (akter: pisec)
+<img src="../img/lp3/F15_RD.png">
+
+#### Razredni diagram za pisanje objav na blogu F16 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F16_RD.png">
+
+#### Razredni diagram za potrjevanje objav F17 in brisanje objav na blogu (akter: moderator)
+<img src="../img/lp3/F17_F19_RD.png">
+
+#### Razredni diagram za brisanje oglasov F18 (akter: administrator)
+<img src="../img/lp3/F18_RD.png">
+
 
 ### 2.3 Opis razredov
 
