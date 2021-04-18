@@ -1165,3 +1165,38 @@ opis TODO
 opis TODO
 <img src="../img/lp3/diagrami-zaporedja/F13.png">
 
+## F14 Urejanje profila
+
+Slika prikazuje diagram zaporedja za osnovni in alternativni tok za urejanje profila, uporabnika z vlogo **Prijavljen uporabnik**.
+
+<img src="../img/lp3/diagrami-zaporedja/f14.png">
+
+## F15 Pisanje objav na blogu
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za pisanje objav na blogu, uporabnika z vlogo **Pisec**.
+
+<img src="../img/lp3/diagrami-zaporedja/f15.png">
+
+## F16 Postani pisec bloga
+
+Slika prikazuje diagram zaporedja za osnovni tok za funkcijo Postani pisec bloga, uporabnika z vlogo **Prijavljen uporabnik**.
+
+<img src="../img/lp3/diagrami-zaporedja/f16.png">
+
+## F17 Potrjevanje objav
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za potrjevanje objav, uporabnika z vlogo **Moderator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f17.png">
+
+## F18 Brisanje oglasov
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za brisanje oglasov, uporabnika z vlogo **Administrator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f18.png">
+
+## F19 Brisanje blog objav
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za brisanje blog objav, uporabnika z vlogo **Administrator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f19.png">
