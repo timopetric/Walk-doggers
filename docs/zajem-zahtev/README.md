@@ -1124,7 +1124,7 @@ ___
 
 ## 8. Prototipi vmesnikov
 
-### Reverse geocoding API
+### Geocoding API
 
 Z uporabo API-ja bomo uporabniku aplikacije poenostavili objavo oglasa. Uporabniku ne bo treba vnesti točne lokacije objave oglasa, temveč bomo pridobili koordinate od uporabnika z uporabo gps in jih pretvorili s pomočjo API-ja v polja mesto, okrožje in država. Uporabnik se mora strinjati z uporabo lokacije. Odločili smo se, da se v objavi oglasa prikaže samo mesto in ne tudi točna uporabnikova lokacija, saj ne želimo, da lahko kdorkoli vidi točen naslov našega uporabnika. 
 
