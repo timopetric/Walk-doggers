@@ -40,8 +40,19 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 
 <img src="../img/lp3/razredni_diagram.png">
 
+### 2.2 Razredni diagrami za posamezne interakcije
 
-### 2.2 Opis razredov
+#### Razredni diagram za registracijo F1 in prijavo F2 (akterji: neprijavljen uporabnik)
+<img src="../img/lp3/F1_F2_razredni_diagram.png">
+
+#### Razredni diagram za prijavo na oglas F3 (akterji: prijavljen uporabnik)
+<img src="../img/lp3/F3_razredni_diagram.png">
+
+#### Razredni diagram za potrditev sprehajalca in kontaktiranje sprehalca oz. lastnika oglasa F4, F5 in F6 (akter: prijavljen uporabnik)
+<img src="../img/lp3/F4_F5_F6_razredni_diagram.png">
+
+
+### 2.3 Opis razredov
 
 
 ### ExploreView
