@@ -1132,36 +1132,36 @@ Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje lastnika, up
 
 ## F7 Pregled podrobnosti prijavljenih oglasov
 
-opis TODO
+Slika prikazuje diagram zaporedja za pregledovanje podrobnosti prijavljenih oglasov. Uporabnik v aplikaciji klikne na razdelek Listings v spodnjem menuju, na zaslonu, ki se mu prikaže pa izbere razdelek "Applied". Uporabniku se prikažejo vsi oglasi na katere se je prijavil.
 <img src="../img/lp3/diagrami-zaporedja/F07.png">
 
 ## F8 Podajanje ocene
 
-opis TODO
+Slika prikazuje diagram zaporedja za podajanje ocene. Oceno lahko poda lastnik psa sprehajalcu in tudi sprehajalec lastniku. Oceno lahko lastnik poda sprehajalcu za vsak oglas za katerega je sprehajalca sprejel. To stori tako, da navigira na razdelek listings in najde oglas za katerega še ni podal ocene sprehahajalcu. Nato klikne gumb "Leave feedback" in se mu prikaže zaslon kjer s klikom na eno izmed zvezdic oceni sprehajalca z oceno od 1-5. Za potrditev klikne gumb "Submit feedback". Sprehajalec pa lastnik oceni na enak način, le da oglas najde v razdelku "Applied".
 <img src="../img/lp3/diagrami-zaporedja/F08.png">
 
 ## F9 Objava oglasa
 
-opis TODO
+Slika prikazuje diagram zaporedja za objavo oglasa. Uporabnik pod razdelkom listings klikne na gumb "add new listing", in prikaže se mu zaslon za dodajanje oglasa. Na zaslonu uporabnik vnese naslov, opis, datum in uro začetka ter datum in uro konca oglasa. Pogleg pa izbere še enega izmed svojih psov, s klikom na sliko.
 <img src="../img/lp3/diagrami-zaporedja/F09.png">
 
 ## F10 Dodajanje profila psa
 
-opis TODO
+Slika prikazuje diagram zaporedja za dodajanje profila psa. Uporabnik v profilu izbere razdelek dogs in na tem zaslonu klikne na gumb za dodajanje svojega psa. Na zaslonu, ki se mu prikaže vnese ime, opis, izbere velikost psa, izbere sliko psa in klikne na gumb Add. Po uspešnem dodajanju se mu prikaže obvestilo, da je profil psa dodan. 
 <img src="../img/lp3/diagrami-zaporedja/F10.png">
 
 ## F11 Urejanje profila psa
 
-opis TODO
+Slika prikazuje diagram zaporedja za urejanje profila psa. Uporabnik v razdelku dogs izbere enega izmed svojih psov, ki jih je že prej dodal. V tem razdelku pa lahko spremeni enake atribute kot pri dodajanju novega psa. S klikom na gumb "Save changes" pa potrdi spremebe.
 <img src="../img/lp3/diagrami-zaporedja/F11.png">
 
 ## F12 Pregledovanje filtriranih oglasov
 
-opis TODO
+Slika prikazuje diagram zaporedja za pregledovanje filtriranih oglasov. Uporabnik v razdelku explore klikne na gumb z ikono filtra, in prikaže se mu izbira za velikost psa in drsnik s katerim izbere največjo oddaljenost oglasov psa od svoje trenutne lokacije. Z vsako spremembo se mu avtomatsko prikažejo oglasi, ki ustrezajo izbranim filtrom.
 <img src="../img/lp3/diagrami-zaporedja/F12.png">
 
 ## F13 Iskanje oglasov na mapi
 
-opis TODO
+Slika prikazuje diagram zaporedja za iskanje oglasov na mapi. Uporabnik pri razdelku explore klikne na ikono zemljevida in prikaže se mu zaslon z zemljevidom in oznake lokacij, kjer se okvirno nahajajo lasntiki psov iz oglasov. S klikom na oznako pa se uporabniku odpre oglas.
 <img src="../img/lp3/diagrami-zaporedja/F13.png">
 
