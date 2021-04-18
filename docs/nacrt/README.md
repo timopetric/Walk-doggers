@@ -26,9 +26,11 @@ Uporabili smo dva načrtovalska vzorca, in sicer:
 
 ## 1. Načrt arhitekture
 
-**TO-DO**
+### Logicni pogled
 
-- Za prikaz uporabite enostavne prikaze, kot so blokovni ali paketni diagrami. Uporabite arhitekturne vzorce.
+Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC arhitektura ter posamezne komponente, ki so razdeljene na Poglede, Krmilnike in Modele. Na njem se vidi tudi delitev baze na PostgresSQL, ki je uporabljena za podatke, kjer lahko podatke enostavno prikažemo z relacijskimi povezavami, ter MongoDB, ki je uporabljana za pogosto spreminjajoče sporočila med dvema uporabnikoma.
+
+<img src="../img/lp3/UML class brewz - logicni pogled.png">
 
 ## 2. Načrt strukture
 
