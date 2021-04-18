@@ -51,6 +51,17 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 #### Razredni diagram za potrditev sprehajalca in kontaktiranje sprehalca oz. lastnika oglasa F4, F5 in F6 (akter: prijavljen uporabnik)
 <img src="../img/lp3/F4_F5_F6_razredni_diagram.png">
 
+#### Razredni diagram za pregled podrobnosti prijavljenih oglasov in po F7 (akterji: prijavljen uporabnik - sprehajalec)
+<img src="../img/lp3/F7 Razredni diagram.png">
+
+#### Razredni diagram za podajanje ocene F8 (akterji: prijavljen uporabnik - sprehajalec)
+<img src="../img/lp3/F8 Razredni diagram.png">
+
+#### Razredni diagram za objavo oglasa F9 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F9 Razredni diagram.png">
+
+#### Razredni diagram za dodajanje in urejanje profila psa F10, F11 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F10F11 Razredni diagram.png">
 
 ### 2.3 Opis razredov
 
