@@ -76,6 +76,7 @@ V aplikaciji Walk Doggers obstaja 5 tipov uporabnikov:
 |razdelek Listings | prikazuje seznam oglasov na katere smo se prijavili in seznam oglasov, ki smo jih objavili
 |razdelek Settings | razdelek, kjer lahko prijavljen uporabnik ureja nastavitve svojega profila
 |Filtrirno okno oglasov | prvo mesto v filtrirnem oknu zasede All Messages, nasledna pa so v časovnem zaporedju razporejeni oglasi od najnovejših do najstarejših med katerimi se premikamo z drsnim potegom
+|Mehka prijava ali Soft apply | Ko sprehajalec kontaktira lastnika brez da bi se prijavil na oglas, se ustvari mehka prijava.
 
 
 ## 4. Diagram primerov uporabe
