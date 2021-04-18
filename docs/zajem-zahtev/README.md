@@ -76,6 +76,7 @@ V aplikaciji Walk Doggers obstaja 5 tipov uporabnikov:
 |razdelek Listings | prikazuje seznam oglasov na katere smo se prijavili in seznam oglasov, ki smo jih objavili
 |razdelek Settings | razdelek, kjer lahko prijavljen uporabnik ureja nastavitve svojega profila
 |Filtrirno okno oglasov | prvo mesto v filtrirnem oknu zasede All Messages, nasledna pa so v časovnem zaporedju razporejeni oglasi od najnovejših do najstarejših med katerimi se premikamo z drsnim potegom
+|Mehka prijava ali Soft apply | Ko sprehajalec kontaktira lastnika brez da bi se prijavil na oglas, se ustvari mehka prijava.
 
 
 ## 4. Diagram primerov uporabe
@@ -536,7 +537,7 @@ Prijavljeni uporabnik lahko ustvari profil za svojega psa.
 
 #### Osnovni tok
 
-1. Prijavljeni uporabnik izbere razdelek Profil.
+1. Prijavljeni uporabnik izbere razdelek Settings.
 1. Prijavljeni uporabnik izbere zavihek My dogs.
 1. Prijavljeni uporabnik klikne na gumb za dodajanje psa.
 1. Aplikacija prikaže okno, kamor lahko prijavljeni uporabnik vnese podatke o svojem psu.
@@ -551,13 +552,13 @@ Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
 #### Izjemni tok
 
 **Izjemni  tok 1**
-* Prijavljen uporabnik pod razdelkom profile izbere profil psa, ki ga želi urediti, eno polje pri urejanju pusti prazno, ko skuša profil posodobiti, mu prikažemo opozorilo, da morajo biti vsa polja izpolnjena.
+* Prijavljen uporabnik pod razdelkom settings pod zavihkom my dogs izbere profil psa, ki ga želi urediti, eno polje pri urejanju pusti prazno, ko skuša profil posodobiti, mu prikažemo opozorilo, da morajo biti vsa polja izpolnjena.
 
 #### Pogoji
 * Uporabnik mora biti prijavljen v sistem. Neprijavljenemu uporabniki ta funkcionalnost ni na voljo.
 
 #### Posledice
-* Prijavljen uporabnik, ima v okviru svojega profila pod zavihkom My dogs enega psa več, ki je kasneje na voljo za objavo na oglasu. 
+* Prijavljen uporabnik ima pod razdelkom settings pod zavihkom My dogs enega psa več, ki je kasneje na voljo za objavo na oglasu. 
 
 #### Posebnosti
 
@@ -1124,7 +1125,7 @@ ___
 
 ## 8. Prototipi vmesnikov
 
-### Reverse geocoding API
+### Geocoding API
 
 Z uporabo API-ja bomo uporabniku aplikacije poenostavili objavo oglasa. Uporabniku ne bo treba vnesti točne lokacije objave oglasa, temveč bomo pridobili koordinate od uporabnika z uporabo gps in jih pretvorili s pomočjo API-ja v polja mesto, okrožje in država. Uporabnik se mora strinjati z uporabo lokacije. Odločili smo se, da se v objavi oglasa prikaže samo mesto in ne tudi točna uporabnikova lokacija, saj ne želimo, da lahko kdorkoli vidi točen naslov našega uporabnika. 
 
