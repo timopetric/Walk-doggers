@@ -1055,7 +1055,7 @@ __________________________________________________________________________
 
 ## 3. Načrt obnašanja
 
-### 3.1.1 F1 Registracija
+## F1 Registracija
 
 Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Neprijavljen uporabnik** registrira v sistem.
 
@@ -1064,7 +1064,7 @@ Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Nepri
 Alternativni tok za Registracijo se nahaja na pri alternativnem toku za prijavo.
 
 
-### 3.1.2 F2 Prijava
+## F2 Prijava
 
 Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Neprijavljen uporabnik** prijavi v sistem.
 
@@ -1072,21 +1072,21 @@ Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Nepri
 <img src="../img/lp3/F2 Prijava.png">
 
 
-### F1&F2 Registracija in Prijava Alternativni tok
+## F1&F2 Registracija in Prijava Alternativni tok
 
 Slika prikazuje diagram zaporedja za alternativni tok registracije in prijave, ki se zgodi ko **Neprijavljen uporabnik** poskuša uporabljati aktivnosti, ki mu niso dovoljene. Alternativni tok se nadaljuje z osnovnim tokom.
 
 <img src="../img/lp3/F1F2 Reg&Pri ALT.png">
 
 
-### 3.1.3 F3 Prijava na oglas
+## F3 Prijava na oglas
 
 Slika prikazuje diagram zaporedja za osnovni tok prijave na oglas, ki se zgodi ko se **Prijavljen uporabnik** poskuša prijaviti na oglas za sprehajanje psa. Izjemni tok pa prikazuje, prikaz obvestila ko oglasov v bližini ni.
 
 <img src="../img/lp3/F3 Prijava na oglas.png">
 
 
-### 3.1.4 F4 Potrditev sprehajalca
+## F4 Potrditev sprehajalca
 
 Slika prikazuje diagram zaporedja za osnovni tok Potrditeve sprehajalca, za objavljen oglas, uporabnika z vlogo **Prijavljen uporabnik** , ki je lastnik psa. S tem potrdi zaiteresiranega sprehajalca, in potrdi njegov sprehod. 
 
@@ -1101,7 +1101,7 @@ Slika prikazuje diagram zaporedja za alternativni tok Potrditve sprehajalca za o
 
 
 
-### 3.1.5 F5 Kontaktiranje sprehajalca za dodatne informacije
+## F5 Kontaktiranje sprehajalca za dodatne informacije
 
 Slika prikazuje diagram zaporedja za Osnovni tok Kontaktiranje sprehajalca za objavljen oglas, uporabnika z vlogo **Prijavljen uporabnik** , ki je lastnik psa. Do željenega učinka pride preko razdelka listings.
 
@@ -1114,7 +1114,7 @@ Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje sprehajalca 
 <img src="../img/lp3/F5 Kontaktiranje sprehajalca ALT.png">
 
 
-### 3.1.6 F6 Kontaktiranje lastnika za dodatne informacije
+## F6 Kontaktiranje lastnika za dodatne informacije
 
 Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje lastnika, uporabnika z vlogo **Prijavljen uporabnik** , ki želi sprehajati psa, katerega je zasledil na oglasu pred tem pa želi več infromaciji od lastnika. Do željenega učinka pride preko razdelka Listings.
 
