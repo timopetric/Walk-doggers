@@ -31,6 +31,12 @@ Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC
 
 <img src="../img/lp3/UML class brewz - logicni pogled.png">
 
+### Razvojni pogled
+
+TODO
+
+<img src="../img/lp3/razvojni-pogled.png">
+
 ## 2. Načrt strukture
 
 V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture sistema.
@@ -1133,3 +1139,29 @@ opis TODO
 
 opis TODO
 <img src="../img/lp3/diagrami-zaporedja/F08.png">
+
+## F9 Objava oglasa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F09.png">
+
+## F10 Dodajanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F10.png">
+
+## F11 Urejanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F11.png">
+
+## F12 Pregledovanje filtriranih oglasov
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F12.png">
+
+## F13 Iskanje oglasov na mapi
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F13.png">
+
