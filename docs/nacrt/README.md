@@ -32,6 +32,12 @@ Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC
 
 <img src="../img/lp3/UML class brewz - logicni pogled.png">
 
+### Razvojni pogled
+
+TODO
+
+<img src="../img/lp3/razvojni-pogled.png">
+
 ## 2. Načrt strukture
 
 V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture sistema.
