@@ -33,7 +33,7 @@ Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC
 
 ### Razvojni pogled
 
-TODO
+Razvojni pogled je predstavljen s posameznimi komponentami, ki se lahko ločeno razvijajo. Pušcice pa prikazujejo odvisnosti med komponentami.
 
 <img src="../img/lp3/razvojni-pogled.png">
 
