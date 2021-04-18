@@ -68,6 +68,28 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 #### Razredni diagram za dodajanje in urejanje profila psa F10, F11 (akter: prijavljeni uporabnik)
 <img src="../img/lp3/F10F11 Razredni diagram.png">
 
+#### Razredni diagram za pregledocanje filtriranih objav F12 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F12_RD.png">
+
+#### Razredni diagram za iskanje oglasov na mapi F13 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F13_RD.png">
+
+#### Razredni diagram za urejanje profila F14 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F14_RD.png">
+
+#### Razredni diagram za pisanje objav na blogu F15 (akter: pisec)
+<img src="../img/lp3/F15_RD.png">
+
+#### Razredni diagram za pisanje objav na blogu F16 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F16_RD.png">
+
+#### Razredni diagram za potrjevanje objav F17 in brisanje objav na blogu (akter: moderator)
+<img src="../img/lp3/F17_F19_RD.png">
+
+#### Razredni diagram za brisanje oglasov F18 (akter: administrator)
+<img src="../img/lp3/F18_RD.png">
+
+
 ### 2.3 Opis razredov
 
 
@@ -1055,7 +1077,7 @@ __________________________________________________________________________
 
 ## 3. Načrt obnašanja
 
-### 3.1.1 F1 Registracija
+## F1 Registracija
 
 Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Neprijavljen uporabnik** registrira v sistem.
 
@@ -1064,7 +1086,7 @@ Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Nepri
 Alternativni tok za Registracijo se nahaja na pri alternativnem toku za prijavo.
 
 
-### 3.1.2 F2 Prijava
+## F2 Prijava
 
 Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Neprijavljen uporabnik** prijavi v sistem.
 
@@ -1072,21 +1094,21 @@ Slika prikazuje diagram zaporedja za osnovni tok in izjemna tokova ko se **Nepri
 <img src="../img/lp3/F2 Prijava.png">
 
 
-### F1&F2 Registracija in Prijava Alternativni tok
+## F1&F2 Registracija in Prijava Alternativni tok
 
 Slika prikazuje diagram zaporedja za alternativni tok registracije in prijave, ki se zgodi ko **Neprijavljen uporabnik** poskuša uporabljati aktivnosti, ki mu niso dovoljene. Alternativni tok se nadaljuje z osnovnim tokom.
 
 <img src="../img/lp3/F1F2 Reg&Pri ALT.png">
 
 
-### 3.1.3 F3 Prijava na oglas
+## F3 Prijava na oglas
 
 Slika prikazuje diagram zaporedja za osnovni tok prijave na oglas, ki se zgodi ko se **Prijavljen uporabnik** poskuša prijaviti na oglas za sprehajanje psa. Izjemni tok pa prikazuje, prikaz obvestila ko oglasov v bližini ni.
 
 <img src="../img/lp3/F3 Prijava na oglas.png">
 
 
-### 3.1.4 F4 Potrditev sprehajalca
+## F4 Potrditev sprehajalca
 
 Slika prikazuje diagram zaporedja za osnovni tok Potrditeve sprehajalca, za objavljen oglas, uporabnika z vlogo **Prijavljen uporabnik** , ki je lastnik psa. S tem potrdi zaiteresiranega sprehajalca, in potrdi njegov sprehod. 
 
@@ -1101,7 +1123,7 @@ Slika prikazuje diagram zaporedja za alternativni tok Potrditve sprehajalca za o
 
 
 
-### 3.1.5 F5 Kontaktiranje sprehajalca za dodatne informacije
+## F5 Kontaktiranje sprehajalca za dodatne informacije
 
 Slika prikazuje diagram zaporedja za Osnovni tok Kontaktiranje sprehajalca za objavljen oglas, uporabnika z vlogo **Prijavljen uporabnik** , ki je lastnik psa. Do željenega učinka pride preko razdelka listings.
 
@@ -1114,7 +1136,7 @@ Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje sprehajalca 
 <img src="../img/lp3/F5 Kontaktiranje sprehajalca ALT.png">
 
 
-### 3.1.6 F6 Kontaktiranje lastnika za dodatne informacije
+## F6 Kontaktiranje lastnika za dodatne informacije
 
 Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje lastnika, uporabnika z vlogo **Prijavljen uporabnik** , ki želi sprehajati psa, katerega je zasledil na oglasu pred tem pa želi več infromaciji od lastnika. Do željenega učinka pride preko razdelka Listings.
 
@@ -1165,3 +1187,38 @@ Slika prikazuje diagram zaporedja za pregledovanje filtriranih oglasov. Uporabni
 Slika prikazuje diagram zaporedja za iskanje oglasov na mapi. Uporabnik pri razdelku explore klikne na ikono zemljevida in prikaže se mu zaslon z zemljevidom in oznake lokacij, kjer se okvirno nahajajo lasntiki psov iz oglasov. S klikom na oznako pa se uporabniku odpre oglas.
 <img src="../img/lp3/diagrami-zaporedja/F13.png">
 
+## F14 Urejanje profila
+
+Slika prikazuje diagram zaporedja za osnovni in alternativni tok za urejanje profila, uporabnika z vlogo **Prijavljen uporabnik**.
+
+<img src="../img/lp3/diagrami-zaporedja/f14.png">
+
+## F15 Pisanje objav na blogu
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za pisanje objav na blogu, uporabnika z vlogo **Pisec**.
+
+<img src="../img/lp3/diagrami-zaporedja/f15.png">
+
+## F16 Postani pisec bloga
+
+Slika prikazuje diagram zaporedja za osnovni tok za funkcijo Postani pisec bloga, uporabnika z vlogo **Prijavljen uporabnik**.
+
+<img src="../img/lp3/diagrami-zaporedja/f16.png">
+
+## F17 Potrjevanje objav
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za potrjevanje objav, uporabnika z vlogo **Moderator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f17.png">
+
+## F18 Brisanje oglasov
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za brisanje oglasov, uporabnika z vlogo **Administrator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f18.png">
+
+## F19 Brisanje blog objav
+
+Slika prikazuje diagram zaporedja za osnovni in izjemni tok za brisanje blog objav, uporabnika z vlogo **Administrator**.
+
+<img src="../img/lp3/diagrami-zaporedja/f19.png">
