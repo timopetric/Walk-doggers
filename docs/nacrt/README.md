@@ -498,7 +498,526 @@ __________________________________________________________________________
 
 
 
-TODO
+### BlogPost
+
+Ta razred se uporablja pri vseh aktivnostih, kjer je potrebno dostopati do blogov in jih spreminjati (npr. dodajati, brisati in potrjevati bloge). Gre za **model** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| title | str |  | - |
+| content | str |  | - |
+| image | bytes |  | - |
+| datePosted | dateTime |  | - |
+| modConfirmed | bool |  | Če je oglas moderator že potrdil. |
+| authorId | str |  | - |
+| moderatorId | str |  | - |
+| postId | str |  | - |
+
+
+#### Nesamoumevne metode
+
+| Ime metode        | Imena in tipi parametrov                       | Tip rezultata  | Pomen (če ni očiten)                  |
+|:------------------|:-----------------------------------------------|:---------------|:--------------------------------------|
+| addNewBlogPost()  | title: str,<br> image: bytes,<br> content: str | success: bool  | -                                     |
+| getPostDetails()  | postId: str                                    | post: BlogPost | Vrnemo podrobnosti posta.             |
+| adminDeletePost() | postId: str                                    | success: bool  | Administratorju omogoči izbris objave |
+
+__________________________________________________________________________
+
+
+### BlogAPI
+Ta razred se uporablja pri vseh aktivnostih, kjer je potrebno dostopati do entitetnega modela Blog in ga spreminjati. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+
+#### Atributi
+
+Razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode           | Imena in tipi parametrov                       | Tip rezultata    | Pomen (če ni očiten)      |
+|:---------------------|:-----------------------------------------------|:-----------------|:--------------------------|
+| addNewBlogPost()     | title: str,<br> image: bytes,<br> content: str | success: boolean |                           |
+| getPostDetails()     | postId: str                                    | post: Blog       | Vrnemo podrobnosti posta. |
+| adminDeletePost()    | postId                                         | success: boolean |                           |
+| modConfirmBlogPost() | postId: str,<br> confirm: bool                 | success: boolean | Moderator potrdi ali zavrne javno vidnost objave |
+
+__________________________________________________________________________
+
+
+### BlogController
+
+Ta razred se uporablja pri vseh aktivnostih, ki so povezane z branjem, dodajanjem, potrjevanjem in brisanjem bloga. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+
+| Ime metode           | Imena in tipi parametrov                       | Tip rezultata   | Pomen (če ni očiten)                             |
+|:---------------------|:-----------------------------------------------|:----------------|:-------------------------------------------------|
+| openPostDetails()    | postId: str                                    | void            | Odpre podrobnosti objave.                        |
+| openNewBlogPost()    | -                                              | void            | Odpre pogled, kjer lahko dodamo nov blog objavo. |
+| addNewBlogPost()     | title: str <br> image: bytes <br> content: str | bool            | Ustvarimo novo objavo                            |
+| modConfirmBlogPost() | postId: str <br> confirm: bool                 | void            | Moderator potrdi blog objavo.                    |
+| adminDeletePost()    | postId: str                                    | void            | Admin izbriše objavo.                            |
+| checkInputForms()    | -                                              | void            | Preverimo pravilnost vhodnih podatkov.           |
+| loadPosts()          | -                                              | List\<BlogPost> | Pridobimo vse objave in jih prikažemo.           |
+
+__________________________________________________________________________
+
+
+### BlogView
+
+V tem pogledu lahko brskamo po objavah in jih dodajamo. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| newPost() | - | void | Prikažemo pogled, kjer lahko dodamo novo objavo. |
+| readMore() | - | void | Prikažemo podrobnosti objave. |
+__________________________________________________________________________
+<br>
+
+### NewBlogPostView
+
+V tem pogledu vnesemo vse potrebne podatke za dodajanje objave. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| createBlogPost() | - | void | Dodamo novo objavo. |
+__________________________________________________________________________
+<br>
+
+### BlogPostDetailsView
+
+V tem pogledu lahko objavo preberemo, potrdimo oz. izbrišemo. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| modRedaction()    | - | void | Moderator objavo potrdi oz. zavrne. |
+| adminDeletePost() | - | void | Administrator lahko izbriše objavo. |
+
+__________________________________________________________________________
+<br>
+
+### Settings
+
+Krmilnik skrbi za odpiranje nastavitev profila in dodanih psov, povišanje v reporterja in odjavo. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| openProfileSettings() | - | void | - |
+| openDogsSettings() | - | void | - |
+| openBecomeAReporter() | - | void | - |
+| logout() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+### SettingsView
+
+Pogled skrbi za odpiranje različnih nastavitev uporabnika in odjavo. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| openProfileSettings() | userId: str | void | - |
+| openDogsSettings() | userId: str | void | - |
+| openBecomeAReporter() | userId: str | void | - |
+| logout() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+### Profile
+
+Ta razred se uporablja za urejanje profila uporabnika. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| fstName | str | - | - |
+| lstName | str | - | - |
+| email | str | - | - |
+| about | str | - | - |
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| editProfile() |userId: str<br> fstName: str<br> lstName: str<br> email: str<br> about: str | void | - |
+| checkAboutLen() | - | void | Preveri dolžino vnosnega polja about. |
+
+__________________________________________________________________________
+<br>
+
+### ProfileSettingView
+
+Pogled skrbi za prikaz urejanje nastavitev profila. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| saveChanges() | - | void | Posodobimo profil uporabnika. |
+
+__________________________________________________________________________
+<br>
+
+### DogsController
+
+Razred skrbi za urejanje in dodajanje psov. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| dogs | List\<Dogs> | - | Vsi vnešeni uporabnikovi psi. |
+| name | str | - | -|
+| descr | str | - | - |
+| size | int | - | - |
+| photo | bytes | - | - |
+
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| editDog() | dogId: str <br> name: str<br> description:str <br> size: int <br> photo: bytes | void | - |
+| addDog() | userId: str <br> name: str<br> description:str <br> size: int <br> photo: bytes | void | - |
+| checkInputForms() | - | bool | Preverimo, če so vnosna polja izpolnjena.|
+
+__________________________________________________________________________
+<br>
+
+### MyDogsView
+
+Pogled skrbi za prikaz vnešenih psov. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| editDog() | - | void | - |
+| addDog() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+### DogEditOrNewView
+
+Pogled skrbi za dodajanje in urejanje psov. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| editDog() | - | void | - |
+| addDog() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+### DogsAPI
+
+Razred skrbi za pridobivanje, dodajanje in urejanje entitetnega modela Dog. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| editDog() | dogId: str <br> name: str <br> description: str <br> size: int <br> photo: bytes | bool | - |
+| addDog() | userId: str <br> dogId: str <br> name: str <br> description: str <br> size: int <br> photo: bytes | bool | - |
+| checkInput() | - | bool | Preverimo pravilnost vhodnih podatkov. |
+
+__________________________________________________________________________
+<br>
+
+### Dog
+
+Ta razred skrbi za shranjevanje, urejanja in pridobivanje psov. Gre za **model** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+|ownerId|str|-|-
+| dogId | str | - | - |
+| name | str | - | - |
+| description | str | - | - |
+| size | int | - | - |
+| photo | bytes | - | - |
+| description | str | - | - |
+
+
+#### Nesamoumevne metode
+
+Ta razred nima metod. 
+__________________________________________________________________________
+<br>
+
+### ConversationView
+
+Pogled skrbi za prikaz in pošiljanje sporočil ter potrjevanje in pošiljanje prošenj. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| sendRequest() | - | void | - |
+| confirmWalker() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+
+### ConversationController
+
+Ta razred skrbi za vse aktivnosti, ki jih uporabnik lahko počne v pogovoru, kot so pošiljanje sporočil, prošenj za sprehajanje ter potrjevanje prošenj. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| getConversationMesages() | conversationId: str | List\<Message> | - |
+| loadActiveListingsConversation() | userId1: str <br> userId2: str | activeListings: List\<Listing> | V pogovoru z osebo userId2 pridobimo vse aktivne oglase, kjer smo kot userId1 prijavljeni na oglas osebe userId2 oz. je userId2 prijavljen kot sprehajalec na oglas osebe userId1. |
+| selectActiveListingInConversation() | listingId: str | void | V oknu, kjer se prikazani vsi aktivni oglasi, izberemo oglas z listingId. |
+| sendRequest() | userId: str<br>listingId: str | void | Sprehajalec pošlje prošnjo za prijavo na oglas. |
+| confirmWalker() | walkerId: str, listingId: str | void | Potrdimo sprehajalca za naš oglas. |
+| sendMessage() | conversationId: str<br> senderId: str<br> text: str | void | - |
+
+__________________________________________________________________________
+<br>
+
+### ConversationAPI
+
+Ta razred se uporablja pri vseh aktivnostih, kjer je potrebno dostopati do entitetnega modela Conversation in ga spreminjati. Gre za krmilnik v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| getConversationsByListing() | userId: str, listingId: str | List\<Conversation> | Če je userId == ownerId, pridobi vse pogovore s prijavljenimi sprehajalci, drugače pridobi pogovor z lastnikom oglasa. |
+| getConversationMessages() | conversationId: str | List\<Message> | -
+| addMessage() | conversationId: str<br> senderId: str<br> text: str | status | - |
+| getConversation() | userId1: str<br> userId2: str | conversationId: str | Pridobimo pogovor med dvema uporabnikoma.
+| createConversation() | userId1: str <br> userId2: str | status | Ustvarimo pogovor med dvema uporabnikoma.
+__________________________________________________________________________
+<br>
+
+### Conversation
+Ta razred skrbi za shranjevanje, dodajanje in pridobivanje pogovorov. Gre za **model** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| convId | str | - | - |
+| user1Id | str | - | - |
+| user2Id | str | - | - |
+| messages | List\<Message> | - | Vsa sporočila v pogovoru. |
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| getConversations() | userId: str | List\<Conversation> | Pridobimo vse pogovore uporabnika. |
+| getMessages() | convId: str | List\<Message> | bool |
+| addMessage() | senderId: str<br> convId: str<br> message: Message | bool | - |
+| sendMessage() | senderId: str<br> convId: str<br> message: Message | bool | - |
+
+
+__________________________________________________________________________
+<br>
+
+### Message
+Ta razred je entitetni model, ki predstavlja sporočilo. Gre za **model** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| msgId | str | - | - |
+| senderId | str | - | - |
+| text | str | - | - |
+| date | dateTime | - | - |
+
+__________________________________________________________________________
+<br>
+
+### InboxController
+
+Ta razred se uporablja, da se pridobijo vsi aktivni oglasi med kateremi se uporabnik lahko premika in pogovori z osebami. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| conversations | List\<Conversation> | - | Vsi pogovori z osebami. |
+| activeListings | List\<Listing> | - | Aktivni oglasi, ki so v prihodnosti.|
+
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| loadFilterWindow() | userId: str | void | V filtrirno okno oglasov naložimo vse aktivne oglase uporabnika. |
+| selectListingInFilterWindow() | listingId: str | void | V filtrirnem oknu oglasov izberemo želeni oglas. |
+| getConversationsByListing() | userId: str, listingId: str | List\<Conversation> | Pridobi vse pogovore s prijavljenimi sprehajalci oz. pogovor z lastnikom oglasa. |
+| openConversation() | conversationId: str | void | Odpre pogled pogovora. |
+| getUserConversations() | userId: str | List\<Conversation> | - |
+| getActiveListings() | userId: str |  List\<Listing> | Pridobi aktivne oglase uporabnika (prijavljene in objavljene). |
+
+__________________________________________________________________________
+<br>
+
+### InboxView
+
+Pogled skrbi za prikaz in pošiljanje sporočil ter potrjevanje in pošiljanje prošenj. Gre za **pogled** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| openConversation() | - | void | - |
+| confirmWalker() | - | void | - |
+
+__________________________________________________________________________
+<br>
+
+
+### Authentication
+
+Vsi čelni krmilniki imajo dostop do tega razreda. Skrbi za za preverjanje seje in hrani JWT žeton do katerega lahko ostali krmilniki dostopajo. Za razred smo uporabili singleton načrtovalski vzorec na strani odjemalca.
+Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+| Ime atributa | Podatkovni tip(če ni očiten) | Zaloga vrednosti(če ni očitna) | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| jwt | str | - | - |
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| getSessionValidity() | - | bool | - |
+
+__________________________________________________________________________
+<br>
+
+
+### AuthServerSide
+
+Ta razred se na strežnik strani uporablja za prevejnaje in kreiranje jwt žetonov in s tem avtentikacijo uporabnikov. Uporabili smo singleton načrtovalski vzorec na strani strežnika. Vsi zaledni krmilniki imajo dostop do tega razreda. Gre za **krmilnik** v arhitekturnem vzorcu MVC.
+
+#### Atributi
+
+Ta razred nima atributov.
+
+#### Nesamoumevne metode
+
+| Ime metode | Imena in tipi parametrov | Tip rezultata | Pomen (če ni očiten) |
+| --- | --- | --- | --- |
+| getUserIdFromJwt() | jwtToken: str | str | - |
+| generateJwt() | user: User         | str | Ustvari jwt žeton za uporabnika. |
+| isAdmin() | jwtToken: str          | bool | - |
+| isReporter() | jwtToken: str | bool | - |
+| isMod() | jwtToken: str            | bool | - |
+| validateJwt() | jwtToken: str      | bool | - |
+
+__________________________________________________________________________
+<br>
+
+### Slovar podatkovnih tipov:
+
+| Tip | Opis |
+| --- | ---- |
+| bytes        | Uporablajmo za shranjevanje slik in datotek | 
+| List\<tip>   | seznam z elementi tipa "tip" | 
+| int          | celo število | 
+| float        | število z decimalno vejico | 
+| str          | niz | 
+| dateTime     | objekt, ki predstavlja čas in datum | 
+| bool         | true oz. false Boolean izraz | 
+| token        | JWT žeton, ki je uporabljen za avtorizacijo in avtentikacijo | 
+| status       | status, ki ga API vrne |
 
 
 
