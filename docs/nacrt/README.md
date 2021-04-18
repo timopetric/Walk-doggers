@@ -10,19 +10,18 @@
 Povzetek
 ===
 
-Ta dokument predstavlja podroben načrt sistema, katerega smo opisali v drugem delu projketa, v tem dokumentu bolj tehnično predstavimo posamezne komponente in delovanje sistema.
+Ta dokument predstavlja podroben načrt sistema, katerega smo opisali v drugem delu projeketa, v tem dokumentu pa bolj tehnično predstavimo posamezne komponente in delovanje sistema.
 
-Za načrta arhitekture smo uporabili vzorec **MVC**. Prikaz načrta arhitekture predstavimo z dvemi pogledi:<br> 
-**logični pogled:** predstavljen s pomočjo blokovnega diagrama<br>
-**razvojni pogled:** predstavljen z UML komponentnem diagramom.
+Za načrta arhitekture smo uporabili vzorec **MVC**. Prikaz načrta arhitekture predstavimo z dvemi pogledi, ki uporabljata blokovni diagram:<br> 
+**logični pogled** ,
+**razvojni pogled** 
 
-Načrt strukture sistema je prikazan z razrednim diagramom, kjer so prikazane povezave med razredi. Celotnemu diagramu zaporedja pa sledi tudi posamezen razedni diagram za vsako funkcionalnost, zaradi preglednosti.
+Načrt strukture sistema je prikazan z razrednim diagramom, kjer so prikazane povezave med razredi. Celotnemu diagramu zaporedja pa sledi tudi posamezen razredni diagram za vsako funkcionalnost, zaradi preglednosti.
 
-Pri načrtih obnašanja smo uporabili diagrame zaporedji, ki prikazejo zaporedje akcji, ki jih izvajlajo posamezne vloge uporabnikov, ter sistemske komponente. Za vsako funkcinalnost iz drugega dela projketa prikažemo osnove, alternativne ter izjemne tokove.
+Pri načrtih obnašanja smo uporabili diagrame zaporedji, ki prikažejo zaporedje akcji, ki jih izvajajo posamezne vloge uporabnikov, ter sistemske komponente. Za vsako funkcinalnost iz drugega dela projketa prikažemo osnovne, alternativne ter izjemne tokove.
 
 Uporabili smo dva načrtovalska vzorca, in sicer:
-**Singleton** in
-**State**
+**Singleton** in **State** več o njiju je napisano pri posameznih interakcijah z njima.
 
 ## 1. Načrt arhitekture
 
@@ -31,6 +30,12 @@ Uporabili smo dva načrtovalska vzorca, in sicer:
 Logicni pogled je predstavljen z blokovnim diagramom, iz njega je lepo vidna MVC arhitektura ter posamezne komponente, ki so razdeljene na Poglede, Krmilnike in Modele. Na njem se vidi tudi delitev baze na PostgresSQL, ki je uporabljena za podatke, kjer lahko podatke enostavno prikažemo z relacijskimi povezavami, ter MongoDB, ki je uporabljana za pogosto spreminjajoče sporočila med dvema uporabnikoma.
 
 <img src="../img/lp3/UML class brewz - logicni pogled.png">
+
+### Razvojni pogled
+
+TODO
+
+<img src="../img/lp3/razvojni-pogled.png">
 
 ## 2. Načrt strukture
 
@@ -51,6 +56,17 @@ V tem razdelku je z razrednimi diagrami predstavljen podroben načrt sktrukture 
 #### Razredni diagram za potrditev sprehajalca in kontaktiranje sprehalca oz. lastnika oglasa F4, F5 in F6 (akter: prijavljen uporabnik)
 <img src="../img/lp3/F4_F5_F6_razredni_diagram.png">
 
+#### Razredni diagram za pregled podrobnosti prijavljenih oglasov in po F7 (akterji: prijavljen uporabnik - sprehajalec)
+<img src="../img/lp3/F7 Razredni diagram.png">
+
+#### Razredni diagram za podajanje ocene F8 (akterji: prijavljen uporabnik - sprehajalec)
+<img src="../img/lp3/F8 Razredni diagram.png">
+
+#### Razredni diagram za objavo oglasa F9 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F9 Razredni diagram.png">
+
+#### Razredni diagram za dodajanje in urejanje profila psa F10, F11 (akter: prijavljeni uporabnik)
+<img src="../img/lp3/F10F11 Razredni diagram.png">
 
 ### 2.3 Opis razredov
 
@@ -1114,6 +1130,40 @@ Slika prikazuje diagram zaporedja za alternativni tok Kontaktiranje lastnika, up
 
 <img src="../img/lp3/F6 Kontaktiranje lastnika ALT2.png">
 
+## F7 Pregled podrobnosti prijavljenih oglasov
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F07.png">
+
+## F8 Podajanje ocene
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F08.png">
+
+## F9 Objava oglasa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F09.png">
+
+## F10 Dodajanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F10.png">
+
+## F11 Urejanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F11.png">
+
+## F12 Pregledovanje filtriranih oglasov
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F12.png">
+
+## F13 Iskanje oglasov na mapi
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F13.png">
 
 ## F14 Urejanje profila
 
