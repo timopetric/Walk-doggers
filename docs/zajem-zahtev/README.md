@@ -536,7 +536,7 @@ Prijavljeni uporabnik lahko ustvari profil za svojega psa.
 
 #### Osnovni tok
 
-1. Prijavljeni uporabnik izbere razdelek Profil.
+1. Prijavljeni uporabnik izbere razdelek Settings.
 1. Prijavljeni uporabnik izbere zavihek My dogs.
 1. Prijavljeni uporabnik klikne na gumb za dodajanje psa.
 1. Aplikacija prikaže okno, kamor lahko prijavljeni uporabnik vnese podatke o svojem psu.
@@ -551,13 +551,13 @@ Aplikacija ne podpira alternativnih tokov za to funkcionalnost.
 #### Izjemni tok
 
 **Izjemni  tok 1**
-* Prijavljen uporabnik pod razdelkom profile izbere profil psa, ki ga želi urediti, eno polje pri urejanju pusti prazno, ko skuša profil posodobiti, mu prikažemo opozorilo, da morajo biti vsa polja izpolnjena.
+* Prijavljen uporabnik pod razdelkom settings pod zavihkom my dogs izbere profil psa, ki ga želi urediti, eno polje pri urejanju pusti prazno, ko skuša profil posodobiti, mu prikažemo opozorilo, da morajo biti vsa polja izpolnjena.
 
 #### Pogoji
 * Uporabnik mora biti prijavljen v sistem. Neprijavljenemu uporabniki ta funkcionalnost ni na voljo.
 
 #### Posledice
-* Prijavljen uporabnik, ima v okviru svojega profila pod zavihkom My dogs enega psa več, ki je kasneje na voljo za objavo na oglasu. 
+* Prijavljen uporabnik ima pod razdelkom settings pod zavihkom My dogs enega psa več, ki je kasneje na voljo za objavo na oglasu. 
 
 #### Posebnosti
 
