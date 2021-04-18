@@ -1134,3 +1134,29 @@ opis TODO
 
 opis TODO
 <img src="../img/lp3/diagrami-zaporedja/F08.png">
+
+## F9 Objava oglasa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F09.png">
+
+## F10 Dodajanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F10.png">
+
+## F11 Urejanje profila psa
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F11.png">
+
+## F12 Pregledovanje filtriranih oglasov
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F12.png">
+
+## F13 Iskanje oglasov na mapi
+
+opis TODO
+<img src="../img/lp3/diagrami-zaporedja/F13.png">
+
