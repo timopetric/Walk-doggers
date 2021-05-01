@@ -1,0 +1,12 @@
+{
+  "name": "walk-doggers-app",
+  "displayName": "walk-doggers-app",
+  "expo": {
+    "name": "walk-doggers-app",
+    "slug": "walk-doggers-app",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
