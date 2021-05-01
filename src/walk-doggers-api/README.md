@@ -10,6 +10,12 @@
 
 ## Backend local development
 
+* Copy default.env to .env
+
+```bash
+cp default.env .env
+```
+
 * Start the stack with Docker Compose:
 
 ```bash
