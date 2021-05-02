@@ -1,7 +1,7 @@
 import React from "react";
 
-import {Text, TextProps, View} from './Themed';
-import {Image, StyleSheet } from "react-native";
+import {Image, StyleSheet, View, Text} from "react-native";
+import {Card} from "react-native-elements";
 
 interface IDogCardProps {
     name?: string;
@@ -13,12 +13,6 @@ interface IDogCardState {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        padding: 20,
-        margin: 20,
-        flexDirection: "column",
-        flex: 1
-    },
     dogCard: {
         width: 300,
         height: 300
@@ -49,7 +43,7 @@ const styles = StyleSheet.create({
 
 class DogCard extends React.Component<IDogCardProps, IDogCardState> {
     render() {
-        return <View style={styles.container}>
+        return <Card>
             <Image
                 style={styles.dogCard}
                 source={{uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*'}}
@@ -61,7 +55,7 @@ class DogCard extends React.Component<IDogCardProps, IDogCardState> {
                 <Text style={styles.distance}>{this.props.distance}</Text>
                 <Text style={styles.takeMeWalk}>Take me for a walk</Text>
             </View>
-        </View>
+        </Card>
     }
 }
 
