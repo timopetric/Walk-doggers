@@ -4,11 +4,19 @@ services:
   db:
     image: postgres:12
     volumes:
-      - db-data:/var/lib/postgresql/data/pgdata
+      - db-data-postgres:/var/lib/postgresql/data/pgdata
     env_file:
       - .env
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
+
+  db-mongo:
+    image: mongo
+    volumes:
+      - db-data-mongo:/data/db
+    ports:
+      - "27017-27019:27017-27019"
+    container_name: walk-doggers-mongodb
 
   server:
     build:
@@ -18,10 +26,13 @@ services:
         INSTALL_DEV: ${INSTALL_DEV-false}
     depends_on:
       - db
+      - db-mongo
     ports:
       - 80:80
     env_file:
       - .env
 
 volumes:
-  db-data:
+  db-data-postgres:
+
+  db-data-mongo:
