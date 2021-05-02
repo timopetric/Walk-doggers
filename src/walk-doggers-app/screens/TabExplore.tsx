@@ -2,14 +2,14 @@ import * as React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
 import DogCard from "../components/DogCard";
+import {View, Text} from "react-native";
 
 export default function TabExplore() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Explore</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+      <Text>Explore</Text>
+      <View/>
 
       <ScrollView>
         <DogCard name="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8km"/>

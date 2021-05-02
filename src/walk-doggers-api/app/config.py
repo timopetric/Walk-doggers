@@ -41,7 +41,7 @@ class Settings(BaseSettings):
     class Config:
         case_sensitive = True
 
-        # If you want to read environment variables from a .env
+        # If you want.en to read environment variables from a v
         # file instead un-comment the below line and create the
         # .env file at the root of the project.
 
