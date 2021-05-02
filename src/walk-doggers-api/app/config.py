@@ -1,6 +1,7 @@
 from typing import Any, Dict, Optional
 
 from pydantic import BaseSettings, PostgresDsn, validator
+import re
 
 
 class Settings(BaseSettings):
@@ -15,6 +16,20 @@ class Settings(BaseSettings):
     def assemble_db_connection(cls, v: Optional[str], values: Dict[str, Any]) -> Any:
         if isinstance(v, str):
             return v
+        if values.get("DATABASE_URL"):
+            user, password, host, database = re.match(
+                r"^postgres://(.*?):(.*?)@(.*?):.*?/(.*?)$",
+                values.get("DATABASE_URL")
+            ).groups()
+            print(user, password, host, database)
+            return PostgresDsn.build(
+                scheme="postgresql",
+                user=user,
+                password=password,
+                host=host,
+                path=f"/{database or ''}",
+            )
+
         return PostgresDsn.build(
             scheme="postgresql",
             user=values.get("POSTGRES_USER"),

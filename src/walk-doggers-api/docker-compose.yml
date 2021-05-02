@@ -29,8 +29,12 @@ services:
       - db-mongo
     ports:
       - 80:80
+    volumes:
+      - ./:/app
     env_file:
       - .env
+    command: /start-reload.sh
+
 
 volumes:
   db-data-postgres:
