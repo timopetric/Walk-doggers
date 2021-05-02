@@ -12,16 +12,31 @@ export default {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Explore: {
             screens: {
-              TabOneScreen: 'one',
+              ExploreScreen: 'explore',
             },
           },
-          TabTwo: {
+          Inbox: {
             screens: {
-              TabTwoScreen: 'two',
+              InboxScreen: 'inbox',
             },
           },
+          Blog: {
+            screens: {
+              BlogScreen: 'blog',
+            }
+          },
+          Listings: {
+            screens: {
+              ListingsScreen: 'listings',
+            }
+          },
+          Settings: {
+            screens: {
+              SettingsScreen: 'settings',
+            }
+          }
         },
       },
       NotFound: '*',
