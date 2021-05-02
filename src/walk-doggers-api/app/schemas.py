@@ -10,13 +10,13 @@ class HTTPError(BaseModel):
 # Shared properties
 class PostBase(BaseModel):
     title: Optional[str] = None
-    body: Optional[str] = None
+    # body: Optional[str] = None
 
 
 # Properties to receive via API on creation
 class PostCreate(PostBase):
     title: str
-    body: str
+    # body: str
 
 
 # Properties to receive via API on update
