@@ -19,7 +19,7 @@ class Settings(BaseSettings):
             return v
 
         # read heroku environment for db postgres link
-        if os.environ["DATABASE_URL"]:
+        if os.environ.get("DATABASE_URL"):
             user, password, host, database = re.match(
                 r"^postgres://(.*?):(.*?)@(.*?):.*?/(.*?)$",
                 os.environ["DATABASE_URL"]
