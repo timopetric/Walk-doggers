@@ -32,5 +32,5 @@ def index() -> Any:
 
 
 app.include_router(PostRouter, tags=["Posts"], prefix="/posts")
-app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")
+app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations") # todo: add is_admin
 app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")

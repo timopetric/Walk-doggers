@@ -1,8 +1,13 @@
 import jwt
-from fastapi import HTTPException, Security
+from fastapi import HTTPException, Security, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
+
+from sqlalchemy.orm import Session
+
+from app.functions import get_db
+from app.postgres import actions
 
 
 class AuthHandler():
@@ -18,7 +23,7 @@ class AuthHandler():
 
     def encode_token(self, user_id):
         payload = {
-            'exp': datetime.utcnow() + timedelta(days=0, minutes=5),
+            'exp': datetime.utcnow() + timedelta(days=30, minutes=0),
             'iat': datetime.utcnow(),
             'sub': user_id
         }
@@ -39,3 +44,9 @@ class AuthHandler():
 
     def auth_wrapper(self, auth: HTTPAuthorizationCredentials = Security(security)):
         return self.decode_token(auth.credentials)
+
+    def is_admin(self, db: Session = Depends(get_db), auth: HTTPAuthorizationCredentials = Security(security)):
+        user_id = self.decode_token(auth.credentials)
+        user = actions.user.get(db=db, id=user_id)
+        # todo: check correct fields for is admin and raise HTTPException if user is not admin
+        return ""

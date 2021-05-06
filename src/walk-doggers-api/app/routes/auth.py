@@ -34,6 +34,6 @@ def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegiste
     return user
 
 
-@AuthRouter.get('/protected')
+@AuthRouter.get('/protected', dependencies=[Depends(auth_handler.is_admin)])
 def protected(user_id=Depends(auth_handler.auth_wrapper)):
     return {'user_id': user_id}
