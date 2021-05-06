@@ -1,4 +1,4 @@
-from app.mongo import models
+from app.mongo.models import Conversation
 
 from fastapi import APIRouter, Depends, HTTPException
 from odmantic import AIOEngine, ObjectId
@@ -12,27 +12,27 @@ database_mongo_uri = os.environ["DATABASE_URL_MONGODB"]
 engine = AIOEngine(motor_client=AsyncIOMotorClient(database_mongo_uri))
 
 
-@ConversationRouter.put("", response_model=models.Conversation)
-async def create_tree(tree: models.Conversation):
-    await engine.save(tree)
-    return tree
+@ConversationRouter.put("", response_model=Conversation)
+async def create_conversation(conversation: Conversation):
+    await engine.save(conversation)
+    return conversation
 
 
-@ConversationRouter.get("", response_model=List[models.Conversation])
-async def get_trees():
-    conversations = await engine.find(models.Conversation)
+@ConversationRouter.get("", response_model=List[Conversation])
+async def get_conversations():
+    conversations = await engine.find(Conversation)
     return conversations
 
 
 @ConversationRouter.get("/count", response_model=int)
-async def count_trees():
-    count = await engine.count(models.Conversation)
+async def count_conversations():
+    count = await engine.count(Conversation)
     return count
 
 
-@ConversationRouter.get("/{id}", response_model=models.Conversation)
-async def get_tree_by_id(id: ObjectId):
-    conversation = await engine.find_one(models.Conversation, models.Conversation.id == id)
+@ConversationRouter.get("/{id}", response_model=Conversation)
+async def get_conversation_by_id(id: ObjectId):
+    conversation = await engine.find_one(Conversation, Conversation.id == id)
     if conversation is None:
         raise HTTPException(404)
     return conversation
