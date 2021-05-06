@@ -8,11 +8,10 @@ from motor.motor_asyncio import AsyncIOMotorClient
 # models.Base.metadata.create_all(bind=engine)
 
 from app.routes.posts import PostRouter
-# from app.routes.conversations import ConversationRouter
+from app.routes.conversations import ConversationRouter
 from typing import Any
 
 app = FastAPI(title="Walk doggers API", debug=True)
-
 
 
 @app.get("/", tags=["default"])
@@ -21,4 +20,4 @@ def index() -> Any:
 
 
 app.include_router(PostRouter, tags=["Posts"], prefix="/posts")
-# app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")
+app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")

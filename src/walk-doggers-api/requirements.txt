@@ -16,3 +16,5 @@ SQLAlchemy==1.4.12
 starlette==0.13.6
 typing-extensions==3.10.0.0
 uvicorn==0.13.4
+odmantic==0.3.4
+motor==2.3.1
