@@ -33,6 +33,7 @@ def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegiste
     user = actions.user.create(db=db, obj_in=auth_details)
     return user
 
+
 @AuthRouter.get('/protected')
-def protected(uset_id=Depends(auth_handler.auth_wrapper)):
-    return { 'name': uset_id }
+def protected(user_id=Depends(auth_handler.auth_wrapper)):
+    return {'user_id': user_id}
