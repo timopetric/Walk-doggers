@@ -4,9 +4,8 @@ from fastapi.encoders import jsonable_encoder
 from pydantic import UUID4, BaseModel
 from sqlalchemy.orm import Session
 
-from . import schemas
-from .db import Base
-from .models import Post
+from app.postgres import Base, schemas
+from app.postgres.models import Post
 
 # Define custom types for SQLAlchemy model, and Pydantic schemas
 ModelType = TypeVar("ModelType", bound=Base)
