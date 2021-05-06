@@ -39,3 +39,34 @@ class Post(PostInDBBase):
 # Additional properties stored in DB
 class PostInDB(PostInDBBase):
     pass
+
+
+class Login(BaseModel):
+    email: str
+    password: str
+
+
+class UserBase(BaseModel):
+    email: str
+    password: str
+    first_name: str
+    last_name: str
+
+
+class UserInDBBase(UserBase):
+    id: Optional[UUID4] = None
+
+    class Config:
+        orm_mode = True
+
+
+class User(UserInDBBase):
+    pass
+
+
+class UserRegister(UserBase):
+    pass
+
+
+class JwtToken(BaseModel):
+    jwt: str

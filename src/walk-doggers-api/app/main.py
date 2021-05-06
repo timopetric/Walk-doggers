@@ -9,9 +9,21 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from app.routes.posts import PostRouter
 from app.routes.conversations import ConversationRouter
-from typing import Any
+from app.routes.auth import AuthRouter
+
+from typing import Any, Generator
+from app.postgres.session import SessionLocal
 
 app = FastAPI(title="Walk doggers API", debug=True)
+
+
+# Dependency to get DB session.
+def get_db() -> Generator:
+    try:
+        db = SessionLocal()
+        yield db
+    finally:
+        db.close()
 
 
 @app.get("/", tags=["default"])
@@ -21,3 +33,4 @@ def index() -> Any:
 
 app.include_router(PostRouter, tags=["Posts"], prefix="/posts")
 app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")
+app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")

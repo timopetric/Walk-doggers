@@ -8,18 +8,9 @@ from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
 from app.postgres import actions, schemas
 from app.postgres.session import SessionLocal
-
+from app.functions import get_db
 
 PostRouter = APIRouter()
-
-# Dependency to get DB session.
-def get_db() -> Generator:
-    try:
-        db = SessionLocal()
-        yield db
-    finally:
-        db.close()
-
 
 @PostRouter.get("", response_model=List[schemas.Post])
 def list_posts(db: Session = Depends(get_db), skip: int = 0, limit: int = 100) -> Any:
@@ -41,7 +32,7 @@ def create_post(*, db: Session = Depends(get_db), post_in: schemas.PostCreate) -
     responses={HTTP_404_NOT_FOUND: {"model": schemas.HTTPError}},
 )
 def update_post(
-    *, db: Session = Depends(get_db), id: UUID4, post_in: schemas.PostUpdate,
+        *, db: Session = Depends(get_db), id: UUID4, post_in: schemas.PostUpdate,
 ) -> Any:
     post = actions.post.get(db=db, id=id)
     if not post:

@@ -5,7 +5,7 @@ from pydantic import UUID4, BaseModel
 from sqlalchemy.orm import Session
 
 from app.postgres import Base, schemas
-from app.postgres.models import Post
+from app.postgres.models import Post, User
 
 # Define custom types for SQLAlchemy model, and Pydantic schemas
 ModelType = TypeVar("ModelType", bound=Base)
@@ -24,7 +24,7 @@ class BaseActions(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         self.model = model
 
     def get_all(
-        self, db: Session, *, skip: int = 0, limit: int = 100
+            self, db: Session, *, skip: int = 0, limit: int = 100
     ) -> List[ModelType]:
         return db.query(self.model).offset(skip).limit(limit).all()
 
@@ -40,11 +40,11 @@ class BaseActions(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return db_obj
 
     def update(
-        self,
-        db: Session,
-        *,
-        db_obj: ModelType,
-        obj_in: Union[UpdateSchemaType, Dict[str, Any]]
+            self,
+            db: Session,
+            *,
+            db_obj: ModelType,
+            obj_in: Union[UpdateSchemaType, Dict[str, Any]]
     ) -> ModelType:
         obj_data = jsonable_encoder(db_obj)
         if isinstance(obj_in, dict):
@@ -72,4 +72,13 @@ class PostActions(BaseActions[Post, schemas.PostCreate, schemas.PostUpdate]):
     pass
 
 
+class UserActions(BaseActions[User, schemas.UserRegister, schemas.UserRegister]):
+    """Users actions with basic CRUD operations"""
+    def get_user_by_email(self, db: Session, email: str) -> Optional[ModelType]:
+        return db.query(self.model).filter(self.model.email == email).first()
+
+    pass
+
+
 post = PostActions(Post)
+user = UserActions(User)
