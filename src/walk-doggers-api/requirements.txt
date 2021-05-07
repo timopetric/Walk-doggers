@@ -24,3 +24,6 @@ passlib==1.7.4
 cffi==1.14.4
 six==1.15.0
 dnspython==2.1.0
+requests==2.25.1
+pytest==6.2.4
+pytest-cov==2.11.1

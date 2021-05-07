@@ -1,8 +1,8 @@
+import os
 from app.mongo.models import Conversation
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from odmantic import AIOEngine, ObjectId
-import os
 from typing import List
 from motor.motor_asyncio import AsyncIOMotorClient
 
@@ -19,8 +19,8 @@ async def create_conversation(conversation: Conversation):
 
 
 @ConversationRouter.get("", response_model=List[Conversation])
-async def get_conversations():
-    conversations = await engine.find(Conversation)
+async def get_conversations(skip: int = 0, limit: int = 100):
+    conversations = await engine.find(Conversation, skip=skip, limit=limit)
     return conversations
 
 

@@ -1,7 +1,7 @@
 ### Run docker
 
 ```bash
-docker-compose up # --build
+docker-compose up --build
 ```
 
 ### Database migrations
@@ -11,4 +11,16 @@ Migration script that modifies tables in postgresql database will be automatical
 
 ```bash
 docker-compose run server alembic revision --autogenerate -m 'migration comment'
+```
+
+
+Run coverage tests for api:
+```bash
+# when running with docker-compose:
+docker exec -it walk-doggers-api_server_1 bash -c "cd /app/app/tests && pytest --cov app --cov-report html"
+
+# when running locally:
+cd ./app/tests; pytest --cov app --cov-report html; cd -
+
+# now you can open ./app/tests/htmlcov/index.html in browser
 ```
