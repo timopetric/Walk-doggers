@@ -1,5 +1,7 @@
 import React from "react";
 import {Text, View} from "react-native";
+import {connect} from "react-redux";
+import {store, toggleFilter} from "../redux/store";
 
 interface IExploreFilterProps {
     sizeCategory?: number;
@@ -24,4 +26,10 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
     }
 }
 
-export default ExploreFilter;
+const mapStateToProps = (state: any) => {
+    return {
+        showFilter: state.showFilter
+    }
+}
+
+export default connect(mapStateToProps)(ExploreFilter);

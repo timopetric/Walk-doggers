@@ -27,6 +27,9 @@ import TabListings from "../screens/TabListings";
 import TabSettings from "../screens/TabSettings";
 import { Button } from 'react-native-elements';
 
+import { Provider } from "react-redux";
+import {store, toggleFilter} from "../redux/store";
+
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
 export default function BottomTabNavigator() {
@@ -82,29 +85,27 @@ export default function BottomTabNavigator() {
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const ExploreStack = createStackNavigator<ExploreParamList>();
 
-function HandleFilterClick(){
-    alert('HandleFilterClick')
-}
-
 function ExploreNavigator() {
     return (
-        <ExploreStack.Navigator>
-            <ExploreStack.Screen
-                name="ExploreScreen"
-                component={TabExplore}
-                options={{
-                    headerTitle: 'Dogs for rent nearby',
-                    headerTitleAlign: 'center',
-                    headerRight: () => (
-                        <Button
-                            onPress={ HandleFilterClick }
-                            icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={'#854dbd'} />}
-                            type="clear"
-                        />
-                    ),
-                }}
-            />
-        </ExploreStack.Navigator>
+        <Provider store={store}>
+            <ExploreStack.Navigator>
+                <ExploreStack.Screen
+                    name="ExploreScreen"
+                    component={TabExplore}
+                    options={{
+                        headerTitle: 'Dogs for rent nearby',
+                        headerTitleAlign: 'center',
+                        headerRight: () => (
+                            <Button
+                                onPress={ () => store.dispatch(toggleFilter()) }
+                                icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={'#854dbd'} />}
+                                type="clear"
+                            />
+                        ),
+                    }}
+                />
+            </ExploreStack.Navigator>
+        </Provider>
     );
 }
 
