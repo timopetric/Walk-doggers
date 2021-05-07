@@ -6,12 +6,13 @@ import {Provider} from "react-redux";
 import {store, pickSizeFilter} from "../redux/store";
 
 interface ISizePickerProps {
-    category: string
+    category: string,
     pick?: Function
 }
 
 interface ISizePickerState {
-    selected: boolean
+    selected: boolean,
+    unsubscribe? : Function;
 }
 
 const styles = StyleSheet.create({
@@ -51,8 +52,6 @@ const mapDispatchToProps = (dispatch : any, ownProps : ISizePickerProps) => {
     }
 }
 
-let unsubscribe : any = null;
-
 class SizePickerItem extends React.Component<ISizePickerProps, ISizePickerState> {
     constructor(props: ISizePickerProps) {
         super(props);
@@ -74,15 +73,19 @@ class SizePickerItem extends React.Component<ISizePickerProps, ISizePickerState>
     }
 
     componentDidMount() {
-        unsubscribe = store.subscribe(() => this.setState({selected: store.getState().selectedSize == this.props.category}))
+        this.setState({
+            ...this.state,
+            unsubscribe: store.subscribe(() => this.setState({selected: store.getState().selectedSize == this.props.category}))
+        });
     }
 
     componentWillUnmount() {
-        if (unsubscribe != null){
-            console.log("unsubscribing")
-            console.log(unsubscribe)
-            unsubscribe();
-            unsubscribe = null;
+        if (this.state.unsubscribe != undefined){
+            this.state.unsubscribe();
+            this.setState({
+                ...this.state,
+                unsubscribe: undefined
+            });
         }
     }
 }
