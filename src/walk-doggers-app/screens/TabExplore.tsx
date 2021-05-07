@@ -7,11 +7,10 @@ import {View, Text} from "react-native";
 import ExploreFilter from "../components/ExploreFilter";
 
 export default function TabExplore() {
-  let showFilter = false;
 
   return (
     <View style={styles.container}>
-      <ExploreFilter showFilter={showFilter}/>
+      <ExploreFilter showFilter={false}/>
       <ScrollView>
         <DogCard name="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8km"/>
         <DogCard name="Very Good Boy" date="TUESDAY 6.4.2020" distance="1.8km"/>

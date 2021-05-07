@@ -25,6 +25,7 @@ import {
 import TabBlog from "../screens/TabBlog";
 import TabListings from "../screens/TabListings";
 import TabSettings from "../screens/TabSettings";
+import { Button } from 'react-native-elements';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -81,13 +82,27 @@ export default function BottomTabNavigator() {
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
 const ExploreStack = createStackNavigator<ExploreParamList>();
 
+function HandleFilterClick(){
+    alert('HandleFilterClick')
+}
+
 function ExploreNavigator() {
     return (
         <ExploreStack.Navigator>
             <ExploreStack.Screen
                 name="ExploreScreen"
                 component={TabExplore}
-                options={{ headerTitle: 'Dogs for rent nearby' }}
+                options={{
+                    headerTitle: 'Dogs for rent nearby',
+                    headerTitleAlign: 'center',
+                    headerRight: () => (
+                        <Button
+                            onPress={ HandleFilterClick }
+                            icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={'#854dbd'} />}
+                            type="clear"
+                        />
+                    ),
+                }}
             />
         </ExploreStack.Navigator>
     );
@@ -101,7 +116,7 @@ function InboxNavigator() {
             <InboxStack.Screen
                 name="InboxScreen"
                 component={TabInbox}
-                options={{ headerTitle: 'Inbox Title' }}
+                options={{ headerTitle: 'Inbox Title', headerTitleAlign: 'center', }}
             />
         </InboxStack.Navigator>
     );
@@ -115,7 +130,7 @@ function BlogNavigator() {
             <BlogStack.Screen
                 name="BlogScreen"
                 component={TabBlog}
-                options={{ headerTitle: 'Blog Title' }}
+                options={{ headerTitle: 'Blog Title', headerTitleAlign: 'center', }}
             />
         </BlogStack.Navigator>
     );
@@ -129,7 +144,7 @@ function ListingsNavigator() {
             <ListingsStack.Screen
                 name="ListingsScreen"
                 component={TabListings}
-                options={{ headerTitle: 'Listings Title' }}
+                options={{ headerTitle: 'Listings Title', headerTitleAlign: 'center', }}
             />
         </ListingsStack.Navigator>
     );
@@ -143,7 +158,7 @@ function SettingsNavigator() {
             <SettingsStack.Screen
                 name="SettingsScreen"
                 component={TabSettings}
-                options={{ headerTitle: 'Settings Title' }}
+                options={{ headerTitle: 'Settings Title', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );
