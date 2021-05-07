@@ -13,6 +13,7 @@ import * as React from 'react';
 import useColorScheme from '../hooks/useColorScheme';
 import TabExplore from '../screens/TabExplore';
 import TabInbox from '../screens/TabInbox';
+
 import {
     BlogParamList,
     BottomTabParamList,
@@ -86,7 +87,7 @@ function ExploreNavigator() {
             <ExploreStack.Screen
                 name="ExploreScreen"
                 component={TabExplore}
-                options={{ headerTitle: 'Explore Title' }}
+                options={{ headerTitle: 'Dogs for rent nearby' }}
             />
         </ExploreStack.Navigator>
     );
