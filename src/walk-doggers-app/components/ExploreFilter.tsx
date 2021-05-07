@@ -1,13 +1,11 @@
 import React from "react";
 import {StyleSheet, Text, View} from "react-native";
 import {connect} from "react-redux";
-import {store, toggleFilter} from "../redux/store";
+import {store, pickDistanceFilter} from "../redux/store";
 import {Slider} from "react-native-elements";
 import SizePickerItem from "./SizePickerItem";
 
 interface IExploreFilterProps {
-    sizeCategory?: number;
-    distance?: number;
     showFilter?: boolean;
 }
 
@@ -43,7 +41,7 @@ function CategoriesRow() {
     let sizePickerItems : any = [];
     categories.forEach((category, index, arr) => {
         sizePickerItems.push(
-            <SizePickerItem category={category} key={index}/>
+            <SizePickerItem category={category} key={index} />
         )
     })
 
@@ -53,7 +51,7 @@ function CategoriesRow() {
 class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterState> {
     render() {
         if (this.props.showFilter){
-            return <View style={ {width: '100%', padding: 20}}>
+            return <View style={ {width: '100%', padding: 20 }}>
                 <Text style={styles.filterParamText}>Size</Text>
                 <CategoriesRow/>
 
@@ -74,6 +72,14 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
 const mapStateToProps = (state: any) => {
     return {
         showFilter: state.showFilter
+    }
+}
+
+const mapDispatchToProps = (dispatch : any, ownProps : IExploreFilterProps) => {
+    return {
+        pick: () => {
+            dispatch(pickDistanceFilter(0));
+        },
     }
 }
 
