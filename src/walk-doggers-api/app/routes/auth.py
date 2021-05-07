@@ -36,21 +36,34 @@ def protected(user_id=Depends(auth_handler.auth_wrapper), db: Session = Depends(
     return user
 
 
+@AuthRouter.post('/roles/become_reporter', response_model=schemas.UserRoles, status_code=200)
+def become_reporter(*, user_id=Depends(auth_handler.auth_wrapper), db: Session = Depends(get_db)) -> Any:
+    user = actions.user.get(db=db, id=user_id)
+
+    if not user:
+        raise HTTPException(status_code=404)
+
+    user.reporter = True
+
+    user = actions.user.update(db=db, db_obj=user, obj_in=user.__dict__)
+    return user
+
+
 @AuthRouter.get('/protected')
 def protected(user_id=Depends(auth_handler.auth_wrapper)):
     return {'user_id': user_id}
 
 
 @AuthRouter.get('/protected/admin', dependencies=[Depends(auth_handler.is_admin)])
-def protected():
+def admin_protecter():
     return {'status': 'ok'}
 
 
 @AuthRouter.get('/protected/moderator', dependencies=[Depends(auth_handler.is_moderator)])
-def protected():
+def mod_protected():
     return {'status': 'ok'}
 
 
 @AuthRouter.get('/protected/reporter', dependencies=[Depends(auth_handler.is_reporter)])
-def protected():
+def reporter_protected():
     return {'status': 'ok'}

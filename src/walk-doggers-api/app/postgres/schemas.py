@@ -53,6 +53,12 @@ class UserBase(BaseModel):
     last_name: str
 
 
+class UserUpdate(UserBase):
+    admin: Optional[bool] = False
+    moderator: Optional[bool] = False
+    reporter: Optional[bool] = False
+
+
 class UserInDBBase(UserBase):
     id: Optional[UUID4] = None
 
@@ -70,7 +76,7 @@ class UserRegister(UserBase):
 
 class UserRoles(BaseModel):
     admin: Optional[bool] = False
-    moderator: Optional[bool] = True
+    moderator: Optional[bool] = False
     reporter: Optional[bool] = False
 
     class Config:
