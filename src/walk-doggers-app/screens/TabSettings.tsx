@@ -3,12 +3,17 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from 'react-native';
+import {Entypo} from "@expo/vector-icons";
+import useColorScheme from "../hooks/useColorScheme";
 
 export default function TabSettings() {
+  const colorScheme = useColorScheme();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Settings</Text>
-      <View/>
+
+      
     </View>
   );
 }

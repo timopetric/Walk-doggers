@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
 import {Card} from "react-native-elements";
 
 interface IBlogCardProps {
@@ -13,10 +13,13 @@ interface IBlogCardProps {
 interface IBlogCardState {
 }
 
+const dimensions = Dimensions.get('window');
+const imgWidth = dimensions.width * 0.85;
 const styles = StyleSheet.create({
     dogCard: {
-        width: 300,
-        height: 300
+        width: imgWidth,
+        height: imgWidth,
+        alignSelf: "center"
     },
     title: {
         fontSize: 20
