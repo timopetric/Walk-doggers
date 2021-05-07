@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 
 from app.postgres import Base
 from app import schemas
-from app.postgres.models import Post, User
+from app.postgres.models import Post, User, Dog
 
 # Define custom types for SQLAlchemy model, and Pydantic schemas
 ModelType = TypeVar("ModelType", bound=Base)
@@ -75,11 +75,25 @@ class PostActions(BaseActions[Post, schemas.PostCreate, schemas.PostUpdate]):
 
 class UserActions(BaseActions[User, schemas.UserRegister, schemas.UserRegister]):
     """Users actions with basic CRUD operations"""
+
     def get_user_by_email(self, db: Session, email: str) -> Optional[ModelType]:
         return db.query(self.model).filter(self.model.email == email).first()
 
     pass
 
 
+class DogActions(BaseActions[Dog, schemas.DogCreate, schemas.Dog]):
+    """Dogs actions with basic CRUD operations"""
+
+    def add_dog(self, db: Session, owner_id: UUID4, obj_in: schemas.DogCreate) -> Optional[ModelType]:
+        obj_in_data = jsonable_encoder(obj_in)
+        db_obj = self.model(**obj_in_data, owner_id=owner_id)
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
+
 post = PostActions(Post)
 user = UserActions(User)
+dog = DogActions(Dog)
