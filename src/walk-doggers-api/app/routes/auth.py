@@ -1,15 +1,11 @@
-from typing import Any, Generator, List
+from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
-from odmantic import AIOEngine
-from pydantic import UUID4
 from sqlalchemy.orm import Session
-from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
-from app.postgres import actions, schemas
-from app.postgres.session import SessionLocal
-from app.functions import get_db
 from app.auth import AuthHandler
+from app.functions import get_db
+from app.postgres import actions, schemas
 
 AuthRouter = APIRouter()
 
@@ -34,6 +30,27 @@ def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegiste
     return user
 
 
-@AuthRouter.get('/protected', dependencies=[Depends(auth_handler.is_admin)])
+@AuthRouter.get('/roles', response_model=schemas.UserRoles)
+def protected(user_id=Depends(auth_handler.auth_wrapper), db: Session = Depends(get_db)):
+    user = actions.user.get(db=db, id=user_id)
+    return user
+
+
+@AuthRouter.get('/protected')
 def protected(user_id=Depends(auth_handler.auth_wrapper)):
     return {'user_id': user_id}
+
+
+@AuthRouter.get('/protected/admin', dependencies=[Depends(auth_handler.is_admin)])
+def protected():
+    return {'status': 'ok'}
+
+
+@AuthRouter.get('/protected/moderator', dependencies=[Depends(auth_handler.is_moderator)])
+def protected():
+    return {'status': 'ok'}
+
+
+@AuthRouter.get('/protected/reporter', dependencies=[Depends(auth_handler.is_reporter)])
+def protected():
+    return {'status': 'ok'}

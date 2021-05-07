@@ -8,9 +8,10 @@ from sqlalchemy.orm import Session
 
 from app.functions import get_db
 from app.postgres import actions
+from app.postgres.models import User
 
 
-class AuthHandler():
+class AuthHandler:
     security = HTTPBearer()
     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
     secret = 'SECRET'
@@ -47,6 +48,18 @@ class AuthHandler():
 
     def is_admin(self, db: Session = Depends(get_db), auth: HTTPAuthorizationCredentials = Security(security)):
         user_id = self.decode_token(auth.credentials)
-        user = actions.user.get(db=db, id=user_id)
-        # todo: check correct fields for is admin and raise HTTPException if user is not admin
-        return ""
+        user: User = actions.user.get(db=db, id=user_id)
+        if not user.admin:
+            raise HTTPException(status_code=403, detail='Permission denied')
+
+    def is_moderator(self, db: Session = Depends(get_db), auth: HTTPAuthorizationCredentials = Security(security)):
+        user_id = self.decode_token(auth.credentials)
+        user: User = actions.user.get(db=db, id=user_id)
+        if not user.moderator:
+            raise HTTPException(status_code=403, detail='Permission denied')
+
+    def is_reporter(self, db: Session = Depends(get_db), auth: HTTPAuthorizationCredentials = Security(security)):
+        user_id = self.decode_token(auth.credentials)
+        user: User = actions.user.get(db=db, id=user_id)
+        if not user.reporter:
+            raise HTTPException(status_code=403, detail='Permission denied')
