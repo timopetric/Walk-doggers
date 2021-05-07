@@ -68,5 +68,14 @@ class UserRegister(UserBase):
     pass
 
 
+class UserRoles(BaseModel):
+    admin: Optional[bool] = False
+    moderator: Optional[bool] = True
+    reporter: Optional[bool] = False
+
+    class Config:
+        orm_mode = True
+
+
 class JwtToken(BaseModel):
     jwt: str
