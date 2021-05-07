@@ -1,7 +1,4 @@
-import os
-
 from fastapi import FastAPI
-from motor.motor_asyncio import AsyncIOMotorClient
 
 # Create all tables in database.
 # Comment this out if you using migrations.
