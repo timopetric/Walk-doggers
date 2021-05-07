@@ -14,7 +14,7 @@ export default function TabExplore() {
   return (
     <View style={styles.container}>
       <Provider store={store}>
-        <ExploreFilter showFilter={store.showFilter}/>
+        <ExploreFilter/>
       </Provider>
       <ScrollView>
         <DogCard name="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8km"/>
