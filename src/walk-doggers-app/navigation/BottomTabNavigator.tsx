@@ -117,7 +117,7 @@ function InboxNavigator() {
             <InboxStack.Screen
                 name="InboxScreen"
                 component={TabInbox}
-                options={{ headerTitle: 'Inbox Title', headerTitleAlign: 'center', }}
+                options={{ headerTitle: 'Inbox', headerTitleAlign: 'center', }}
             />
         </InboxStack.Navigator>
     );
@@ -125,13 +125,24 @@ function InboxNavigator() {
 
 const BlogStack = createStackNavigator<BlogParamList>();
 
+
 function BlogNavigator() {
     return (
         <BlogStack.Navigator>
             <BlogStack.Screen
                 name="BlogScreen"
                 component={TabBlog}
-                options={{ headerTitle: 'Blog Title', headerTitleAlign: 'center', }}
+                options={{
+                    headerTitle: 'Blog',
+                    headerTitleAlign: 'center',
+                    headerRight: () => (
+                        <Button
+                            onPress={ () => alert('TODO implement funcionality') }
+                            icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={'#854dbd'} />}
+                            type="clear"
+                        />
+                    ),
+                }}
             />
         </BlogStack.Navigator>
     );
@@ -145,7 +156,7 @@ function ListingsNavigator() {
             <ListingsStack.Screen
                 name="ListingsScreen"
                 component={TabListings}
-                options={{ headerTitle: 'Listings Title', headerTitleAlign: 'center', }}
+                options={{ headerTitle: 'Listings', headerTitleAlign: 'center', }}
             />
         </ListingsStack.Navigator>
     );
@@ -159,7 +170,7 @@ function SettingsNavigator() {
             <SettingsStack.Screen
                 name="SettingsScreen"
                 component={TabSettings}
-                options={{ headerTitle: 'Settings Title', headerTitleAlign: 'center', }}
+                options={{ headerTitle: 'Settings', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );
