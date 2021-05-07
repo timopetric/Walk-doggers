@@ -4,13 +4,18 @@ import {ScrollView, StyleSheet} from 'react-native';
 import EditScreenInfo from '../components/EditScreenInfo';
 import DogCard from "../components/DogCard";
 import {View, Text} from "react-native";
+import ExploreFilter from "../components/ExploreFilter";
+
+import { Provider } from "react-redux";
+import {store, toggleFilter} from "../redux/store";
 
 export default function TabExplore() {
+
   return (
     <View style={styles.container}>
-      <Text>Explore</Text>
-      <View/>
-
+      <Provider store={store}>
+        <ExploreFilter/>
+      </Provider>
       <ScrollView>
         <DogCard name="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8km"/>
         <DogCard name="Very Good Boy" date="TUESDAY 6.4.2020" distance="1.8km"/>

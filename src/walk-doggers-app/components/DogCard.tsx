@@ -36,7 +36,9 @@ const styles = StyleSheet.create({
         flex: 1
     },
     takeMeWalk: {
-        color: 'cyan',
+        color: '#3789cc',
+        textTransform: "uppercase",
+        fontWeight: "bold",
         alignContent: "flex-end",
     }
 });
