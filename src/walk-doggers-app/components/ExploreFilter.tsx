@@ -22,22 +22,21 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     sliderStyle: {
-        width: '80%',
+
     },
     sizesRow: {
         flexDirection: "row",
-        display: "flex",
         justifyContent: "space-between",
-        marginBottom: 10,
+        marginBottom: 10
     }
 });
 
 const categories = [
-    "1-5 kg",
-    "5-10 kg",
-    "10-20 kg",
-    "20-40 kg",
-    "40+ kg",
+    "1-5",
+    "5-10",
+    "10-20",
+    "20-40",
+    "40+",
 ]
 
 function CategoriesRow() {
@@ -63,6 +62,7 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
                     value={0.5}
                     thumbTintColor='white'
                     minimumTrackTintColor='blue'
+                    style={styles.sliderStyle}
                 />
             </View>
         }
