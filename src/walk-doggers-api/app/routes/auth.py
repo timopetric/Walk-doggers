@@ -5,7 +5,8 @@ from sqlalchemy.orm import Session
 
 from app.auth import AuthHandler
 from app.functions import get_db
-from app.postgres import actions, schemas
+from app.postgres import actions
+from app import schemas
 
 AuthRouter = APIRouter()
 

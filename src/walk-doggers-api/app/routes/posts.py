@@ -1,16 +1,16 @@
-from typing import Any, Generator, List
+from typing import Any, List
 
 from fastapi import APIRouter, Depends, HTTPException
-from odmantic import AIOEngine
 from pydantic import UUID4
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 
-from app.postgres import actions, schemas
-from app.postgres.session import SessionLocal
+from app.postgres import actions
+from app import schemas
 from app.functions import get_db
 
 PostRouter = APIRouter()
+
 
 @PostRouter.get("", response_model=List[schemas.Post])
 def list_posts(db: Session = Depends(get_db), skip: int = 0, limit: int = 100) -> Any:
