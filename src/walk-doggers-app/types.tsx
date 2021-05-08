@@ -28,6 +28,7 @@ export type InboxParamList = {
 
 export type BlogParamList = {
   BlogScreen: undefined;
+  NewBlogPostScreen: undefined;
 };
 
 export type ListingsParamList = {

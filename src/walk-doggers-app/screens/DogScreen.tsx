@@ -25,18 +25,12 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         fontSize: 14
     },
-    row: {
+    imageRow: {
         flexDirection: "row",
         flexWrap: "wrap",
     },
     distance: {
         flex: 1
-    },
-    takeMeWalk: {
-        color: BLUE,
-        textTransform: "uppercase",
-        fontWeight: "bold",
-        alignContent: "flex-end",
     },
     subtitle: {
         fontSize: 18,

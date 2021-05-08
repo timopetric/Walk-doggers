@@ -31,6 +31,7 @@ import { Button } from 'react-native-elements';
 import { Provider } from "react-redux";
 import {store, toggleFilter} from "../redux/store";
 import DogScreen from "../screens/DogScreen";
+import NewBlogPostScreen from "../screens/NewBlogPostScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -104,6 +105,9 @@ function ExploreNavigator() {
                 <ExploreStack.Screen
                     name="DogScreen"
                     component={DogScreen}
+                    options={{
+                        headerTitle: ''
+                    }}
                 />
             </ExploreStack.Navigator>
         </Provider>
@@ -127,7 +131,7 @@ function InboxNavigator() {
 const BlogStack = createStackNavigator<BlogParamList>();
 
 
-function BlogNavigator() {
+function BlogNavigator({navigation} : any) {
     return (
         <BlogStack.Navigator>
             <BlogStack.Screen
@@ -138,11 +142,18 @@ function BlogNavigator() {
                     headerTitleAlign: 'center',
                     headerRight: () => (
                         <Button
-                            onPress={ () => alert('TODO implement funcionality') }
+                            onPress={ () =>  navigation.navigate('NewBlogPostScreen')}
                             icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={PRIMARY} />}
                             type="clear"
                         />
                     ),
+                }}
+            />
+            <BlogStack.Screen
+                name="NewBlogPostScreen"
+                component={NewBlogPostScreen}
+                options={{
+                    headerTitle: 'New Blog Post'
                 }}
             />
         </BlogStack.Navigator>

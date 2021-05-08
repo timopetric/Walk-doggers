@@ -31,7 +31,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                 source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}
             />
             <View style={styles.listingCard}>
-                <View style={styles.row}>
+                <View style={styles.imageRow}>
                     <Text style={{flex:1, fontFamily: "red-hat-text", fontSize: 12, fontStyle: "normal", fontWeight: "500", color: GRAY_2}}>ACCEPTED</Text>
                     <Text>lokacija</Text>
                 </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         fontSize: 12
     },
-    row: {
+    imageRow: {
         flexDirection: "row",
         flex:1,
         justifyContent:"space-around"
