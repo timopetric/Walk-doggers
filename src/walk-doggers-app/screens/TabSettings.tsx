@@ -7,7 +7,7 @@ import {Card} from "react-native-elements";
 
 const mainColor = '#303030';
 
-export default function TabSettings() {
+export default function TabSettings({navigation} : any) {
 
   return (
     <View style={styles.container}>
@@ -16,7 +16,7 @@ export default function TabSettings() {
           <Ionicons size={30} name="person" color={mainColor} />
           <Text style={{marginLeft: 5}}>Profile</Text>
         </View>
-        <AntDesign onPress={() => alert('TODO implement')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
+        <AntDesign onPress={() => navigation.navigate('EditProfileScreen')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
       </Card>
 
       <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>

@@ -37,4 +37,5 @@ export type ListingsParamList = {
 
 export type SettingsParamList = {
   SettingsScreen: undefined;
+  EditProfileScreen: undefined;
 };

@@ -32,6 +32,7 @@ import { Provider } from "react-redux";
 import {store, toggleFilter} from "../redux/store";
 import DogScreen from "../screens/DogScreen";
 import NewBlogPostScreen from "../screens/NewBlogPostScreen";
+import EditProfileScreen from "../screens/EditProfileScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -153,7 +154,8 @@ function BlogNavigator({navigation} : any) {
                 name="NewBlogPostScreen"
                 component={NewBlogPostScreen}
                 options={{
-                    headerTitle: 'New Blog Post'
+                    headerTitle: 'New Blog Post',
+                    headerTitleAlign: 'center',
                 }}
             />
         </BlogStack.Navigator>
@@ -183,6 +185,11 @@ function SettingsNavigator() {
                 name="SettingsScreen"
                 component={TabSettings}
                 options={{ headerTitle: 'Settings', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="EditProfileScreen"
+                component={EditProfileScreen}
+                options={{ headerTitle: 'Edit Profile', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );
