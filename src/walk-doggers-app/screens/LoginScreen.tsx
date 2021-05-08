@@ -46,9 +46,16 @@ const LoginScreen = ({
           placeholder="Enter your password"
         />
 
+        <View style={styles.separator}></View>
         <ButtonForm
           title={"Login"}
           onClickHandler={onPress}
+          primary={true}
+        />
+        <ButtonForm
+          title={"Register"}
+          onClickHandler={onPress}
+          primary={false}
         />
       </View>
     </View>
@@ -70,9 +77,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    marginBottom: 20,
   },
   button: {
     alignItems: "center",
