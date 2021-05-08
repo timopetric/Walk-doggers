@@ -3,6 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
+import ButtonCustom from "../../components/ButtonCustom"
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -40,7 +41,7 @@ export default function BecomeAReporterScreen() {
                 <Text style={styles.title}>Terms & Conditions</Text>
                 <Text style={styles.content}>{lorem}</Text>
 
-                <Button title='Save changes' onPress={() => alert('TODO implement')} color={PRIMARY}/>
+                <ButtonCustom text='Save changes' onPress= {() => alert('TODO implement')}color="purple"></ButtonCustom>
             </View>
         </ScrollView>
     );
