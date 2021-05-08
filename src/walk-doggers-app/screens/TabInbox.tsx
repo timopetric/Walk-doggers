@@ -2,23 +2,21 @@ import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
+import MessageThread from '../components/MessageThread'
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function TabInbox() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Inbox</Text>
-      <View/>
-    </View>
+    <ScrollView>
+            <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
+            <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
+    </ScrollView>
+
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
   title: {
     fontSize: 20,
     fontWeight: 'bold',

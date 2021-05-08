@@ -1,0 +1,62 @@
+import { FontAwesome } from "@expo/vector-icons";
+import React from "react";
+
+import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
+import {Card} from "react-native-elements";
+
+const logo = require("../assets/images/image.jpg");
+
+interface IMessageThreadProps {
+    name?: string;
+    lastMessage?: string;
+}
+
+interface IMessageThreadState {
+}
+
+class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadState> {
+
+    render() {
+        return (
+            <View>
+              <View style={styles.row}>
+                  <Image source={logo} style={styles.image}></Image>
+                  <View style={styles.textContainer}>
+                    <Text style={styles.name}>{this.props.name}</Text>
+                    <Text style={styles.lastMessage}>{this.props.lastMessage}</Text>
+                  </View>
+              </View>
+            </View>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    row: {
+        flexDirection: 'row',
+        alignItems: 'flex-start',
+        padding: 20
+    },
+    image: {
+        height: 70,
+        width: 70,
+        borderRadius: 35
+    },
+    name: {
+      fontFamily: "roboto",
+      fontWeight: "bold",
+      fontSize: 18
+    },
+    lastMessage: {
+      fontFamily: "roboto",
+      fontSize: 16
+    },
+    textContainer: {
+      paddingLeft: 20,
+      flexDirection: "column",
+      justifyContent: "center",
+      height: 70
+    }
+})
+
+export default MessageThread
