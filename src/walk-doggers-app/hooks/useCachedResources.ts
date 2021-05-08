@@ -16,6 +16,7 @@ export default function useCachedResources() {
         await Font.loadAsync({
           ...Ionicons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          'red-hat-text': require('../assets/fonts/RedHatText-Regular.ttf'),
           'roboto': require('../assets/fonts/Roboto.ttf')
         });
       } catch (e) {

@@ -3,12 +3,15 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import ListingCard from "../components/ListingCard"
 
 export default function TabListings() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Listings</Text>
-      <View />
+      <ScrollView>
+        <ListingCard status="" dogName="" descr="" date="" time="" numOfApplied=""/>
+      </ScrollView>
     </View>
   );
 }
