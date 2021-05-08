@@ -1,40 +1,49 @@
 import * as React from "react";
-import { StyleSheet, TextInput, TextInputProps } from "react-native";
+import { Text, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from '../constants/Colors';
-
+import { Button } from 'react-native-elements';
 interface Props {
-    value: string
-    setValue: any
-    placeholder: string
+    title: string
+    onClickHandler: any
 };
 
-const ButtonForm: React.FC<Props>= ({value, setValue, placeholder}) => {
+const ButtonForm: React.FC<Props>= ({title, onClickHandler}) => {
     return (
         <>
-            <TextInput
-                style={styles.input}
-                onChangeText={setValue}
-                value={value}
-                placeholder={placeholder}
-            />
+            <TouchableOpacity onPress={onClickHandler} style={styles.appButtonContainer}>
+              <Text style={styles.appButtonText}>{title}</Text>
+            </TouchableOpacity>
         </>
     );
   };
 
 const styles = StyleSheet.create({
-  textInput: {
-    height: 40,
-    borderColor: "#fff",
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    marginBottom: 20
+  button: {
+    height: 48,
+    borderRadius: 6,
+    shadowColor: '#000',
+    color:'black',
+    backgroundColor: 'white',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.8,
+    shadowRadius: 2,  
   },
-  input: {
-    height: 40,
-    margin: 12,
-    borderWidth: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 3,
+  appButtonContainer: {
+    marginTop: 22,
+    height: 48,
+    elevation: 8,
+    backgroundColor: "white",
+    borderRadius: 6,
+    paddingVertical: 10,
+    paddingHorizontal: 10,
+    alignItems: 'center'
   },
+  appButtonText: {
+    fontSize: 18,
+    color: "#8265F3",
+    alignSelf: "center",
+    fontFamily: 'red-hat-text-500'
+  }
 });
 
 export default ButtonForm;

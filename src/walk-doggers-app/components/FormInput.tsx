@@ -1,5 +1,6 @@
 import * as React from "react";
 import { StyleSheet, TextInput, TextInputProps } from "react-native";
+import { withTheme } from "react-native-elements";
 import Colors from '../constants/Colors';
 
 interface Props {
@@ -17,6 +18,7 @@ const FormTextInput: React.FC<Props>= ({value, setValue, placeholder}) => {
                 onChangeText={setValue}
                 value={value}
                 placeholder={placeholder}
+                placeholderTextColor="rgba(255, 255, 255, 0.5)" 
             
             />
         </>

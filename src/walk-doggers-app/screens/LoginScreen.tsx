@@ -7,6 +7,7 @@ import { RootStackParamList } from '../types';
 import FormTextInput from '../components/FormInput';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import Colors, { PRIMARY } from '../constants/Colors'
+import ButtonForm from '../components/ButtonForm';
 const LoginScreen = ({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Login'>) => {
@@ -25,9 +26,12 @@ const LoginScreen = ({
         <Text style={styles.heading}>WALK DOGGERS</Text>
       </View>
 
+      
       <View style={styles.form}>
-        <Text>Log in</Text>
-        <Text>EMAIL</Text>
+
+        <Text style={styles.login}>Log in</Text>
+
+        <Text style={styles.label}>EMAIL</Text>
         <FormTextInput 
           value={email}
           setValue={setEmail}
@@ -35,19 +39,17 @@ const LoginScreen = ({
 
         />
 
-        <Text>PASSWORD</Text>
+        <Text style={styles.label}>PASSWORD</Text>
         <FormTextInput
-            value={password}
-            setValue={setPassword}
-            placeholder="Enter your password"
+          value={password}
+          setValue={setPassword}
+          placeholder="Enter your password"
         />
-      
-        <TouchableOpacity
-                style={styles.button}
-                onPress={onPress}
-        >
-        <Text>Press Here</Text>
-      </TouchableOpacity>
+
+        <ButtonForm
+          title={"Login"}
+          onClickHandler={onPress}
+        />
       </View>
     </View>
   );
@@ -91,10 +93,15 @@ const styles = StyleSheet.create({
     height: 110,
   },
   login: {
-    fontFamily: 'r',
+    fontFamily: 'red-hat-text-500',
     color: 'white',
     fontSize: 40,
+    marginBottom:26,
   },
+  label: {
+    fontFamily: 'red-hat-text-500',
+    color: 'white',
+  }
 
 });
 
