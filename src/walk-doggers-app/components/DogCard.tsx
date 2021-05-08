@@ -49,8 +49,6 @@ const styles = StyleSheet.create({
 });
 
 class DogCard extends React.Component<IDogCardProps, IDogCardState> {
-
-
     render() {
 
         return <Card>
@@ -63,9 +61,7 @@ class DogCard extends React.Component<IDogCardProps, IDogCardState> {
             <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
             <View style={styles.row}>
                 <Text style={styles.distance}>{this.props.distance}</Text>
-                <Pressable>
-                    <Text style={styles.takeMeWalk}>Take me for a walk</Text>
-                </Pressable>
+                <Text style={styles.takeMeWalk}>Take me for a walk</Text>
             </View>
         </Card>
     }

@@ -42,6 +42,14 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "bold",
         marginTop: 10,
+    },
+    miniImage: {
+        width: imgWidth / 5,
+        height: imgWidth / 5,
+        borderRadius: imgWidth / 5,
+    },
+    aboutCard: {
+        flexDirection: "row"
     }
 });
 
@@ -56,12 +64,27 @@ export default function DogScreen() {
 
             <View style={styles.container}>
                 <Text style={styles.dogName}>Very Good Boy</Text>
-                <Text style={styles.description}>I'm a very good boy. Just as my 6'1 owner. \n Please take me for a walk</Text>
+                <Text style={styles.description}>I'm a very good boy. Just as my 6'1 owner. Please take me for a walk</Text>
                 <Text style={styles.subtitle}>When</Text>
                 <Text>Tuesday 14:00 - 15:00</Text>
                 <Text style={styles.subtitle}>Where</Text>
                 <Text>Ljubljana</Text>
                 <Text style={styles.subtitle}>About Me</Text>
+                <View style={styles.aboutCard}>
+                    <Image
+                        style={styles.miniImage}
+                        source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
+                    />
+                    <Text style={{marginLeft: 20}}>Bailey</Text>
+                </View>
+                <Text style={styles.subtitle}>About Owner</Text>
+                <View style={styles.aboutCard}>
+                    <Image
+                        style={styles.miniImage}
+                        source={{uri: 'https://beta.finance.si//pics//cache_ch/challe-salle-foto-bruno-sedevcic-5b40a7709a46f.jpg.cut.1530963962-5b40a7fa5a7dc.jpg'}}
+                    />
+                    <Text style={{marginLeft: 20}}>Saša Petrović</Text>
+                </View>
             </View>
         </ScrollView>
     );
