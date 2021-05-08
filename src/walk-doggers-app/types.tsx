@@ -5,6 +5,7 @@
 
 export type RootStackParamList = {
   Root: undefined;
+
   NotFound: undefined;
   Login: undefined;
 };
@@ -19,6 +20,7 @@ export type BottomTabParamList = {
 
 export type ExploreParamList = {
   ExploreScreen: undefined;
+  DogScreen: undefined;
 };
 
 export type InboxParamList = {
@@ -27,6 +29,7 @@ export type InboxParamList = {
 
 export type BlogParamList = {
   BlogScreen: undefined;
+  NewBlogPostScreen: undefined;
 };
 
 export type ListingsParamList = {
@@ -35,6 +38,8 @@ export type ListingsParamList = {
 
 export type SettingsParamList = {
   SettingsScreen: undefined;
+  EditProfileScreen: undefined;
+  BecomeAReporterScreen: undefined;
 };
 
 export type inputParams = {

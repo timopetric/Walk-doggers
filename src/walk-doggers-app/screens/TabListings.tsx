@@ -3,12 +3,15 @@ import { StyleSheet } from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import { Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import ListingCard from "../components/ListingCard"
 
 export default function TabListings() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Listings</Text>
-      <View />
+      <ScrollView>
+        <ListingCard status="accepted" location="Ljubljana, Slovenija" dogName="Bad Guy" descr="Whoever is righteous has regard for the life of his beast, but the mercy of the wicked is cruel. - Proverbs 12:10" date="10.5.2020" dateDay = "Thursday" time="14:00" numOfApplied="6"/>
+      </ScrollView>
     </View>
   );
 }

@@ -19,7 +19,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
     render() {
         return (
             <View>
-              <View style={styles.row}>
+              <View style={styles.imageRow}>
                   <Image source={logo} style={styles.image}></Image>
                   <View style={styles.textContainer}>
                     <Text style={styles.name}>{this.props.name}</Text>
@@ -32,7 +32,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
 }
 
 const styles = StyleSheet.create({
-    row: {
+    imageRow: {
         flexDirection: 'row',
         alignItems: 'flex-start',
         padding: 20

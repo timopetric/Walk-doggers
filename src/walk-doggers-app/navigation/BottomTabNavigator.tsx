@@ -25,11 +25,15 @@ import {
 } from '../types';
 import TabBlog from "../screens/TabBlog";
 import TabListings from "../screens/TabListings";
-import TabSettings from "../screens/TabSettings";
+import TabSettings from "../screens/Settings/TabSettings";
 import { Button } from 'react-native-elements';
 
 import { Provider } from "react-redux";
 import {store, toggleFilter} from "../redux/store";
+import DogScreen from "../screens/DogScreen";
+import NewBlogPostScreen from "../screens/NewBlogPostScreen";
+import EditProfileScreen from "../screens/Settings/EditProfileScreen";
+import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -94,10 +98,17 @@ function ExploreNavigator() {
                         headerRight: () => (
                             <Button
                                 onPress={ () => store.dispatch(toggleFilter()) }
-                                icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={'#854dbd'} />}
+                                icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={PRIMARY} />}
                                 type="clear"
                             />
                         ),
+                    }}
+                />
+                <ExploreStack.Screen
+                    name="DogScreen"
+                    component={DogScreen}
+                    options={{
+                        headerTitle: ''
                     }}
                 />
             </ExploreStack.Navigator>
@@ -122,7 +133,7 @@ function InboxNavigator() {
 const BlogStack = createStackNavigator<BlogParamList>();
 
 
-function BlogNavigator() {
+function BlogNavigator({navigation} : any) {
     return (
         <BlogStack.Navigator>
             <BlogStack.Screen
@@ -133,11 +144,19 @@ function BlogNavigator() {
                     headerTitleAlign: 'center',
                     headerRight: () => (
                         <Button
-                            onPress={ () => alert('TODO implement funcionality') }
+                            onPress={ () =>  navigation.navigate('NewBlogPostScreen')}
                             icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={PRIMARY} />}
                             type="clear"
                         />
                     ),
+                }}
+            />
+            <BlogStack.Screen
+                name="NewBlogPostScreen"
+                component={NewBlogPostScreen}
+                options={{
+                    headerTitle: 'New Blog Post',
+                    headerTitleAlign: 'center',
                 }}
             />
         </BlogStack.Navigator>
@@ -167,6 +186,16 @@ function SettingsNavigator() {
                 name="SettingsScreen"
                 component={TabSettings}
                 options={{ headerTitle: 'Settings', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="EditProfileScreen"
+                component={EditProfileScreen}
+                options={{ headerTitle: 'Edit Profile', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="BecomeAReporterScreen"
+                component={BecomeAReporterScreen}
+                options={{ headerTitle: 'Become a Reporter', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );

@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         fontSize: 12
     },
-    row: {
+    imageRow: {
         display: "flex",
         flexDirection: "row",
         flexWrap: "wrap",
@@ -64,14 +64,14 @@ class BlogCard extends React.Component<IBlogCardProps, IBlogCardState> {
                 source={{uri: 'https://images.theconversation.com/files/319375/original/file-20200309-118956-1cqvm6j.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop'}}
             />
 
-            <View style={styles.row}>
+            <View style={styles.imageRow}>
                 <Text style={styles.author}></Text>
                 <Text style={styles.confirmedText}></Text>
             </View>
 
             <Text style={styles.title}>{this.props.title}</Text>
             <Text style={styles.content}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
-            <View style={styles.row}>
+            <View style={styles.imageRow}>
                 <Text style={styles.readMore}>Read more</Text>
             </View>
         </Card>

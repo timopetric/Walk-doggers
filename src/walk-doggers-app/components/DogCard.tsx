@@ -1,8 +1,9 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions, Pressable} from "react-native";
 import {Card} from "react-native-elements";
 import {BLUE} from '../constants/Colors';
+import { useNavigation } from '@react-navigation/native';
 
 interface IDogCardProps {
     name?: string;
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
         fontSize: 12
     },
-    row: {
+    imageRow: {
         flexDirection: "row",
         flexWrap: "wrap",
     },
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
 
 class DogCard extends React.Component<IDogCardProps, IDogCardState> {
     render() {
+
         return <Card>
             <Image
                 style={styles.dogCard}
@@ -57,7 +59,7 @@ class DogCard extends React.Component<IDogCardProps, IDogCardState> {
             <Text style={styles.date}>{this.props.date}</Text>
             <Text style={styles.dogName}>{this.props.name}</Text>
             <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
-            <View style={styles.row}>
+            <View style={styles.imageRow}>
                 <Text style={styles.distance}>{this.props.distance}</Text>
                 <Text style={styles.takeMeWalk}>Take me for a walk</Text>
             </View>
