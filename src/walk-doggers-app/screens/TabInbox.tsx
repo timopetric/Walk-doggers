@@ -12,7 +12,6 @@ export default function TabInbox() {
             <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
             <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
     </ScrollView>
-
   );
 }
 

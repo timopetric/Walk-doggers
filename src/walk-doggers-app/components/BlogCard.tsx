@@ -2,6 +2,7 @@ import React from "react";
 
 import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
 import {Card} from "react-native-elements";
+import {BLUE} from '../constants/Colors';
 
 interface IBlogCardProps {
     title?: string;
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     readMore: {
-        color: '#3789cc',
+        color: BLUE,
         textTransform: "uppercase",
         fontWeight: "bold",
         alignContent: "flex-end",

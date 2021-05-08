@@ -9,6 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as React from 'react';
+import {PRIMARY} from '../constants/Colors';
 
 import useColorScheme from '../hooks/useColorScheme';
 import TabExplore from '../screens/TabExplore';
@@ -38,7 +39,7 @@ export default function BottomTabNavigator() {
     return (
         <BottomTab.Navigator
             initialRouteName="Explore"
-            tabBarOptions={{ activeTintColor: '#854dbd' }}>
+            tabBarOptions={{ activeTintColor: PRIMARY }}>
             <BottomTab.Screen
                 name="Explore"
                 component={ExploreNavigator}
@@ -133,7 +134,7 @@ function BlogNavigator() {
                     headerRight: () => (
                         <Button
                             onPress={ () => alert('TODO implement funcionality') }
-                            icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={'#854dbd'} />}
+                            icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={PRIMARY} />}
                             type="clear"
                         />
                     ),
