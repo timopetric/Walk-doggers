@@ -17,6 +17,8 @@ export const PINK = '#F365AA';
 export const ORANGE = '#FFA25F';
 export const BLUE = '#2878EF';
 
+export const PINKISH_WHITE = '#ECE8FF'
+
 export default {
   light: {
     text: '#000',

@@ -1,7 +1,7 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
-import {GRAY_2} from '../constants/Colors';
+import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
+import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
 
 import {Card, normalize} from "react-native-elements";
 import Constants from "../constants/Colors"
@@ -46,6 +46,16 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                     </View>
                     <Text style={styles.time}>{this.props.time}</Text>
                 </View>
+                <TouchableOpacity>
+                    <View style={styles.button}>
+                        <View style={styles.iconNum}>
+                            <Text style={styles.iconText}>10</Text>
+                        </View>
+                        <Text style={styles.btnText}>Applied Users</Text>
+                        <View style={styles.ghost}>
+                        </View>
+                    </View>
+                </TouchableOpacity>
                 
             </View>
 
@@ -112,6 +122,37 @@ const styles = StyleSheet.create({
     time: {
         fontFamily: "red-hat-text-500",
         fontSize: 16,
+    },
+    button: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignContent: "flex-end",
+        borderRadius: 8,
+        backgroundColor: PRIMARY,
+        padding: 5,
+        marginTop: 10
+
+    },
+    btnText: {
+        fontFamily: "red-hat-text-500",
+        fontSize: 20,
+        padding: 5,
+        color: PINKISH_WHITE
+    },
+    iconNum: {
+        padding: 5
+    },
+    iconText: {
+        fontFamily: "roboto",
+        padding:3,
+        paddingLeft: 10,
+        paddingRight: 10,
+        color: PINKISH_WHITE,
+        backgroundColor: PRIMARY_DARK,
+        borderRadius: 5
+    },
+    ghost: {
+        width: 25
     }
 
 });
