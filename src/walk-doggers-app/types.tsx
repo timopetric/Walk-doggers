@@ -6,6 +6,7 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
+  Login: undefined;
 };
 
 export type BottomTabParamList = {
@@ -34,4 +35,10 @@ export type ListingsParamList = {
 
 export type SettingsParamList = {
   SettingsScreen: undefined;
+};
+
+export type inputParams = {
+  value: string;
+  setValue: undefined;
+  Login: undefined;
 };

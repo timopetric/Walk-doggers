@@ -40,6 +40,11 @@ export default {
         },
       },
       NotFound: '*',
+      Login: {
+        screens: {
+          LoginScreen: 'login'
+        }
+      }
     },
   },
 };
