@@ -17,6 +17,7 @@ export default function useCachedResources() {
           ...Ionicons.font,
           'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
           'red-hat-text': require('../assets/fonts/RedHatText-Regular.ttf'),
+          'red-hat-text-500': require('../assets/fonts/RedHatText-Medium.ttf'),
           'roboto': require('../assets/fonts/Roboto.ttf')
         });
       } catch (e) {
