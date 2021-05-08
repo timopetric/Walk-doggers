@@ -5,6 +5,7 @@
 
 export type RootStackParamList = {
   Root: undefined;
+
   NotFound: undefined;
 };
 
@@ -18,6 +19,7 @@ export type BottomTabParamList = {
 
 export type ExploreParamList = {
   ExploreScreen: undefined;
+  DogScreen: undefined;
 };
 
 export type InboxParamList = {

@@ -30,6 +30,7 @@ import { Button } from 'react-native-elements';
 
 import { Provider } from "react-redux";
 import {store, toggleFilter} from "../redux/store";
+import DogScreen from "../screens/DogScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -94,11 +95,15 @@ function ExploreNavigator() {
                         headerRight: () => (
                             <Button
                                 onPress={ () => store.dispatch(toggleFilter()) }
-                                icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={'#854dbd'} />}
+                                icon= {<Ionicons size={30} style={{ marginBottom: -3 }} name="filter" color={PRIMARY} />}
                                 type="clear"
                             />
                         ),
                     }}
+                />
+                <ExploreStack.Screen
+                    name="DogScreen"
+                    component={DogScreen}
                 />
             </ExploreStack.Navigator>
         </Provider>
