@@ -1,6 +1,6 @@
 import {Button, Dimensions, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../constants/Colors";
+import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
 
@@ -50,7 +50,7 @@ export default function EditProfileScreen() {
                 <Text style={styles.subtitle}>About me</Text>
                 <Input></Input>
 
-                <Button title='Save changes' onPress={() => alert('TODO implement')}/>
+                <Button title='Save changes' onPress={() => alert('TODO implement')} color={PRIMARY}/>
             </View>
         </ScrollView>
     );

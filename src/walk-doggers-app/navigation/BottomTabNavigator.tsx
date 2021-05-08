@@ -25,14 +25,15 @@ import {
 } from '../types';
 import TabBlog from "../screens/TabBlog";
 import TabListings from "../screens/TabListings";
-import TabSettings from "../screens/TabSettings";
+import TabSettings from "../screens/Settings/TabSettings";
 import { Button } from 'react-native-elements';
 
 import { Provider } from "react-redux";
 import {store, toggleFilter} from "../redux/store";
 import DogScreen from "../screens/DogScreen";
 import NewBlogPostScreen from "../screens/NewBlogPostScreen";
-import EditProfileScreen from "../screens/EditProfileScreen";
+import EditProfileScreen from "../screens/Settings/EditProfileScreen";
+import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -190,6 +191,11 @@ function SettingsNavigator() {
                 name="EditProfileScreen"
                 component={EditProfileScreen}
                 options={{ headerTitle: 'Edit Profile', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="BecomeAReporterScreen"
+                component={BecomeAReporterScreen}
+                options={{ headerTitle: 'Become a Reporter', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );

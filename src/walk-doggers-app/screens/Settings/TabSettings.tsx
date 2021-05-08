@@ -32,7 +32,7 @@ export default function TabSettings({navigation} : any) {
           <FontAwesome size={30} name="newspaper-o" color={mainColor} />
           <Text style={{marginLeft: 5}}>Become a Reporter</Text>
         </View>
-        <AntDesign onPress={() => alert('TODO implement')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
+        <AntDesign onPress={() => navigation.navigate('BecomeAReporterScreen')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
       </Card>
 
       <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
