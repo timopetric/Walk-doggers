@@ -28,14 +28,19 @@ jobs:
 
       - name: Run npm install for app
         working-directory: ./src/walk-doggers-app/
-        run: npm install
+        run: |
+          npm install
+          bash ./postinstall.sh
+          echo "Install npm wait-on"
+          sudo npm install wait-on -g
 
-      - name: Start Expo app web server with docker run command
+      - name: Install expo-cli
+        run: sudo npm install --unsafe-perm -g expo-cli
+
+      - name: Start Expo app web server
         working-directory: ./src/walk-doggers-app/
-        run: sudo docker run --rm -p 19000-19010:19000-19010 -v "$PWD:/app" -e EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0 --name=walk-doggers-expo-web kerbe/expo start:web
-
-      - name: Install npm wait-on
-        run: sudo npm install wait-on -g
+        run: expo start:web &
+#         run: sudo docker run --rm -p 19000-19010:19000-19010 -v "$PWD:/app" -e EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0 --name=walk-doggers-expo-web kerbe/expo start:web
 
       - name: wait-on page and echo hello and print page html
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
