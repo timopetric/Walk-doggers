@@ -41,6 +41,14 @@ jobs:
       - name: wait-on page and echo hello and print page html
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
 
-      - name: Cypress run frontent test
+      - name: Cypress run frontend test
         working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
         run: docker run --rm -v $PWD:/e2e -w /e2e --network=host -e CYPRESS_screenshotOnRunFailure=false -e CYPRESS_VIDEO=false cypress/included:7.2.0
+
+      - name: Deploy on heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_PRODUCTION }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          branch: test-github-actions
