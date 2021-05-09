@@ -7,10 +7,11 @@ interface Props {
     value: string
     setValue: any
     placeholder: string
+    testId: string
     //props: any
 };
 
-const FormTextInput: React.FC<Props>= ({value, setValue, placeholder}) => {
+const FormTextInput: React.FC<Props>= ({value, setValue, placeholder, testId}) => {
     return (
         <>
             <TextInput
@@ -19,6 +20,7 @@ const FormTextInput: React.FC<Props>= ({value, setValue, placeholder}) => {
                 value={value}
                 placeholder={placeholder}
                 placeholderTextColor="rgba(255, 255, 255, 0.5)" 
+                testID={testId}
             
             />
         </>

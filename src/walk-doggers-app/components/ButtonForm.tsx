@@ -9,18 +9,19 @@ interface Props {
     title: string
     onClickHandler: any
     primary: boolean
+    testId: string
 };
 
 
 
-const ButtonForm: React.FC<Props>= ({title, onClickHandler, primary}) => {
+const ButtonForm: React.FC<Props>= ({title, onClickHandler, primary, testId}) => {
     return (
         <>
             {/*<TouchableOpacity onPress={onClickHandler} style={styles.appButtonContainer}>
               <Text style={styles.appButtonText}>{title}</Text>
             </TouchableOpacity>
           */}
-            <ButtonContainer onPress={onClickHandler} primary={primary}>
+            <ButtonContainer onPress={onClickHandler} primary={primary} testID={testId}>
               <ButtonText primary={primary}>{title}</ButtonText>
             </ButtonContainer>
         </>
