@@ -1,17 +1,17 @@
 from typing import Optional
 
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, Field
 
 
 class DogBase(BaseModel):
-    name: str
-    description: Optional[str] = None
-    size_category: int
-    photo: Optional[str] = None
+    name: str = Field(..., example="Koki")
+    description: Optional[str] = Field(..., example="Moj lep kuža")
+    size_category: int = Field(..., example=0, ge=0, le=4)
+    photo: Optional[str] = Field(..., example="-")    # TODO: binary image
 
 
 class DogInDBBase(DogBase):
-    id: Optional[UUID4] = None
+    id: Optional[UUID4] = Field(..., example="0e884724-fbed-4d4a-b8a8-9fb8fd56d838")
 
     class Config:
         orm_mode = True
