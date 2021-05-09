@@ -36,6 +36,7 @@ const LoginScreen = ({
           value={email}
           setValue={setEmail}
           placeholder="Enter your email address"
+          testId="email"
 
         />
 
@@ -44,6 +45,7 @@ const LoginScreen = ({
           value={password}
           setValue={setPassword}
           placeholder="Enter your password"
+          testId="pass"
         />
 
         <View style={styles.separator}></View>
@@ -51,11 +53,13 @@ const LoginScreen = ({
           title={"Login"}
           onClickHandler={onPressLogin}
           primary={true}
+          testId={"log"}
         />
         <ButtonForm
           title={"Register"}
           onClickHandler={onPressRegister}
           primary={false}
+          testId="reg"
         />
       </View>
     </View>
