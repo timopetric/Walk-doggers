@@ -47,6 +47,7 @@ jobs:
 
       - name: Cypress run
         uses: cypress-io/github-action@v2
-        working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
+        with:
+          working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
         env:
           CYPRESS_baseUrl: http://localhost:19006/explore
