@@ -1,0 +1,29 @@
+name: CI gh actions test
+on:
+  push:
+    branches:
+      - test-github-actions
+    paths-ignore:
+      - "README.md"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          repository: tpo-2020-2021/LP234-21
+          ref: dev
+
+      - name: Run API and databases with docker-compose
+        working-directory: ./src/walk-doggers-api/
+        run: docker-compose up -d
+
+      - name: Run npm install for app
+        working-directory: ./src/walk-doggers-app/
+        run: npm install
+
+      - run: npm install wait-on
+
+      - name: wait-on page and echo hello
+        run: "wait-on http://localhost:19006/ && curl http://localhost:19006/"
