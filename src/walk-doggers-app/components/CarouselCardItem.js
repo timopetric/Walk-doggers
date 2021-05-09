@@ -7,21 +7,30 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 const CarouselCardItem = ({ item, index }) => {
   return (
     <View style={styles.container} key={index}>
-      <Image
-        source={{ uri: item.imgUrl }}
-        style={styles.image}
-      />
-      <Text style={styles.header}>{item.title}</Text>
-      <Text style={styles.body}>{item.body}</Text>
+      <View style={styles.row}> 
+        <Image
+          source={{ uri: item.imgUrl }}
+          style={styles.image}
+        />
+        <View style={styles.column}>
+          <Text style={styles.title}>{item.title}</Text>
+          <View style={[styles.row, {paddingTop: 5}]}>
+            <Text style={styles.date}>{item.date}</Text>
+            <Text style={{fontFamily: "roboto", color: "black", fontSize: 15}}> walk at </Text>
+            <Text style={styles.date}>{item.time}</Text>
+          </View>
+        </View>
+      </View>
     </View>
   )
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    borderRadius: 8,
+    backgroundColor: "white",
+    borderRadius: 20,
     width: ITEM_WIDTH,
-    paddingBottom: 40,
+    padding: 20,
+    marginTop: 20,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -32,23 +41,27 @@ const styles = StyleSheet.create({
     elevation: 7,
   },
   image: {
-    width: ITEM_WIDTH,
-    height: 300,
+    borderRadius: 35,
+    width: 70,
+    height: 70
   },
-  header: {
+  title: {
     color: "#222",
-    fontSize: 28,
-    fontWeight: "bold",
-    paddingLeft: 20,
-    paddingTop: 20
+    fontSize: 22,
+    fontFamily: "roboto-500"
   },
-  body: {
+  date: {
     color: "#222",
-    fontSize: 18,
-    paddingLeft: 20,
-    paddingLeft: 20,
-    paddingRight: 20
+    fontSize: 15,
+    fontFamily: "roboto-500"
+  },
+  column: {
+    paddingLeft: 20
+  },
+  row: {
+    flexDirection: "row",
+    alignContent: "center"
   }
-})
+});
 
 export default CarouselCardItem

@@ -19,6 +19,7 @@ export default function useCachedResources() {
           'red-hat-text': require('../assets/fonts/RedHatText-Regular.ttf'),
           'red-hat-text-500': require('../assets/fonts/RedHatText-Medium.ttf'),
           'roboto': require('../assets/fonts/Roboto.ttf'),
+          'roboto-500': require('../assets/fonts/Roboto-Medium.ttf'),
           'pecita': require('../assets/fonts/Pecita.otf')
         });
       } catch (e) {
