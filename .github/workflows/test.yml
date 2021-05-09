@@ -15,6 +15,10 @@ jobs:
           repository: tpo-2020-2021/LP234-21
           ref: dev
 
+      - name: Create default .env file for api
+        working-directory: ./src/walk-doggers-api/
+        run: cp default.env .env
+
       - name: Run API and databases with docker-compose
         working-directory: ./src/walk-doggers-api/
         run: docker-compose up -d
