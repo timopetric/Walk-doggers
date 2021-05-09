@@ -44,3 +44,9 @@ jobs:
 
       - name: wait-on page and echo hello and print page html
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
+        working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
+        env:
+          CYPRESS_baseUrl: http://localhost:19006/explore
