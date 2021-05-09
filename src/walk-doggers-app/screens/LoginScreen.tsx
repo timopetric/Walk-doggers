@@ -13,7 +13,7 @@ const LoginScreen = ({
 }: StackScreenProps<RootStackParamList, 'Login'>) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const onPress = () => {navigation.navigate('Root')};
+  const onPress = () => {navigation.replace('Root')};
 
 
   return (
