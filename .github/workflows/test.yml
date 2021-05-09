@@ -19,7 +19,7 @@ jobs:
         working-directory: ./src/walk-doggers-api/
         run: cp default.env .env
 
-      - name: Run API and databases with docker-compose
+      - name: Start API and databases with docker-compose
         working-directory: ./src/walk-doggers-api/
         run: docker-compose up -d
 
@@ -27,7 +27,12 @@ jobs:
         working-directory: ./src/walk-doggers-app/
         run: npm install
 
-      - run: npm install wait-on
+      - name: Start Expo app web server with docker run command
+        working-directory: ./src/walk-doggers-app/
+        run: docker run -d -it --rm -p 19000-19010:19000-19010 -v "$PWD:/app" -e EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0 --name=walk-doggers-expo-web kerbe/expo start:web
 
-      - name: wait-on page and echo hello
-        run: "wait-on http://localhost:19006/ && curl http://localhost:19006/"
+      - name: Install npm wait-on
+        run: sudo npm install wait-on -g
+
+      - name: wait-on page and echo hello and print page html
+        run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
