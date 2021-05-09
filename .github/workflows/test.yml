@@ -46,8 +46,7 @@ jobs:
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
 
       - name: Cypress run
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
+        working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
         env:
           CYPRESS_baseUrl: http://localhost:19006/explore
+        run: docker run --rm -v $PWD:/e2e -w /e2e --network=host cypress/included:7.2.0
