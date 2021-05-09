@@ -15,9 +15,6 @@ jobs:
           repository: tpo-2020-2021/LP234-21
           ref: test-github-actions
 
-#      - name: Create Docker Network
-#        run: docker network create data
-
 #      - name: Create default .env file for api
 #        working-directory: ./src/walk-doggers-api/
 #        run: cp default.env .env
@@ -40,13 +37,10 @@ jobs:
       - name: Start Expo app web server
         working-directory: ./src/walk-doggers-app/
         run: expo start:web &
-#         run: sudo docker run --rm -p 19000-19010:19000-19010 -v "$PWD:/app" -e EXPO_DEVTOOLS_LISTEN_ADDRESS=0.0.0.0 --name=walk-doggers-expo-web kerbe/expo start:web
 
       - name: wait-on page and echo hello and print page html
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
 
-      - name: Cypress run
+      - name: Cypress run frontent test
         working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
-        env:
-          CYPRESS_baseUrl: http://localhost:19006/explore
-        run: docker run --rm -v $PWD:/e2e -w /e2e --network=host cypress/included:7.2.0
+        run: docker run --rm -v $PWD:/e2e -w /e2e --network=host -e CYPRESS_screenshotOnRunFailure=false -e CYPRESS_VIDEO=false cypress/included:7.2.0
