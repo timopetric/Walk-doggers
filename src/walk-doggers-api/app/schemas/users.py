@@ -1,18 +1,20 @@
 from typing import Optional
 
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, Field
+
+from app.functions import regex_password, regex_email
 
 
 class Login(BaseModel):
-    email: str
-    password: str
+    email: str = Field(..., example="a@a.a")
+    password: str = Field(..., example="a")
 
 
 class UserBase(BaseModel):
-    email: str
-    password: str
-    first_name: str
-    last_name: str
+    email: str = Field(..., example="a@a.a", regex=regex_email)
+    password: str = Field(..., example="Dobr0$Geslo", regex=regex_password)
+    first_name: str = Field(..., example="Janez")
+    last_name: str = Field(..., example="Novak")
 
 
 class UserUpdate(UserBase):

@@ -159,3 +159,7 @@ fabric.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+
+
+package-lock.json
