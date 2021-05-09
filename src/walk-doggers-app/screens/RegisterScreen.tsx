@@ -14,7 +14,7 @@ const RegisterScreen = ({
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const onPressRegister = () => {navigation.navigate('Root')};
+    const onPressRegister = () => {navigation.replace('Root')};
     const onPressLogin = () => {navigation.navigate('Login')};
 
 

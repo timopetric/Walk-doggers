@@ -14,7 +14,7 @@ const LoginScreen = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const onPressLogin = () => {navigation.replace('Root')};
-  const onPressRegister = () => {navigation.replace('Register')};
+  const onPressRegister = () => {navigation.navigate('Register')};
 
   return (
     <View style={styles.container}>
