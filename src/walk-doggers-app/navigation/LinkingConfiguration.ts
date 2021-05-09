@@ -44,6 +44,11 @@ export default {
         screens: {
           LoginScreen: 'login'
         }
+      },
+      Register: {
+        screens: {
+          RegisterScreen: 'register'
+        }
       }
     },
   },

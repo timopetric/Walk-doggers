@@ -5,9 +5,9 @@
 
 export type RootStackParamList = {
   Root: undefined;
-
   NotFound: undefined;
   Login: undefined;
+  Register: undefined;
 };
 
 export type BottomTabParamList = {
@@ -42,8 +42,7 @@ export type SettingsParamList = {
   BecomeAReporterScreen: undefined;
 };
 
-export type inputParams = {
-  value: string;
-  setValue: undefined;
-  Login: undefined;
-};
+export type LoginParamList = {
+  Root: undefined;
+  Register: undefined;
+}

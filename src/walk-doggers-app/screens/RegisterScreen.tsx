@@ -1,20 +1,22 @@
 import React, {useState}  from 'react';
 import {StyleSheet} from 'react-native';
-import {Image, Text, View, TextInput, TouchableOpacity } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {Image, Text, View } from 'react-native';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
 import FormTextInput from '../components/FormInput';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 import Colors, { PRIMARY } from '../constants/Colors'
 import ButtonForm from '../components/ButtonForm';
-const LoginScreen = ({
+
+const RegisterScreen = ({
   navigation,
-}: StackScreenProps<RootStackParamList, 'Login'>) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const onPressLogin = () => {navigation.navigate('Root')};
-  const onPressRegister = () => {navigation.navigate('Register')};
+}: StackScreenProps<RootStackParamList, 'Register'>) => {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const onPressRegister = () => {navigation.navigate('Root')};
+    const onPressLogin = () => {navigation.navigate('Login')};
+
 
   return (
     <View style={styles.container}>
@@ -29,7 +31,21 @@ const LoginScreen = ({
       
       <View style={styles.form}>
 
-        <Text style={styles.login}>Log in</Text>
+        <Text style={styles.login}>Register</Text>
+
+        <Text style={styles.label}>FIRST NAME</Text>
+        <FormTextInput
+          value={firstName}
+          setValue={setFirstName}
+          placeholder="Enter your firstname"
+        />
+
+        <Text style={styles.label}>LAST NAME</Text>
+        <FormTextInput
+          value={lastName}
+          setValue={setLastName}
+          placeholder="Enter your lastname"
+        />
 
         <Text style={styles.label}>EMAIL</Text>
         <FormTextInput 
@@ -46,15 +62,18 @@ const LoginScreen = ({
           placeholder="Enter your password"
         />
 
+        
+
         <View style={styles.separator}></View>
-        <ButtonForm
-          title={"Login"}
-          onClickHandler={onPressLogin}
-          primary={true}
-        />
+
         <ButtonForm
           title={"Register"}
           onClickHandler={onPressRegister}
+          primary={true}
+        />
+        <ButtonForm
+          title={"Login"}
+          onClickHandler={onPressLogin}
           primary={false}
         />
       </View>
@@ -86,7 +105,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginTop: 80,
+    marginTop: 30,
   },
   heading: {
     fontFamily: 'pecita',
@@ -110,4 +129,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default LoginScreen;
+export default RegisterScreen;
