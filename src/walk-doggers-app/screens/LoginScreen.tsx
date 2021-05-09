@@ -13,8 +13,8 @@ const LoginScreen = ({
 }: StackScreenProps<RootStackParamList, 'Login'>) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const onPressLogin = () => {navigation.navigate('Root')};
-  const onPressRegister = () => {navigation.navigate('Register')};
+  const onPressLogin = () => {navigation.replace('Root')};
+  const onPressRegister = () => {navigation.replace('Register')};
 
   return (
     <View style={styles.container}>

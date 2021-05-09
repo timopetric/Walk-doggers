@@ -40,7 +40,7 @@ export default function TabSettings({navigation} : any) {
           <Ionicons size={30} name="exit-outline" color={mainColor} />
           <Text style={{marginLeft: 5}}>Logout</Text>
         </View>
-        <AntDesign onPress={() => alert('TODO implement')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
+        <AntDesign onPress={() => navigation.replace('Login') } size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
       </Card>
     </View>
   );
