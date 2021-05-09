@@ -5,12 +5,12 @@ import EditScreenInfo from '../components/EditScreenInfo';
 import MessageThread from '../components/MessageThread'
 import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import Carousel from '../components/Carousel'
+import CarouselCards from '../components/CarouselCards'
 
 export default function TabInbox() {
   return (
       <ScrollView>
-        {/*<Carousel data={[{title:"test", description:"test"}]}></Carousel>*/}
+        <CarouselCards></CarouselCards>
         <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
         <MessageThread name="Domen" lastMessage="To je moje sporocilo!"></MessageThread>
       </ScrollView>
