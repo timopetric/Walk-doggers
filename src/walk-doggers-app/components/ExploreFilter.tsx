@@ -3,14 +3,14 @@ import {Pressable, StyleSheet, Text, View} from "react-native";
 import {connect} from "react-redux";
 import {store, pickDistanceFilter, pickSizeFilter} from "../redux/store";
 import {Card, Slider} from "react-native-elements";
-import {categories} from "../constants/Values";
+import {categories, maxDistance} from "../constants/Values";
 
 interface IExploreFilterProps {
     showFilter?: boolean;
 }
 
 interface IExploreFilterState {
-
+    selectedSize?: number;
 }
 
 const styles = StyleSheet.create({
@@ -18,20 +18,16 @@ const styles = StyleSheet.create({
         color: '#393c40',
         textTransform: "uppercase",
         fontWeight: "bold",
+        flex: 1
     },
-    sliderStyle: {
-
+    selectedDistanceText: {
+        flex: 1,
+        alignItems: "flex-end"
     },
     sizesRow: {
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 10
-    },
-    touchable: {
-
-    },
-    text: {
-
     },
     sizePickerBox: {
         flexShrink: 1,
@@ -43,6 +39,9 @@ const styles = StyleSheet.create({
     },
     notSelected: {
         backgroundColor: '#e1e3e6'
+    },
+    distanceRange: {
+        flexDirection: "row",
     },
 });
 
@@ -65,12 +64,17 @@ function onPressBox(props: any) {
     store.dispatch(pickSizeFilter(props.index));
 }
 
+function onSliderValueChange(value: number, comp: ExploreFilter){
+    comp.setState({selectedSize: value});
+    store.dispatch(pickDistanceFilter(value));
+}
+
 function SizePickerBox(props: any) {
     return (
-        <Pressable style={styles.touchable} onPress={() => onPressBox(props) }>
+        <Pressable onPress={() => onPressBox(props) }>
             <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
-                <Text style={styles.text}>{props.category}</Text>
-                <Text style={styles.text}>kg</Text>
+                <Text>{props.category}</Text>
+                <Text>kg</Text>
             </Card>
         </Pressable>
     )
@@ -83,13 +87,26 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
                 <Text style={styles.filterParamText}>Size</Text>
                 <FilterSizePicker/>
 
-                <Text style={styles.filterParamText}>Distance</Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={styles.filterParamText}>Distance</Text>
+                    <View style={styles.selectedDistanceText}>
+                        <Text>{store.getState().selectedDistance}</Text>
+                    </View>
+                </View>
+
                 <Slider
-                    value={0.5}
+                    value={store.getState().selectedDistance / maxDistance}
                     thumbTintColor='white'
                     minimumTrackTintColor='blue'
-                    style={styles.sliderStyle}
+                    onValueChange={(value) => onSliderValueChange(Math.round(value * maxDistance), this)}
                 />
+                <View style={styles.distanceRange}>
+                    <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
+                        <Text style={{fontWeight: "bold"}}>200 km</Text>
+                    </View>
+
+                </View>
             </View>
         }
         return <View/>

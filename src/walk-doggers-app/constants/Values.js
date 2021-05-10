@@ -5,3 +5,5 @@ export const categories = [
     "20-40",
     "40+",
 ]
+
+export const maxDistance = 200;
