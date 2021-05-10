@@ -24,7 +24,7 @@ export default function TabSettings({navigation} : any) {
           <FontAwesome5 size={30} name="dog" color={mainColor} />
           <Text style={{marginLeft: 5}}>My Dogs</Text>
         </View>
-        <AntDesign onPress={() => alert('TODO implement')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
+        <AntDesign onPress={() => navigation.navigate('MyDogsScreen')} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
       </Card>
 
       <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>

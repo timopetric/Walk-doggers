@@ -34,6 +34,7 @@ import DogScreen from "../screens/DogScreen";
 import NewBlogPostScreen from "../screens/NewBlogPostScreen";
 import EditProfileScreen from "../screens/Settings/EditProfileScreen";
 import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
+import MyDogsScreen from "../screens/Settings/MyDogsScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -191,6 +192,11 @@ function SettingsNavigator() {
                 name="EditProfileScreen"
                 component={EditProfileScreen}
                 options={{ headerTitle: 'Edit Profile', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="MyDogsScreen"
+                component={MyDogsScreen}
+                options={{ headerTitle: 'My Dogs', headerTitleAlign: 'center', }}
             />
             <SettingsStack.Screen
                 name="BecomeAReporterScreen"
