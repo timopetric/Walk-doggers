@@ -1,0 +1,47 @@
+name: Neprekinjena integracija
+on:
+  push:
+    branches:
+      - test
+    paths-ignore:
+      - "README.md"
+      - "docs/**"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v2
+        with:
+          repository: tpo-2020-2021/LP234-21
+          ref: test
+
+#      - name: Create default .env file for api
+#        working-directory: ./src/walk-doggers-api/
+#        run: cp default.env .env
+
+#      - name: Start API and databases with docker-compose
+#        working-directory: ./src/walk-doggers-api/
+#        run: docker-compose up -d
+
+      - name: Run npm install for app
+        working-directory: ./src/walk-doggers-app/
+        run: |
+          npm install
+          bash ./postinstall.sh
+          echo "Install npm wait-on"
+          sudo npm install wait-on -g
+
+      - name: Install expo-cli
+        run: sudo npm install --unsafe-perm -g expo-cli
+
+      - name: Start Expo app web server
+        working-directory: ./src/walk-doggers-app/
+        run: expo start:web &
+
+      - name: wait-on page and echo hello and print page html
+        run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
+
+      - name: Cypress run frontend test
+        working-directory: ./test/cypress_tests/
+        run: docker run --rm -v $PWD:/e2e -w /e2e --network=host -e CYPRESS_screenshotOnRunFailure=false -e CYPRESS_VIDEO=false cypress/included:7.2.0
