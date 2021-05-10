@@ -1,10 +1,11 @@
-name: CI gh actions test
+name: Neprekinjena dostava
 on:
   push:
     branches:
-      - test-github-actions
+      - production
     paths-ignore:
       - "README.md"
+      - "docs/**"
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -13,7 +14,7 @@ jobs:
       - uses: actions/checkout@v2
         with:
           repository: tpo-2020-2021/LP234-21
-          ref: test-github-actions
+          ref: production
 
 #      - name: Create default .env file for api
 #        working-directory: ./src/walk-doggers-api/
@@ -42,7 +43,7 @@ jobs:
         run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
 
       - name: Cypress run frontend test
-        working-directory: ./src/walk-doggers-api/app/tests/cypress_tests
+        working-directory: ./test/cypress_tests/
         run: docker run --rm -v $PWD:/e2e -w /e2e --network=host -e CYPRESS_screenshotOnRunFailure=false -e CYPRESS_VIDEO=false cypress/included:7.2.0
 
       - name: Deploy on heroku
@@ -51,4 +52,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: ${{ secrets.HEROKU_PRODUCTION }}
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
-          branch: test-github-actions
+          branch: production
