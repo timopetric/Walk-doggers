@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {store, pickDistanceFilter} from "../redux/store";
 import {Slider} from "react-native-elements";
 import SizePickerItem from "./SizePickerItem";
+import {categories} from "../constants/Values";
 
 interface IExploreFilterProps {
     showFilter?: boolean;
@@ -28,14 +29,6 @@ const styles = StyleSheet.create({
         marginBottom: 10
     }
 });
-
-const categories = [
-    "1-5",
-    "5-10",
-    "10-20",
-    "20-40",
-    "40+",
-]
 
 function CategoriesRow() {
     let sizePickerItems : any = [];

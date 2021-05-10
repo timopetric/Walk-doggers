@@ -35,6 +35,7 @@ import NewBlogPostScreen from "../screens/NewBlogPostScreen";
 import EditProfileScreen from "../screens/Settings/EditProfileScreen";
 import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
 import MyDogsScreen from "../screens/Settings/MyDogsScreen";
+import NewDogScreen from "../screens/Settings/NewDogScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -180,7 +181,7 @@ function ListingsNavigator() {
 
 const SettingsStack = createStackNavigator<SettingsParamList>();
 
-function SettingsNavigator() {
+function SettingsNavigator({navigation} : any) {
     return (
         <SettingsStack.Navigator>
             <SettingsStack.Screen
@@ -196,12 +197,27 @@ function SettingsNavigator() {
             <SettingsStack.Screen
                 name="MyDogsScreen"
                 component={MyDogsScreen}
-                options={{ headerTitle: 'My Dogs', headerTitleAlign: 'center', }}
+                options={{
+                    headerTitle: 'My Dogs',
+                    headerTitleAlign: 'center',
+                    headerRight: () => (
+                        <Button
+                            onPress={ () =>  navigation.navigate('NewDogScreen')}
+                            icon= {<Entypo size={30} style={{ marginBottom: -3 }} name="plus" color={PRIMARY} />}
+                            type="clear"
+                        />
+                    ),
+                }}
             />
             <SettingsStack.Screen
                 name="BecomeAReporterScreen"
                 component={BecomeAReporterScreen}
                 options={{ headerTitle: 'Become a Reporter', headerTitleAlign: 'center', }}
+            />
+            <SettingsStack.Screen
+                name="NewDogScreen"
+                component={NewDogScreen}
+                options={{ headerTitle: 'New Dog', headerTitleAlign: 'center', }}
             />
         </SettingsStack.Navigator>
     );

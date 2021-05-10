@@ -42,8 +42,6 @@ const styles = StyleSheet.create({
 export default function NewBlogPostScreen() {
     return (
         <ScrollView>
-
-
             <View style={styles.container}>
                 <Text style={styles.subtitle}>Title</Text>
                 <Input></Input>
