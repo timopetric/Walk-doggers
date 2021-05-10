@@ -34,14 +34,18 @@ const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e
     "Amet mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Dui id ornare arcu odio. Ut enim blandit volutpat maecenas volutpat blandit. Mi ipsum faucibus vitae aliquet nec. Phasellus vestibulum lorem sed risus ultricies. Iaculis urna id volutpat lacus laoreet non curabitur gravida. Cursus in hac habitasse platea dictumst. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Rhoncus est pellentesque elit ullamcorper dignissim. Sit amet aliquam id diam. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Ultrices sagittis orci a scelerisque purus semper eget duis at. Euismod in pellentesque massa placerat duis ultricies lacus sed. Malesuada proin libero nunc consequat interdum varius sit. Feugiat in ante metus dictum at. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Sed odio morbi quis commodo odio aenean sed."
 
 
-export default function BecomeAReporterScreen() {
+function onPressBecomeAReporter(navigation : any) {
+    navigation.goBack();
+}
+
+export default function BecomeAReporterScreen({navigation}: any) {
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>Terms & Conditions</Text>
                 <Text style={styles.content}>{lorem}</Text>
 
-                <ButtonCustom text='Save changes' onPress= {() => alert('TODO implement')}color="purple"></ButtonCustom>
+                <ButtonCustom text='Save changes' onPress= {() => onPressBecomeAReporter(navigation) }color="purple"></ButtonCustom>
             </View>
         </ScrollView>
     );

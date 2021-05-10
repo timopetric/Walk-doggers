@@ -29,7 +29,7 @@ export function pickDistanceFilter(distance) {
 
 const initialState = {
     showFilter: false,
-    selectedSize: '0',
+    selectedSize: 0,
 }
 
 const reducer = (state = initialState, action) => {

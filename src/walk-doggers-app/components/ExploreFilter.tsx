@@ -1,9 +1,8 @@
-import React from "react";
-import {StyleSheet, Text, View} from "react-native";
+import React, {useState} from "react";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import {connect} from "react-redux";
-import {store, pickDistanceFilter} from "../redux/store";
-import {Slider} from "react-native-elements";
-import SizePickerItem from "./SizePickerItem";
+import {store, pickDistanceFilter, pickSizeFilter} from "../redux/store";
+import {Card, Slider} from "react-native-elements";
 import {categories} from "../constants/Values";
 
 interface IExploreFilterProps {
@@ -27,18 +26,54 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         marginBottom: 10
-    }
+    },
+    touchable: {
+
+    },
+    text: {
+
+    },
+    sizePickerBox: {
+        flexShrink: 1,
+        marginHorizontal: 2,
+        borderRadius: 5,
+    },
+    selected: {
+        backgroundColor: '#747575'
+    },
+    notSelected: {
+        backgroundColor: '#e1e3e6'
+    },
 });
 
-function CategoriesRow() {
+function FilterSizePicker() {
+    const [selected, setSelected] = useState(store.getState().selectedSize);
+
     let sizePickerItems : any = [];
     categories.forEach((category, index, arr) => {
         sizePickerItems.push(
-            <SizePickerItem category={category} key={index} />
+            <SizePickerBox category={category} selected = {selected} key={index} index={index} setSelected={setSelected}/>
         )
     })
 
     return <View style={styles.sizesRow}>{sizePickerItems}</View>
+
+}
+
+function onPressBox(props: any) {
+    props.setSelected(props.index);
+    store.dispatch(pickSizeFilter(props.index));
+}
+
+function SizePickerBox(props: any) {
+    return (
+        <Pressable style={styles.touchable} onPress={() => onPressBox(props) }>
+            <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
+                <Text style={styles.text}>{props.category}</Text>
+                <Text style={styles.text}>kg</Text>
+            </Card>
+        </Pressable>
+    )
 }
 
 class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterState> {
@@ -46,7 +81,7 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
         if (this.props.showFilter){
             return <View style={ {width: '100%', padding: 20 }}>
                 <Text style={styles.filterParamText}>Size</Text>
-                <CategoriesRow/>
+                <FilterSizePicker/>
 
                 <Text style={styles.filterParamText}>Distance</Text>
                 <Slider
@@ -58,7 +93,6 @@ class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterS
             </View>
         }
         return <View/>
-
     }
 }
 
@@ -76,4 +110,4 @@ const mapDispatchToProps = (dispatch : any, ownProps : IExploreFilterProps) => {
     }
 }
 
-export default connect(mapStateToProps)(ExploreFilter);
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreFilter);

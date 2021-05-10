@@ -66,7 +66,11 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function NewDogScreen() {
+function onPressAdd(navigation : any) {
+    navigation.goBack();
+}
+
+export default function NewDogScreen({navigation} : any) {
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -92,6 +96,8 @@ export default function NewDogScreen() {
                 </View>
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>
+
+                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation)}/>
             </View>
         </ScrollView>
     );
@@ -114,7 +120,7 @@ function SizePicker() {
 function SizePickerBox(props: any) {
     return (
         <Pressable style={styles.touchable} onPress={() => props.setSelected(props.index) }>
-            <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]} wrapperStyle={styles.wrapper}>
+            <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
                 <Text style={styles.text}>{props.category}</Text>
                 <Text style={styles.text}>kg</Text>
             </Card>
