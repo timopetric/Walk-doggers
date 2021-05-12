@@ -33,7 +33,7 @@ const CarouselCards = () => {
     <View>
       <Carousel
         layout="tinder"
-        layoutCardOffset={9}
+        layoutCardOffset={0}
         ref={isCarousel}
         data={data}
         renderItem={CarouselCardItem}
@@ -51,6 +51,7 @@ const CarouselCards = () => {
           height: 10,
           borderRadius: 5,
           marginHorizontal: 0,
+          marginTop: -9,
           backgroundColor: 'rgba(0, 0, 0, 0.92)'
         }}
         inactiveDotOpacity={0.4}
