@@ -15,26 +15,29 @@ const RegisterScreen = ({
   const [lastName, setLastName] = useState<string | null>(null)
   const [email, setEmail] = useState<string | null>(null);
   const [password, setPassword] = useState<string | null>(null);
-  const onPressRegister = () => {navigation.replace('Root')};
+  //const onPressRegister = () => {navigation.replace('Root')};
   const onPressLogin = () => {navigation.replace('Login')};
 
   const sendUserData = async () => {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({email: email, password: password, first_name: firstName, last_name: lastName})
+      body: JSON.stringify({"email": email, "password": password, "first_name": firstName, "last_name": lastName})
     };
-    const response = await fetch('localhost/auth/register', requestOptions);
+    const response = await fetch('http://172.18.0.1/auth/register', requestOptions);
+    console.log("neki neki");
     const data = await response.json();
+    console.log(data);
     return data;
   }
   
   const register = async () => {
     if(firstName && lastName && email && password){
       try {
-        const userJwt = "bla";
+        const userJwt = await sendUserData();
         if (userJwt) {
           Alert.alert(JSON.stringify(userJwt));
+          console.log(userJwt);
         }
       } catch (e){
         console.log(e);
@@ -44,6 +47,9 @@ const RegisterScreen = ({
     }
     
   }
+
+  const onPressRegister = () => {register()};
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -61,35 +67,34 @@ const RegisterScreen = ({
 
         <Text style={styles.label}>FIRST NAME</Text>
         <FormTextInput
-          value={firstName}
           setValue={setFirstName}
           placeholder="Enter your firstname"
           testId="fn"
+          secureTextEntry={false}
         />
 
         <Text style={styles.label}>LAST NAME</Text>
         <FormTextInput
-          value={lastName}
           setValue={setLastName}
           placeholder="Enter your lastname"
           testId="ln"
+          secureTextEntry={false}
         />
 
         <Text style={styles.label}>EMAIL</Text>
         <FormTextInput 
-          value={email}
           setValue={setEmail}
           placeholder="Enter your email address"
           testId="email"
-
+          secureTextEntry={false}
         />
 
         <Text style={styles.label}>PASSWORD</Text>
         <FormTextInput
-          value={password}
           setValue={setPassword}
           placeholder="Enter your password"
           testId="pass"
+          secureTextEntry={true}
         />
 
         

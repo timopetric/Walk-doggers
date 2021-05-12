@@ -33,19 +33,18 @@ const LoginScreen = ({
 
         <Text style={styles.label}>EMAIL</Text>
         <FormTextInput 
-          value={email}
           setValue={setEmail}
           placeholder="Enter your email address"
           testId="email"
-
+          secureTextEntry={false}
         />
 
         <Text style={styles.label}>PASSWORD</Text>
         <FormTextInput
-          value={password}
           setValue={setPassword}
           placeholder="Enter your password"
           testId="pass"
+          secureTextEntry={true}
         />
 
         <View style={styles.separator}></View>
