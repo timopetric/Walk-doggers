@@ -3,12 +3,14 @@ import React from "react";
 
 import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
 import {Card} from "react-native-elements";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 const logo = require("../assets/images/image.jpg");
 
 interface IMessageThreadProps {
     name?: string;
     lastMessage?: string;
+    onPress?: any;
 }
 
 interface IMessageThreadState {
@@ -18,7 +20,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
 
     render() {
         return (
-            <View>
+            <TouchableOpacity onPress={this.props.onPress}>
               <View style={styles.imageRow}>
                   <Image source={logo} style={styles.image}></Image>
                   <View style={styles.textContainer}>
@@ -26,7 +28,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
                     <Text style={styles.lastMessage}>{this.props.lastMessage}</Text>
                   </View>
               </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 }
@@ -35,7 +37,10 @@ const styles = StyleSheet.create({
     imageRow: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        padding: 20
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20
     },
     image: {
         height: 70,
