@@ -22,13 +22,16 @@ def login(*, db: Session = Depends(get_db), auth_details: schemas.Login) -> Any:
     return {'jwt': jwt}
 
 
-@AuthRouter.post("/register", response_model=schemas.User, status_code=201)
+@AuthRouter.post("/register", response_model=schemas.JwtToken, status_code=201)
 def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegister) -> Any:
     if actions.user.get_user_by_email(db=db, email=auth_details.email) is not None:
         raise HTTPException(status_code=400, detail='email is taken')
     auth_details.password = auth_handler.get_password_hash(auth_details.password)
     user = actions.user.create(db=db, obj_in=auth_details)
-    return user
+    if user is None:
+        raise HTTPException(status_code=404, detail='Error')
+    jwt = auth_handler.encode_token(str(user.id))
+    return {'jwt': jwt}
 
 
 @AuthRouter.get('/roles', response_model=schemas.UserRoles)
