@@ -6,18 +6,44 @@ import { RootStackParamList } from '../types';
 import FormTextInput from '../components/FormInput';
 import Colors, { PRIMARY } from '../constants/Colors'
 import ButtonForm from '../components/ButtonForm';
+import { Alert } from 'react-native';
 
 const RegisterScreen = ({
   navigation,
 }: StackScreenProps<RootStackParamList, 'Register'>) => {
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('')
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const onPressRegister = () => {navigation.replace('Root')};
-    const onPressLogin = () => {navigation.replace('Login')};
+  const [firstName, setFirstName] = useState<string | null>(null);
+  const [lastName, setLastName] = useState<string | null>(null)
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const onPressRegister = () => {navigation.replace('Root')};
+  const onPressLogin = () => {navigation.replace('Login')};
 
-
+  const sendUserData = async () => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({email: email, password: password, first_name: firstName, last_name: lastName})
+    };
+    const response = await fetch('localhost/auth/register', requestOptions);
+    const data = await response.json();
+    return data;
+  }
+  
+  const register = async () => {
+    if(firstName && lastName && email && password){
+      try {
+        const userJwt = "bla";
+        if (userJwt) {
+          Alert.alert(JSON.stringify(userJwt));
+        }
+      } catch (e){
+        console.log(e);
+      }
+    } else {
+      Alert.alert("Error", "Missing Fields");
+    }
+    
+  }
   return (
     <View style={styles.container}>
       <View style={styles.header}>
