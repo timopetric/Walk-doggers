@@ -8,19 +8,28 @@ const data = [
     title: "Very good boy",
     date: "Tuesday",
     time: "14:00",
-    imgUrl: "https://picsum.photos/id/11/200/300"
+    imgUrl: "https://picsum.photos/id/11/200/300",
+    reqBtn: true,
+    accText: false,
+    reqText: false
   },
   {
     title: "Very bad boy",
     date: "Tuesday",
     time: "14:00",
-    imgUrl: "https://picsum.photos/id/10/200/300"
+    imgUrl: "https://picsum.photos/id/10/200/300",
+    reqBtn: false,
+    accText: true,
+    reqText: false
   },
   {
     title: "Very bad boy",
     date: "Tuesday",
     time: "14:00",
-    imgUrl: "https://picsum.photos/id/10/200/300"
+    imgUrl: "https://picsum.photos/id/10/200/300",
+    reqBtn: false,
+    accText: false,
+    reqText: true
   }
 ]
 
@@ -58,7 +67,7 @@ const CarouselCards = () => {
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots={true}
-        containerStyle={{paddingVertical: 0, marginTop: -32, paddingBottom: 10}}
+        containerStyle={{paddingVertical: 0, marginTop: -35, paddingBottom: 10}}
 
       />
     </View>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity} from "react-native"
 import { withTheme } from 'react-native-elements'
-import  {GREEN} from '../constants/Colors';
+import  {GREEN, ORANGE} from '../constants/Colors';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
@@ -21,11 +21,21 @@ const CarouselCardItem = ({ item, index }) => {
             <Text style={{fontFamily: "roboto", color: "black", fontSize: 15}}> walk at </Text>
             <Text style={styles.date}>{item.time}</Text>
           </View>
-          <View style={styles.button}>
+          { item.accText && <View style={[styles.accView, {backgroundColor: GREEN}]}>
+              <Text style={styles.accText}>ACCEPTED</Text>
+          </View> }
+
+          { item.reqText && <View style={[styles.accView, {backgroundColor: ORANGE}]}>
+              <Text style={styles.accText}>REQUESTED</Text>
+          </View> }
+
+
+          { item.reqBtn && <View style={styles.btnReq}>
             <TouchableOpacity>
               <Text style={styles.btnText}>Request</Text>
             </TouchableOpacity>
-          </View>
+          </View>}
+
           
         </View>
       </View>
@@ -38,6 +48,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: ITEM_WIDTH,
     padding: 15,
+    paddingBottom: 20,
     marginBottom: 25,
     marginTop: 20,
     shadowColor: "#000",
@@ -47,55 +58,72 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
-    elevation: 7
+    elevation: 7,
   },
   image: {
     borderRadius: 35,
     width: 70,
     height: 70,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   title: {
     color: "#222",
     fontSize: 20,
-    fontFamily: "roboto-500"
+    fontFamily: "roboto-500",
   },
   date: {
     color: "#222",
     fontSize: 15,
-    fontFamily: "roboto-500"
+    fontFamily: "roboto-500",
   },
   column: {
     paddingLeft: 20,
-    flex: 1
+    flex: 1,
   },
   row: {
     flexDirection: "row",
-    alignContent: "center"
+    alignContent: "center",
   },
-  
+
   center: {
-    alignItems: 'center'
+    alignItems: "center",
   },
-  button: {
-        position: "absolute",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignContent: "flex-end",
-        borderRadius: 10,
-        padding: 5,
-        marginTop: 10,
-        backgroundColor: GREEN,
-        right: 10,
-        top: 30,
-        zIndex: 2
-    },
-    btnText: {
-        fontFamily: "red-hat-text-500",
-        color: "white",
-        fontSize: 12,
-        padding: 5,
-    }
+  btnReq: {
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "flex-end",
+    borderRadius: 5,
+    backgroundColor: GREEN,
+    right: 5,
+    top: 55,
+    zIndex: 2,
+  },
+  btnText: {
+    fontFamily: "red-hat-text",
+    color: "white",
+    fontSize: 12,
+    padding: 5,
+    paddingLeft: 10,
+    paddingRight: 10
+  },
+  accView: {
+    position: "absolute",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignContent: "flex-end",
+    borderRadius: 5,
+    padding: 0,
+    right: 5,
+    top: 0,
+    zIndex: 2,
+  },
+  accText: {
+    fontFamily: "roboto",
+    color: "white",
+    fontSize: 10,
+    padding: 5,
+  }
 });
 
 export default CarouselCardItem
