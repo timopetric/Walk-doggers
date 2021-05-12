@@ -37,7 +37,10 @@ const styles = StyleSheet.create({
     imageRow: {
         flexDirection: 'row',
         alignItems: 'flex-start',
-        padding: 20
+        paddingTop: 10,
+        paddingBottom: 10,
+        paddingLeft: 20,
+        paddingRight: 20
     },
     image: {
         height: 70,

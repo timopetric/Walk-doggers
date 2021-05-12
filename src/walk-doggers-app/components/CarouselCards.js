@@ -43,20 +43,23 @@ const CarouselCards = () => {
         useScrollView={true}
       />
       <Pagination
-        dotsLength={data.length}
+        dotsLength={data.length>6?6:data.length}
         activeDotIndex={index}
         carouselRef={isCarousel}
         dotStyle={{
-          width: 10,
+          width: 5,
           height: 10,
           borderRadius: 5,
           marginHorizontal: 0,
           marginTop: -9,
-          backgroundColor: 'rgba(0, 0, 0, 0.92)'
+          backgroundColor: 'rgba(0, 0, 0, 0.92)',
+          padding: 5
         }}
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots={true}
+        containerStyle={{paddingVertical: 0, marginTop: -32, paddingBottom: 10}}
+
       />
     </View>
 

@@ -21,11 +21,11 @@ const CarouselCardItem = ({ item, index }) => {
             <Text style={{fontFamily: "roboto", color: "black", fontSize: 15}}> walk at </Text>
             <Text style={styles.date}>{item.time}</Text>
           </View>
-          <TouchableOpacity>
-                    <View style={styles.button}>
-                        <Text style={styles.btnText}>Request</Text>
-                    </View>
-          </TouchableOpacity>
+          <View style={styles.button}>
+            <TouchableOpacity>
+              <Text style={styles.btnText}>Request</Text>
+            </TouchableOpacity>
+          </View>
           
         </View>
       </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: ITEM_WIDTH,
     padding: 15,
-    marginBottom: 5,
+    marginBottom: 25,
     marginTop: 20,
     shadowColor: "#000",
     shadowOffset: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: "#222",
-    fontSize: 22,
+    fontSize: 20,
     fontFamily: "roboto-500"
   },
   date: {
@@ -78,13 +78,17 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   button: {
+        position: "absolute",
         flexDirection: "row",
         justifyContent: "center",
         alignContent: "flex-end",
         borderRadius: 10,
         padding: 5,
         marginTop: 10,
-        backgroundColor: GREEN
+        backgroundColor: GREEN,
+        right: 10,
+        top: 30,
+        zIndex: 2
     },
     btnText: {
         fontFamily: "red-hat-text-500",
