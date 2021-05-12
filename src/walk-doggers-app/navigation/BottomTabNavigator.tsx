@@ -36,6 +36,7 @@ import EditProfileScreen from "../screens/Settings/EditProfileScreen";
 import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
 import MyDogsScreen from "../screens/Settings/MyDogsScreen";
 import NewDogScreen from "../screens/Settings/NewDogScreen";
+import MessagesScreen from '../screens/MessagesScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -127,6 +128,11 @@ function InboxNavigator() {
                 name="InboxScreen"
                 component={TabInbox}
                 options={{ headerTitle: 'Inbox', headerTitleAlign: 'center', }}
+            />
+            <InboxStack.Screen
+                name="MessageScreen"
+                component={MessagesScreen}
+                options={{ headerTitle: 'Messages', headerTitleAlign: 'center', }}
             />
         </InboxStack.Navigator>
     );
