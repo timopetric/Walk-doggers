@@ -36,7 +36,7 @@ const SizeSelector = props => {
     }
 
     const itemComponents = categories.map((item, index) => {
-        return <SizeSelectorBox category={item} selected={selectedIndexes.has(index)} onSelect={() => onSelect(index)}/>
+        return <SizeSelectorBox key={index} category={item} selected={selectedIndexes.has(index)} onSelect={() => onSelect(index)}/>
     })
     return <View style={[styles.sizesRow, style]}>{itemComponents}</View>
 }
