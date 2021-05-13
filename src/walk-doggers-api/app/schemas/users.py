@@ -7,7 +7,7 @@ from app.functions import regex_password, regex_email
 
 class Login(BaseModel):
     email: str = Field(..., example="a@a.a")
-    password: str = Field(..., example="a")
+    password: str = Field(..., example="Dobr0$Geslo")
 
 
 class UserBase(BaseModel):

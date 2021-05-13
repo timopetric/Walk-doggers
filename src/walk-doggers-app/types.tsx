@@ -25,6 +25,7 @@ export type ExploreParamList = {
 
 export type InboxParamList = {
   InboxScreen: undefined;
+  MessageScreen: undefined;
 };
 
 export type BlogParamList = {
