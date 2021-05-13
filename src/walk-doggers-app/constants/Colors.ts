@@ -9,6 +9,8 @@ export const GRAY_0 = '#EDEDED';
 export const GRAY_1 = '#C4C4C4';
 export const GRAY_2 = '#A3A3A3';
 export const GRAY_3 = '#676767';
+export const GRAY_BUBLE = '#F2F2F2';
+export const PINKISH_BUBLE = '#E8E2FF'
 
 export const YELLOW = '#FFDD7D';
 export const GREEN = '#6FC268';

@@ -1,9 +1,9 @@
 import React, {useState, useEffect, useCallback, Component} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, Modal} from 'react-native';
-import {Bubble, GiftedChat, Send} from 'react-native-gifted-chat';
+import {Bubble, GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import Colors, { PRIMARY, PINKISH_WHITE} from '../constants/Colors';
+import Colors, { PRIMARY, PINKISH_WHITE, GRAY_BUBLE, PINKISH_BUBLE} from '../constants/Colors';
 import CarouselCards from '../components/CarouselCards'
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -62,14 +62,25 @@ const ChatScreen = () => {
         {...props}
         wrapperStyle={{
           right: {
-            backgroundColor: '#2e64e5',
+            backgroundColor: PINKISH_BUBLE,
+            padding: 5
           },
+          left: {
+            backgroundColor: GRAY_BUBLE,
+            padding: 5
+          }
         }}
         textStyle={{
           right: {
-            color: '#fff',
+            color: 'black',
+            fontFamily: "roboto"
           },
+          left: {
+            color: 'black',
+            fontFamily: "roboto"
+          }
         }}
+
       />
     );
   };
@@ -80,6 +91,21 @@ const ChatScreen = () => {
     );
   }
 
+    const renderInputToolbar = (props) => {
+      //Add the extra styles via containerStyle
+      return (
+        <InputToolbar
+          {...props}
+          containerStyle={{
+            backgroundColor: "white",
+            borderTopColor: "#E8E8E8",
+            borderTopWidth: 1,
+            padding: 8
+          }}
+        />
+      );
+    };
+
   return (
 
     <View style={{ flex: 1 }}>
@@ -88,7 +114,7 @@ const ChatScreen = () => {
                 <Text style={styles.name}>Saša Petrovič</Text>
             </View>
       <View style={{ flex: 1, marginTop: -40, borderRadius:55, backgroundColor: "white"}}>
-        <CarouselCards></CarouselCards>
+        <CarouselCards inChat={true}></CarouselCards>
             <GiftedChat
                 messages={messages}
                 onSend={(messages) => onSend(messages)}
@@ -100,6 +126,8 @@ const ChatScreen = () => {
                 renderSend={renderSend}
                 scrollToBottom
                 scrollToBottomComponent={scrollToBottomComponent}
+                timeTextStyle={{ left: { color: 'black' },right: { color:'black'} }}
+                //renderInputToolbar={renderInputToolbar} 
                 />
       </View>
     </View>

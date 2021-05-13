@@ -9,6 +9,7 @@ const data = [
     date: "Tuesday",
     time: "14:00",
     imgUrl: "https://picsum.photos/id/11/200/300",
+    appliedListing: true,
     reqBtn: true,
     accText: false,
     reqText: false
@@ -18,6 +19,7 @@ const data = [
     date: "Tuesday",
     time: "14:00",
     imgUrl: "https://picsum.photos/id/10/200/300",
+    appliedListing: true,
     reqBtn: false,
     accText: true,
     reqText: false
@@ -27,16 +29,28 @@ const data = [
     date: "Tuesday",
     time: "14:00",
     imgUrl: "https://picsum.photos/id/10/200/300",
+    appliedListing: true,
     reqBtn: false,
     accText: false,
     reqText: true
+  },
+  {
+    title: "Very bad boy",
+    date: "Tuesday",
+    time: "14:00",
+    imgUrl: "https://picsum.photos/id/10/200/300",
+    appliedListing: false, 
+    accBtn: true
   }
 ]
 
-const CarouselCards = () => {
+const CarouselCards = (props) => {
   const [index, setIndex] = React.useState(0)
   const isCarousel = React.useRef(null)
 
+  data.forEach(function(arrayItem) {
+    arrayItem.inChat = props.inChat
+  })
 
   return (
     <View>
@@ -50,6 +64,7 @@ const CarouselCards = () => {
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => setIndex(index)}
         useScrollView={true}
+
       />
       <Pagination
         dotsLength={data.length>6?6:data.length}
@@ -67,7 +82,7 @@ const CarouselCards = () => {
         inactiveDotOpacity={0.4}
         inactiveDotScale={0.6}
         tappableDots={true}
-        containerStyle={{paddingVertical: 0, marginTop: -35, paddingBottom: 10}}
+        containerStyle={{paddingVertical: 0, marginTop: -40, paddingBottom: 20}}
 
       />
     </View>

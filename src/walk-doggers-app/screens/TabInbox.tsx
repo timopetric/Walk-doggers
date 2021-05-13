@@ -11,7 +11,7 @@ export default function TabInbox({navigation} : any) {
   const onPress = () => {navigation.navigate('MessageScreen')};
   return (
       <ScrollView>
-        <CarouselCards></CarouselCards>
+        <CarouselCards inChat={false}></CarouselCards>
         <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress = {onPress}></MessageThread>
         <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress = {onPress}></MessageThread>
       </ScrollView>
