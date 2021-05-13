@@ -1,9 +1,9 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions, Pressable} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions, Pressable, TouchableHighlight, TouchableOpacity} from "react-native";
 import {Card} from "react-native-elements";
-import {BLUE} from '../constants/Colors';
-import { useNavigation } from '@react-navigation/native';
+import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2} from '../constants/Colors';
+import {useNavigation} from '@react-navigation/native';
 
 interface IDogCardProps {
     name?: string;
@@ -17,16 +17,15 @@ interface IDogCardState {
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width * 0.85;
 const styles = StyleSheet.create({
-    dogCard: {
-        width: imgWidth,
-        height: imgWidth,
-        alignSelf: "center"
-    },
+
     dogName: {
-        fontSize: 20
+        fontSize: 23,
+        fontWeight: "500",
+        marginTop: 6
     },
     date: {
-
+        color: GRAY_1,
+        fontWeight:"500"
     },
     description: {
         paddingTop: 10,
@@ -45,26 +44,53 @@ const styles = StyleSheet.create({
         textTransform: "uppercase",
         fontWeight: "bold",
         alignContent: "flex-end",
-    }
+    },
+    card: {
+        backgroundColor: "#fff",
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        shadowOffset: {
+            height: 2,
+            width: 2,
+        },
+        elevation: 1,
+        flex: 1,
+        // padding: 10,
+        margin: 10,
+        borderRadius: 12,
+    },
+    image: {
+        width: "100%",
+        aspectRatio: 4/3,
+        borderTopStartRadius: 12,
+        borderTopEndRadius: 12
+        // flex:1,
+        // alignSelf: "center"
+    },
 });
 
-class DogCard extends React.Component<IDogCardProps, IDogCardState> {
-    render() {
+const DogCard = props => {
 
-        return <Card>
-            <Image
-                style={styles.dogCard}
-                source={{uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*'}}
-            />
-            <Text style={styles.date}>{this.props.date}</Text>
-            <Text style={styles.dogName}>{this.props.name}</Text>
-            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</Text>
+    const {date, name, distance, imageUrl, onPress} = props;
+    return <View style={styles.card}>
+        <Image
+            style={styles.image}
+            source={{uri: imageUrl}}
+        />
+        <View style={{padding: 16}}>
+            <Text style={styles.date}>{date}</Text>
+            <Text style={styles.dogName}>{name}</Text>
+            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor
+                incididunt ut labore et dolore magna aliqua.</Text>
             <View style={styles.imageRow}>
-                <Text style={styles.distance}>{this.props.distance}</Text>
-                <Text style={styles.takeMeWalk}>Take me for a walk</Text>
+                <Text style={styles.distance}>{distance}</Text>
+                <TouchableOpacity onPress={onPress}>
+                    <Text style={styles.takeMeWalk}>Take me for a walk</Text>
+                </TouchableOpacity>
             </View>
-        </Card>
-    }
+        </View>
+    </View>
 }
 
 export default DogCard;

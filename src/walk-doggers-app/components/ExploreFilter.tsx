@@ -4,21 +4,70 @@ import {connect} from "react-redux";
 import {store, pickDistanceFilter, pickSizeFilter} from "../redux/store";
 import {Card, Slider} from "react-native-elements";
 import {categories, maxDistance} from "../constants/Values";
+import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, GRAY_1, GRAY_3, GRAY_0, BLUE} from '../constants/Colors';
+import SizeSelector from "./SizeSelector";
+
 
 interface IExploreFilterProps {
     showFilter?: boolean;
 }
 
-interface IExploreFilterState {
-    selectedSize?: number;
+const ExploreFilter = props => {
+    const {showFilter, distance, setDistance, selectedIndexes, setSelectedIndexes, multiple, categories} = props
+    if (showFilter) {
+        return <View style={{width: '100%', padding: 20}}>
+            <Text style={[styles.filterParamText, {paddingBottom: 10}]}>Size</Text>
+            <SizeSelector categories={categories} selectedIndexes={selectedIndexes}
+                          setSelectedIndexes={setSelectedIndexes} multiple={multiple}/>
+
+            <View style={{flexDirection: 'row', marginTop: 10}}>
+                <Text style={styles.filterParamText}>Distance</Text>
+                <View style={styles.selectedDistanceText}>
+                    {/*<Text style={{fontSize: 16, fontWeight: "400"}}>{store.getState().selectedDistance} km</Text>*/}
+                    <Text style={{fontSize: 16, fontWeight: "400"}}>{distance} km</Text>
+                </View>
+            </View>
+
+            <Slider
+                value={distance / maxDistance}
+                thumbTintColor='white'
+                thumbStyle={styles.thumbStyle}
+                minimumTrackTintColor={BLUE}
+                onValueChange={value => setDistance(Math.round(value * maxDistance))}
+            />
+            <View style={styles.distanceRange}>
+                <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>
+                <View style={{flex: 1, alignItems: 'flex-end'}}>
+                    <Text style={{fontWeight: "bold"}}>200 km</Text>
+                </View>
+
+            </View>
+        </View>
+    }
+    return <View/>
+
+}
+
+const mapStateToProps = (state: any) => {
+    return {
+        showFilter: state.showFilter
+    }
+}
+
+const mapDispatchToProps = (dispatch: any, ownProps: IExploreFilterProps) => {
+    return {
+        pick: () => {
+            dispatch(pickDistanceFilter(0));
+        },
+    }
 }
 
 const styles = StyleSheet.create({
     filterParamText: {
-        color: '#393c40',
+        color: '#000',
         textTransform: "uppercase",
         fontWeight: "bold",
-        flex: 1
+        // paddingBottom: 10,
     },
     selectedDistanceText: {
         flex: 1,
@@ -34,97 +83,41 @@ const styles = StyleSheet.create({
         marginHorizontal: 2,
         borderRadius: 5,
     },
+    notSelectedText: {
+        color: GRAY_3,
+        fontWeight: "500"
+    },
+    selectedText: {
+        color: "#fff",
+        fontWeight: "500"
+    },
     selected: {
-        backgroundColor: '#747575'
+        backgroundColor: GRAY_3,
+        color: 'white'
     },
     notSelected: {
-        backgroundColor: '#e1e3e6'
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 5,
+        margin: 2,
+        paddingVertical: 10,
+        backgroundColor: GRAY_0
     },
     distanceRange: {
         flexDirection: "row",
     },
-});
-
-function FilterSizePicker() {
-    const [selected, setSelected] = useState(store.getState().selectedSize);
-
-    let sizePickerItems : any = [];
-    categories.forEach((category, index, arr) => {
-        sizePickerItems.push(
-            <SizePickerBox category={category} selected = {selected} key={index} index={index} setSelected={setSelected}/>
-        )
-    })
-
-    return <View style={styles.sizesRow}>{sizePickerItems}</View>
-
-}
-
-function onPressBox(props: any) {
-    props.setSelected(props.index);
-    store.dispatch(pickSizeFilter(props.index));
-}
-
-function onSliderValueChange(value: number, comp: ExploreFilter){
-    comp.setState({selectedSize: value});
-    store.dispatch(pickDistanceFilter(value));
-}
-
-function SizePickerBox(props: any) {
-    return (
-        <Pressable onPress={() => onPressBox(props) }>
-            <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
-                <Text>{props.category}</Text>
-                <Text>kg</Text>
-            </Card>
-        </Pressable>
-    )
-}
-
-class ExploreFilter extends React.Component<IExploreFilterProps, IExploreFilterState> {
-    render() {
-        if (this.props.showFilter){
-            return <View style={ {width: '100%', padding: 20 }}>
-                <Text style={styles.filterParamText}>Size</Text>
-                <FilterSizePicker/>
-
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={styles.filterParamText}>Distance</Text>
-                    <View style={styles.selectedDistanceText}>
-                        <Text>{store.getState().selectedDistance}</Text>
-                    </View>
-                </View>
-
-                <Slider
-                    value={store.getState().selectedDistance / maxDistance}
-                    thumbTintColor='white'
-                    minimumTrackTintColor='blue'
-                    onValueChange={(value) => onSliderValueChange(Math.round(value * maxDistance), this)}
-                />
-                <View style={styles.distanceRange}>
-                    <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>
-                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                        <Text style={{fontWeight: "bold"}}>200 km</Text>
-                    </View>
-
-                </View>
-            </View>
-        }
-        return <View/>
-    }
-}
-
-const mapStateToProps = (state: any) => {
-    return {
-        showFilter: state.showFilter
-    }
-}
-
-const mapDispatchToProps = (dispatch : any, ownProps : IExploreFilterProps) => {
-    return {
-        pick: () => {
-            dispatch(pickDistanceFilter(0));
+    thumbStyle: {
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        shadowOffset: {
+            height: 2,
+            width: 2,
         },
-    }
-}
+        elevation: 1,
+        width: 30,
+        height: 30,
 
+    },
+});
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreFilter);
