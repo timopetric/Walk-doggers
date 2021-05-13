@@ -38,7 +38,7 @@ def create_blog_post(*, db: Session = Depends(get_db), post_in: schemas.BlogPost
     "/{id}",
     response_model=schemas.BlogPost,
     responses={HTTP_404_NOT_FOUND: {"model": schemas.HTTPError}},
-    dependencies=[Depends(auth_handler.is_moderator())]
+    dependencies=[Depends(auth_handler.is_moderator)]
 )
 def update_blog_post(
         *, db: Session = Depends(get_db), id: UUID4, post_in: schemas.BlogPostUpdateModelator,
