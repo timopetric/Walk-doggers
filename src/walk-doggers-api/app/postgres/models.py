@@ -28,7 +28,6 @@ class User(Base):
     listings = relationship("Listing", back_populates="author")
 
 
-
 class Dog(Base):
     __tablename__ = "dog"
 
