@@ -1,23 +1,47 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions, Pressable, TouchableHighlight, TouchableOpacity} from "react-native";
-import {Card} from "react-native-elements";
+import {
+    Image,
+    StyleSheet,
+    View,
+    Text,
+    Dimensions,
+    Pressable,
+    TouchableHighlight,
+    TouchableOpacity,
+    Platform
+} from "react-native";
 import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2} from '../constants/Colors';
-import {useNavigation} from '@react-navigation/native';
 
-interface IDogCardProps {
-    name?: string;
-    date?: string;
-    distance?: string;
-}
-
-interface IDogCardState {
-}
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width * 0.85;
-const styles = StyleSheet.create({
 
+
+const DogCard = props => {
+
+    const {date, name, distance, imageUrl, onPress} = props;
+    return <View style={styles.card}>
+        <Image
+            style={styles.image}
+            source={{uri: imageUrl}}
+        />
+        <View style={{padding: 16}}>
+            <Text style={styles.date}>{date}</Text>
+            <Text style={styles.dogName}>{name}</Text>
+            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                tempor
+                incididunt ut labore et dolore magna aliqua.</Text>
+            <View style={styles.imageRow}>
+                <Text style={styles.distance}>{distance}</Text>
+                <TouchableOpacity onPress={onPress}>
+                    <Text style={styles.takeMeWalk}>Take me for a walk</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    </View>
+}
+const styles = StyleSheet.create({
     dogName: {
         fontSize: 23,
         fontWeight: "500",
@@ -61,36 +85,12 @@ const styles = StyleSheet.create({
     },
     image: {
         width: "100%",
+        height: Platform.OS === 'web' ? 300 : null,
         aspectRatio: 4/3,
-        borderTopStartRadius: 12,
-        borderTopEndRadius: 12
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12
         // flex:1,
         // alignSelf: "center"
     },
 });
-
-const DogCard = props => {
-
-    const {date, name, distance, imageUrl, onPress} = props;
-    return <View style={styles.card}>
-        <Image
-            style={styles.image}
-            source={{uri: imageUrl}}
-        />
-        <View style={{padding: 16}}>
-            <Text style={styles.date}>{date}</Text>
-            <Text style={styles.dogName}>{name}</Text>
-            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor
-                incididunt ut labore et dolore magna aliqua.</Text>
-            <View style={styles.imageRow}>
-                <Text style={styles.distance}>{distance}</Text>
-                <TouchableOpacity onPress={onPress}>
-                    <Text style={styles.takeMeWalk}>Take me for a walk</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    </View>
-}
-
 export default DogCard;
