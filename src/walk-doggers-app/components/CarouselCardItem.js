@@ -50,6 +50,16 @@ const CarouselCardItem = ({ item, index, inChat }) => {
               <Text style={styles.btnText}>Accept</Text>
             </TouchableOpacity>
           </View>}
+          {item.inChat && !item.appliedListing &&  item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
+              <Text style={[styles.accText, {color: ORANGE}]}>REQUESTED</Text>
+          </View> }
+
+          {/* objavljen oglas, ki je potrjen*/}
+          {!item.appliedListing && !item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
+              <Text style={[styles.accText, {color: GREEN}]}>ARRANGED</Text>
+          </View> }
+
+
 
 
           

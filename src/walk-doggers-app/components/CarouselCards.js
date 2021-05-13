@@ -21,16 +21,6 @@ const data = [
     imgUrl: "https://picsum.photos/id/10/200/300",
     appliedListing: true,
     reqBtn: false,
-    accText: true,
-    reqText: false
-  },
-  {
-    title: "Very bad boy",
-    date: "Tuesday",
-    time: "14:00",
-    imgUrl: "https://picsum.photos/id/10/200/300",
-    appliedListing: true,
-    reqBtn: false,
     accText: false,
     reqText: true
   },
@@ -39,8 +29,26 @@ const data = [
     date: "Tuesday",
     time: "14:00",
     imgUrl: "https://picsum.photos/id/10/200/300",
+    appliedListing: true,
+    reqBtn: false,
+    accText: true,
+    reqText: false
+  },
+  {
+    title: "Very bad boy",
+    date: "Tuesday",
+    time: "14:00",
+    imgUrl: "https://picsum.photos/id/10/200/300",
     appliedListing: false, 
     accBtn: true
+  },
+  {
+    title: "Very bad boy",
+    date: "Tuesday",
+    time: "14:00",
+    imgUrl: "https://picsum.photos/id/10/200/300",
+    appliedListing: false, 
+    accBtn: false
   }
 ]
 

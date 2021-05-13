@@ -4,6 +4,7 @@ import React from "react";
 import {Image, StyleSheet, View, Text, Dimensions} from "react-native";
 import {Card} from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import  {GREEN, ORANGE, RED} from '../constants/Colors';
 
 const logo = require("../assets/images/image.jpg");
 
@@ -25,8 +26,9 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
                   <Image source={logo} style={styles.image}></Image>
                   <View style={styles.textContainer}>
                     <Text style={styles.name}>{this.props.name}</Text>
-                    <Text style={styles.lastMessage}>{this.props.lastMessage}</Text>
+                    <Text style={styles.lastMessage} numberOfLines={1} ellipsizeMode='tail'>{this.props.lastMessage}</Text>
                   </View>
+                  <Text style={styles.status}>Requested</Text>
               </View>
             </TouchableOpacity>
         )
@@ -54,13 +56,21 @@ const styles = StyleSheet.create({
     },
     lastMessage: {
       fontFamily: "roboto",
-      fontSize: 16
+      fontSize: 14
     },
     textContainer: {
       paddingLeft: 20,
       flexDirection: "column",
       justifyContent: "center",
-      height: 70
+      height: 70,
+      width: "60%"
+    },
+    status: {
+      marginTop: 16,
+      fontFamily: "red-hat-text",
+      fontSize: 12,
+      textTransform: "uppercase",
+      color: ORANGE
     }
 })
 

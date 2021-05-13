@@ -12,7 +12,7 @@ export default function TabInbox({navigation} : any) {
   return (
       <ScrollView>
         <CarouselCards inChat={false}></CarouselCards>
-        <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress = {onPress}></MessageThread>
+        <MessageThread name="Domen" lastMessage="To je moje sporocilodfsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!" onPress = {onPress}></MessageThread>
         <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress = {onPress}></MessageThread>
       </ScrollView>
   );
