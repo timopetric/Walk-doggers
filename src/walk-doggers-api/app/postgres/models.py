@@ -1,6 +1,6 @@
 from uuid import uuid4
 
-from sqlalchemy import Column, String, Text, Boolean, ForeignKey, Integer, DateTime
+from sqlalchemy import Column, String, Text, Boolean, ForeignKey, Integer, DateTime, Float
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -61,6 +61,10 @@ class Listing(Base):
     description = Column(Text)
     date_from = Column(DateTime)
     date_to = Column(DateTime)
+
+    lon = Column(Float)
+    lat = Column(Float)
+    location_text = Column(String)
 
     author_id = Column('author_id', UUID(), ForeignKey('user.id'), nullable=False)
     dog_id = Column('dog_id', UUID(), ForeignKey('dog.id'), nullable=False)
