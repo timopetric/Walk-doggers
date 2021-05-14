@@ -67,21 +67,19 @@ function onPressAdd(navigation : any) {
     navigation.goBack();
 }
 
-const image_urls: Array<string> = [];
-const images: Array<any> = [];
-const image_components: Array<JSX.Element> = [];
-
-image_urls.forEach((image_url: string, index: number) => {
-    image_components.push(
-        <Image
-            style={styles.miniImage}
-            source={{uri: image_url}}
-        />
-    );
-});
-
 export default function NewDogScreen({navigation} : any) {
-    const [image, setImage] = useState(undefined);
+    const [localImageUrls, setLocalImageUrls] = useState([]);
+
+    const imageComponents: Array<JSX.Element> = [];
+    localImageUrls.forEach((imageUrl: string, index: number) => {
+        imageComponents.push(
+            <Image
+                style={styles.miniImage}
+                source={{uri: imageUrl}}
+                key={index}
+            />
+        );
+    });
 
     useEffect(() => {
         (async () => {
@@ -106,7 +104,7 @@ export default function NewDogScreen({navigation} : any) {
 
         if (!result.cancelled) {
             // @ts-ignore
-            setImage(result.uri);
+            setLocalImageUrls(oldArray => [...oldArray, result.uri]);
         }
     };
 
@@ -125,7 +123,7 @@ export default function NewDogScreen({navigation} : any) {
 
                 <Text style={styles.subtitle}>Image</Text>
                 <View style={styles.imageRow}>
-                    {image && <Image source={{ uri: image }} style={styles.miniImage} />}
+                    {imageComponents}
                     <Pressable onPress={pickImage}>
                         <View style={[styles.miniImage, styles.addImage]}>
                             <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
