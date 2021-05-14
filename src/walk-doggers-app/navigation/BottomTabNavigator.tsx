@@ -205,8 +205,7 @@ function BlogNavigator({navigation}: any) {
                 name="BlogPostScreen"
                 component={BlogPostScreen}
                 options={{
-                    headerTitle: 'Blog Post',
-                    headerTitleAlign: 'center',
+                    headerTitle: '',
                     ...headerWhiteBackground,
                 }}
             />

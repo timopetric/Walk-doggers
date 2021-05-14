@@ -1,14 +1,11 @@
-import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Button, Dimensions, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {Card, Input} from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
-import ButtonCustom from "../../components/ButtonCustom"
-import {Provider} from "react-redux";
-import {store} from "../../redux/store";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {categories} from "../../constants/Values";
-
+import * as ImagePicker from 'expo-image-picker';
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -70,7 +67,49 @@ function onPressAdd(navigation : any) {
     navigation.goBack();
 }
 
+const image_urls: Array<string> = [];
+const images: Array<any> = [];
+const image_components: Array<JSX.Element> = [];
+
+image_urls.forEach((image_url: string, index: number) => {
+    image_components.push(
+        <Image
+            style={styles.miniImage}
+            source={{uri: image_url}}
+        />
+    );
+});
+
 export default function NewDogScreen({navigation} : any) {
+    const [image, setImage] = useState(undefined);
+
+    useEffect(() => {
+        (async () => {
+            if (Platform.OS !== 'web') {
+                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                if (status !== 'granted') {
+                    alert('Sorry, we need camera roll permissions to make this work!');
+                }
+            }
+        })();
+    }, []);
+
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+        });
+
+        console.log(result);
+
+        if (!result.cancelled) {
+            // @ts-ignore
+            setImage(result.uri);
+        }
+    };
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -86,13 +125,12 @@ export default function NewDogScreen({navigation} : any) {
 
                 <Text style={styles.subtitle}>Image</Text>
                 <View style={styles.imageRow}>
-                    <Image
-                        style={styles.miniImage}
-                        source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
-                    />
-                    <View style={[styles.miniImage, styles.addImage]}>
-                        <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
-                    </View>
+                    {image && <Image source={{ uri: image }} style={styles.miniImage} />}
+                    <Pressable onPress={pickImage}>
+                        <View style={[styles.miniImage, styles.addImage]}>
+                            <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
+                        </View>
+                    </Pressable>
                 </View>
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>
