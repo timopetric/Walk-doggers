@@ -92,6 +92,18 @@ export default function NewDogScreen({navigation} : any) {
         })();
     }, []);
 
+    function DataURIToBlob(dataurl: any) {
+        const arr = dataurl.split(',');
+        const mime = arr[0].match(/:(.*?);/)[1];
+        const bstr = atob(arr[1]);
+        let n = bstr.length;
+        const u8arr = new Uint8Array(n);
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new Blob([u8arr], { type: mime });
+    }
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -105,6 +117,17 @@ export default function NewDogScreen({navigation} : any) {
         if (!result.cancelled) {
             // @ts-ignore
             setLocalImageUrls(oldArray => [...oldArray, result.uri]);
+            let formData = new FormData();
+            formData.append(
+                "image_data",
+                DataURIToBlob(result.uri),
+                "image_data"
+            );
+
+            fetch('http://127.0.0.1:80/image_upload', {
+                method: "POST",
+                body: formData
+            }).then(response => console.log(response.json()))
         }
     };
 
@@ -119,7 +142,6 @@ export default function NewDogScreen({navigation} : any) {
 
                 <Text style={styles.subtitle}>Size</Text>
                 <SizePicker/>
-
 
                 <Text style={styles.subtitle}>Image</Text>
                 <View style={styles.imageRow}>
