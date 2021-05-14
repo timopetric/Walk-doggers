@@ -1,6 +1,6 @@
 import {Dimensions, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../constants/Colors";
+import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
 

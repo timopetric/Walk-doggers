@@ -12,14 +12,15 @@ import {
     Platform
 } from "react-native";
 import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2} from '../constants/Colors';
+import {useNavigation} from "@react-navigation/native";
 
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width * 0.85;
 
 
-const Card = props => {
-
+const Card = (props: any) => {
+    const navigation = useNavigation();
     const {date, title, content, distance, imageUrl, author, onPress, callToActionText} = props;
     return <View style={styles.card}>
         <Image
@@ -35,7 +36,7 @@ const Card = props => {
             <Text style={styles.description}>{content}</Text>
             <View style={styles.imageRow}>
                 <Text style={styles.distance}>{distance}</Text>
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={() => onPress(props, navigation)}>
                     <Text style={styles.takeMeWalk}>{callToActionText}</Text>
                 </TouchableOpacity>
             </View>
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: "100%",
-        height: Platform.OS === 'web' ? 300 : null,
+        height: Platform.OS === 'web' ? 300 : undefined,
         aspectRatio: 4 / 3,
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12

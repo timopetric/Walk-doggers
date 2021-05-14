@@ -12,6 +12,10 @@ import {useEffect, useState} from "react";
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
+function onPress(props: any, navigation: any){
+    navigation.navigate('DogScreen');
+}
+
 
 export default function TabExplore({navigation}: any) {
     const categories = [
@@ -37,10 +41,33 @@ export default function TabExplore({navigation}: any) {
             </Provider>
 
             <ScrollView>
-                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8 km"
-                      onPress={() => navigation.navigate('DogScreen')}/>
-                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Very Good Boy" date="TUESDAY 6.4.2020" distance="1.8 km"/>
-                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Snoop Dog" date="TUESDAY 6.4.2020" distance="1.8 km"/>
+                <Card
+                    content={content}
+                    callToActionText={'Take me for a walk'}
+                    imageUrl={imageUrl}
+                    title="Smol Husky Woofer"
+                    date="TUESDAY 6.4.2020"
+                    distance="1.8 km"
+                    onPress={onPress}
+                />
+                <Card
+                    content={content}
+                    callToActionText={'Take me for a walk'}
+                    imageUrl={imageUrl}
+                    title="Very Good Boy"
+                    date="TUESDAY 6.4.2020"
+                    distance="1.8 km"
+                    onPress={onPress}
+                />
+                <Card
+                    content={content}
+                    callToActionText={'Take me for a walk'}
+                    imageUrl={imageUrl}
+                    title="Snoop Dog"
+                    date="TUESDAY 6.4.2020"
+                    distance="1.8 km"
+                    onPress={onPress}
+                />
             </ScrollView>
         </View>
     )

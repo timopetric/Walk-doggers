@@ -12,7 +12,7 @@ interface IExploreFilterProps {
     showFilter?: boolean;
 }
 
-const ExploreFilter = props => {
+const ExploreFilter = (props: any) => {
     const {showFilter, distance, setDistance, selectedIndexes, setSelectedIndexes, multiple, categories} = props
     if (showFilter) {
         return <View style={{width: '100%', padding: 20}}>
