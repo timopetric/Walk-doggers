@@ -21,6 +21,7 @@ app = FastAPI(title="Walk doggers API", debug=DEBUG)
 
 origins = [
     "http://localhost",
+    "http://localhost:80",
     "http://localhost:19002",
     "http://localhost:19003",
     "http://localhost:19004",

@@ -104,6 +104,17 @@ export default function NewDogScreen({navigation} : any) {
         return new Blob([u8arr], { type: mime });
     }
 
+    function makeid(length: number) {
+        let result           = [];
+        let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result.push(characters.charAt(Math.floor(Math.random() *
+                charactersLength)));
+        }
+        return result.join('');
+    }
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -121,7 +132,7 @@ export default function NewDogScreen({navigation} : any) {
             formData.append(
                 "image_data",
                 DataURIToBlob(result.uri),
-                "image_data"
+                makeid(10)
             );
 
             fetch('http://127.0.0.1:80/image_upload', {
