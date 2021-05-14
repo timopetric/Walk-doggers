@@ -142,12 +142,20 @@ function InboxNavigator() {
             <InboxStack.Screen
                 name="InboxScreen"
                 component={TabInbox}
-                options={{headerTitle: 'Inbox', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'Inbox', headerTitleAlign: 'center',
+                    headerStyle: {
+                        backgroundColor: PRIMARY
+                    },
+                    headerTitleStyle: {
+                        color: "white"
+                    }
+                }}
             />
             <InboxStack.Screen
                 name="MessageScreen"
                 component={MessageScreen}
-                options={{headerTitle: 'Messages', headerTitleAlign: 'center',}}
+                options={{headerShown: false,}}
             />
         </InboxStack.Navigator>
     );
