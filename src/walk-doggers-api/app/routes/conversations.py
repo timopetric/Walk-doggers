@@ -103,7 +103,6 @@ async def get_conversation_messages(conv_id: ObjectId,
                                     db: Session = Depends(get_db),
                                     user_id=Depends(auth_handler.auth_wrapper),
                                     skip: int = 0, limit: int = 100):
-
     # double check if jwt user is valid
     user = get_user_from_id(db, user_id)
 
@@ -120,9 +119,8 @@ async def get_conversation_messages(conv_id: ObjectId,
 @ConversationRouter.get("/{conv_id}/messages/count", response_model=int,
                         description="Get number of messages from a conversation with id conv_id.")
 async def get_conversation_messages_count(conv_id: ObjectId,
-                                    db: Session = Depends(get_db),
-                                    user_id=Depends(auth_handler.auth_wrapper)):
-
+                                          db: Session = Depends(get_db),
+                                          user_id=Depends(auth_handler.auth_wrapper)):
     # double check if jwt user is valid
     user = get_user_from_id(db, user_id)
 

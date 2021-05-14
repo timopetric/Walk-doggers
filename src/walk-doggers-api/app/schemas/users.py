@@ -12,7 +12,6 @@ class Login(BaseModel):
 
 class UserBase(BaseModel):
     email: str = Field(..., example="a@a.a", regex=regex_email)
-    password: str = Field(..., example="Dobr0$Geslo", regex=regex_password)
     first_name: str = Field(..., example="Janez")
     last_name: str = Field(..., example="Novak")
 
@@ -35,6 +34,7 @@ class User(UserInDBBase):
 
 
 class UserRegister(UserBase):
+    password: str = Field(..., example="Dobr0$Geslo", regex=regex_password)
     pass
 
 

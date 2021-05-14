@@ -1,4 +1,6 @@
 from .posts import Post, PostBase, PostInDB, PostInDBBase, PostCreate, PostUpdate
+from .blog import BlogPost, BlogPostBase, BlogPostInDB, BlogPostInDBBase, BlogPostCreate, BlogPostUpdateModelator, \
+    BlogPostUpdate, BlogPostDeleted
 from .users import UserUpdate, UserBase, User, UserInDBBase, UserRoles, UserRegister, Login
 from .jwt import JwtToken
 from .errors import HTTPError
