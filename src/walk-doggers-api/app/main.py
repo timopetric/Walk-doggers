@@ -1,5 +1,7 @@
 import os
 from fastapi import FastAPI
+
+from app.routes.image_upload import ImageRouter
 from app.routes.posts import PostRouter
 from app.routes.conversations import ConversationRouter
 from app.routes.auth import AuthRouter
@@ -26,3 +28,4 @@ app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversa
 app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")
 app.include_router(DogsRouter, tags=["Dogs"], prefix="/dogs")
 app.include_router(BlogRouter, tags=["Blog"], prefix="/blog")
+app.include_router(ImageRouter, tags=["ImageUpload"], prefix="/image_upload")

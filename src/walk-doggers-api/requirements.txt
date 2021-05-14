@@ -27,3 +27,4 @@ dnspython==2.1.0
 requests==2.25.1
 pytest==6.2.4
 pytest-cov==2.11.1
+python-multipart==0.0.5
