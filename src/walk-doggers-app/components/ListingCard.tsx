@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignContent: "flex-end",
+        alignItems: "center",
         borderRadius: 8,
         backgroundColor: PRIMARY,
         padding: 5,
@@ -135,12 +135,14 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontFamily: "red-hat-text-500",
-        fontSize: 20,
-        padding: 5,
+        fontSize: 16,
         color: PINKISH_WHITE
     },
     iconNum: {
-        padding: 5
+        padding: 2,
+        borderRadius: 5,
+        backgroundColor: PRIMARY_DARK,
+        margin: 3,
     },
     iconText: {
         fontFamily: "roboto",
@@ -148,8 +150,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         color: PINKISH_WHITE,
-        backgroundColor: PRIMARY_DARK,
-        borderRadius: 5
+
+
     },
     ghost: {
         width: 25

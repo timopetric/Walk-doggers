@@ -18,24 +18,25 @@ const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width * 0.85;
 
 
-const DogCard = props => {
+const Card = props => {
 
-    const {date, name, distance, imageUrl, onPress} = props;
+    const {date, title, content, distance, imageUrl, author, onPress, callToActionText} = props;
     return <View style={styles.card}>
         <Image
             style={styles.image}
             source={{uri: imageUrl}}
         />
         <View style={{padding: 16}}>
-            <Text style={styles.date}>{date}</Text>
-            <Text style={styles.dogName}>{name}</Text>
-            <Text style={styles.description}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                tempor
-                incididunt ut labore et dolore magna aliqua.</Text>
+            <View style={{justifyContent: "space-between", flexDirection: "row"}}>
+                {author && <Text style={styles.date}>{author}</Text>}
+                {date && <Text style={styles.date}>{date}</Text>}
+            </View>
+            <Text style={styles.dogName}>{title}</Text>
+            <Text style={styles.description}>{content}</Text>
             <View style={styles.imageRow}>
                 <Text style={styles.distance}>{distance}</Text>
                 <TouchableOpacity onPress={onPress}>
-                    <Text style={styles.takeMeWalk}>Take me for a walk</Text>
+                    <Text style={styles.takeMeWalk}>{callToActionText}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     },
     date: {
         color: GRAY_1,
-        fontWeight:"500"
+        fontWeight: "500"
     },
     description: {
         paddingTop: 10,
@@ -86,11 +87,11 @@ const styles = StyleSheet.create({
     image: {
         width: "100%",
         height: Platform.OS === 'web' ? 300 : null,
-        aspectRatio: 4/3,
+        aspectRatio: 4 / 3,
         borderTopLeftRadius: 12,
         borderTopRightRadius: 12
         // flex:1,
         // alignSelf: "center"
     },
 });
-export default DogCard;
+export default Card;

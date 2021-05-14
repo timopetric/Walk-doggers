@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Pressable, ScrollView, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
-import DogCard from "../components/DogCard";
+import Card from "../components/Card";
 import {View, Text} from "react-native";
 import ExploreFilter from "../components/ExploreFilter";
 
@@ -11,6 +11,7 @@ import {store, toggleFilter} from "../redux/store";
 import {useEffect, useState} from "react";
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
+const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
 
 export default function TabExplore({navigation}: any) {
     const categories = [
@@ -36,10 +37,10 @@ export default function TabExplore({navigation}: any) {
             </Provider>
 
             <ScrollView>
-                <DogCard imageUrl={imageUrl} name="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8km"
-                         onPress={() => navigation.navigate('DogScreen')}/>
-                <DogCard imageUrl={imageUrl} name="Very Good Boy" date="TUESDAY 6.4.2020" distance="1.8km"/>
-                <DogCard imageUrl={imageUrl} name="Snoop Dog" date="TUESDAY 6.4.2020" distance="1.8km"/>
+                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Smol Husky Woofer" date="TUESDAY 6.4.2020" distance="1.8 km"
+                      onPress={() => navigation.navigate('DogScreen')}/>
+                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Very Good Boy" date="TUESDAY 6.4.2020" distance="1.8 km"/>
+                <Card content={content} callToActionText={'Take me for a walk'} imageUrl={imageUrl} title="Snoop Dog" date="TUESDAY 6.4.2020" distance="1.8 km"/>
             </ScrollView>
         </View>
     )
