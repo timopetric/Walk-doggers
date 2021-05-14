@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
-import {GRAY_0, GRAY_1, PRIMARY} from "../constants/Colors";
+import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 
 const data = [
   {
@@ -85,10 +85,11 @@ const CarouselCards = (props) => {
           borderRadius: 10,
           backgroundColor: PRIMARY,
         }}
-        inactiveDotOpacity={0.4}
+        dotContainerStyle={{marginHorizontal: 3}}
+        inactiveDotOpacity={0.7}
         inactiveDotScale={1}
         inactiveDotStyle={{
-          backgroundColor: GRAY_1
+          backgroundColor: GRAY_1,
         }}
         tappableDots={true}
         containerStyle={{paddingVertical: 0, marginTop: -40, paddingBottom: 20}}

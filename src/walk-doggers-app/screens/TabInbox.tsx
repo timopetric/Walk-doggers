@@ -12,13 +12,15 @@ export default function TabInbox({navigation}: any) {
         navigation.navigate('MessageScreen')
     };
     return (
-        <ScrollView style={styles.containter}>
+        <View style={styles.containter}>
             <CarouselCards inChat={false}/>
-            <View style={{height: 10}}/>
-            <MessageThread name="Domen" lastMessage="To je moje sporocilodfsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
-                           onPress={onPress}/>
-            <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress={onPress}/>
-        </ScrollView>
+            <ScrollView>
+                <View style={{height: 10}}/>
+                <MessageThread name="Domen" lastMessage="To je moje sporocilodfsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
+                               onPress={onPress}/>
+                <MessageThread name="Domen" lastMessage="To je moje sporocilo!" onPress={onPress}/>
+            </ScrollView>
+        </View>
     );
 }
 
