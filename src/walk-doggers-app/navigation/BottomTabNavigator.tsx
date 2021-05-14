@@ -113,10 +113,11 @@ function ExploreNavigator() {
                     options={{
                         headerTitle: 'Dogs for rent nearby',
                         headerTitleAlign: 'center',
+                        ...headerWhiteBackground,
                         headerRight: () => (
                             <Button
                                 onPress={() => store.dispatch(toggleFilter())}
-                                icon={<Ionicons size={30} style={{marginBottom: -3}} name="filter" color={PRIMARY}/>}
+                                icon={<Ionicons size={23} style={{marginBottom: -3}} name="filter" color={PRIMARY}/>}
                                 type="clear"
                             />
                         ),
@@ -135,6 +136,28 @@ function ExploreNavigator() {
 }
 
 const InboxStack = createStackNavigator<InboxParamList>();
+const headerPrimaryBackground =
+    {
+        headerStyle: {
+            backgroundColor: PRIMARY
+        }
+        ,
+        headerTitleStyle: {
+            color: "white"
+        }
+    };
+
+const headerWhiteBackground =
+    {
+        headerStyle: {
+            backgroundColor: 'white'
+        }
+        ,
+        headerTitleStyle: {
+            color: PRIMARY
+        },
+        headerTintColor: PRIMARY,
+    };
 
 function InboxNavigator() {
     return (
@@ -144,12 +167,7 @@ function InboxNavigator() {
                 component={TabInbox}
                 options={{
                     headerTitle: 'Inbox', headerTitleAlign: 'center',
-                    headerStyle: {
-                        backgroundColor: PRIMARY
-                    },
-                    headerTitleStyle: {
-                        color: "white"
-                    }
+                    ...headerPrimaryBackground
                 }}
             />
             <InboxStack.Screen
@@ -161,7 +179,8 @@ function InboxNavigator() {
     );
 }
 
-const BlogStack = createStackNavigator<BlogParamList>();
+const BlogStack = createStackNavigator
+    < BlogParamList > ();
 
 
 function BlogNavigator({navigation}: any) {
@@ -173,10 +192,11 @@ function BlogNavigator({navigation}: any) {
                 options={{
                     headerTitle: 'Blog',
                     headerTitleAlign: 'center',
+                    ...headerWhiteBackground,
                     headerRight: () => (
                         <Button
                             onPress={() => navigation.navigate('NewBlogPostScreen')}
-                            icon={<Entypo size={30} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
+                            icon={<Entypo size={26} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
                             type="clear"
                         />
                     ),
@@ -188,6 +208,8 @@ function BlogNavigator({navigation}: any) {
                 options={{
                     headerTitle: 'New Blog Post',
                     headerTitleAlign: 'center',
+                    ...headerWhiteBackground,
+
                 }}
             />
         </BlogStack.Navigator>
@@ -202,7 +224,9 @@ function ListingsNavigator() {
             <ListingsStack.Screen
                 name="ListingsScreen"
                 component={TabListings}
-                options={{headerTitle: 'Listings', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'Listings', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
             />
         </ListingsStack.Navigator>
     );
@@ -216,12 +240,16 @@ function SettingsNavigator({navigation}: any) {
             <SettingsStack.Screen
                 name="SettingsScreen"
                 component={TabSettings}
-                options={{headerTitle: 'Settings', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'Settings', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
             />
             <SettingsStack.Screen
                 name="EditProfileScreen"
                 component={EditProfileScreen}
-                options={{headerTitle: 'Edit Profile', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'Edit Profile', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
             />
             <SettingsStack.Screen
                 name="MyDogsScreen"
@@ -229,6 +257,7 @@ function SettingsNavigator({navigation}: any) {
                 options={{
                     headerTitle: 'My Dogs',
                     headerTitleAlign: 'center',
+                    ...headerWhiteBackground,
                     headerRight: () => (
                         <Button
                             onPress={() => navigation.navigate('NewDogScreen')}
@@ -241,12 +270,16 @@ function SettingsNavigator({navigation}: any) {
             <SettingsStack.Screen
                 name="BecomeAReporterScreen"
                 component={BecomeAReporterScreen}
-                options={{headerTitle: 'Become a Reporter', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'Become a Reporter', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
             />
             <SettingsStack.Screen
                 name="NewDogScreen"
                 component={NewDogScreen}
-                options={{headerTitle: 'New Dog', headerTitleAlign: 'center',}}
+                options={{
+                    headerTitle: 'New Dog', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
             />
         </SettingsStack.Navigator>
     );
