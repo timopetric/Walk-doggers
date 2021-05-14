@@ -9,6 +9,8 @@ from app.routes.dogs import DogsRouter
 from app.routes.blog import BlogRouter
 from typing import Any
 
+from fastapi.middleware.cors import CORSMiddleware
+
 # Create all tables in database.
 # Comment this out if you using migrations.
 # models.Base.metadata.create_all(bind=engine)
@@ -17,6 +19,22 @@ from typing import Any
 DEBUG = os.environ.get("DEBUG", False)
 app = FastAPI(title="Walk doggers API", debug=DEBUG)
 
+origins = [
+    "http://localhost",
+    "http://localhost:19002",
+    "http://localhost:19003",
+    "http://localhost:19004",
+    "http://localhost:19005",
+    "http://localhost:19006",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/", tags=["default"])
 def index() -> Any:
