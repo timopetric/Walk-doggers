@@ -128,7 +128,8 @@ export default function NewDogScreen({navigation}: any) {
                     uri: newImageUri,
                 });
             }
-            console.log(process.env.BASE_API_URL);
+
+            console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
 
             fetch(process.env.BASE_API_URL + '/image_upload/', {
                 method: "POST",
@@ -141,9 +142,6 @@ export default function NewDogScreen({navigation}: any) {
             }).catch(e => {
                 console.log(e);
             })
-
-            // @ts-ignore
-            setImageUrls(oldArray => [...oldArray, result.uri]);
         }
     };
 
