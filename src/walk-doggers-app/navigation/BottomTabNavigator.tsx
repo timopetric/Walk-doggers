@@ -23,7 +23,7 @@ import {
     ListingsParamList,
     SettingsParamList
 } from '../types';
-import TabBlog from "../screens/TabBlog";
+import TabBlog from "../screens/Blog/TabBlog";
 import TabListings from "../screens/TabListings";
 import TabSettings from "../screens/Settings/TabSettings";
 import {Button} from 'react-native-elements';
@@ -31,12 +31,13 @@ import {Button} from 'react-native-elements';
 import {Provider} from "react-redux";
 import {store, toggleFilter} from "../redux/store";
 import DogScreen from "../screens/DogScreen";
-import NewBlogPostScreen from "../screens/NewBlogPostScreen";
+import NewBlogPostScreen from "../screens/Blog/NewBlogPostScreen";
 import EditProfileScreen from "../screens/Settings/EditProfileScreen";
 import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
 import MyDogsScreen from "../screens/Settings/MyDogsScreen";
 import NewDogScreen from "../screens/Settings/NewDogScreen";
 import MessageScreen from '../screens/MessageScreen';
+import BlogPostScreen from "../screens/Blog/BlogPostScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -179,9 +180,7 @@ function InboxNavigator() {
     );
 }
 
-const BlogStack = createStackNavigator
-    < BlogParamList > ();
-
+const BlogStack = createStackNavigator<BlogParamList>();
 
 function BlogNavigator({navigation}: any) {
     return (
@@ -200,6 +199,14 @@ function BlogNavigator({navigation}: any) {
                             type="clear"
                         />
                     ),
+                }}
+            />
+            <BlogStack.Screen
+                name="BlogPostScreen"
+                component={BlogPostScreen}
+                options={{
+                    headerTitle: '',
+                    ...headerWhiteBackground,
                 }}
             />
             <BlogStack.Screen
