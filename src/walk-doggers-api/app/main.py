@@ -7,6 +7,7 @@ from app.routes.conversations import ConversationRouter
 from app.routes.auth import AuthRouter
 from app.routes.dogs import DogsRouter
 from app.routes.blog import BlogRouter
+from app.routes.listings import ListingsRouter
 from typing import Any
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -39,4 +40,5 @@ app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversa
 app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")
 app.include_router(DogsRouter, tags=["Dogs"], prefix="/dogs")
 app.include_router(BlogRouter, tags=["Blog"], prefix="/blog")
+app.include_router(ListingsRouter, tags=["Listings"], prefix="/listings")
 app.include_router(ImageRouter, tags=["ImageUpload"], prefix="/image_upload")
