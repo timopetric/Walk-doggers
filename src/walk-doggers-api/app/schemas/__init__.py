@@ -4,5 +4,5 @@ from .blog import BlogPost, BlogPostBase, BlogPostInDB, BlogPostInDBBase, BlogPo
 from .users import UserUpdate, UserBase, User, UserInDBBase, UserRoles, UserRegister, Login
 from .jwt import JwtToken
 from .errors import HTTPError
-from .dogs import DogBase, Dog, DogCreate
+from .dogs import DogBase, Dog, DogCreate, DogUpdate
 from .listings import Listing, ListingInDBBase, ListingInDB, ListingCreate, ListingUpdate, ListingBase
