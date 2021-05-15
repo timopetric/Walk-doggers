@@ -68,10 +68,10 @@ function onPressAdd(navigation : any) {
 }
 
 export default function NewDogScreen({navigation} : any) {
-    const [localImageUrls, setLocalImageUrls] = useState([]);
+    const [imageUrls, setImageUrls] = useState([]);
 
     const imageComponents: Array<JSX.Element> = [];
-    localImageUrls.forEach((imageUrl: string, index: number) => {
+    imageUrls.forEach((imageUrl: string, index: number) => {
         imageComponents.push(
             <Image
                 style={styles.miniImage}
@@ -104,7 +104,7 @@ export default function NewDogScreen({navigation} : any) {
         return new Blob([u8arr], { type: mime });
     }
 
-    function makeid(length: number) {
+    function makeID(length: number) {
         let result           = [];
         let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let charactersLength = characters.length;
@@ -126,19 +126,22 @@ export default function NewDogScreen({navigation} : any) {
         //console.log(result);
 
         if (!result.cancelled) {
-            // @ts-ignore
-            setLocalImageUrls(oldArray => [...oldArray, result.uri]);
             let formData = new FormData();
             formData.append(
                 "image_data",
                 DataURIToBlob(result.uri),
-                makeid(10) + '.jpg',
+                makeID(10),
             );
 
             fetch('http://127.0.0.1:80/image_upload', {
                 method: "POST",
                 body: formData
-            }).then(response => console.log(response.json()))
+            }).then(async response => {
+                let json = await response.json();
+                console.log(json);
+                // @ts-ignore
+                setImageUrls(oldArray => [...oldArray, json.image_uri]);
+            }).catch(e => { console.log(e); })
         }
     };
 
