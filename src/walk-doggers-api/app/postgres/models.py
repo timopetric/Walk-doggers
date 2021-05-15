@@ -23,9 +23,12 @@ class User(Base):
     admin = Column(Boolean, default=False)
     moderator = Column(Boolean, default=False)
     reporter = Column(Boolean, default=False)
+
     dogs = relationship("Dog", back_populates="owner")
     blog_posts = relationship("BlogPost", back_populates="author")
     listings = relationship("Listing", back_populates="author")
+    ratings = relationship("Rating", back_populates="user")
+    applications = relationship("Application", back_populates="applied_user")
 
 
 class Dog(Base):
@@ -71,3 +74,24 @@ class Listing(Base):
 
     author = relationship("User", back_populates="listings")
     dog = relationship("Dog", back_populates="listings")
+    applications = relationship("Application", back_populates='listing')
+
+
+class Application(Base):
+    __tablename__ = "application"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    listing_id = Column('listing_id', UUID(), ForeignKey('listing.id'), nullable=False)
+    applied_user_id = Column('applied_user_id', UUID(), ForeignKey('user.id'), nullable=False)
+    status = Column(String, default='normal') # soft, normal, rejected, confirmed
+    listing_author_to_applied_user_left_rating = Column(Boolean, default=False)
+    applied_user_to_listing_author_left_rating = Column(Boolean, default=False)
+
+    listing = relationship("Listing", back_populates='applications')
+    applied_user = relationship("User", back_populates='applications')
+
+
+class Rating(Base):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    rating = Column(Integer)
+    user_id = Column('user_id', UUID(), ForeignKey('user.id'), nullable=False)
+    user = relationship("User", back_populates='ratings')
