@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {Image, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
@@ -17,7 +17,7 @@ const LoginScreen = ({
   const onPressRegister = () => {navigation.navigate('Register')};
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Image
             style={styles.logo}
@@ -62,7 +62,7 @@ const LoginScreen = ({
           testId="reg"
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

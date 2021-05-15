@@ -1,31 +1,31 @@
 from datetime import datetime
 from typing import Optional, List
 
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, Field
 
 
 # Shared properties
 class ListingBase(BaseModel):
-    title: Optional[str] = None
-    description: Optional[str] = None
+    title: Optional[str] = Field(..., example="Super dog listing name")
+    description: Optional[str] = Field(..., example="A very cute dog listing description")
     date_from: Optional[datetime] = None
     date_to: Optional[datetime] = None
 
-    lon: Optional[float] = None
-    lat: Optional[float] = None
+    lat: Optional[float] = Field(..., example="46.048247")
+    lon: Optional[float] = Field(..., example="14.509531")
 
     dog_id: Optional[UUID4]
 
 
 # Properties to receive via API on creation
 class ListingCreate(ListingBase):
-    title: str
-    description: str
+    title: str = Field(..., example="Super dog listing name")
+    description: str = Field(..., example="A very cute dog listing description")
     date_from: datetime
     date_to: datetime
-    lon: float
     lat: float
-    dog_id: UUID4
+    lon: float
+    dog_id: UUID4 = Field(..., example="692cdce1-944c-47e6-bd80-eb2883fd27dc")
 
 
 # Properties to receive via API on update

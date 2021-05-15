@@ -1,5 +1,5 @@
 import React, {useState}  from 'react';
-import {StyleSheet} from 'react-native';
+import {ScrollView, StyleSheet} from 'react-native';
 import {Image, Text, View } from 'react-native';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../types';
@@ -19,7 +19,7 @@ const RegisterScreen = ({
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.header}>
         <Image
             style={styles.logo}
@@ -83,7 +83,7 @@ const RegisterScreen = ({
           testId="log"
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
