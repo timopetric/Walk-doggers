@@ -1,3 +1,5 @@
+import uuid
+from pprint import pprint
 from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 
 from fastapi.encoders import jsonable_encoder
@@ -6,7 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.postgres import Base
 from app import schemas
-from app.postgres.models import Post, User, Dog, BlogPost, Listing
+from app.postgres.models import Post, User, Dog, BlogPost, Listing, Application
 
 # Define custom types for SQLAlchemy model, and Pydantic schemas
 ModelType = TypeVar("ModelType", bound=Base)
@@ -127,8 +129,23 @@ class ListingActions(BaseActions[Listing, schemas.ListingCreate, schemas.Listing
     pass
 
 
+class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, schemas.ApplicationUpdate]):
+    """Post actions with basic CRUD operations"""
+
+    def apply_to_listing(self, db: Session, listing_id: UUID4, applied_user_id: UUID4, soft: bool = False):
+        status = 'normal'
+        if soft:
+            status = 'soft'
+        db_obj = self.model(listing_id=listing_id, applied_user_id=applied_user_id, status=status)
+        db.add(db_obj)
+        db.commit()
+        db.refresh(db_obj)
+        return db_obj
+
+
 post = PostActions(Post)
 user = UserActions(User)
 dog = DogActions(Dog)
 blog_post = BlogPostActions(BlogPost)
 listing = ListingActions(Listing)
+application = ApplicationActions(Application)

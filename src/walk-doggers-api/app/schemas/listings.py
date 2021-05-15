@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 from pydantic import UUID4, BaseModel, Field
 
@@ -33,6 +33,11 @@ class ListingUpdate(ListingBase):
     pass
 
 
+# Properties to receive via API on update
+class ListingModifyApplication(BaseModel):
+    application_id: UUID4
+
+
 class ListingInDBBase(ListingBase):
     id: Optional[UUID4] = None
     author_id: Optional[UUID4] = None
@@ -48,15 +53,18 @@ class Listing(ListingInDBBase):
     author: "User"
     dog: "Dog"
     location_text: str
+    applications: "List[Application]"
     pass
 
+    # Additional properties stored in DB
 
-# Additional properties stored in DB
+
 class ListingInDB(ListingInDBBase):
     pass
 
 
 from .users import User
 from .dogs import Dog
+from .applications import Application
 
 Listing.update_forward_refs()
