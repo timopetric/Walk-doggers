@@ -6,7 +6,8 @@ import {Entypo} from "@expo/vector-icons";
 import {useEffect, useState} from "react";
 import {categories} from "../../constants/Values";
 import * as ImagePicker from 'expo-image-picker';
-import {decode as atob, encode as btoa} from 'base-64'
+import {decode as atob, encode as btoa} from 'base-64';
+import mime from 'mime';
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -46,12 +47,8 @@ const styles = StyleSheet.create({
     notSelected: {
         backgroundColor: '#e1e3e6'
     },
-    touchable: {
-
-    },
-    text: {
-
-    },
+    touchable: {},
+    text: {},
     sizesRow: {
         flexDirection: "row",
         justifyContent: "space-between",
@@ -64,11 +61,11 @@ const styles = StyleSheet.create({
     },
 });
 
-function onPressAdd(navigation : any) {
+function onPressAdd(navigation: any) {
     navigation.goBack();
 }
 
-export default function NewDogScreen({navigation} : any) {
+export default function NewDogScreen({navigation}: any) {
     const [imageUrls, setImageUrls] = useState([]);
 
     const imageComponents: Array<JSX.Element> = [];
@@ -85,7 +82,7 @@ export default function NewDogScreen({navigation} : any) {
     useEffect(() => {
         (async () => {
             if (Platform.OS !== 'web') {
-                const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
                 if (status !== 'granted') {
                     alert('Sorry, we need camera roll permissions to make this work!');
                 }
@@ -93,89 +90,47 @@ export default function NewDogScreen({navigation} : any) {
         })();
     }, []);
 
-    function DataURIToBlobWeb(dataurl: any, base64: any) {
+    function DataURIToBlob(dataurl: any) {
         const arr = dataurl.split(',');
         const mime = arr[0].match(/:(.*?);/)[1];
-        //console.log("arr[1]: ", arr[1]);
         const bstr = atob(arr[1]);
-        //console.log("bstr: ", bstr);
         let n = bstr.length;
         const u8arr = new Uint8Array(n);
         while (n--) {
             u8arr[n] = bstr.charCodeAt(n);
         }
-        return new Blob([u8arr], { type: mime });
-    }
-
-    function DataURIToBlobMobile(dataurl: any, base64: any){
-        let extension = dataurl.split(".");
-        extension = extension[extension.length - 1];
-        let mime = "image/png";
-        if (extension == "jpg" || extension == "jpeg")
-            mime = "image/jpeg";
-        //console.log("mime: ", mime);
-        const bstr = atob(base64);
-        //console.log("bstr: ", bstr);
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], { type: mime });
-    }
-
-    function DataURIToBlob(dataurl: any, base64: any){
-        if (Platform.OS !== "web"){
-            return DataURIToBlobMobile(dataurl, base64);
-        }else{
-            return DataURIToBlobWeb(dataurl, base64);
-        }
-    }
-
-    function makeID(length: number) {
-        let result           = [];
-        let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        let charactersLength = characters.length;
-        for (let i = 0; i < length; i++) {
-            result.push(characters.charAt(Math.floor(Math.random() *
-                charactersLength)));
-        }
-        return result.join('');
+        return new Blob([u8arr], {type: mime});
     }
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
             allowsEditing: true,
-            base64: true,
+            // base64: true,
             aspect: [4, 3],
             quality: 1,
         });
 
-        //console.log(result);
 
         if (!result.cancelled) {
             // @ts-ignore
-            let blob = DataURIToBlob(result.uri, result.base64);
 
             let formData = new FormData();
-            formData.append(
-                "image_data",
-                blob,
-                makeID(10),
-            );
 
-            /*fetch('http://127.0.0.1:80/blog', {
-                method: "GET",
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-            }).then(async response => {
-                console.log("blog response: ", response);
-            }).catch(e => { console.log(e); })*/
+            if (Platform.OS === 'web') {
+                const file = DataURIToBlob(result.uri);
+                formData.append('image_data', file, 'image.jpg');
+            } else {
+                const newImageUri = "file:///" + result.uri.split("file:/").join("");
+                formData.append('image_data', {
+                    name: newImageUri.split("/").pop(),
+                    type: mime.getType(newImageUri),
+                    uri: newImageUri,
+                });
+            }
+            console.log(process.env.BASE_API_URL);
 
-            fetch('http://127.0.0.1:80/image_upload', {
+            fetch(process.env.BASE_API_URL + '/image_upload/', {
                 method: "POST",
                 body: formData
             }).then(async response => {
@@ -183,7 +138,9 @@ export default function NewDogScreen({navigation} : any) {
                 console.log(json);
                 // @ts-ignore
                 setImageUrls(oldArray => [...oldArray, json.image_uri]);
-            }).catch(e => { console.log(e); })
+            }).catch(e => {
+                console.log(e);
+            })
 
             // @ts-ignore
             setImageUrls(oldArray => [...oldArray, result.uri]);
@@ -207,7 +164,7 @@ export default function NewDogScreen({navigation} : any) {
                     {imageComponents}
                     <Pressable onPress={pickImage}>
                         <View style={[styles.miniImage, styles.addImage]}>
-                            <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
+                            <Entypo size={imgWidth / 10} name="plus" color={PRIMARY}/>
                         </View>
                     </Pressable>
                 </View>
@@ -223,10 +180,10 @@ export default function NewDogScreen({navigation} : any) {
 function SizePicker() {
     const [selected, setSelected] = useState(0);
 
-    let sizePickerItems : any = [];
+    let sizePickerItems: any = [];
     categories.forEach((category, index, arr) => {
         sizePickerItems.push(
-            <SizePickerBox category={category} selected = {selected} key={index} index={index} setSelected={setSelected}/>
+            <SizePickerBox category={category} selected={selected} key={index} index={index} setSelected={setSelected}/>
         )
     })
 
@@ -236,8 +193,9 @@ function SizePicker() {
 
 function SizePickerBox(props: any) {
     return (
-        <Pressable style={styles.touchable} onPress={() => props.setSelected(props.index) }>
-            <Card containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
+        <Pressable style={styles.touchable} onPress={() => props.setSelected(props.index)}>
+            <Card
+                containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
                 <Text style={styles.text}>{props.category}</Text>
                 <Text style={styles.text}>kg</Text>
             </Card>
