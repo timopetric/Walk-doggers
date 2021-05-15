@@ -19,15 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 DEBUG = os.environ.get("DEBUG", False)
 app = FastAPI(title="Walk doggers API", debug=DEBUG)
 
-origins = [
-    "http://localhost",
-    "http://localhost:80",
-    "http://localhost:19002",
-    "http://localhost:19003",
-    "http://localhost:19004",
-    "http://localhost:19005",
-    "http://localhost:19006",
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
