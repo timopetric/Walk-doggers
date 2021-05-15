@@ -4,11 +4,12 @@ import { StyleSheet } from 'react-native';
 import { Text, View } from 'react-native';
 import { AntDesign, Ionicons, FontAwesome5, FontAwesome } from '@expo/vector-icons';
 import {Card} from "react-native-elements";
+import { AuthContext } from '../../navigation/Providers/AuthProvider';
 
 const mainColor = '#303030';
 
 export default function TabSettings({navigation} : any) {
-
+  const { logout } = React.useContext(AuthContext);
   return (
     <View style={styles.container}>
       <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
@@ -40,7 +41,7 @@ export default function TabSettings({navigation} : any) {
           <Ionicons size={30} name="exit-outline" color={mainColor} />
           <Text style={{marginLeft: 5}}>Logout</Text>
         </View>
-        <AntDesign testID="logoutBtn" onPress={() => navigation.replace('Login') } size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
+        <AntDesign testID="logoutBtn" onPress={() => logout()} size={30} name="right" color={mainColor} style={{justifyContent: 'flex-end'}} />
       </Card>
     </View>
   );

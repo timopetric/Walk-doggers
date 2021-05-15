@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, {useContext, useState}  from 'react';
 import {StyleSheet} from 'react-native';
 import {Image, Text, View, TextInput, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -8,12 +8,16 @@ import FormTextInput from '../components/FormInput';
 import { Header } from 'react-native/Libraries/NewAppScreen';
 import Colors, { PRIMARY } from '../constants/Colors'
 import ButtonForm from '../components/ButtonForm';
-const LoginScreen = ({
-  navigation,
-}: StackScreenProps<RootStackParamList, 'Login'>) => {
+import { AuthNavProps } from '../navigation/AuthStack/AuthParamList';
+import { AuthContext } from '../navigation/Providers/AuthProvider';
+
+const LoginScreen = ({ navigation, route }: AuthNavProps<"Login">) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const onPressLogin = () => {navigation.replace('Root')};
+
+  const { user, login } = useContext(AuthContext);
+  
+  const onPressLogin = () => {login({email, password})};
   const onPressRegister = () => {navigation.navigate('Register')};
 
   return (

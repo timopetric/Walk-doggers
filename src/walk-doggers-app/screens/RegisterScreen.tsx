@@ -1,4 +1,4 @@
-import React, {useState}  from 'react';
+import React, {useContext, useState}  from 'react';
 import {StyleSheet} from 'react-native';
 import {Image, Text, View } from 'react-native';
 import { createStackNavigator, StackScreenProps } from '@react-navigation/stack';
@@ -7,48 +7,19 @@ import FormTextInput from '../components/FormInput';
 import Colors, { PRIMARY } from '../constants/Colors'
 import ButtonForm from '../components/ButtonForm';
 import { Alert } from 'react-native';
+import { AuthNavProps } from '../navigation/AuthStack/AuthParamList';
+import { AuthContext } from '../navigation/Providers/AuthProvider';
 
-const RegisterScreen = ({
-  navigation,
-}: StackScreenProps<RootStackParamList, 'Register'>) => {
-  const [firstName, setFirstName] = useState<string | null>(null);
-  const [lastName, setLastName] = useState<string | null>(null)
-  const [email, setEmail] = useState<string | null>(null);
-  const [password, setPassword] = useState<string | null>(null);
-  //const onPressRegister = () => {navigation.replace('Root')};
+const RegisterScreen = ({ navigation, route }: AuthNavProps<"Register">) => {
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const { user, register } = useContext(AuthContext);
+
+  const onPressRegister = () => {register({first_name: firstName, last_name: lastName, email, password})};
   const onPressLogin = () => {navigation.replace('Login')};
-
-  const sendUserData = async () => {
-    const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({"email": email, "password": password, "first_name": firstName, "last_name": lastName})
-    };
-    const response = await fetch('http://172.18.0.1/auth/register', requestOptions);
-    console.log("neki neki");
-    const data = await response.json();
-    console.log(data);
-    return data;
-  }
-  
-  const register = async () => {
-    if(firstName && lastName && email && password){
-      try {
-        const userJwt = await sendUserData();
-        if (userJwt) {
-          Alert.alert(JSON.stringify(userJwt));
-          console.log(userJwt);
-        }
-      } catch (e){
-        console.log(e);
-      }
-    } else {
-      Alert.alert("Error", "Missing Fields");
-    }
-    
-  }
-
-  const onPressRegister = () => {register()};
 
   return (
     <View style={styles.container}>
