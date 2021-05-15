@@ -123,7 +123,7 @@ export default function NewDogScreen({navigation} : any) {
             quality: 1,
         });
 
-        console.log(result);
+        //console.log(result);
 
         if (!result.cancelled) {
             // @ts-ignore
@@ -132,7 +132,7 @@ export default function NewDogScreen({navigation} : any) {
             formData.append(
                 "image_data",
                 DataURIToBlob(result.uri),
-                makeid(10)
+                makeid(10) + '.jpg',
             );
 
             fetch('http://127.0.0.1:80/image_upload', {
