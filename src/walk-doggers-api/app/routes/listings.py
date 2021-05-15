@@ -10,6 +10,8 @@ from app.postgres import actions
 from app import schemas
 from app.functions import get_db
 
+from ..geocoding_external_api import get_location_text
+
 ListingsRouter = APIRouter()
 auth_handler = AuthHandler()
 
@@ -31,8 +33,8 @@ def get_listing_by_id(*, db: Session = Depends(get_db), id: UUID4) -> Any:
 
 
 @ListingsRouter.post("/", response_model=schemas.Listing, status_code=HTTP_201_CREATED)
-def add_new_listing(*, db: Session = Depends(get_db), listing_in: schemas.ListingCreate,
-            user_id=Depends(auth_handler.auth_wrapper)) -> Any:
+async def add_new_listing(*, db: Session = Depends(get_db), listing_in: schemas.ListingCreate,
+                          user_id=Depends(auth_handler.auth_wrapper)) -> Any:
     dog_id = listing_in.dog_id
     dog = actions.dog.get(db=db, id=dog_id)
     # check if dog exists
@@ -43,12 +45,12 @@ def add_new_listing(*, db: Session = Depends(get_db), listing_in: schemas.Listin
     if dog.owner_id != user_id:
         raise HTTPException(status_code=403)
 
-    # TODO call geocoding API and convert lat + lon to location text
-    location_text = "TODO"
+    # call geocoding API and convert lat + lon to location text
+    location_text = await get_location_text(listing_in.lat, listing_in.lon)
 
     try:
         dog = actions.listing.add_listing(db=db, author_id=user_id, location_text=location_text, obj_in=listing_in)
-    except:
+    except Exception:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
     return dog
