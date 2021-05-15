@@ -24,7 +24,7 @@ import {
     SettingsParamList
 } from '../types';
 import TabBlog from "../screens/Blog/TabBlog";
-import TabListings from "../screens/TabListings";
+import TabListings from "../screens/Listings/TabListings";
 import TabSettings from "../screens/Settings/TabSettings";
 import {Button} from 'react-native-elements';
 
@@ -38,6 +38,7 @@ import MyDogsScreen from "../screens/Settings/MyDogsScreen";
 import NewDogScreen from "../screens/Settings/NewDogScreen";
 import MessageScreen from '../screens/MessageScreen';
 import BlogPostScreen from "../screens/Blog/BlogPostScreen";
+import NewListingScreen from "../screens/Listings/NewListingScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -225,14 +226,32 @@ function BlogNavigator({navigation}: any) {
 
 const ListingsStack = createStackNavigator<ListingsParamList>();
 
-function ListingsNavigator() {
+function ListingsNavigator({navigation}: any) {
     return (
         <ListingsStack.Navigator>
             <ListingsStack.Screen
                 name="ListingsScreen"
                 component={TabListings}
                 options={{
-                    headerTitle: 'Listings', headerTitleAlign: 'center', ...headerWhiteBackground,
+                    headerTitle: 'Listings',
+                    headerTitleAlign: 'center',
+                    ...headerWhiteBackground,
+                    headerRight: () => (
+                        <Button
+                            onPress={() => navigation.navigate('NewListingScreen')}
+                            icon={<Entypo size={30} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
+                            type="clear"
+                        />
+                    ),
+                }}
+            />
+            <ListingsStack.Screen
+                name="NewListingScreen"
+                component={NewListingScreen}
+                options={{
+                    headerTitle: 'New Listing',
+                    headerTitleAlign: 'center',
+                    ...headerWhiteBackground,
                 }}
             />
         </ListingsStack.Navigator>

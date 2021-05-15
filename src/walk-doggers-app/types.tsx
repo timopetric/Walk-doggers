@@ -36,6 +36,7 @@ export type BlogParamList = {
 
 export type ListingsParamList = {
   ListingsScreen: undefined;
+  NewListingScreen: undefined;
 };
 
 export type SettingsParamList = {
@@ -43,7 +44,7 @@ export type SettingsParamList = {
   EditProfileScreen: undefined;
   BecomeAReporterScreen: undefined;
   MyDogsScreen: undefined;
-  NewDogScreen: undefined;
+  NewDogScreen: undefined
 };
 
 export type LoginParamList = {

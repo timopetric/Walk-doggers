@@ -123,7 +123,9 @@ export default function NewDogScreen({navigation}: any) {
             } else {
                 const newImageUri = "file:///" + result.uri.split("file:/").join("");
                 formData.append('image_data', {
+                    // @ts-ignore
                     name: newImageUri.split("/").pop(),
+                    // @ts-ignore
                     type: mime.getType(newImageUri),
                     uri: newImageUri,
                 });
