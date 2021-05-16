@@ -3,11 +3,12 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {Card, Input} from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
-import {useEffect, useState} from "react";
+import {useEffect, useState, useContext} from "react";
 import {categories} from "../../constants/Values";
 import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
+import AuthContext from "../../navigation/AuthContext";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -61,12 +62,68 @@ const styles = StyleSheet.create({
     },
 });
 
-function onPressAdd(navigation: any) {
-    navigation.goBack();
+function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
+    let jwt = getJwt()
+
+    let reqBody: any = {}
+    if (dog.name !== "") reqBody.name = dog.name;
+    // TODO: make name field a required field, present an error if its empty
+    if (dog.description !== "") reqBody.description = dog.description;
+    if (dog.size_category !== -1) reqBody.size_category = dog.size_category;
+    if (dog.photo !== "") reqBody.photo = dog.photo;
+
+    // console.log(JSON.stringify(reqBody))
+    // console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
+    // console.log(JSON.stringify(dog))
+
+    fetch(process.env.BASE_API_URL + '/dogs/', {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify(reqBody)
+    }).then(async response => {
+        let json = await response.json();
+        console.log(json)
+        const statusCode = response.status;
+        switch (statusCode) {
+            case 201:
+                // successfully created dog
+                navigation.goBack();
+                break;
+            case 422:
+                // TODO: notify user about validation error
+                // description missing, ...
+                break;
+
+            default:
+                // TODO: notify user about error
+                break;
+        }
+    }).catch(e => {
+        console.log(e);
+    })
+}
+
+type Dog = {
+    name: string;
+    description: string;
+    size_category: number;
+    photo: string;
 }
 
 export default function NewDogScreen({navigation}: any) {
+    const { getJwt } = useContext(AuthContext);
+
     const [imageUrls, setImageUrls] = useState([]);
+    const [dog, setDog] = useState<Dog>({
+        name: "",
+        description: "",
+        size_category: -1,
+        photo: "",
+    });
 
     const imageComponents: Array<JSX.Element> = [];
     imageUrls.forEach((imageUrl: string, index: number) => {
@@ -137,6 +194,9 @@ export default function NewDogScreen({navigation}: any) {
             }).then(async response => {
                 let json = await response.json();
                 console.log(json);
+
+                setDog({ ...dog, photo: json.image_uri})
+
                 // @ts-ignore
                 setImageUrls(oldArray => [...oldArray, json.image_uri]);
             }).catch(e => {
@@ -149,13 +209,13 @@ export default function NewDogScreen({navigation}: any) {
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.subtitle}>Dog's name</Text>
-                <Input></Input>
+                <Input onChangeText={(text) => setDog({ ...dog, name: text })}></Input>
 
                 <Text style={styles.subtitle}>Description</Text>
-                <Input></Input>
+                <Input onChangeText={(text) => setDog({ ...dog, description: text })}></Input>
 
                 <Text style={styles.subtitle}>Size</Text>
-                <SizePicker/>
+                <SizePicker dog={dog} setDog={setDog} />
 
                 <Text style={styles.subtitle}>Image</Text>
                 <View style={styles.imageRow}>
@@ -166,17 +226,21 @@ export default function NewDogScreen({navigation}: any) {
                         </View>
                     </Pressable>
                 </View>
-                <Text style={styles.subtitle}>Content</Text>
-                <Input></Input>
+                {/* <Text style={styles.subtitle}>Content</Text>
+                <Input></Input> */}
 
-                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation)}/>
+                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
             </View>
         </ScrollView>
     );
 }
 
-function SizePicker() {
+function SizePicker(props: any) {
     const [selected, setSelected] = useState(0);
+
+    useEffect(() => {
+        props.setDog({ ...props.dog, size_category: selected })
+    }, [selected])
 
     let sizePickerItems: any = [];
     categories.forEach((category, index, arr) => {
