@@ -9,6 +9,7 @@ import ExploreFilter from "../components/ExploreFilter";
 import {Provider} from "react-redux";
 import {store, toggleFilter} from "../redux/store";
 import {useEffect, useState} from "react";
+import * as Location from 'expo-location';
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
@@ -32,6 +33,29 @@ export default function TabExplore({navigation}: any) {
     // useEffect(() => {
     // make api request for listings
     // }, [distance, selectedIndexes])
+
+    const [location, setLocation] = useState({}) ;
+    const [errorMsg, setErrorMsg] = useState("");
+
+    useEffect(() => {
+        (async () => {
+          let { status } = await Location.requestForegroundPermissionsAsync();
+          if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return;
+          }
+          let location = await Location.getCurrentPositionAsync({});
+          setLocation(location);
+        })();
+      }, []);
+
+    let text = "Waiting..";
+    if (errorMsg) {
+      text = errorMsg;
+    } else if (location) {
+      text = JSON.stringify(location);
+      console.log(text)
+    }
 
     return (
         <View style={styles.container}>
