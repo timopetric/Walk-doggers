@@ -6,6 +6,9 @@ import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 
 const data = [
   {
+    allMessages: true
+  },
+  {
     title: "Very good boy",
     date: "Tuesday",
     time: "14:00",
