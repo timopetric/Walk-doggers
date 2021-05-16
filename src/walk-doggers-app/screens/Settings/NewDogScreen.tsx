@@ -9,16 +9,13 @@ import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
 import AuthContext from "../../navigation/AuthContext";
+import ImageUpload from "../../components/ImageUpload";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
         padding: 20
-    },
-    imageRow: {
-        flexDirection: "row",
-        flexWrap: "wrap",
     },
     distance: {
         flex: 1
@@ -29,18 +26,6 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
         marginTop: 30,
         marginBottom: 10,
-    },
-    miniImage: {
-        width: imgWidth / 5,
-        height: imgWidth / 5,
-        borderRadius: 10,
-        marginHorizontal: 8,
-    },
-    addImage: {
-        backgroundColor: GRAY_1,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
     },
     selected: {
         backgroundColor: '#747575'
@@ -114,10 +99,10 @@ type Dog = {
     photo: string;
 }
 
+
 export default function NewDogScreen({navigation}: any) {
     const { getJwt } = useContext(AuthContext);
 
-    const [imageUrls, setImageUrls] = useState([]);
     const [dog, setDog] = useState<Dog>({
         name: "",
         description: "",
@@ -125,86 +110,10 @@ export default function NewDogScreen({navigation}: any) {
         photo: "",
     });
 
-    const imageComponents: Array<JSX.Element> = [];
-    imageUrls.forEach((imageUrl: string, index: number) => {
-        imageComponents.push(
-            <Image
-                style={styles.miniImage}
-                source={{uri: imageUrl}}
-                key={index}
-            />
-        );
-    });
-
-    useEffect(() => {
-        (async () => {
-            if (Platform.OS !== 'web') {
-                const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
-                if (status !== 'granted') {
-                    alert('Sorry, we need camera roll permissions to make this work!');
-                }
-            }
-        })();
-    }, []);
-
-    function DataURIToBlob(dataurl: any) {
-        const arr = dataurl.split(',');
-        const mime = arr[0].match(/:(.*?);/)[1];
-        const bstr = atob(arr[1]);
-        let n = bstr.length;
-        const u8arr = new Uint8Array(n);
-        while (n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-        }
-        return new Blob([u8arr], {type: mime});
+    const saveUrl = (url: string) => {
+        setDog({...dog, photo: url})
+        console.log(url)
     }
-
-    const pickImage = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.All,
-            allowsEditing: true,
-            // base64: true,
-            aspect: [4, 3],
-            quality: 1,
-        });
-
-
-        if (!result.cancelled) {
-            // @ts-ignore
-
-            let formData = new FormData();
-
-            if (Platform.OS === 'web') {
-                const file = DataURIToBlob(result.uri);
-                formData.append('image_data', file, 'image.jpg');
-            } else {
-                const newImageUri = "file:///" + result.uri.split("file:/").join("");
-                formData.append('image_data', {
-                    name: newImageUri.split("/").pop(),
-                    type: mime.getType(newImageUri),
-                    uri: newImageUri,
-                });
-            }
-
-            console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
-
-            fetch(process.env.BASE_API_URL + '/image_upload/', {
-                method: "POST",
-                body: formData
-            }).then(async response => {
-                let json = await response.json();
-                console.log(json);
-
-                setDog({ ...dog, photo: json.image_uri})
-
-                // @ts-ignore
-                setImageUrls(oldArray => [...oldArray, json.image_uri]);
-            }).catch(e => {
-                console.log(e);
-            })
-        }
-    };
-
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -218,16 +127,10 @@ export default function NewDogScreen({navigation}: any) {
                 <SizePicker dog={dog} setDog={setDog} />
 
                 <Text style={styles.subtitle}>Image</Text>
-                <View style={styles.imageRow}>
-                    {imageComponents}
-                    <Pressable onPress={pickImage}>
-                        <View style={[styles.miniImage, styles.addImage]}>
-                            <Entypo size={imgWidth / 10} name="plus" color={PRIMARY}/>
-                        </View>
-                    </Pressable>
-                </View>
-                {/* <Text style={styles.subtitle}>Content</Text>
-                <Input></Input> */}
+                <ImageUpload saveUrl={saveUrl}/>
+                
+                <Text style={styles.subtitle}>Content</Text>
+                <Input></Input>
 
                 <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
             </View>
