@@ -5,6 +5,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
 import { Card } from "react-native-elements/dist/card/Card";
 import {categories} from "../constants/Values";
+import StarRating from 'react-native-star-rating';
 
 interface IAboutMeCardProps {
     image?: string;
@@ -18,7 +19,7 @@ class AboutMeCard extends React.Component<IAboutMeCardProps> {
   render() {
     return (
       <View style={styles.card}>
-        <View style={styles.row}> 
+        <View style={styles.row}>
           <Image
             style={styles.miniImage}
             source={{
@@ -26,18 +27,37 @@ class AboutMeCard extends React.Component<IAboutMeCardProps> {
             }}
           />
           <View style={styles.col}>
-          <Text style={styles.name}>{this.props.name}</Text>
-          <Text style={styles.desc}>{this.props.descr}</Text>
+            <Text style={styles.name}>{this.props.name}</Text>
+            <Text style={styles.desc}>{this.props.descr}</Text>
           </View>
-
-          <FontAwesome5 name="weight-hanging" size={13} color="black" style={styles.icon}/>
-          <Text style={styles.value}>{categories[this.props.value]} kg</Text>
+          <View style={styles.stars}>
+          {this.props.isDog && <FontAwesome5
+            name="weight-hanging"
+            size={13}
+            color="black"
+            style={styles.icon}
+          />}
+          
+          {this.props.isDog && <Text style={styles.value}>{categories[this.props.value]} kg</Text>}
+          
+          
+          {!this.props.isDog && 
+          <StarRating
+            disabled={false}
+            maxStars={5}
+            emptyStar={"ios-star-outline"}
+            fullStar={"ios-star"}
+            halfStar={"ios-star-half"}
+            iconSet={"Ionicons"}
+            starSize={20}/>
+          } 
+          </View>
+          
 
           
         </View>
-        
       </View>
-    )
+    );
   }
 }
 
@@ -54,6 +74,10 @@ const styles = StyleSheet.create({
   icon: {
     marginTop: 5,
     paddingRight: 5
+  },
+  stars: {
+    alignItems: "flex-end",
+    flex: 1
   },
   card: {
     backgroundColor: "white",
@@ -83,9 +107,8 @@ const styles = StyleSheet.create({
   value: {
     fontFamily: "roboto",
     color: "#676767",
-    fontSize: 16,
-    flex: 0.2
-  },
+    fontSize: 16
+    },
   miniImage: {
     width: imgWidth / 6,
     height: imgWidth / 6,
