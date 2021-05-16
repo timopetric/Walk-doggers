@@ -20,6 +20,8 @@ class User(Base):
     password = Column(String)
     first_name = Column(String)
     last_name = Column(String)
+    description = Column(String, default="")
+    image_url = Column(String, default="https://walk-doggers.s3.eu-central-1.amazonaws.com/download.png")
     admin = Column(Boolean, default=False)
     moderator = Column(Boolean, default=False)
     reporter = Column(Boolean, default=False)
