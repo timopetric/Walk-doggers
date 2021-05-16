@@ -5,7 +5,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
 import { Card } from "react-native-elements/dist/card/Card";
 import {categories} from "../constants/Values";
-import StarRating from 'react-native-star-rating'
+// import StarRating from 'react-native-star-rating'
 import {GRAY_STAR, YELLOW} from "../constants/Colors";
 
 interface IAboutMeCardProps {
@@ -49,20 +49,20 @@ class AboutMeCard extends React.Component<IAboutMeCardProps> {
               )}
             </View>
 
-            {!this.props.isDog && (
-              <StarRating
-                disabled={false}
-                rating={this.props.value}
-                maxStars={5}
-                fullStarColor={YELLOW}
-                emptyStarColor={GRAY_STAR}
-                emptyStar={"ios-star"}
-                fullStar={"ios-star"}
-                halfStar={"ios-star-half"}
-                iconSet={"Ionicons"}
-                starSize={20}
-              />
-            )}
+          {/*  {!this.props.isDog && (*/}
+          {/*    <StarRating*/}
+          {/*      disabled={false}*/}
+          {/*      rating={this.props.value}*/}
+          {/*      maxStars={5}*/}
+          {/*      fullStarColor={YELLOW}*/}
+          {/*      emptyStarColor={GRAY_STAR}*/}
+          {/*      emptyStar={"ios-star"}*/}
+          {/*      fullStar={"ios-star"}*/}
+          {/*      halfStar={"ios-star-half"}*/}
+          {/*      iconSet={"Ionicons"}*/}
+          {/*      starSize={20}*/}
+          {/*    />*/}
+          {/*  )}*/}
           </View>
         </View>
       </View>
