@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, Dimensions, Image, TouchableOpacity} from "react-native"
 import { withTheme } from 'react-native-elements'
-import  {GREEN, ORANGE, RED} from '../constants/Colors';
+import {GRAY_3, GREEN, ORANGE, RED} from '../constants/Colors';
 
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
@@ -16,7 +16,7 @@ const CarouselCardItem = ({ item, index, inChat }) => {
         />
         <View style={styles.column}>
           <Text style={styles.title}>{item.title}</Text>
-          <View style={[styles.row, {paddingTop: 5}]}>
+          <View style={[styles.row, {paddingTop: 3}]}>
             <Text style={styles.date}>{item.date}</Text>
             <Text style={{fontFamily: "roboto", color: "black", fontSize: 15}}> walk at </Text>
             <Text style={styles.date}>{item.time}</Text>
@@ -74,22 +74,22 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: ITEM_WIDTH,
     padding: 15,
-    paddingBottom: 20,
+    // paddingBottom: 20,
     marginBottom: 25,
     marginTop: 20,
-    shadowColor: "#000",
+    shadowColor: GRAY_3,
     shadowOffset: {
       width: 0,
       height: 3,
     },
-    shadowOpacity: 0.29,
-    shadowRadius: 4.65,
-    elevation: 7,
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 1,
   },
   image: {
     borderRadius: 35,
-    width: 70,
-    height: 70,
+    width: 55,
+    height: 55,
     justifyContent: "center",
   },
   title: {
@@ -123,14 +123,22 @@ const styles = StyleSheet.create({
     right: 5,
     top: 55,
     zIndex: 2,
+    shadowColor: GRAY_3,
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 6,
+    elevation: 1,
   },
   btnText: {
-    fontFamily: "red-hat-text",
+    // fontFamily: "red-hat-text",
+    fontWeight:"600",
     color: "white",
     fontSize: 12,
-    padding: 5,
-    paddingLeft: 10,
-    paddingRight: 10
+    paddingVertical: 6,
+    paddingHorizontal: 20,
   },
   accView: {
     position: "absolute",
@@ -144,7 +152,8 @@ const styles = StyleSheet.create({
     zIndex: 2,
   },
   accText: {
-    fontFamily: "roboto",
+    // fontFamily: "roboto",
+    fontWeight: "600",
     color: "white",
     fontSize: 10,
     padding: 5,

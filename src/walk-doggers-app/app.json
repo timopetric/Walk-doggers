@@ -19,7 +19,10 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": ["Uploading dog photos"]
+      }
     },
     "android": {
       "adaptiveIcon": {

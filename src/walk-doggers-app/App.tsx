@@ -79,7 +79,7 @@ export default function App() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"email": email, "password": password})
                 };
-                const response = await fetch('http://192.168.1.30/auth/login', requestOptions);
+                const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
                 const responseData = await response.json();
                 // return data;
                 console.log("data", responseData);
@@ -102,7 +102,7 @@ export default function App() {
                         "password": password
                     })
                 };
-                const response = await fetch('http://192.168.1.30/auth/register', requestOptions);
+                const response = await fetch(process.env.BASE_API_URL + '/auth/register', requestOptions);
                 const responseData = await response.json();
                 console.log("data", responseData);
                 await AsyncStorage.setItem("@user", responseData?.jwt);

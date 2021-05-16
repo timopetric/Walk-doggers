@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from "react-native"
 import Carousel, { Pagination } from 'react-native-snap-carousel'
 import CarouselCardItem, { SLIDER_WIDTH, ITEM_WIDTH } from './CarouselCardItem'
+import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 
 const data = [
   {
@@ -63,7 +64,7 @@ const CarouselCards = (props) => {
   return (
     <View>
       <Carousel
-        layout="tinder"
+        // layout="tinder"
         layoutCardOffset={0}
         ref={isCarousel}
         data={data}
@@ -71,7 +72,7 @@ const CarouselCards = (props) => {
         sliderWidth={SLIDER_WIDTH}
         itemWidth={ITEM_WIDTH}
         onSnapToItem={(index) => setIndex(index)}
-        useScrollView={true}
+        // useScrollView={true}
 
       />
       <Pagination
@@ -80,15 +81,16 @@ const CarouselCards = (props) => {
         carouselRef={isCarousel}
         dotStyle={{
           width: 5,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 0,
-          marginTop: -9,
-          backgroundColor: 'rgba(0, 0, 0, 0.92)',
-          padding: 5
+          height: 5,
+          borderRadius: 10,
+          backgroundColor: PRIMARY,
         }}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
+        dotContainerStyle={{marginHorizontal: 3}}
+        inactiveDotOpacity={0.7}
+        inactiveDotScale={1}
+        inactiveDotStyle={{
+          backgroundColor: GRAY_1,
+        }}
         tappableDots={true}
         containerStyle={{paddingVertical: 0, marginTop: -40, paddingBottom: 20}}
 
