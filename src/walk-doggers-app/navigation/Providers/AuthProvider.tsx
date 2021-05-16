@@ -1,15 +1,15 @@
-import React, { createContext, FC, useState } from 'react';
+import React, { createContext, FC, useContext, useEffect, useState } from 'react';
 import { View, Text, Alert } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const AuthContext = createContext<{
-    user: string;
-    setUser: (user:string) => void;
+    user: User;
+    setUser: (user:User) => void;
     login: ({email, password} : LoginProps) => void;
     register: ({first_name, last_name, email, password} : RegisterProps) => void;
     logout: () => void;
 }>({
-    user: '',
+    user: {"jwt": null},
     setUser: () => {},
     login: ({} : LoginProps) => {},
     register: ({} : RegisterProps) => {},
@@ -18,7 +18,7 @@ export const AuthContext = createContext<{
 
 interface AuthProviderProps {}
 
-type User = null | {jwt: string};
+type User = {jwt: string | null};
 
 type LoginProps = {
     email: string;
@@ -92,8 +92,41 @@ const registerHandler = async ({first_name, last_name, email, password} : Regist
       }
 } 
 
+export function useAuth() {
+    const context = useContext(AuthContext);
+  
+    if (!context) {
+      throw new Error('useAuth must be used within an AuthProvider');
+    }
+  
+    return context;
+  }
+
 export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
-    const [user, setUser] = useState<string>('');
+    let [user, setUser] = useState<User>({"jwt": null});
+    const [loading, setLoading] = useState(true);
+
+    async function loadStorageData(): Promise<void> {
+        try {
+          //Try get the data from Async Storage
+          const authDataSerialized = await AsyncStorage.getItem('@user');
+          if (authDataSerialized) {
+            //If there are data, it's converted to an Object and the state is updated.
+            const _authData: User = JSON.parse(authDataSerialized);
+            setUser(_authData);
+          }
+        } catch (error) {
+        } finally {
+          //loading finished
+          setLoading(false);
+        }
+      }
+
+    useEffect(() => {
+    //Every time the App is opened, this provider is rendered
+    //and call de loadStorage function.
+    loadStorageData();
+    }, []);
 
     return (
         <AuthContext.Provider
@@ -107,7 +140,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                     if(userJwt){
                         //check for async storage try catch
                         try {
-                            setUser((userJwt.jwt).toString());
+                            setUser(userJwt);
+                            console.log(userJwt.jwt.toString())
                             await AsyncStorage.setItem("@user", JSON.stringify(userJwt))
                             console.log("async storage LOGIN USER SAVED");
                             console.log("user: ", user);
@@ -137,7 +171,7 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
                 },
                 logout: async () => {
                     console.log(user);
-                    setUser('');
+                    setUser({"jwt": null});
                     
                     try {
                         await AsyncStorage.removeItem("@user");
@@ -154,6 +188,8 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }) => {
         </AuthContext.Provider>
     )
 }
+
+
 
 
 
