@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     fontSize: 16
     },
   miniImage: {
-    width: imgWidth / 6,
-    height: imgWidth / 6,
+    width: 70,
+    height: 70,
     borderRadius: imgWidth / 6,
     marginRight: 20
   },

@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity,Platform} from "react-native";
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
 
 import {Card, normalize} from "react-native-elements";
@@ -28,7 +28,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
     
     render() {
         return <Card containerStyle={{padding: 0, borderRadius: 12}}>
-            <Image
+            <Image 
                 style={styles.img}
                 source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}
             />
@@ -68,9 +68,11 @@ export default ListingCard
 
 const styles = StyleSheet.create({
     img: {
-        flex: 1,
-        height: imgWidth*0.8,
-        padding: 0
+        width: "100%",
+        height: Platform.OS === 'web' ? 300 : undefined,
+        aspectRatio: 4 / 3,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12
     },
     status: {
         flex:1, 

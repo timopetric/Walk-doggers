@@ -1,4 +1,4 @@
-import {Dimensions, Image, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Dimensions, Image, ScrollView, StyleSheet, Text, View, Platform} from "react-native";
 import * as React from "react";
 import {GRAY_1} from "../../constants/Colors";
 
@@ -9,9 +9,11 @@ const styles = StyleSheet.create({
         padding: 20
     },
     image: {
-        width: imgWidth,
-        height: imgWidth,
-        alignSelf: "center"
+        width: "100%",
+        height: Platform.OS === 'web' ? 300 : undefined,
+        aspectRatio: 4 / 3,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
     },
     author: {
         color: GRAY_1,

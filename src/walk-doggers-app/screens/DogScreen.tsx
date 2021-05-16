@@ -1,4 +1,4 @@
-import {Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity} from "react-native";
+import {Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, Platform} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
 import * as React from "react";
 import {PRIMARY} from "../constants/Colors";
@@ -11,12 +11,15 @@ const styles = StyleSheet.create({
     container: {
       paddingHorizontal: 35,
       paddingTop: 15,
-      paddingBottom: 50
+      paddingBottom: 50,
+      maxWidth: 900
     },
     image: {
-        width: imgWidth,
-        height: imgWidth/1.5,
-        alignSelf: "center"
+        width: "100%",
+        height: Platform.OS === 'web' ? 300 : undefined,
+        aspectRatio: 4 / 3,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12,
     },
     dogName: {
         fontSize: 26,
@@ -77,6 +80,7 @@ export default function DogScreen() {
             <Image
                 style={styles.image}
                 source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
+                resizeMode="cover"
             />
             <View style={[{flex:1, alignItems: "flex-end", right: 25}]}> 
                 <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.9}>
