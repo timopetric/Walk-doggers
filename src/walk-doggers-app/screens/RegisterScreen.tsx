@@ -8,7 +8,7 @@ import Colors, { PRIMARY } from '../constants/Colors'
 import ButtonForm from '../components/ButtonForm';
 import { Alert } from 'react-native';
 import { AuthNavProps } from '../navigation/AuthStack/AuthParamList';
-import { AuthContext } from '../navigation/Providers/AuthProvider';
+import AuthContext from "../navigation/AuthContext";
 
 const RegisterScreen = ({ navigation, route }: AuthNavProps<"Register">) => {
   const [firstName, setFirstName] = useState('');
@@ -16,9 +16,9 @@ const RegisterScreen = ({ navigation, route }: AuthNavProps<"Register">) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { user, register } = useContext(AuthContext);
+  const { signUp } = useContext(AuthContext);
 
-  const onPressRegister = () => {register({first_name: firstName, last_name: lastName, email, password})};
+  const onPressRegister = () => {signUp({firstName, lastName, email, password})};
   const onPressLogin = () => {navigation.replace('Login')};
 
   return (
