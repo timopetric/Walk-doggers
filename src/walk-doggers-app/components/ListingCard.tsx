@@ -27,7 +27,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
 
     
     render() {
-        return <Card containerStyle={{padding: 0, borderRadius: 10}}>
+        return <Card containerStyle={{padding: 0, borderRadius: 12}}>
             <Image
                 style={styles.img}
                 source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}

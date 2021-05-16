@@ -5,7 +5,8 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
 import { Card } from "react-native-elements/dist/card/Card";
 import {categories} from "../constants/Values";
-import StarRating from 'react-native-star-rating';
+import StarRating from 'react-native-star-rating'
+import {GRAY_STAR, YELLOW} from "../constants/Colors";
 
 interface IAboutMeCardProps {
     image?: string;
@@ -31,30 +32,38 @@ class AboutMeCard extends React.Component<IAboutMeCardProps> {
             <Text style={styles.desc}>{this.props.descr}</Text>
           </View>
           <View style={styles.stars}>
-          {this.props.isDog && <FontAwesome5
-            name="weight-hanging"
-            size={13}
-            color="black"
-            style={styles.icon}
-          />}
-          
-          {this.props.isDog && <Text style={styles.value}>{categories[this.props.value]} kg</Text>}
-          
-          
-          {!this.props.isDog && 
-          <StarRating
-            disabled={false}
-            maxStars={5}
-            emptyStar={"ios-star-outline"}
-            fullStar={"ios-star"}
-            halfStar={"ios-star-half"}
-            iconSet={"Ionicons"}
-            starSize={20}/>
-          } 
-          </View>
-          
+            <View style={styles.weightRow}>
+              {this.props.isDog && (
+                <FontAwesome5
+                  name="weight-hanging"
+                  size={13}
+                  color="black"
+                  style={styles.icon}
+                />
+              )}
 
-          
+              {this.props.isDog && (
+                <Text style={styles.value}>
+                  {categories[this.props.value]} kg
+                </Text>
+              )}
+            </View>
+
+            {!this.props.isDog && (
+              <StarRating
+                disabled={false}
+                rating={this.props.value}
+                maxStars={5}
+                fullStarColor={YELLOW}
+                emptyStarColor={GRAY_STAR}
+                emptyStar={"ios-star"}
+                fullStar={"ios-star"}
+                halfStar={"ios-star-half"}
+                iconSet={"Ionicons"}
+                starSize={20}
+              />
+            )}
+          </View>
         </View>
       </View>
     );
@@ -89,8 +98,8 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.22,
     shadowRadius: 2.22,
-
-    elevation: 3,
+    elevation: 1,
+    marginTop: 5
   },
   col: {
     flex: 0.8,
@@ -115,4 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: imgWidth / 6,
     marginRight: 20
   },
+  weightRow: {
+    flexDirection: "row"
+  }
 });

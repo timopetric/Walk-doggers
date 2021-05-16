@@ -46,8 +46,10 @@ export default function TabExplore({navigation}: any) {
                     callToActionText={'Take me for a walk'}
                     imageUrl={imageUrl}
                     title="Smol Husky Woofer"
-                    date="TUESDAY 6.4.2020"
+                    date=" 6.4.2020"
+                    day="TUESDAY"
                     distance="1.8 km"
+                    time="7:00 - 21:00"
                     onPress={onPress}
                 />
                 <Card
@@ -55,8 +57,10 @@ export default function TabExplore({navigation}: any) {
                     callToActionText={'Take me for a walk'}
                     imageUrl={imageUrl}
                     title="Very Good Boy"
-                    date="TUESDAY 6.4.2020"
+                    date=" 6.4.2020"
+                    day="TUESDAY"
                     distance="1.8 km"
+                    time="7:00 - 21:00"
                     onPress={onPress}
                 />
                 <Card
@@ -64,8 +68,10 @@ export default function TabExplore({navigation}: any) {
                     callToActionText={'Take me for a walk'}
                     imageUrl={imageUrl}
                     title="Snoop Dog"
-                    date="TUESDAY 6.4.2020"
+                    date=" 6.4.2020"
+                    day="TUESDAY"
                     distance="1.8 km"
+                    time="7:00 - 21:00"
                     onPress={onPress}
                 />
             </ScrollView>
