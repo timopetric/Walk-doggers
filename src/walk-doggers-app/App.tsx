@@ -14,7 +14,7 @@ export default function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
     const [state, dispatch] = React.useReducer(
-        (prevState, action) => {
+        (prevState: any, action:any) => {
             switch (action.type) {
                 case 'RESTORE_TOKEN':
                     return {
@@ -79,7 +79,9 @@ export default function App() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"email": email, "password": password})
                 };
+                console.log("emv",process.env)
                 const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
+                console.log(process.env.BASE_API_URL + '/auth/login')
                 const responseData = await response.json();
                 // return data;
                 console.log("data", responseData);
