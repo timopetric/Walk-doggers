@@ -65,6 +65,17 @@ export default function ImageUpload({saveUrl}: any) {
         return new Blob([u8arr], {type: mime});
     }
 
+    function makeID(length: number) {
+        let result           = [];
+        let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let charactersLength = characters.length;
+        for (let i = 0; i < length; i++) {
+            result.push(characters.charAt(Math.floor(Math.random() *
+                charactersLength)));
+        }
+        return result.join('');
+    }
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -82,7 +93,7 @@ export default function ImageUpload({saveUrl}: any) {
 
             if (Platform.OS === 'web') {
                 const file = DataURIToBlob(result.uri);
-                formData.append('image_data', file, 'image.jpg');
+                formData.append('image_data', file, makeID(10));
             } else {
                 const newImageUri = "file:///" + result.uri.split("file:/").join("");
                 formData.append('image_data', {

@@ -32,3 +32,4 @@ boto3==1.17.71
 botocore==1.20.71
 httpx==0.18.1
 ratelimit==2.2.1
+numpy==1.20.1

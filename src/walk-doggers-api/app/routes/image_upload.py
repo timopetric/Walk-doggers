@@ -1,4 +1,6 @@
 import io
+import string
+import random
 from botocore.exceptions import ClientError
 from fastapi import APIRouter, Depends, HTTPException, File, UploadFile, Form
 import boto3
@@ -35,9 +37,12 @@ async def upload_image(image_data: UploadFile = File(...)):
             "message": f"Max allowed file size is 2MB, uploaded size was: {size}"
         }
 
+    letters = string.ascii_lowercase
+    rnd_name = ''.join(random.choice(letters) for i in range(15))
+
     try:
-        response = s3.Object('walk-doggers', image_data.filename).put(ACL='public-read', Body=io.BytesIO(content))
-        image_uri = AWS_URL_PREFIX + image_data.filename
+        response = s3.Object('walk-doggers', rnd_name).put(ACL='public-read', Body=io.BytesIO(content))
+        image_uri = AWS_URL_PREFIX + rnd_name
 
         return {
             "message": f"Uploaded successfully",
