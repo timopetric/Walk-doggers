@@ -8,6 +8,7 @@ import {categories} from "../../constants/Values";
 import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
+import ImageUpload from "../../components/ImageUpload";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -65,7 +66,26 @@ function onPressAdd(navigation: any) {
     navigation.goBack();
 }
 
+type Listing = {
+    title: string;
+    description: string;
+    photos: Array<string>;
+}
+
+const initialListing: Listing = {
+    title: "",
+    description: "",
+    photos: [],
+}
+
 export default function NewListingScreen({navigation}: any) {
+    const [listing, setListing] = useState<Listing>(initialListing);
+
+    const saveUrl = (url: string) => {
+        setListing({...listing, photos: [...(listing.photos), url]});
+        console.log(url);
+    }
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -75,17 +95,7 @@ export default function NewListingScreen({navigation}: any) {
                 <Text style={styles.subtitle}>Dog</Text>
 
                 <Text style={styles.subtitle}>Images</Text>
-                <View style={styles.imageRow}>
-                    <Pressable>
-                        <Image
-                            style={styles.miniImage}
-                            source={{uri: 'https://i.ebayimg.com/images/g/W9gAAOSwf05bGvqH/s-l400.jpg'}}
-                        />
-                        <View style={[styles.miniImage, styles.addImage]}>
-                            <Entypo size={imgWidth / 10} name="plus" color={PRIMARY}/>
-                        </View>
-                    </Pressable>
-                </View>
+                <ImageUpload saveUrl={saveUrl} maxImages={3}/>
                 <Text style={styles.subtitle}>Description</Text>
                 <Input></Input>
 
