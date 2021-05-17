@@ -40,7 +40,7 @@ class Dog(Base):
     name = Column(String)
     description = Column(String)
     size_category = Column(Integer)
-    photo = Column(String)
+    photo = Column(String, default="https://walk-doggers.s3.eu-central-1.amazonaws.com/Dog_silhouette.png")
     owner_id = Column('owner_id', UUID(), ForeignKey('user.id'), nullable=False)
     owner = relationship("User", back_populates="dogs")
     listings = relationship("Listing", back_populates="dog")

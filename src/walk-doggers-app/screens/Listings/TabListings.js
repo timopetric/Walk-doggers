@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { StyleSheet } from 'react-native';
 
-import EditScreenInfo from '../components/EditScreenInfo';
+import EditScreenInfo from '../../components/EditScreenInfo';
 import { Text, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import ListingCard from "../components/ListingCard"
+import ListingCard from "../../components/ListingCard"
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 

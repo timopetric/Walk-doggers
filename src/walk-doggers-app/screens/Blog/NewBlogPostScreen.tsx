@@ -3,6 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
+import ImageUpload from "../../components/ImageUpload";
 import { useState } from "react";
 import FormTextInput from "../../components/FormInput";
 
@@ -44,16 +45,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const MultiLineTextInput = (props:any) => {
-    return (
-      <TextInput
-        {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
-        editable
-        maxLength={80}
-      />
-    );
-  }
-  
+const saveUrl = (url: string) => {
+    //todo
+}
+
 export default function NewBlogPostScreen() {
     const [title, setTitle] = useState<string>("");
     const [imgUrl, setImgUrl] = useState<string>("")
@@ -72,15 +67,7 @@ export default function NewBlogPostScreen() {
                 />
 
                 <Text style={styles.subtitle}>Image</Text>
-                <View style={styles.imageRow}>
-                    <Image
-                        style={styles.miniImage}
-                        source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
-                    />
-                    <View style={[styles.miniImage, styles.addImage]}>
-                        <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
-                    </View>
-                </View>
+                <ImageUpload saveUrl={saveUrl} maxImages={1}/>
                 <Text style={styles.subtitle}>Content</Text>
                 <MultiLineTextInput
                     multiline
