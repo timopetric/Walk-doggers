@@ -128,7 +128,7 @@ export default function NewDogScreen({navigation}: any) {
                 <SizePicker dog={dog} setDog={setDog} />
 
                 <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl}/>
+                <ImageUpload saveUrl={saveUrl} maxImages={10}/>
                 
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>

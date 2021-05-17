@@ -50,7 +50,7 @@ export default function NewBlogPostScreen() {
                 <Text style={styles.subtitle}>Title</Text>
                 <Input></Input>
                 <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl}/>
+                <ImageUpload saveUrl={saveUrl} maxImages={1}/>
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>
             </View>

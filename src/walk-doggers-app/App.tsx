@@ -14,7 +14,7 @@ export default function App() {
     const isLoadingComplete = useCachedResources();
     const colorScheme = useColorScheme();
     const [state, dispatch] = React.useReducer(
-        (prevState, action) => {
+        (prevState: any, action: any) => {
             switch (action.type) {
                 case 'RESTORE_TOKEN':
                     return {

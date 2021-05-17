@@ -28,7 +28,23 @@ const styles = StyleSheet.create({
     },
 })
 
-export default function ImageUpload({saveUrl}: any) {
+function ImageUploadButton({imageUrls, maxImages, pickImage}: any) {
+    if (imageUrls.length < maxImages){
+        return (
+            <Pressable onPress={pickImage}>
+                <View style={[styles.miniImage, styles.addImage]}>
+                    <Entypo size={imgWidth / 10} name="plus" color={PRIMARY} />
+                </View>
+            </Pressable>
+        )
+    }else{
+        return (
+            <View/>
+        )
+    }
+}
+
+export default function ImageUpload({saveUrl, maxImages}: any) {
     const [imageUrls, setImageUrls] = useState([]);
 
     const imageComponents: Array<JSX.Element> = [];
@@ -98,6 +114,7 @@ export default function ImageUpload({saveUrl}: any) {
                 const newImageUri = "file:///" + result.uri.split("file:/").join("");
                 formData.append('image_data', {
                     name: newImageUri.split("/").pop(),
+                    // @ts-ignore
                     type: mime.getType(newImageUri),
                     uri: newImageUri,
                 });
@@ -114,7 +131,7 @@ export default function ImageUpload({saveUrl}: any) {
                 saveUrl(json.image_uri)
                 // @ts-ignore
                 setImageUrls(oldArray => [...oldArray, json.image_uri]);
-                
+
             }).catch(e => {
                 console.log(e);
             })
@@ -122,14 +139,14 @@ export default function ImageUpload({saveUrl}: any) {
     };
 
     return (
-      <View style={styles.imageRow}>
-        {imageComponents}
-        <Pressable onPress={pickImage}>
-          <View style={[styles.miniImage, styles.addImage]}>
-            <Entypo size={imgWidth / 10} name="plus" color={PRIMARY} />
-          </View>
-        </Pressable>
-      </View>
+        <View style={styles.imageRow}>
+            {imageComponents}
+            <ImageUploadButton
+                imageUrls={imageUrls}
+                maxImages={maxImages}
+                pickImage={pickImage}
+            />
+        </View>
     );
 
 }
