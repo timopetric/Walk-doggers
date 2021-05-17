@@ -114,6 +114,7 @@ export default function NewDogScreen({navigation}: any) {
         setDog({...dog, photo: url})
         console.log(url)
     }
+    
     return (
         <ScrollView>
             <View style={styles.container}>
