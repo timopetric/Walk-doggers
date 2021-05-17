@@ -21,42 +21,53 @@ const imgWidth = dimensions.width * 0.85;
 
 const Card = (props: any) => {
     const navigation = useNavigation();
-    const {date, title, content, distance, imageUrl, author, onPress, callToActionText} = props;
-    return <View style={styles.card}>
-        <Image
-            style={styles.image}
-            source={{uri: imageUrl}}
-        />
-        <View style={{padding: 16}}>
-            <View style={{justifyContent: "space-between", flexDirection: "row"}}>
-                {author && <Text style={styles.date}>{author}</Text>}
-                {date && <Text style={styles.date}>{date}</Text>}
-            </View>
-            <Text style={styles.dogName}>{title}</Text>
-            <Text style={styles.description}>{content}</Text>
-            <View style={styles.imageRow}>
-                <Text style={styles.distance}>{distance}</Text>
-                <TouchableOpacity onPress={() => onPress(props, navigation)}>
-                    <Text style={styles.takeMeWalk}>{callToActionText}</Text>
-                </TouchableOpacity>
-            </View>
+    const {date, day, title, content, distance, imageUrl, author, onPress, callToActionText, time} = props;
+    return (
+      <View style={styles.card}>
+        <Image style={styles.image} source={{ uri: imageUrl }} />
+        <View style={{ padding: 16 }}>
+          <View
+            style={{ justifyContent: "space-between", flexDirection: "row" }}
+          >
+            {author && <Text style={styles.date}>{author}</Text>}
+            {date && (
+              <View style={styles.row}>
+                <View style={styles.dateRow}>
+                  <Text style={styles.dateDay}>{day}</Text>
+                  <Text style={styles.date}>{date}</Text>
+                </View>
+                <Text style={styles.time}>{time}</Text>
+              </View>
+            )}
+          </View>
+          <Text style={styles.dogName}>{title}</Text>
+          <Text style={styles.description}>{content}</Text>
+          <View style={styles.imageRow}>
+            <Text style={[styles.distance, styles.date]}>{distance}</Text>
+            <TouchableOpacity onPress={() => onPress(props, navigation)}>
+              <Text style={styles.takeMeWalk}>{callToActionText}</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-    </View>
+      </View>
+    );
 }
 const styles = StyleSheet.create({
     dogName: {
         fontSize: 23,
-        fontWeight: "500",
+        fontFamily: "red-hat-text-500",
         marginTop: 6
     },
     date: {
         color: GRAY_1,
-        fontWeight: "500"
+        fontFamily: "red-hat-text",
+        fontSize: 15
     },
     description: {
         paddingTop: 10,
         paddingBottom: 10,
-        fontSize: 12
+        fontSize: 15,
+        fontFamily: "red-hat-text",
     },
     imageRow: {
         flexDirection: "row",
@@ -68,8 +79,8 @@ const styles = StyleSheet.create({
     takeMeWalk: {
         color: BLUE,
         textTransform: "uppercase",
-        fontWeight: "bold",
         alignContent: "flex-end",
+        fontFamily: "red-hat-text-500",
     },
     card: {
         backgroundColor: "#fff",
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
         elevation: 1,
         flex: 1,
         // padding: 10,
-        margin: 10,
+        margin: 15,
         borderRadius: 12,
     },
     image: {
@@ -94,5 +105,28 @@ const styles = StyleSheet.create({
         // flex:1,
         // alignSelf: "center"
     },
+    dateRow: {
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        flex: 1
+    },
+    row: {
+        flexDirection: "row",
+        flex:1,
+        justifyContent:"space-around",
+        alignItems: "center"
+    },
+    dateDay: {
+        color: GRAY_1,
+        fontFamily: "red-hat-text-500",
+        fontSize: 15,
+        textTransform: "uppercase"
+    },
+    time: {
+        fontFamily: "red-hat-text-500",
+        fontSize: 15,
+        color: GRAY_1,
+    },
+
 });
 export default Card;

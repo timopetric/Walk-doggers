@@ -8,8 +8,19 @@ export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
 const CarouselCardItem = ({ item, index, inChat }) => {
   return (
+
     <View style={styles.container} key={index}>
-      <View style={styles.row}> 
+
+      {item.allMessages &&
+      <View style={styles.allMessages}>
+        <Text style={styles.h1}>All Messages</Text>
+        <Text style={styles.h2}>Swipe to filter by active listings</Text>
+      </View>
+      }
+
+
+      {!item.allMessages &&
+      <View style={styles.row}>
         <Image
           source={{ uri: item.imgUrl }}
           style={styles.image}
@@ -58,13 +69,8 @@ const CarouselCardItem = ({ item, index, inChat }) => {
           {!item.appliedListing && !item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
               <Text style={[styles.accText, {color: GREEN}]}>ARRANGED</Text>
           </View> }
-
-
-
-
-          
         </View>
-      </View>
+      </View>}
     </View>
   )
 }
@@ -157,6 +163,19 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 10,
     padding: 5,
+  },
+  allMessages: {
+    height: 55,
+    alignItems: "center"
+  },
+  h1: {
+    fontFamily: "roboto-500",
+    fontSize: 18,
+    top:-5
+  },
+  h2: {
+    fontFamily: "roboto-300",
+    fontSize: 14
   }
 });
 

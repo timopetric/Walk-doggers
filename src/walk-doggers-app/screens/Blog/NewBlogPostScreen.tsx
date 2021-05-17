@@ -3,6 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
+import ImageUpload from "../../components/ImageUpload";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -38,6 +39,9 @@ const styles = StyleSheet.create({
     }
 });
 
+const saveUrl = (url: string) => {
+    //todo
+}
 
 export default function NewBlogPostScreen() {
     return (
@@ -46,15 +50,7 @@ export default function NewBlogPostScreen() {
                 <Text style={styles.subtitle}>Title</Text>
                 <Input></Input>
                 <Text style={styles.subtitle}>Image</Text>
-                <View style={styles.imageRow}>
-                    <Image
-                        style={styles.miniImage}
-                        source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
-                    />
-                    <View style={[styles.miniImage, styles.addImage]}>
-                        <Entypo size={imgWidth/10} name="plus" color={PRIMARY} />
-                    </View>
-                </View>
+                <ImageUpload saveUrl={saveUrl}/>
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>
             </View>
