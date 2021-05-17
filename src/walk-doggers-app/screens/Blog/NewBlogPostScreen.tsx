@@ -6,6 +6,8 @@ import {Entypo} from "@expo/vector-icons";
 import ImageUpload from "../../components/ImageUpload";
 import { useState } from "react";
 import FormTextInput from "../../components/FormInput";
+import ButtonForm from "../../components/ButtonForm";
+import AuthContext from "../../navigation/AuthContext";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -39,14 +41,68 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-    input:{
-        borderRadius: 10,
-        backgroundColor: "rgba(205, 205, 205, 1)"
-    }
+    multiLineInput:{
+        borderRadius: 3,
+        backgroundColor: "rgba(205, 205, 205, 1)",
+        paddingHorizontal: 10,
+    },
+    input: {
+        height: 48,
+        padding: 1,
+        marginBottom: 12,
+        backgroundColor: 'rgba(205, 205, 205, 1)',
+        borderRadius: 3,
+        paddingHorizontal: 10,
+      },
+    separator: {
+        marginBottom: 20,
+    },
 });
+const MultiLineTextInput = (props:any) => {
+    return (
+      <TextInput
+        {...props} // Inherit any props passed to it; e.g., multiline, numberOfLines below
+        editable
+        maxLength={80}
+      />
+    );
+  }
 
 const saveUrl = (url: string) => {
     //todo
+}
+
+type Blog = {
+    title: string,
+    content: string,
+    photo: string
+}
+
+async function postBlog({title, content, photo}: Blog, getJwt: Function) {
+
+    let jwt = getJwt();
+
+    const reqOptions = {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify({
+            title,
+            content,
+            photo
+        })
+    };
+
+    console.log(JSON.stringify({
+        title,
+        content,
+        photo
+    }));
+    let response = await fetch(process.env.BASE_API_URL + '/blog', reqOptions);
+    return response;
 }
 
 export default function NewBlogPostScreen() {
@@ -54,8 +110,13 @@ export default function NewBlogPostScreen() {
     const [imgUrl, setImgUrl] = useState<string>("")
     const [desc, setDesc] = useState<string>("");
 
-    console.log(title, desc);
+    const { getJwt } = React.useContext(AuthContext);
     
+    const onPressAddBlog = async () => {
+        const response = await postBlog({title: title, content: desc, photo: imgUrl}, getJwt)
+        console.log(JSON.stringify(response));
+    };
+
     return (
         <ScrollView>
             <View style={styles.container}>
@@ -67,15 +128,23 @@ export default function NewBlogPostScreen() {
                 />
 
                 <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl} maxImages={1}/>
+                <ImageUpload saveUrl={setImgUrl} maxImages={1}/>
                 <Text style={styles.subtitle}>Content</Text>
                 <MultiLineTextInput
                     multiline
-                    numberOfLines={5}
+                    numberOfLines={4}
                     onChangeText={(text:string) => setDesc(text)}
                     value={desc}
                     backgroundColor="rgba(205, 205, 205,1)"
-                    style={styles.input}
+                    style={styles.multiLineInput}
+                />
+
+                <View style={styles.separator}></View>
+                <ButtonForm
+                    title={"Publish Blog"}
+                    onClickHandler={onPressAddBlog}
+                    primary={false}
+                    testId={"log"}
                 />
             </View>
         </ScrollView>
