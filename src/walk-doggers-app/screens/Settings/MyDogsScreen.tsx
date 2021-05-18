@@ -1,4 +1,4 @@
-import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View, FlatList} from "react-native";
+import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View, FlatList, ListRenderItem} from "react-native";
 import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {useEffect, useState, useContext} from "react";
