@@ -1,4 +1,4 @@
-import {Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, Dimensions, Image, ScrollView, StyleSheet, Text, TextInput, View} from "react-native";
 import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
 import { Input } from 'react-native-elements';
@@ -68,32 +68,27 @@ const MultiLineTextInput = (props:any) => {
     );
   }
 
-const saveUrl = (url: string) => {
-    //todo
-}
-
 type Blog = {
     title: string,
     content: string,
     photo: string
 }
 
-async function postBlog({title, content, photo}: Blog, getJwt: Function) {
+async function postBlog({title, content, photo}: Blog, getJwt: Function, navigation: any) {
 
     let jwt = getJwt();
-
     const reqOptions = {
         method: 'POST',
         headers: {
-            'Accept': 'application/json',
+            'accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + jwt
+            'Authorization': 'Bearer ' + jwt,
         },
         body: JSON.stringify({
             title,
             content,
             photo
-        })
+        }),
     };
 
     console.log(JSON.stringify({
@@ -101,11 +96,33 @@ async function postBlog({title, content, photo}: Blog, getJwt: Function) {
         content,
         photo
     }));
-    let response = await fetch(process.env.BASE_API_URL + '/blog', reqOptions);
-    return response;
+    console.log("jwt: ",jwt,'\n')
+    let response = await fetch(process.env.BASE_API_URL + '/blog/', reqOptions);
+    const statusCode = response.status;
+        switch (statusCode) {
+            case 201:
+                // successfully created dog
+                Alert.alert("Blog post was succesfully created, now it needs to be approved by mods")
+                navigation.goBack();
+                break;
+            case 403:
+                Alert.alert("You need to be repoter to write blogs")
+                break;
+            case 422:
+                Alert.alert("Data validation failed")
+                break;
+
+            default:
+                // TODO: notify user about error
+                Alert.alert("Error occured upsi...")
+                break;
+        }
+    
+    console.log("response: ",response.status)
+    return await response.json();
 }
 
-export default function NewBlogPostScreen() {
+export default function NewBlogPostScreen(navigation:any) {
     const [title, setTitle] = useState<string>("");
     const [imgUrl, setImgUrl] = useState<string>("")
     const [desc, setDesc] = useState<string>("");
@@ -113,8 +130,8 @@ export default function NewBlogPostScreen() {
     const { getJwt } = React.useContext(AuthContext);
     
     const onPressAddBlog = async () => {
-        const response = await postBlog({title: title, content: desc, photo: imgUrl}, getJwt)
-        console.log(JSON.stringify(response));
+        const response = await postBlog({title: title, content: desc, photo: imgUrl}, getJwt, navigation)
+        console.log(response);
     };
 
     return (
