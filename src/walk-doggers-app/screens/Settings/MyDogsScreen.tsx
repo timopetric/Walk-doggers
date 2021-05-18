@@ -9,47 +9,65 @@ import ButtonCustom from "../../components/ButtonCustom"
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
-    miniDogCard: {
-        flexDirection: "row",
-        margin: 20,
-        borderRadius: 14,
-        backgroundColor: GRAY_0,
-        overflow: "hidden",
+  miniDogCard: {
+    flexDirection: "row",
+    marginHorizontal: 20,
+    marginBottom: 20,
+    overflow: "hidden",
+
+    backgroundColor: "white",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1,
     },
-    subtitle: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 8,
-        marginBottom: 10,
-    },
-    miniImage: {
-        width: imgWidth / 4,
-        height: imgWidth / 4,
-        marginRight: 20,
-        flex: 1
-    },
-    textContainer: {
-        flex: 4,
-    },
-    editContainer: {
-        flexDirection: "column",
-        flexWrap: "wrap",
-        justifyContent: "flex-end",
-        flex: 1
-    },
-    editText: {
-        color: BLUE,
-        textTransform: "uppercase",
-        fontWeight: "bold",
-        alignContent: "flex-end",
-    }
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
+    elevation: 1,
+  },
+  subtitle: {
+    fontSize: 18,
+    marginTop: 8,
+    marginBottom: 10,
+    fontFamily: "roboto-500",
+  },
+  miniImage: {
+    width: imgWidth / 4,
+    height: imgWidth / 4,
+    marginRight: 20,
+    flex: 1,
+  },
+  textContainer: {
+    flex: 4,
+  },
+  editContainer: {
+    flexDirection: "column",
+    flexWrap: "wrap",
+    justifyContent: "flex-end",
+    flex: 1,
+  },
+  editText: {
+    color: BLUE,
+    textTransform: "uppercase",
+    alignContent: "flex-end",
+    paddingBottom: 10,
+    fontFamily: "red-hat-text-500",
+  },
+  description: {
+    fontFamily: "red-hat-text",
+  },
+  scroller: {
+    backgroundColor: GRAY_0,
+    paddingTop: 20
+  },
 });
 
 
 export default function MyDogsScreen() {
     return (
-        <ScrollView>
-            <MiniDogCard name={'Buddy'}/>
+        <ScrollView style={styles.scroller}>
+            <MiniDogCard name={'Buddy'} de/>
             <MiniDogCard name={'Snoop Dog'}/>
         </ScrollView>
     );
@@ -66,7 +84,7 @@ function MiniDogCard(props: any) {
             <View style={{justifyContent: 'flex-end', flexDirection: 'row', flex: 2}}>
                 <View style={styles.textContainer}>
                     <Text style={styles.subtitle}>{props.name}</Text>
-                    <Text>Golden retriever</Text>
+                    <Text style={styles.description}>Golden retriever</Text>
                 </View>
 
                 <View style={styles.editContainer}>
