@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity,Platform} from "react-native";
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
 
 import {Card, normalize} from "react-native-elements";
@@ -27,8 +27,8 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
 
     
     render() {
-        return <Card containerStyle={{padding: 0, borderRadius: 10}}>
-            <Image
+        return <Card containerStyle={{padding: 0, borderRadius: 12}}>
+            <Image 
                 style={styles.img}
                 source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}
             />
@@ -68,9 +68,11 @@ export default ListingCard
 
 const styles = StyleSheet.create({
     img: {
-        flex: 1,
-        height: imgWidth*0.8,
-        padding: 0
+        width: "100%",
+        height: Platform.OS === 'web' ? 300 : undefined,
+        aspectRatio: 4 / 3,
+        borderTopLeftRadius: 12,
+        borderTopRightRadius: 12
     },
     status: {
         flex:1, 
@@ -126,7 +128,7 @@ const styles = StyleSheet.create({
     button: {
         flexDirection: "row",
         justifyContent: "space-between",
-        alignContent: "flex-end",
+        alignItems: "center",
         borderRadius: 8,
         backgroundColor: PRIMARY,
         padding: 5,
@@ -135,12 +137,14 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontFamily: "red-hat-text-500",
-        fontSize: 20,
-        padding: 5,
+        fontSize: 16,
         color: PINKISH_WHITE
     },
     iconNum: {
-        padding: 5
+        padding: 2,
+        borderRadius: 5,
+        backgroundColor: PRIMARY_DARK,
+        margin: 3,
     },
     iconText: {
         fontFamily: "roboto",
@@ -148,8 +152,8 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         paddingRight: 10,
         color: PINKISH_WHITE,
-        backgroundColor: PRIMARY_DARK,
-        borderRadius: 5
+
+
     },
     ghost: {
         width: 25

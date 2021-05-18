@@ -6,8 +6,8 @@
 export type RootStackParamList = {
   Root: undefined;
   NotFound: undefined;
-  Login: undefined;
-  Register: undefined;
+  // Login: undefined;
+  // Register: undefined;
 };
 
 export type BottomTabParamList = {
@@ -25,21 +25,26 @@ export type ExploreParamList = {
 
 export type InboxParamList = {
   InboxScreen: undefined;
+  MessageScreen: undefined;
 };
 
 export type BlogParamList = {
   BlogScreen: undefined;
   NewBlogPostScreen: undefined;
+  BlogPostScreen: undefined;
 };
 
 export type ListingsParamList = {
   ListingsScreen: undefined;
+  NewListingScreen: undefined;
 };
 
 export type SettingsParamList = {
   SettingsScreen: undefined;
   EditProfileScreen: undefined;
   BecomeAReporterScreen: undefined;
+  MyDogsScreen: undefined;
+  NewDogScreen: undefined
 };
 
 export type LoginParamList = {

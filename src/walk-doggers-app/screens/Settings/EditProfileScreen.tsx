@@ -33,8 +33,11 @@ const styles = StyleSheet.create({
     },
 });
 
+function onPressSaveChanges(navigation: any){
+    navigation.goBack()
+}
 
-export default function EditProfileScreen() {
+export default function EditProfileScreen({navigation}: any) {
     return (
         <ScrollView>
             <Image
@@ -52,7 +55,7 @@ export default function EditProfileScreen() {
                 <Text style={styles.subtitle}>About me</Text>
                 <Input></Input>
 
-                <ButtonCustom text='Save changes' onPress= {() => alert('TODO implement')} color="purple"></ButtonCustom>
+                <ButtonCustom text='Save changes' onPress= {() => onPressSaveChanges(navigation) } color="purple"></ButtonCustom>
             </View>
         </ScrollView>
     );

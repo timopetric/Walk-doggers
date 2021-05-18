@@ -29,7 +29,8 @@ export function pickDistanceFilter(distance) {
 
 const initialState = {
     showFilter: false,
-    selectedSize: '0',
+    selectedSize: 2,
+    selectedDistance: 40,
 }
 
 const reducer = (state = initialState, action) => {
@@ -44,7 +45,7 @@ const reducer = (state = initialState, action) => {
         }
         case PICK_DISTANCE_FILTER: return {
             ...state,
-            selectedSize: action.payload
+            selectedDistance: action.payload
         }
 
         default: return state

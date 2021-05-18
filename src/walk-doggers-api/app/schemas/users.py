@@ -7,20 +7,23 @@ from app.functions import regex_password, regex_email
 
 class Login(BaseModel):
     email: str = Field(..., example="a@a.a")
-    password: str = Field(..., example="a")
+    password: str = Field(..., example="Dobr0$Geslo")
 
 
 class UserBase(BaseModel):
     email: str = Field(..., example="a@a.a", regex=regex_email)
-    password: str = Field(..., example="Dobr0$Geslo", regex=regex_password)
     first_name: str = Field(..., example="Janez")
     last_name: str = Field(..., example="Novak")
+    description: Optional[str] = Field("", example="I love long walks in nature.")
+    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/download.png",
+                                     example="image_url")
 
 
-class UserUpdate(UserBase):
-    admin: Optional[bool] = False
-    moderator: Optional[bool] = False
-    reporter: Optional[bool] = False
+class UserUpdate(BaseModel):
+    first_name: str = Field(..., example="Janez")
+    last_name: str = Field(..., example="Novak")
+    description: Optional[str] = Field("", example="I love long walks in nature.")
+    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/download.png")
 
 
 class UserInDBBase(UserBase):
@@ -35,6 +38,7 @@ class User(UserInDBBase):
 
 
 class UserRegister(UserBase):
+    password: str = Field(..., example="Dobr0$Geslo", regex=regex_password)
     pass
 
 
@@ -45,6 +49,12 @@ class UserRoles(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserRolesUpdate(UserBase):
+    admin: Optional[bool] = False
+    moderator: Optional[bool] = False
+    reporter: Optional[bool] = False
 
 
 class JwtToken(BaseModel):
