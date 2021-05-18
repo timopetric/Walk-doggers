@@ -122,7 +122,7 @@ async function postBlog({title, content, photo}: Blog, getJwt: Function, navigat
     return await response.json();
 }
 
-export default function NewBlogPostScreen(navigation:any) {
+export default function NewBlogPostScreen({navigation}: any) {
     const [title, setTitle] = useState<string>("");
     const [imgUrl, setImgUrl] = useState<string>("")
     const [desc, setDesc] = useState<string>("");
