@@ -9,6 +9,14 @@ const AuthContext = createContext({
     },
     getJwt: () => {
     },
+    getRoles: async () => {
+    },
+    isAdmin: (): boolean => {
+    },
+    isModerator: (): boolean => {
+    },
+    isReporter: (): boolean => {
+    },
 });
 
 export type LoginProps = {

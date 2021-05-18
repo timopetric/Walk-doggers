@@ -1,9 +1,11 @@
 import {Dimensions, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
-import { Input } from 'react-native-elements';
+import {Input} from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
 import ImageUpload from "../../components/ImageUpload";
+import {useContext, useEffect} from "react";
+import AuthContext from "../../navigation/AuthContext";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -43,7 +45,19 @@ const saveUrl = (url: string) => {
     //todo
 }
 
-export default function NewBlogPostScreen() {
+export default function NewBlogPostScreen({navigation}: any) {
+    const {isReporter, getRoles} = useContext(AuthContext);
+
+
+    useEffect(() => {
+        getRoles().then(() => {
+            if (!isReporter()) {
+                alert('Restricted to reporters.')
+                navigation.goBack();
+            }
+        })
+    }, [])
+
     return (
         <ScrollView>
             <View style={styles.container}>
