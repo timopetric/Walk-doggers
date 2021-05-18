@@ -70,6 +70,7 @@ class Listing(Base):
     lon = Column(Float)
     lat = Column(Float)
     location_text = Column(String)
+    distance: float
 
     author_id = Column('author_id', UUID(), ForeignKey('user.id'), nullable=False)
     dog_id = Column('dog_id', UUID(), ForeignKey('dog.id'), nullable=False)
