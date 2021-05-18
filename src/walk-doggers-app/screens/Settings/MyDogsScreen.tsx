@@ -3,6 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {useEffect, useState, useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
+import { useIsFocused } from "@react-navigation/native";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -72,7 +73,7 @@ type Dog = {
 
 
 export default function MyDogsScreen() {
-    
+    const isFocused = useIsFocused();
     const { getJwt } = useContext(AuthContext);
 
     const [dogs, setDogs] = useState<Object[]>([{name: "string", id: "d",
@@ -84,20 +85,22 @@ export default function MyDogsScreen() {
         <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id}/>
       );
 
-      useEffect(() => {
-        fetch(process.env.BASE_API_URL + '/dogs/', {
-            method: "GET",
-            headers: {
-                "accept": "application/json",
-                "Content-Type": "application/json",
-                'Authorization': 'Bearer ' + getJwt()
-            },
-        }).then(async response => {
-            let json = await response.json();
-            console.log(json)
-            setDogs(json)
-        })
-        }, [])
+    useEffect(() => {
+        if (isFocused) {
+            fetch(process.env.BASE_API_URL + '/dogs/', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + getJwt()
+                },
+            }).then(async response => {
+                let json = await response.json();
+                console.log(json)
+                setDogs(json)
+            })
+        }
+    }, [isFocused])
     
     return (
         <FlatList
