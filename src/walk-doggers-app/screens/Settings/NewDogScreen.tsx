@@ -10,6 +10,7 @@ import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
 import AuthContext from "../../navigation/AuthContext";
 import ImageUpload from "../../components/ImageUpload";
+import SizeSelector from "../../components/SizeSelector";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -101,35 +102,42 @@ type Dog = {
 
 
 export default function NewDogScreen({navigation}: any) {
-    const { getJwt } = useContext(AuthContext);
+    const {getJwt} = useContext(AuthContext);
 
     const [dog, setDog] = useState<Dog>({
         name: "",
         description: "",
-        size_category: -1,
+        size_category: 0,
         photo: "",
     });
+
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        setDog({...dog, size_category: selectedIndex})
+    }, [selectedIndex]);
 
     const saveUrl = (url: string) => {
         setDog({...dog, photo: url})
         console.log(url)
     }
-    
+
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.subtitle}>Dog's name</Text>
-                <Input onChangeText={(text) => setDog({ ...dog, name: text })}></Input>
+                <Input onChangeText={(text) => setDog({...dog, name: text})}></Input>
 
                 <Text style={styles.subtitle}>Description</Text>
-                <Input onChangeText={(text) => setDog({ ...dog, description: text })}></Input>
+                <Input onChangeText={(text) => setDog({...dog, description: text})}></Input>
 
                 <Text style={styles.subtitle}>Size</Text>
-                <SizePicker dog={dog} setDog={setDog} />
+                <SizeSelector categories={categories} selectedIndex={selectedIndex}
+                              setSelectedIndex={setSelectedIndex} multiple={false}/>
 
                 <Text style={styles.subtitle}>Image</Text>
                 <ImageUpload saveUrl={saveUrl} maxImages={10}/>
-                
+
                 <Text style={styles.subtitle}>Content</Text>
                 <Input></Input>
 
@@ -137,34 +145,4 @@ export default function NewDogScreen({navigation}: any) {
             </View>
         </ScrollView>
     );
-}
-
-function SizePicker(props: any) {
-    const [selected, setSelected] = useState(0);
-
-    useEffect(() => {
-        props.setDog({ ...props.dog, size_category: selected })
-    }, [selected])
-
-    let sizePickerItems: any = [];
-    categories.forEach((category, index, arr) => {
-        sizePickerItems.push(
-            <SizePickerBox category={category} selected={selected} key={index} index={index} setSelected={setSelected}/>
-        )
-    })
-
-    return <View style={styles.sizesRow}>{sizePickerItems}</View>
-
-}
-
-function SizePickerBox(props: any) {
-    return (
-        <Pressable style={styles.touchable} onPress={() => props.setSelected(props.index)}>
-            <Card
-                containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
-                <Text style={styles.text}>{props.category}</Text>
-                <Text style={styles.text}>kg</Text>
-            </Card>
-        </Pressable>
-    )
 }
