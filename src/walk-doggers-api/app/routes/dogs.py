@@ -3,7 +3,7 @@ from typing import Any, List
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import UUID4
 from sqlalchemy.orm import Session
-from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
+from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_400_BAD_REQUEST
 
 from app.auth import AuthHandler
 from app.postgres import actions
@@ -33,6 +33,8 @@ def get_dog(*, db: Session = Depends(get_db), dog_id: UUID4) -> Any:
 @DogsRouter.post("/", response_model=schemas.Dog, status_code=HTTP_201_CREATED)
 def add_dog(*, db: Session = Depends(get_db), dog_in: schemas.DogCreate,
             user_id=Depends(auth_handler.auth_wrapper)) -> Any:
+    if dog_in and len(dog_in.name) == 0:
+        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Error. Name can not be empty.")
     try:
         dog = actions.dog.add_dog(db=db, owner_id=user_id, obj_in=dog_in)
     except Exception:

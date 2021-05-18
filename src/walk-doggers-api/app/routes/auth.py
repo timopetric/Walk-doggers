@@ -17,7 +17,8 @@ auth_handler = AuthHandler()
 
 @AuthRouter.post("/login", response_model=schemas.JwtToken)
 def login(*, db: Session = Depends(get_db), auth_details: schemas.Login) -> Any:
-    user = actions.user.get_user_by_email(db=db, email=auth_details.email)
+    email_str = auth_details.email.lower()
+    user = actions.user.get_user_by_email(db=db, email=email_str)
     if user is None or not auth_handler.verify_password(auth_details.password, user.password):
         raise HTTPException(status_code=HTTP_401_UNAUTHORIZED, detail='Invalid username and/or password')
     jwt = auth_handler.encode_token(str(user.id))
@@ -26,7 +27,8 @@ def login(*, db: Session = Depends(get_db), auth_details: schemas.Login) -> Any:
 
 @AuthRouter.post("/register", response_model=schemas.JwtToken, status_code=HTTP_201_CREATED)
 def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegister) -> Any:
-    if actions.user.get_user_by_email(db=db, email=auth_details.email) is not None:
+    email_str = auth_details.email.lower()
+    if actions.user.get_user_by_email(db=db, email=email_str) is not None:
         raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail='email is taken')
     auth_details.password = auth_handler.get_password_hash(auth_details.password)
     user = actions.user.create(db=db, obj_in=auth_details)
