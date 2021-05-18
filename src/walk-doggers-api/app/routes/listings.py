@@ -8,10 +8,12 @@ from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
 from app.auth import AuthHandler
 from app.postgres import actions
 from app import schemas
-from app.functions import get_db, check_if_user_can_apply_to_listing, check_if_user_is_author_of_listing
+from app.functions import get_db, check_if_user_can_apply_to_listing, check_if_user_is_author_of_listing, \
+    check_if_listing_is_active
 from app.postgres.models import Listing, Application
 
 from ..geocoding_external_api import get_location_text
+from geopy import distance
 
 ListingsRouter = APIRouter()
 auth_handler = AuthHandler()
@@ -23,6 +25,38 @@ def get_users_listings(db: Session = Depends(get_db), user_id=Depends(auth_handl
     if user is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
     return user.listings
+
+
+@ListingsRouter.get("/explore", response_model=List[schemas.ListingExplore],
+                    description="Get listings on explore page")
+def get_listings_filtered(*, db: Session = Depends(get_db),
+                          user_lat: float, user_lon: float,
+                          user_dist: float,
+                          user_dog_size0: bool,
+                          user_dog_size1: bool,
+                          user_dog_size2: bool,
+                          user_dog_size3: bool,
+                          user_dog_size4: bool) -> Any:
+    listings = actions.listing.get_all(db=db, skip=0, limit=9999999)
+    if listings is None:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
+
+    rez = list()
+    for listing in listings:
+        lon, lat = listing.lon, listing.lat
+        dist = float(distance.distance((user_lat, user_lon), (lat, lon)).km)
+
+        if dist <= user_dist \
+                and listing.dog.size_category in [0 if user_dog_size0 else None,
+                                                  1 if user_dog_size1 else None,
+                                                  2 if user_dog_size2 else None,
+                                                  3 if user_dog_size3 else None,
+                                                  4 if user_dog_size4 else None] \
+                and check_if_listing_is_active(listing):
+            listing.distance = dist
+            rez.append(listing)
+
+    return rez
 
 
 @ListingsRouter.get("/{id}", response_model=schemas.Listing)
