@@ -34,12 +34,23 @@ export default function App() {
                         isSignout: true,
                         userToken: null,
                     };
+                case 'SET_ROLES':
+                    console.log("XXX: " + action.roles.admin)
+                    return {
+                        ...prevState,
+                        admin: action.roles.admin,
+                        moderator: action.roles.moderator,
+                        reporter: action.roles.reporter,
+                    };
             }
         },
         {
             isLoading: true,
             isSignout: false,
             userToken: null,
+            admin: null,
+            moderator: null,
+            reporter: null
         }
     );
 
@@ -80,12 +91,31 @@ export default function App() {
                     body: JSON.stringify({"email": email, "password": password})
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
-                const responseData = await response.json();
-                // return data;
-                console.log("data", responseData);
-                await AsyncStorage.setItem("@user", responseData?.jwt);
+                if (response.ok) {
+                    const responseData = await response.json();
+                    await AsyncStorage.setItem("@user", responseData?.jwt);
+                    await authContext.getRoles(responseData?.jwt);
+                    dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                } else {
+                    alert('Wrong email or password!')
+                }
 
-                dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+            },
+            getRoles: async (jwt: string) => {
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        "accept": "application/json",
+                        'Authorization': 'Bearer ' + jwt
+                    },
+                };
+                const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
+                const responseData = await response.json();
+                console.log("data", responseData);
+                // await AsyncStorage.setItem("@user", responseData?.jwt);
+
+
+                dispatch({type: 'SET_ROLES', roles: responseData});
             },
             signOut: async () => {
                 await AsyncStorage.removeItem("@user")
@@ -103,15 +133,28 @@ export default function App() {
                     })
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/register', requestOptions);
-                const responseData = await response.json();
-                console.log("data", responseData);
-                await AsyncStorage.setItem("@user", responseData?.jwt);
-
-                dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                if (response.ok) {
+                    const responseData = await response.json();
+                    await AsyncStorage.setItem("@user", responseData?.jwt);
+                    await authContext.getRoles(responseData?.jwt);
+                    dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                } else {
+                    alert('Wrong email or password!')
+                }
             },
             getJwt: () => {
                 return state.userToken;
-            }
+            },
+            isAdmin: (): boolean => {
+                return state.admin;
+            },
+            isModerator: (): boolean => {
+                return state.moderator;
+            },
+            isReporter: (): boolean => {
+                return state.reporter;
+            },
+
         }),
         [state.userToken, []]
     );
