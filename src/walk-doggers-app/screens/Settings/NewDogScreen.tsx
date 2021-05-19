@@ -11,12 +11,17 @@ import mime from 'mime';
 import AuthContext from "../../navigation/AuthContext";
 import ImageUpload from "../../components/ImageUpload";
 import SizeSelector from "../../components/SizeSelector";
+import FormItem from "../../components/FormItem";
+import DateSelect from "../../components/DateSelect";
+import ButtonCustom from "../../components/ButtonCustom";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        padding: 20,
+        backgroundColor:"white",
+        flex: 1
     },
     distance: {
         flex: 1
@@ -123,26 +128,20 @@ export default function NewDogScreen({navigation}: any) {
     }
 
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text style={styles.subtitle}>Dog's name</Text>
-                <Input onChangeText={(text) => setDog({...dog, name: text})}></Input>
-
-                <Text style={styles.subtitle}>Description</Text>
-                <Input onChangeText={(text) => setDog({...dog, description: text})}></Input>
-
-                <Text style={styles.subtitle}>Size</Text>
-                <SizeSelector categories={categories} selectedIndex={selectedIndex}
-                              setSelectedIndex={setSelectedIndex} multiple={false}/>
-
-                <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl} maxImages={10}/>
-
-                <Text style={styles.subtitle}>Content</Text>
-                <Input></Input>
-
-                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
-            </View>
+        <ScrollView style={styles.container}>
+                <FormItem label={"NAME"} placeholder={"Enter dog's name"}
+                          getText={(text) => setDog({...dog, name: text})}/>
+                <FormItem label={"DESCRIPTION"} placeholder={"Describe your dog"}
+                          getText={(text) => setDog({...dog, description: text})}
+                          height={150}/>
+                <FormItem label={"SIZE"}>
+                    <SizeSelector categories={categories} selectedIndex={selectedIndex}
+                                  setSelectedIndex={setSelectedIndex} multiple={false}/>
+                </FormItem>
+                <FormItem label={"IMAGE"}>
+                    <ImageUpload saveUrl={saveUrl} maxImages={10}/>
+                </FormItem>
+            <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
         </ScrollView>
     );
 }
