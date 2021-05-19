@@ -157,7 +157,7 @@ export default function NewListingScreen({navigation}: any) {
                     <DateSelect onDateTimeSelect={setDateTo}/>
                 </FormItem>
 
-                <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation)}/>
+                <ButtonCustom text="Publish" color={"purple"} onPress={() => onPressAdd(navigation)}/>
             </View>
         </ScrollView>
     );

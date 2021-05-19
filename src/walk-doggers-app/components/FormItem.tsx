@@ -13,7 +13,11 @@ const FormItem = ({label, placeholder, getText, height, children}: any) => {
             <Text style={styles.label}>{label}</Text>
             {children === undefined ?
                 <TextInput
-                    style={[styles.input, height !== undefined && {height: height, paddingTop: 12}]}
+                    style={[styles.input, height !== undefined && {
+                        height: height,
+                        paddingTop: 12,
+                        textAlignVertical: "top"
+                    }]}
                     onChangeText={getText}
                     placeholder={placeholder}
                     placeholderTextColor={GRAY_1}
