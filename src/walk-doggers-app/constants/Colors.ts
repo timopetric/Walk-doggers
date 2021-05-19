@@ -5,6 +5,7 @@ export const PRIMARY = '#8265F3';
 export const PRIMARY_DARK = '#6951C7';
 export const PRIMARY_DARKER = '#5B3ADE';
 
+export const GRAY_00 = '#F6F6F6';
 export const GRAY_0 = '#EDEDED';
 export const GRAY_1 = '#C4C4C4';
 export const GRAY_2 = '#A3A3A3';
@@ -23,18 +24,18 @@ export const BLUE = '#2878EF';
 export const PINKISH_WHITE = '#ECE8FF'
 
 export default {
-  light: {
-    text: '#000',
-    background: '#fff',
-    tint: tintColorLight,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorLight,
-  },
-  dark: {
-    text: '#fff',
-    background: '#000',
-    tint: tintColorDark,
-    tabIconDefault: '#ccc',
-    tabIconSelected: tintColorDark,
-  },
+    light: {
+        text: '#000',
+        background: '#fff',
+        tint: tintColorLight,
+        tabIconDefault: '#ccc',
+        tabIconSelected: tintColorLight,
+    },
+    dark: {
+        text: '#fff',
+        background: '#000',
+        tint: tintColorDark,
+        tabIconDefault: '#ccc',
+        tabIconSelected: tintColorDark,
+    },
 };

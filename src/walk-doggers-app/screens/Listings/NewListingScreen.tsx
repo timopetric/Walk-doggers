@@ -10,6 +10,9 @@ import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
 import ImageUpload from "../../components/ImageUpload";
 import CalendarDays from 'react-native-calendar-slider-carousel';
+import FormItem from "../../components/FormItem";
+import ButtonCustom from "../../components/ButtonCustom";
+import DogSelect from "../../components/DogSelect";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -80,57 +83,31 @@ const initialListing: Listing = {
 }
 
 export default function NewListingScreen({navigation}: any) {
-    const [listing, setListing] = useState<Listing>(initialListing);
-    const [date, setDate] = useState({})
-
-    const saveUrl = (url: string) => {
-        setListing({...listing, photos: [...(listing.photos), url]});
-        console.log(url);
-    }
-    const changeSelectedDate = (date) => {
-        console.log(date); // "2019-07-20"
-        
-        setDate({
-          date
-         });
-      };
+    // const [listing, setListing] = useState<Listing>(initialListing);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [dateFrom, setDateFrom] = useState("");
+    const [dateTo, setDateTo] = useState("");
+    const [dogId, setDogId] = useState(null);
 
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: "white"}}>
             <View style={styles.container}>
-                <Text style={styles.subtitle}>Title</Text>
-                <Input></Input>
+                <FormItem label={"TITLE"} placeholder={"Enter listing title"} getText={x => setTitle(x)}/>
+                <FormItem label={"DOG"}>
+                    <DogSelect onSelectId={setDogId} navigation={navigation}/>
+                </FormItem>
+                <FormItem label={"DESCRIPTION"} placeholder={"Describe your listing"} getText={x => setDescription(x)}
+                          height={150}/>
+                <FormItem label={"FROM"}>
+                    <Text>ll</Text>
+                </FormItem>
 
-                <Text style={styles.subtitle}>Dog</Text>
+                <FormItem label={"TO"}>
+                    <Text>ll</Text>
+                </FormItem>
 
-                <Text style={styles.subtitle}>Images</Text>
-                <CalendarDays
-                // First day. Default = new Date()
-                firstDate={"2019-07-05"}
-                // Last day. You can set number of days instead
-                lastDate={"2019-07-20"}
-                // Sets number of days displaued. Default = 30
-                numberOfDays={60}
-                // Initial selected day. Default = firstDate
-                selectedDate={"2019-07-10"}
-                // scrollView width
-                width={dimensions.width}
-                // Instead of width you can set number of days visible.
-                daysInView={3}
-                // Only available if width % 120 = 0. Scroll by full width
-                paginate={true}
-                // Function to get selected date in 'YYYY-MM-DD' format
-                onDateSelect={date => changeSelectedDate(date)}
-                // Replaces scroll with left and right arrows.
-                // Suitable for web where horizontal scroll is not always available 
-                arrows={false}
-
-                />
-                <ImageUpload saveUrl={saveUrl} maxImages={3}/>
-                <Text style={styles.subtitle}>Description</Text>
-                <Input></Input>
-
-                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation)}/>
+                <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation)}/>
             </View>
         </ScrollView>
     );

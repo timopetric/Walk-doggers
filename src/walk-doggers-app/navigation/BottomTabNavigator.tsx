@@ -257,6 +257,13 @@ function ListingsNavigator({navigation}: any) {
                     ...headerWhiteBackground,
                 }}
             />
+            <ListingsStack.Screen
+                name="NewDogScreenListings"
+                component={NewDogScreen}
+                options={{
+                    headerTitle: 'New Dog', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
+            />
         </ListingsStack.Navigator>
     );
 }
