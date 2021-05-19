@@ -6,12 +6,56 @@ import {Entypo} from "@expo/vector-icons";
 import ImageUpload from "../../components/ImageUpload";
 import {useContext, useEffect} from "react";
 import AuthContext from "../../navigation/AuthContext";
+import FormItem from "../../components/FormItem";
+import ButtonCustom from "../../components/ButtonCustom";
+
+
+const saveUrl = (url: string) => {
+    //todo
+}
+
+export default function NewBlogPostScreen({navigation}: any) {
+    const {isReporter, getRoles} = useContext(AuthContext);
+
+
+    useEffect(() => {
+        getRoles().then(() => {
+            if (!isReporter()) {
+                alert('Restricted to reporters.')
+                navigation.goBack();
+            }
+        })
+    }, [])
+
+    return (
+        <ScrollView style={styles.container} contentContainerStyle={{alignItems: "center"}}>
+            <View style={styles.innerContainer}>
+                <FormItem label={"TITLE"} placeholder={"Blog post title"}/>
+                <FormItem label={"IMAGE"}>
+                    <ImageUpload saveUrl={saveUrl} maxImages={10} showEdit={true}/>
+                </FormItem>
+                <FormItem label={"CONTENT"} placeholder={"Blog content"}
+                          height={150}/>
+                <ButtonCustom text="Create Blog Post" color={"purple"}/>
+            </View>
+        </ScrollView>
+    );
+}
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        // margin: 20,
+        paddingHorizontal: 20,
+        backgroundColor: "white",
+        flex: 1
+    },
+    innerContainer: {
+        marginTop: 20,
+        width: 500,
+        maxWidth: "100%",
+        flex: 1
     },
     imageRow: {
         flexDirection: "row",
@@ -40,34 +84,3 @@ const styles = StyleSheet.create({
         justifyContent: "center",
     }
 });
-
-const saveUrl = (url: string) => {
-    //todo
-}
-
-export default function NewBlogPostScreen({navigation}: any) {
-    const {isReporter, getRoles} = useContext(AuthContext);
-
-
-    useEffect(() => {
-        getRoles().then(() => {
-            if (!isReporter()) {
-                alert('Restricted to reporters.')
-                navigation.goBack();
-            }
-        })
-    }, [])
-
-    return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text style={styles.subtitle}>Title</Text>
-                <Input></Input>
-                <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl} maxImages={1}/>
-                <Text style={styles.subtitle}>Content</Text>
-                <Input></Input>
-            </View>
-        </ScrollView>
-    );
-}

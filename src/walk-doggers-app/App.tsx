@@ -112,11 +112,7 @@ export default function App() {
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
                 const responseData = await response.json();
-                console.log("data", responseData);
-                // await AsyncStorage.setItem("@user", responseData?.jwt);
-
-
-                dispatch({type: 'SET_ROLES', roles: responseData});
+                await dispatch({type: 'SET_ROLES', roles: responseData});
             },
             signOut: async () => {
                 await AsyncStorage.removeItem("@user")
@@ -157,7 +153,7 @@ export default function App() {
             },
 
         }),
-        [state.userToken, []]
+        [state.userToken, state.reporter, state.admin, state.morerator, []]
     );
     if (!isLoadingComplete) {
         return null;
