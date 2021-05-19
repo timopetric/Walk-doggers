@@ -3,7 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {Card, Input} from 'react-native-elements';
 import {Entypo} from "@expo/vector-icons";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {categories} from "../../constants/Values";
 import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
@@ -13,6 +13,9 @@ import CalendarDays from 'react-native-calendar-slider-carousel';
 import FormItem from "../../components/FormItem";
 import ButtonCustom from "../../components/ButtonCustom";
 import DogSelect from "../../components/DogSelect";
+import DateSelect from "../../components/DateSelect";
+import * as Location from "expo-location";
+import AuthContext from "../../navigation/AuthContext";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -66,9 +69,6 @@ const styles = StyleSheet.create({
     },
 });
 
-function onPressAdd(navigation: any) {
-    navigation.goBack();
-}
 
 type Listing = {
     title: string;
@@ -76,12 +76,34 @@ type Listing = {
     photos: Array<string>;
 }
 
-const initialListing: Listing = {
-    title: "",
-    description: "",
-    photos: [],
+const addListing = (navigation: any, listing: Listing, getJwt: any) => {
+    let jwt = getJwt()
+    console.log("JWT " + jwt);
+    fetch(process.env.BASE_API_URL + '/listings/', {
+        method: "POST",
+        headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify(listing)
+    }).then(async response => {
+        let json = await response.json();
+        console.log(json)
+        const statusCode = response.status;
+        switch (statusCode) {
+            case 201:
+                navigation.goBack();
+                break;
+            default:
+                alert("error");
+                // TODO: notify user about error
+                break;
+        }
+    }).catch(e => {
+        console.log(e);
+    })
 }
-
 export default function NewListingScreen({navigation}: any) {
     // const [listing, setListing] = useState<Listing>(initialListing);
     const [title, setTitle] = useState("");
@@ -89,6 +111,34 @@ export default function NewListingScreen({navigation}: any) {
     const [dateFrom, setDateFrom] = useState("");
     const [dateTo, setDateTo] = useState("");
     const [dogId, setDogId] = useState(null);
+    const [location, setLocation] = useState({});
+
+    const {getJwt} = useContext(AuthContext);
+
+    const onPressAdd = () => {
+        const listing = {
+            title,
+            description,
+            date_from: dateFrom,
+            date_to: dateTo,
+            dog_id: dogId,
+            lat: location?.coords?.latitude,
+            lon: location?.coords?.longitude,
+        }
+        console.log(listing)
+        addListing(navigation, listing, getJwt);
+    }
+
+    useEffect(() => {
+        (async () => {
+            let {status} = await Location.requestForegroundPermissionsAsync();
+            if (status !== 'granted') {
+                return;
+            }
+            const loc = await Location.getCurrentPositionAsync({});
+            setLocation(loc);
+        })();
+    }, []);
 
     return (
         <ScrollView style={{backgroundColor: "white"}}>
@@ -100,11 +150,11 @@ export default function NewListingScreen({navigation}: any) {
                 <FormItem label={"DESCRIPTION"} placeholder={"Describe your listing"} getText={x => setDescription(x)}
                           height={150}/>
                 <FormItem label={"FROM"}>
-                    <Text>ll</Text>
+                    <DateSelect onDateTimeSelect={setDateFrom}/>
                 </FormItem>
 
                 <FormItem label={"TO"}>
-                    <Text>ll</Text>
+                    <DateSelect onDateTimeSelect={setDateTo}/>
                 </FormItem>
 
                 <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation)}/>
