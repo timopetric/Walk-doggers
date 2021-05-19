@@ -102,11 +102,12 @@ export default function App() {
 
             },
             getRoles: async (jwt: string) => {
+                const token = jwt || state.userToken
                 const requestOptions = {
                     method: 'GET',
                     headers: {
                         "accept": "application/json",
-                        'Authorization': 'Bearer ' + jwt
+                        'Authorization': 'Bearer ' + token
                     },
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);

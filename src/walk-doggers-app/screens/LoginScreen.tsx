@@ -57,7 +57,7 @@ const LoginScreen = ({navigation, route}: AuthNavProps<"Login">) => {
                     secureTextEntry={true}
                 />
 
-                <View style={styles.separator}></View>
+                <View style={styles.separator}/>
                 <ButtonForm
                     title={"Login"}
                     onClickHandler={onPressLogin}

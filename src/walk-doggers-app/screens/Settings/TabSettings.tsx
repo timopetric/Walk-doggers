@@ -11,8 +11,10 @@ import AuthContext from "../../navigation/AuthContext";
 const mainColor = '#303030';
 
 export default function TabSettings({navigation}: any) {
-    const {signOut, getJwt} = useContext(AuthContext);
+    const {signOut, getJwt, isReporter} = useContext(AuthContext);
     console.log(getJwt());
+    const showBecomeReporter = !isReporter();
+
     return (
         <View style={styles.container}>
             <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
@@ -32,7 +34,7 @@ export default function TabSettings({navigation}: any) {
                 <AntDesign onPress={() => navigation.navigate('MyDogsScreen')} size={30} name="right" color={mainColor}
                            style={{justifyContent: 'flex-end'}}/>
             </Card>
-
+            {showBecomeReporter &&
             <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
                 <View style={{flexDirection: 'row'}}>
                     <FontAwesome size={30} name="newspaper-o" color={mainColor}/>
@@ -41,6 +43,7 @@ export default function TabSettings({navigation}: any) {
                 <AntDesign onPress={() => navigation.navigate('BecomeAReporterScreen')} size={30} name="right"
                            color={mainColor} style={{justifyContent: 'flex-end'}}/>
             </Card>
+            }
 
             <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
                 <View style={{flexDirection: 'row'}}>

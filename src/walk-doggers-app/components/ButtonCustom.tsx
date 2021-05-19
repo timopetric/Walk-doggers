@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     },
     btnText: {
         fontFamily: "red-hat-text-500",
-        fontSize: 20,
+        fontSize: 17,
         padding: 5,
     }
 
