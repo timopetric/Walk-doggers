@@ -57,10 +57,9 @@ export default function BottomTabNavigator() {
                         height: 0,
                         width: 0,
                     },
-                    height: 80,
-                    elevation: 1,
-                    paddingTop: 10,
-                    paddingBottom: 10
+                    elevation: 5,
+                    // paddingTop: 10,
+                    // paddingBottom: 10
                 }
             }}>
             <BottomTab.Screen
