@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     settingsItemContainer: {
-        paddingHorizontal: 30, flexDirection: "row", width: 500, maxWidth: "100%"
+        paddingHorizontal: 30, flexDirection: "row", width: 800, maxWidth: "100%"
     },
     settingsItem: {
         flexDirection: "row",

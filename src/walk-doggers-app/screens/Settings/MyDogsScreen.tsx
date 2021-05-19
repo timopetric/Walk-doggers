@@ -112,7 +112,7 @@ export default function MyDogsScreen() {
                 data={dogs}
                 renderItem={renderItem}
                 keyExtractor={(item) => item.id}
-                style={[{paddingTop: 20, backgroundColor: "white", width: 600, maxWidth: "100%"}]}
+                style={[{paddingTop: 20, backgroundColor: "white", width: 800, maxWidth: "100%"}]}
             />
         </View>
     );
