@@ -20,7 +20,7 @@ const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
         padding: 20,
-        backgroundColor:"white",
+        backgroundColor: "white",
         flex: 1
     },
     distance: {
@@ -129,18 +129,18 @@ export default function NewDogScreen({navigation}: any) {
 
     return (
         <ScrollView style={styles.container}>
-                <FormItem label={"NAME"} placeholder={"Enter dog's name"}
-                          getText={(text) => setDog({...dog, name: text})}/>
-                <FormItem label={"DESCRIPTION"} placeholder={"Describe your dog"}
-                          getText={(text) => setDog({...dog, description: text})}
-                          height={150}/>
-                <FormItem label={"SIZE"}>
-                    <SizeSelector categories={categories} selectedIndex={selectedIndex}
-                                  setSelectedIndex={setSelectedIndex} multiple={false}/>
-                </FormItem>
-                <FormItem label={"IMAGE"}>
-                    <ImageUpload saveUrl={saveUrl} maxImages={10}/>
-                </FormItem>
+            <FormItem label={"NAME"} placeholder={"Enter dog's name"}
+                      getText={(text) => setDog({...dog, name: text})}/>
+            <FormItem label={"DESCRIPTION"} placeholder={"Describe your dog"}
+                      getText={(text) => setDog({...dog, description: text})}
+                      height={150}/>
+            <FormItem label={"SIZE"}>
+                <SizeSelector categories={categories} selectedIndex={selectedIndex}
+                              setSelectedIndex={setSelectedIndex} multiple={false}/>
+            </FormItem>
+            <FormItem label={"IMAGE"}>
+                <ImageUpload saveUrl={saveUrl} maxImages={10} showEdit={true}/>
+            </FormItem>
             <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
         </ScrollView>
     );

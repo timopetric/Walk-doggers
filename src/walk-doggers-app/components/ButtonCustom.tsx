@@ -26,13 +26,14 @@ interface IButtonProps {
     color?: string;
     text?: string;
     onPress?: any;
+    style?: any;
 }
 
 class ButtonCustom extends React.Component<IButtonProps> {
     render() {
         
         return (
-            <TouchableOpacity onPress={this.props.onPress}>
+            <TouchableOpacity onPress={this.props.onPress} style={this.props.style}>
                     <View style={[styles.button, (this.props.color === "purple") ? { backgroundColor: PRIMARY} : {}]}>
                         <Text style={[styles.btnText, (this.props.color === "purple") ? { color: PINKISH_WHITE} : {}]}>{this.props.text}</Text>
                     </View>

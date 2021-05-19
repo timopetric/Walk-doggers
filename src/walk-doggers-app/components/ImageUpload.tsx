@@ -1,27 +1,44 @@
-import {Button, Dimensions, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {
+    Button,
+    Dimensions,
+    Image,
+    Platform,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TouchableOpacity,
+    View
+} from "react-native";
 import * as React from "react";
-import {GRAY_1, PRIMARY} from "../constants/Colors";
+import {GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../constants/Colors";
 import {Entypo} from "@expo/vector-icons";
 import {useEffect, useState} from "react";
 import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
 
-const dimensions = Dimensions.get('window');
-const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     miniImage: {
-        width: imgWidth / 5,
-        height: imgWidth / 5,
-        borderRadius: 10,
-        marginHorizontal: 8,
+        width: "100%",
+        height: "100%",
+        borderRadius: 4,
     },
     imageRow: {
-        flexDirection: "row",
-        flexWrap: "wrap",
+        // flexDirection: "row",
+        // flexWrap: "wrap",
+        margin: 4,
+        // shadowRadius: 6,
+        // shadowOffset: {
+        //     height: 2,
+        //     width: 2,
+        // },
+        // shadowOpacity: 0.1,
+        // elevation: 2,
+        overflow: "hidden",
     },
     addImage: {
-        backgroundColor: GRAY_1,
+        backgroundColor: GRAY_0,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -29,23 +46,24 @@ const styles = StyleSheet.create({
 })
 
 function ImageUploadButton({imageUrls, maxImages, pickImage}: any) {
-    if (imageUrls.length < maxImages){
+    if (imageUrls.length < maxImages) {
         return (
             <Pressable onPress={pickImage}>
                 <View style={[styles.miniImage, styles.addImage]}>
-                    <Entypo size={imgWidth / 10} name="plus" color={PRIMARY} />
+                    <Entypo size={28} name="plus" color={GRAY_3}/>
                 </View>
             </Pressable>
         )
-    }else{
+    } else {
         return (
             <View/>
         )
     }
 }
 
-export default function ImageUpload({saveUrl, maxImages}: any) {
+export default function ImageUpload({saveUrl, defaultUrl, circle, size, showEdit}: any) {
     const [imageUrls, setImageUrls] = useState([]);
+    const [imageUrl, setImageUrl] = useState(null);
 
     const imageComponents: Array<JSX.Element> = [];
     imageUrls.forEach((imageUrl: string, index: number) => {
@@ -69,6 +87,13 @@ export default function ImageUpload({saveUrl, maxImages}: any) {
         })();
     }, []);
 
+    useEffect(() => {
+        console.log("defaulturl: " + defaultUrl);
+        if (defaultUrl !== undefined) {
+            setImageUrl(defaultUrl);
+        }
+    }, []);
+
     function DataURIToBlob(dataurl: any) {
         const arr = dataurl.split(',');
         const mime = arr[0].match(/:(.*?);/)[1];
@@ -82,8 +107,8 @@ export default function ImageUpload({saveUrl, maxImages}: any) {
     }
 
     function makeID(length: number) {
-        let result           = [];
-        let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = [];
+        let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         let charactersLength = characters.length;
         for (let i = 0; i < length; i++) {
             result.push(characters.charAt(Math.floor(Math.random() *
@@ -130,7 +155,8 @@ export default function ImageUpload({saveUrl, maxImages}: any) {
                 console.log(json);
                 saveUrl(json.image_uri)
                 // @ts-ignore
-                setImageUrls(oldArray => [...oldArray, json.image_uri]);
+                setImageUrl(json.image_uri)
+                // setImageUrls(oldArray => [...oldArray, json.image_uri]);
 
             }).catch(e => {
                 console.log(e);
@@ -140,12 +166,64 @@ export default function ImageUpload({saveUrl, maxImages}: any) {
 
     return (
         <View style={styles.imageRow}>
-            {imageComponents}
-            <ImageUploadButton
-                imageUrls={imageUrls}
-                maxImages={maxImages}
-                pickImage={pickImage}
-            />
+            {/*{imageComponents}*/}
+            <TouchableOpacity onPress={pickImage}
+                              style={{
+                                  height: size !== undefined ? size : 80,
+                                  width: size !== undefined ? size : 80,
+                                  borderRadius: circle === true ? 150 : 4,
+                                  overflow: "hidden",
+                                  // margin: 4
+                              }}>
+                {imageUrl !== null ?
+                    <Image
+                        style={styles.miniImage}
+                        source={{uri: imageUrl}}
+                    />
+                    :
+                    <View style={[styles.miniImage, styles.addImage]}>
+                        <Entypo size={28} name="plus" color={GRAY_3}/>
+                    </View>
+                }
+            </TouchableOpacity>
+            {showEdit === true && imageUrl !== null &&
+            <View
+                pointerEvents={"none"}
+                style={{
+                    position: "absolute",
+                    left: 0,
+                    top: 0,
+                    borderRadius: circle === true ? 120 : 4,
+                    height: size !== undefined ? size : 80,
+                    width: size !== undefined ? size : 80,
+                    flexDirection: 'column-reverse',
+                    overflow: 'hidden',
+                    alignItems: 'center'
+                }}>
+                <View style={{
+                    backgroundColor: "rgba(0,0,0,0.3)",
+                    width: size !== undefined ? size : 80,
+                    alignItems: "center"
+                }}>
+                    <Text style={{
+                        color: "white",
+                        paddingBottom: 4,
+                        paddingTop: 2,
+                        fontSize: 12,
+                        fontWeight: "500"
+                    }}>Edit</Text>
+                </View>
+            </View>
+            }
+
+
+            {/*<ImageUploadButton*/}
+            {/*    imageUrls={imageUrls}*/}
+            {/*    maxImages={maxImages}*/}
+            {/*    pickImage={pickImage}*/}
+            {/*/>*/}
+
+
         </View>
     );
 
