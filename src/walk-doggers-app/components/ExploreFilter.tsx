@@ -6,6 +6,7 @@ import {Card, Slider} from "react-native-elements";
 import {categories, maxDistance} from "../constants/Values";
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, GRAY_1, GRAY_3, GRAY_0, BLUE} from '../constants/Colors';
 import SizeSelector from "./SizeSelector";
+import Collapsible from "react-native-collapsible";
 
 
 interface IExploreFilterProps {
@@ -14,38 +15,37 @@ interface IExploreFilterProps {
 
 const ExploreFilter = (props: any) => {
     const {showFilter, distance, setDistance, selectedIndexes, setSelectedIndexes, multiple, categories} = props
-    if (showFilter) {
-        return <View style={{width: '100%', padding: 20}}>
-            <Text style={[styles.filterParamText, {paddingBottom: 10}]}>Size</Text>
-            <SizeSelector categories={categories} selectedIndexes={selectedIndexes}
-                          setSelectedIndexes={setSelectedIndexes} multiple={multiple}/>
+    return (
+        <Collapsible collapsed={!showFilter} style={{flexDirection: "row", width: "100%"}} duration={300}>
+            <View style={{padding: 20, flex: 1, width: 900, maxWidth: '100%', paddingBottom: 8}}>
+                <Text style={[styles.filterParamText, {paddingBottom: 10}]}>Size</Text>
+                <SizeSelector categories={categories} selectedIndexes={selectedIndexes}
+                              setSelectedIndexes={setSelectedIndexes} multiple={multiple}/>
 
-            <View style={{flexDirection: 'row', marginTop: 10}}>
-                <Text style={styles.filterParamText}>Distance</Text>
-                <View style={styles.selectedDistanceText}>
-                    {/*<Text style={{fontSize: 16, fontWeight: "400"}}>{store.getState().selectedDistance} km</Text>*/}
-                    <Text style={{fontSize: 16, fontWeight: "400"}}>{distance} km</Text>
-                </View>
-            </View>
-
-            <Slider
-                value={distance / maxDistance}
-                thumbTintColor='white'
-                thumbStyle={styles.thumbStyle}
-                minimumTrackTintColor={BLUE}
-                onValueChange={value => setDistance(Math.round(value * maxDistance))}
-            />
-            <View style={styles.distanceRange}>
-                <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>
-                <View style={{flex: 1, alignItems: 'flex-end'}}>
-                    <Text style={{fontWeight: "bold"}}>200 km</Text>
+                <View style={{flexDirection: 'row', marginTop: 10}}>
+                    <Text style={styles.filterParamText}>Distance</Text>
+                    <View style={styles.selectedDistanceText}>
+                        {/*<Text style={{fontSize: 16, fontWeight: "400"}}>{store.getState().selectedDistance} km</Text>*/}
+                        <Text style={{fontSize: 16, fontWeight: "400"}}>{distance} km</Text>
+                    </View>
                 </View>
 
-            </View>
-        </View>
-    }
-    return <View/>
+                <Slider
+                    value={distance / maxDistance}
+                    thumbTintColor='white'
+                    thumbStyle={styles.thumbStyle}
+                    minimumTrackTintColor={BLUE}
+                    onValueChange={value => setDistance(Math.round(value * maxDistance))}
+                />
+                <View style={styles.distanceRange}>
+                    <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>
+                    <View style={{flex: 1, alignItems: 'flex-end'}}>
+                        <Text style={{fontWeight: "bold"}}>200 km</Text>
+                    </View>
 
+                </View>
+            </View>
+        </Collapsible>);
 }
 
 const mapStateToProps = (state: any) => {
