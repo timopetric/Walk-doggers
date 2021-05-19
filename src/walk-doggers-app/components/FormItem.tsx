@@ -1,5 +1,5 @@
 import React from "react";
-import {GRAY_00, GRAY_1} from "../constants/Colors";
+import {GRAY_00, GRAY_1, GRAY_PURPLE_00, GRAY_PURPLE_1} from "../constants/Colors";
 
 import {
     StyleSheet,
@@ -20,7 +20,7 @@ const FormItem = ({label, placeholder, getText, height, children}: any) => {
                     }]}
                     onChangeText={getText}
                     placeholder={placeholder}
-                    placeholderTextColor={GRAY_1}
+                    placeholderTextColor={GRAY_PURPLE_1}
                     multiline={height !== undefined}
                 />
                 : children}
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     input: {
         height: 48,
         fontSize: 15,
-        backgroundColor: GRAY_00,
+        backgroundColor: GRAY_PURPLE_00,
         borderRadius: 1,
         paddingHorizontal: 10,
     },

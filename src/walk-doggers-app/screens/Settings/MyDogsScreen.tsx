@@ -1,6 +1,6 @@
 import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View, FlatList} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
+import {BLUE, GRAY_0, GRAY_1, GRAY_3, LIGHT_BG, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {useEffect, useState, useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
 import {useIsFocused} from "@react-navigation/native";
@@ -106,7 +106,7 @@ export default function MyDogsScreen() {
     }, [isFocused])
 
     return (
-        <View style={{alignItems: "center", backgroundColor: "white", flex: 1}}>
+        <View style={{alignItems: "center", backgroundColor: LIGHT_BG, flex: 1}}>
 
             <FlatList
                 data={dogs}

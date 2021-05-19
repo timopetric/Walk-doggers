@@ -6,7 +6,7 @@ import {AntDesign, Ionicons, FontAwesome5, FontAwesome} from '@expo/vector-icons
 import {Card, Rating} from "react-native-elements";
 import {useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
-import {DARK, GRAY_0, GRAY_00, GRAY_3, RED, YELLOW} from "../../constants/Colors";
+import {DARK, GRAY_0, GRAY_00, GRAY_3, LIGHT_BG, RED, YELLOW} from "../../constants/Colors";
 // import { AuthContext } from '../../navigation/Providers/AuthProvider';
 
 
@@ -74,7 +74,7 @@ export default function TabSettings({navigation}: any) {
                     readonly
                     ratingBackgroundColor={GRAY_0}
                     ratingColor={YELLOW}
-                    tintColor={'white'}
+                    tintColor={LIGHT_BG}
                 />
             </View>
 
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
             flex: 1,
             alignItems: 'center',
             justifyContent: "space-between",
-            backgroundColor: "white",
+            backgroundColor: LIGHT_BG,
         },
 
 });
