@@ -21,7 +21,16 @@ const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
-        padding: 20
+        // margin: 20,
+        paddingHorizontal: 20,
+        backgroundColor: "white",
+        flex: 1
+    },
+    innerContainer: {
+        marginTop: 20,
+        width: 800,
+        maxWidth: "100%",
+        flex: 1
     },
     imageRow: {
         flexDirection: "row",
@@ -141,8 +150,8 @@ export default function NewListingScreen({navigation}: any) {
     }, []);
 
     return (
-        <ScrollView style={{backgroundColor: "white"}}>
-            <View style={styles.container}>
+        <ScrollView style={styles.container} contentContainerStyle={{alignItems: "center"}}>
+            <View style={styles.innerContainer}>
                 <FormItem label={"TITLE"} placeholder={"Enter listing title"} getText={x => setTitle(x)}/>
                 <FormItem label={"DOG"}>
                     <DogSelect onSelectId={setDogId} navigation={navigation}/>

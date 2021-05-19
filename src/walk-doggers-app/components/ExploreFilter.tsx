@@ -16,8 +16,8 @@ interface IExploreFilterProps {
 const ExploreFilter = (props: any) => {
     const {showFilter, distance, setDistance, selectedIndexes, setSelectedIndexes, multiple, categories} = props
     return (
-        <Collapsible collapsed={!showFilter} style={{flexDirection: "row", width: "100%"}} duration={300}>
-            <View style={{padding: 20, flex: 1, width: 900, maxWidth: '100%', paddingBottom: 8}}>
+        <Collapsible collapsed={!showFilter} style={{flex: 1}} duration={300}>
+            <View style={{padding: 20, paddingBottom: 8, flex: 1}}>
                 <Text style={[styles.filterParamText, {paddingBottom: 10}]}>Size</Text>
                 <SizeSelector categories={categories} selectedIndexes={selectedIndexes}
                               setSelectedIndexes={setSelectedIndexes} multiple={multiple}/>
