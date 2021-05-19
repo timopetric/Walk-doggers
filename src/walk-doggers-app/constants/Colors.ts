@@ -6,6 +6,7 @@ export const PRIMARY_DARK = '#6951C7';
 export const PRIMARY_DARKER = '#5B3ADE';
 
 export const GRAY_00 = '#F6F6F6';
+export const DARK = '#404040';
 export const GRAY_0 = '#EDEDED';
 export const GRAY_1 = '#C4C4C4';
 export const GRAY_2 = '#A3A3A3';

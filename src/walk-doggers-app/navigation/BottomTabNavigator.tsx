@@ -276,7 +276,7 @@ function SettingsNavigator({navigation}: any) {
                 name="SettingsScreen"
                 component={TabSettings}
                 options={{
-                    headerTitle: 'Settings', headerTitleAlign: 'center', ...headerWhiteBackground,
+                    headerTitle: 'Settings', headerTitleAlign: 'center', ...headerPrimaryBackground,
                 }}
             />
             <SettingsStack.Screen
