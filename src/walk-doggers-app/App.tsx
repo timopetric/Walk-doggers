@@ -92,6 +92,7 @@ export default function App() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"email": email, "password": password})
                 };
+                console.log("emv",process.env)
                 const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
