@@ -53,7 +53,7 @@ class Listing(ListingInDBBase):
     author: "User"
     dog: "Dog"
     location_text: str
-    applications: "List[Application]"
+    applications: "List[ApplicationBrief]"
 
     # Additional properties stored in DB
 
@@ -65,13 +65,20 @@ class ListingExplore(ListingInDBBase):
     distance: float
 
 
+class ListingBrief(ListingInDBBase):
+    author: "User"
+    dog: "Dog"
+    location_text: str
+
+
 class ListingInDB(ListingInDBBase):
     pass
 
 
 from .users import User
 from .dogs import Dog
-from .applications import Application
+from .applications import ApplicationBrief
 
 Listing.update_forward_refs()
 ListingExplore.update_forward_refs()
+ListingBrief.update_forward_refs()
