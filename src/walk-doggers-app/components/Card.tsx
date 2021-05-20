@@ -21,42 +21,54 @@ const imgWidth = dimensions.width * 0.85;
 
 const Card = (props: any) => {
     const navigation = useNavigation();
-    const {date, day, title, content, distance, imageUrl, author, onPress, callToActionText, time, modConfirmed} = props;
+    const {
+        date,
+        day,
+        title,
+        content,
+        distance,
+        imageUrl,
+        author,
+        onPress,
+        callToActionText,
+        time,
+        modConfirmed
+    } = props;
     return (
-      <View style={styles.card}>
-        <Image style={styles.image} source={{ uri: imageUrl }} />
-        <View style={{ padding: 16 }}>
-          <View
-            style={{ justifyContent: "space-between", flexDirection: "row" }}
-          >
-            {author &&
-              <View style={styles.fstRow}>
-                <Text style={styles.date}>{author}</Text>
-                {!modConfirmed && author && <Text style={styles.wait}>WAITING FOR APPROVAL</Text>}
-              </View>
-            }
+        <View style={styles.card}>
+            <Image style={styles.image} source={{uri: imageUrl}}/>
+            <View style={{padding: 16}}>
+                <View
+                    style={{justifyContent: "space-between", flexDirection: "row"}}
+                >
+                    {author &&
+                    <View style={styles.fstRow}>
+                        <Text style={styles.date}>{author}</Text>
+                        {!modConfirmed && author && <Text style={styles.wait}>WAITING FOR APPROVAL</Text>}
+                    </View>
+                    }
 
 
-            {date && (
-              <View style={styles.row}>
-                <View style={styles.dateRow}>
-                  <Text style={styles.dateDay}>{day}</Text>
-                  <Text style={styles.date}>{date}</Text>
+                    {date && (
+                        <View style={styles.row}>
+                            <View style={styles.dateRow}>
+                                <Text style={styles.dateDay}>{day}</Text>
+                                <Text style={styles.date}>{date}</Text>
+                            </View>
+                            <Text style={styles.time}>{time}</Text>
+                        </View>
+                    )}
                 </View>
-                <Text style={styles.time}>{time}</Text>
-              </View>
-            )}
-          </View>
-          <Text style={styles.dogName}>{title}</Text>
-          <Text style={styles.description}>{content}</Text>
-          <View style={styles.imageRow}>
-            <Text style={[styles.distance, styles.date]}>{distance?.toFixed(2)} km || ''</Text>
-            <TouchableOpacity onPress={() => onPress(props, navigation)}>
-              <Text style={styles.takeMeWalk}>{callToActionText}</Text>
-            </TouchableOpacity>
-          </View>
+                <Text style={styles.dogName}>{title}</Text>
+                <Text style={styles.description}>{content}</Text>
+                <View style={styles.imageRow}>
+                    <Text style={[styles.distance, styles.date]}>{distance && distance.toFixed(2) + " km"}</Text>
+                    <TouchableOpacity onPress={() => onPress(props, navigation)}>
+                        <Text style={styles.takeMeWalk}>{callToActionText}</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
         </View>
-      </View>
     );
 }
 const styles = StyleSheet.create({
@@ -119,8 +131,8 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        flex:1,
-        justifyContent:"space-around",
+        flex: 1,
+        justifyContent: "space-around",
         alignItems: "center"
     },
     dateDay: {
@@ -136,13 +148,13 @@ const styles = StyleSheet.create({
         color: GRAY_3,
     },
     fstRow: {
-      flexDirection: "row",
-      flex: 1,
-      justifyContent: "space-between"
+        flexDirection: "row",
+        flex: 1,
+        justifyContent: "space-between"
     },
     wait: {
-      fontFamily: "red-hat-text-500",
-      color: ORANGE
+        fontFamily: "red-hat-text-500",
+        color: ORANGE
     }
 
 });

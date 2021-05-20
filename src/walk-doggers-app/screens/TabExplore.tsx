@@ -12,6 +12,8 @@ import {useContext, useEffect, useState} from "react";
 import * as Location from 'expo-location';
 import AuthContext from '../navigation/AuthContext';
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
+import {format} from "date-fns";
+
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
 
@@ -97,7 +99,7 @@ type FilteredListingParams = {
     user_lat: number
     user_lon: number
     user_dist: number
-    user_dog_size0: boolean 
+    user_dog_size0: boolean
     user_dog_size1: boolean
     user_dog_size2: boolean
     user_dog_size3: boolean
@@ -105,11 +107,11 @@ type FilteredListingParams = {
 }
 
 const setParams = (params: any) => {
-    let urlBuilder = new URLSearchParams(process.env.BASE_API_URL+"/listings/");
+    let urlBuilder = new URLSearchParams(process.env.BASE_API_URL + "/listings/");
     console.log(urlBuilder.toString())
     for (const [key, value] of Object.entries(params)) {
         urlBuilder.append(key, value)
-      }
+    }
     //console.log(urlBuilder.toString())
     return urlBuilder.toString()
 
@@ -131,27 +133,27 @@ async function getListings(getJwt: Function) {
         'neki': 1,
         'jou': 3
     }
-    console.log("jwt: ",jwt,'\n')
+    console.log("jwt: ", jwt, '\n')
     let response = await fetch(process.env.BASE_API_URL + '/listings/', reqOptions);
 
     console.log("urlbuilder: ", setParams(params));
     const statusCode = response.status;
     console.log("status: ", statusCode)
-        switch (statusCode) {
-            case 200:
-                // successfully created dog
-                break;
-            case 403:
-                Alert.alert("You need to be authorized to see listings")
-                break;
+    switch (statusCode) {
+        case 200:
+            // successfully created dog
+            break;
+        case 403:
+            Alert.alert("You need to be authorized to see listings")
+            break;
 
-            default:
-                // TODO: notify user about error
-                Alert.alert("Error occured upsi...")
-                break;
-        }
-    
-    console.log("response: ",response.status)
+        default:
+            // TODO: notify user about error
+            Alert.alert("Error occured upsi...")
+            break;
+    }
+
+    console.log("response: ", response.status)
     return await response.json();
 }
 
@@ -170,25 +172,25 @@ async function getFilteredListings(getJwt: Function, params: any) {
     let query = setParams(params)
     const url = process.env.BASE_API_URL + '/listings/explore/?' + query;
     console.log(url)
-    console.log("jwt: ",jwt,'\n')
+    console.log("jwt: ", jwt, '\n')
     let response = await fetch(url, reqOptions);
     const statusCode = response.status;
     console.log("status: ", statusCode)
-        switch (statusCode) {
-            case 200:
-                // successfully created dog
-                break;
-            case 403:
-                Alert.alert("You need to be authorized to see listings")
-                break;
+    switch (statusCode) {
+        case 200:
+            // successfully created dog
+            break;
+        case 403:
+            Alert.alert("You need to be authorized to see listings")
+            break;
 
-            default:
-                // TODO: notify user about error
-                Alert.alert("Error occured upsi...")
-                break;
-        }
-    
-    console.log("response: ",response.status)
+        default:
+            // TODO: notify user about error
+            Alert.alert("Error occured upsi...")
+            break;
+    }
+
+    console.log("response: ", response.status)
     return await response.json();
 }
 
@@ -201,37 +203,37 @@ const categories = [
 ]
 
 const getLocation = async () => {
-    let { status } = await Location.requestForegroundPermissionsAsync();
+    let {status} = await Location.requestForegroundPermissionsAsync();
     console.log("location status :", status)
     if (status !== 'granted') {
         return;
     }
     let location;
-    try{
-        location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
+    try {
+        location = await Location.getCurrentPositionAsync({accuracy: Location.Accuracy.High});
         return location;
-    } catch(e){
+    } catch (e) {
         console.log("Getlocation error: ", e)
-        return ;
+        return;
     }
-    
-    
+
+
 }
 export default function TabExplore({navigation}: any) {
-    const [location, setLocation] = useState<{} | undefined>({}) ;
+    const [location, setLocation] = useState<{} | undefined>({});
     const [errorMsg, setErrorMsg] = useState("");
     const [distance, setDistance] = useState(200);
-    const [selectedIndexes, setSelectedIndexes] = useState(new Set([0,1,2,3,4]));
+    const [selectedIndexes, setSelectedIndexes] = useState(new Set([0, 1, 2, 3, 4]));
     const [listings, setListings] = useState<ListingsArray | null>(null)
     const [isLoading, setIsLoading] = useState<Boolean>(true)
 
-    const { getJwt } = useContext(AuthContext)
+    const {getJwt} = useContext(AuthContext)
     useEffect(() => {
         const getUserLocation = async () => {
             const location = await getLocation();
             if (location != undefined)
                 setLocation(location);
-            else 
+            else
                 setErrorMsg('Permission to access location was denied');
         }
         getUserLocation()
@@ -241,35 +243,34 @@ export default function TabExplore({navigation}: any) {
         const getData = async () => {
             setIsLoading(true)
 
-            if(location != undefined) {
-                const props : FilteredListingParams = {
+            if (location != undefined) {
+                const props: FilteredListingParams = {
                     'user_lat': location.coords.latitude || 0,
                     'user_lon': location.coords.longitude || 0,
                     'user_dist': distance,
-                    'user_dog_size0': selectedIndexes.has(0),	
-                    'user_dog_size1': selectedIndexes.has(1),	
-                    'user_dog_size2': selectedIndexes.has(2),	
-                    'user_dog_size3': selectedIndexes.has(3),	
-                    'user_dog_size4': selectedIndexes.has(4),	
+                    'user_dog_size0': selectedIndexes.has(0),
+                    'user_dog_size1': selectedIndexes.has(1),
+                    'user_dog_size2': selectedIndexes.has(2),
+                    'user_dog_size3': selectedIndexes.has(3),
+                    'user_dog_size4': selectedIndexes.has(4),
                 }
                 console.log(props)
                 const listings = await getFilteredListings(getJwt, props);
-                
+
                 console.log("location", location)
                 console.log("listings", listings)
-    
-                if (listings != null){
+
+                if (listings != null) {
                     setListings(listings)
                     setIsLoading(false)
-                }
-                else 
+                } else
                     setErrorMsg('No listings');
             }
 
-        } 
-        
+        }
+
         getData();
-      }, [location, distance, selectedIndexes]);
+    }, [location, distance, selectedIndexes]);
 
     let text = "Waiting..";
     if (errorMsg) {
@@ -324,44 +325,45 @@ export default function TabExplore({navigation}: any) {
                     onPress={onPress}
                 />
             </ScrollView> */}
-            {isLoading ? 
-            <View style={[styles.container, styles.horizontal]}>
-                <ActivityIndicator size="large" color={PRIMARY} />
-            </View>
-            :
-            <FlatList
-                data={listings}
-                renderItem={renderItem}
-                keyExtractor={(item : any) => item.id}
-                style={[{paddingTop: 20}]}
-            />
-        }
+            {isLoading ?
+                <View style={[styles.container, styles.horizontal]}>
+                    <ActivityIndicator size="large" color={PRIMARY}/>
+                </View>
+                :
+                <FlatList
+                    data={listings}
+                    renderItem={renderItem}
+                    keyExtractor={(item: any) => item.id}
+                    style={[{paddingTop: 20}]}
+                />
+            }
         </View>
     );
 }
-function renderItem({ item } : any){
+
+function renderItem({item}: any) {
     // <Card  name={item.name} url={item.photo} description={item.description} id={item.id}/>
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const date_from = new Date(item.date_from.toString());
     const date_to = new Date(item.date_to.toString());
-    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    const options = {year: 'numeric', month: 'numeric', day: 'numeric'};
     //@ts-ignore
     const date_item = date_from.toLocaleDateString('de-DE', options);
-    const hours = `${date_from.getHours()}:${date_from.getMinutes()} - ${date_to.getHours()}:${date_to.getMinutes()}`
+    const hours = `${format(date_from, 'HH:mm')} - ${format(date_to, 'HH:mm')}`
 
     return (
-        <Card 
-        content={item.description}
-        callToActionText={'Take me for a walk'}
-        imageUrl={item.dog.photo}
-        title={item.title}
-        date={date_item}
-        day={daysOfWeek[date_from.getDay()]}
-        distance={item.distance}
-        time={hours}
-        onPress={onPress}/>
+        <Card
+            content={item.description}
+            callToActionText={'Take me for a walk'}
+            imageUrl={item.dog.photo}
+            title={item.title}
+            date={date_item}
+            day={daysOfWeek[date_from.getDay()]}
+            distance={item.distance}
+            time={hours}
+            onPress={onPress}/>
     );
- };
+};
 
 
 const styles = StyleSheet.create({
@@ -384,5 +386,5 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         padding: 10
-      }
+    }
 });
