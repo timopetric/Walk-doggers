@@ -50,7 +50,7 @@ const Card = (props: any) => {
           <Text style={styles.dogName}>{title}</Text>
           <Text style={styles.description}>{content}</Text>
           <View style={styles.imageRow}>
-            <Text style={[styles.distance, styles.date]}>{distance.toFixed(2)} km</Text>
+            <Text style={[styles.distance, styles.date]}>{distance?.toFixed(2)} km || ''</Text>
             <TouchableOpacity onPress={() => onPress(props, navigation)}>
               <Text style={styles.takeMeWalk}>{callToActionText}</Text>
             </TouchableOpacity>

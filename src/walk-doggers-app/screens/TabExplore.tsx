@@ -243,8 +243,8 @@ export default function TabExplore({navigation}: any) {
 
             if(location != undefined) {
                 const props : FilteredListingParams = {
-                    'user_lat': location?.coords.latitude || 0,
-                    'user_lon': location?.coords.longitude || 0,
+                    'user_lat': location.coords.latitude || 0,
+                    'user_lon': location.coords.longitude || 0,
                     'user_dist': distance,
                     'user_dog_size0': selectedIndexes.has(0),	
                     'user_dog_size1': selectedIndexes.has(1),	
