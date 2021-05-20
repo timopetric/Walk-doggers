@@ -3,6 +3,7 @@ from fastapi import FastAPI
 
 from app.postgres import actions
 from app.postgres.session import SessionLocal
+from app.routes.applications import ApplicationsRouter
 from app.routes.image_upload import ImageRouter
 from app.routes.posts import PostRouter
 from app.routes.conversations import ConversationRouter
@@ -46,6 +47,7 @@ app.include_router(DogsRouter, tags=["Dogs"], prefix="/dogs")
 app.include_router(BlogRouter, tags=["Blog"], prefix="/blog")
 app.include_router(ListingsRouter, tags=["Listings"], prefix="/listings")
 app.include_router(ImageRouter, tags=["ImageUpload"], prefix="/image_upload")
+app.include_router(ApplicationsRouter, tags=["Applications"], prefix="/applications")
 
 
 auth_handler = AuthHandler()
