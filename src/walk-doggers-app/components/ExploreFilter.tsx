@@ -33,7 +33,7 @@ const ExploreFilter = (props: any) => {
                 thumbTintColor='white'
                 thumbStyle={styles.thumbStyle}
                 minimumTrackTintColor={BLUE}
-                onValueChange={value => setDistance(Math.round(value * maxDistance))}
+                onSlidingComplete={value => setDistance(Math.round(value * maxDistance))}
             />
             <View style={styles.distanceRange}>
                 <Text style={{flex: 1, fontWeight: "bold"}}>0 km</Text>

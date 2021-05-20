@@ -117,15 +117,16 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     dateDay: {
-        color: GRAY_1,
+        color: GRAY_2,
         fontFamily: "red-hat-text-500",
         fontSize: 15,
-        textTransform: "uppercase"
+        textTransform: "uppercase",
+        paddingRight: 5,
     },
     time: {
         fontFamily: "red-hat-text-500",
         fontSize: 15,
-        color: GRAY_1,
+        color: GRAY_3,
     },
 
 });

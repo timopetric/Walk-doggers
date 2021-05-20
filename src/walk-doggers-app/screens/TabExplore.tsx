@@ -55,8 +55,8 @@ type Applications = {
 type ListingsArray = [{
     title: string,
     description: string,
-    date_from: "2021-05-18T20:17:26.542Z",
-    date_to: "2021-05-18T20:17:26.542Z",
+    date_from: Date,
+    date_to: Date,
     lat: number,
     lon: number,
     dog_id: "string",
@@ -67,6 +67,49 @@ type ListingsArray = [{
     dog: Dog,
     applications: Applications
 }]
+
+type FillteredListingsArray = {
+    title: string,
+    description: string,
+    date_from: Date,
+    date_to: Date,
+    lat: number,
+    lon: number,
+    dog_id: string,
+    id: string,
+    author_id: string,
+    location_text: string,
+    author: Author,
+    dog: Dog,
+    distance: string
+}
+
+type Location = {
+    lon: number,
+    lat: number,
+}
+
+type FilteredListingParams = {
+    user_lat: number
+    user_lon: number
+    user_dist: number
+    user_dog_size0: boolean	
+    user_dog_size1: boolean
+    user_dog_size2: boolean
+    user_dog_size3: boolean
+    user_dog_size4: boolean
+}
+
+const setParams = (params: any) => {
+    let urlBuilder = new URLSearchParams(process.env.BASE_API_URL+"/listings/");
+    console.log(urlBuilder.toString())
+    for (const [key, value] of Object.entries(params)) {
+        urlBuilder.append(key, value)
+      }
+    //console.log(urlBuilder.toString())
+    return urlBuilder.toString()
+
+}
 
 async function getListings(getJwt: Function) {
 
@@ -80,9 +123,14 @@ async function getListings(getJwt: Function) {
             'Authorization': 'Bearer ' + jwt
         },
     };
-
+    const params = {
+        'neki': 1,
+        'jou': 3
+    }
     console.log("jwt: ",jwt,'\n')
     let response = await fetch(process.env.BASE_API_URL + '/listings/', reqOptions);
+
+    console.log("urlbuilder: ", setParams(params));
     const statusCode = response.status;
     console.log("status: ", statusCode)
         switch (statusCode) {
@@ -103,6 +151,43 @@ async function getListings(getJwt: Function) {
     return await response.json();
 }
 
+async function getFilteredListings(getJwt: Function, params: any) {
+
+    let jwt = getJwt();
+
+    const reqOptions = {
+        method: 'GET',
+        headers: {
+            'accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + jwt
+        },
+    };
+
+    let query = setParams(params)
+    const url = process.env.BASE_API_URL + '/listings/explore/?' + query;
+    console.log(url)
+    console.log("jwt: ",jwt,'\n')
+    let response = await fetch(url, reqOptions);
+    const statusCode = response.status;
+    console.log("status: ", statusCode)
+        switch (statusCode) {
+            case 200:
+                // successfully created dog
+                break;
+            case 403:
+                Alert.alert("You need to be authorized to see listings")
+                break;
+
+            default:
+                // TODO: notify user about error
+                Alert.alert("Error occured upsi...")
+                break;
+        }
+    
+    console.log("response: ",response.status)
+    return await response.json();
+}
 function onPress(props: any, navigation: any){
     navigation.navigate('DogScreen');
 }
@@ -121,14 +206,22 @@ const getLocation = async () => {
     if (status !== 'granted') {
         return;
     }
-    let location = await Location.getCurrentPositionAsync({});
-    return location;
+    let location;
+    try{
+        location = await Location.getCurrentPositionAsync({accuracy:Location.Accuracy.High});
+        return location;
+    } catch(e){
+        console.log("Getlocation error: ", e)
+        return ;
+    }
+    
+    
 }
 export default function TabExplore({navigation}: any) {
     const [location, setLocation] = useState<{} | undefined>({}) ;
     const [errorMsg, setErrorMsg] = useState("");
-    const [distance, setDistance] = useState(0);
-    const [selectedIndexes, setSelectedIndexes] = useState(new Set([0]));
+    const [distance, setDistance] = useState(200);
+    const [selectedIndexes, setSelectedIndexes] = useState(new Set([0,1,2,3,4]));
     const [listings, setListings] = useState<ListingsArray | null>(null)
     // useEffect(() => {
     // make api request for listings
@@ -141,11 +234,25 @@ export default function TabExplore({navigation}: any) {
 
     useEffect(() => {
         const getData = async () => {
-            const location = await getLocation();
-            const listings = await getListings(getJwt);
-            console.log(location)
 
-            console.log(listings)
+            const location = await getLocation();
+
+            const props : FilteredListingParams = {
+                'user_lat': location?.coords.latitude || 0,
+                'user_lon': location?.coords.latitude || 0,
+                'user_dist': distance,
+                'user_dog_size0': selectedIndexes.has(0),	
+                'user_dog_size1': selectedIndexes.has(1),	
+                'user_dog_size2': selectedIndexes.has(2),	
+                'user_dog_size3': selectedIndexes.has(3),	
+                'user_dog_size4': selectedIndexes.has(4),	
+            }
+            console.log(props)
+            const listings = await getFilteredListings(getJwt, props);
+
+            
+            console.log("location", location)
+            console.log("listings", listings)
             if (location != undefined)
                 setLocation(location);
             else 
@@ -156,12 +263,10 @@ export default function TabExplore({navigation}: any) {
             }
             else 
                 setErrorMsg('No listings');
-            
-            
         } 
         
         getData();
-      }, []);
+      }, [distance, selectedIndexes]);
 
     let text = "Waiting..";
     if (errorMsg) {
@@ -170,19 +275,7 @@ export default function TabExplore({navigation}: any) {
       text = JSON.stringify(location);
       console.log(text)
     }
-    const renderItem = ({ item } : any) => (
-       // <Card  name={item.name} url={item.photo} description={item.description} id={item.id}/>
-       <Card 
-       content={item.content}
-       callToActionText={'Take me for a walk'}
-       imageUrl={item.dog.photo}
-       title={item.title}
-       date={item.date_from}
-       day="TUESDAY"
-       distance="1.8 km"
-       time="7:00 - 21:00"
-       onPress={onPress}/>
-    );
+
 
     return (
         <View style={styles.container}>
@@ -234,9 +327,32 @@ export default function TabExplore({navigation}: any) {
                 style={[{paddingTop: 20}]}
             />
         </View>
-    )
-        ;
+    );
 }
+function renderItem({ item } : any){
+    // <Card  name={item.name} url={item.photo} description={item.description} id={item.id}/>
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const date_from = new Date(item.date_from.toString());
+    const date_to = new Date(item.date_to.toString());
+    const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    //@ts-ignore
+    const date_item = date_from.toLocaleDateString('de-DE', options);
+    const hours = `${date_from.getHours()}:${date_from.getMinutes()} - ${date_to.getHours()}:${date_to.getMinutes()}`
+
+    return (
+        <Card 
+        content={item.description}
+        callToActionText={'Take me for a walk'}
+        imageUrl={item.dog.photo}
+        title={item.title}
+        date={date_item}
+        day={daysOfWeek[date_from.getDay()]}
+        distance={item.distance}
+        time={hours}
+        onPress={onPress}/>
+    );
+ };
+
 
 const styles = StyleSheet.create({
     container: {
