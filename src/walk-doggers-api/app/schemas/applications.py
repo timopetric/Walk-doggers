@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Literal
 
 from pydantic import UUID4, BaseModel
 
@@ -19,6 +19,7 @@ class ApplicationCreate(ApplicationBase):
 
 # Properties to receive via API on update
 class ApplicationUpdate(ApplicationBase):
+    status: Literal['confirmed', 'rejected']
     pass
 
 
