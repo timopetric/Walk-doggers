@@ -57,10 +57,9 @@ export default function BottomTabNavigator() {
                         height: 0,
                         width: 0,
                     },
-                    height: 80,
-                    elevation: 1,
-                    paddingTop: 10,
-                    paddingBottom: 10
+                    elevation: 5,
+                    // paddingTop: 10,
+                    // paddingBottom: 10
                 }
             }}>
             <BottomTab.Screen
@@ -257,6 +256,13 @@ function ListingsNavigator({navigation}: any) {
                     ...headerWhiteBackground,
                 }}
             />
+            <ListingsStack.Screen
+                name="NewDogScreenListings"
+                component={NewDogScreen}
+                options={{
+                    headerTitle: 'New Dog', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
+            />
         </ListingsStack.Navigator>
     );
 }
@@ -270,7 +276,7 @@ function SettingsNavigator({navigation}: any) {
                 name="SettingsScreen"
                 component={TabSettings}
                 options={{
-                    headerTitle: 'Settings', headerTitleAlign: 'center', ...headerWhiteBackground,
+                    headerTitle: 'Settings', headerTitleAlign: 'center', ...headerPrimaryBackground,
                 }}
             />
             <SettingsStack.Screen

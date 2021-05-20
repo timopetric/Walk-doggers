@@ -1,6 +1,7 @@
 import {Dimensions, Image, ScrollView, StyleSheet, Text, View, Platform} from "react-native";
 import * as React from "react";
 import {GRAY_1} from "../../constants/Colors";
+import ButtonCustom from "../../components/ButtonCustom";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -17,11 +18,12 @@ const styles = StyleSheet.create({
     },
     author: {
         color: GRAY_1,
-        fontWeight: "500"
+        fontFamily: "red-hat-text-500"
     },
     title: {
-        fontSize: 24,
-        fontWeight: "bold",
+        fontSize: 23,
+        fontFamily: "red-hat-text-500",
+        marginTop: 6
     },
     date: {
 
@@ -29,8 +31,13 @@ const styles = StyleSheet.create({
     content: {
         paddingTop: 10,
         paddingBottom: 10,
-        fontSize: 14
+        fontSize: 15,
+        fontFamily: "red-hat-text",
     },
+    moderatorBtn: {
+        flexDirection: "row",
+        flex: 1
+    }
 });
 
 const BlogPostScreen = (props: any) => {
@@ -47,6 +54,13 @@ const BlogPostScreen = (props: any) => {
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.content}>{content}</Text>
             </View>
+            <View style={styles.moderatorBtn}>
+                <ButtonCustom text={"Reject"} color={"red"} style={{flex: 1, paddingHorizontal: 15}}/>
+                <ButtonCustom text={"Accept"} color={"green"} style={{flex: 1, paddingHorizontal: 15}}/>
+            </View>
+            <ButtonCustom text={"Remove Blog Post"} color={"red"} style={{flex: 1, paddingHorizontal: 15}}/>
+            
+
         </ScrollView>
     );
 }

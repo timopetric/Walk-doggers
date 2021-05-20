@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {StyleSheet} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Image, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
@@ -27,51 +27,55 @@ const LoginScreen = ({navigation, route}: AuthNavProps<"Login">) => {
     };
 
     return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Image
-                    style={styles.logo}
-                    source={require('../assets/images/logo_dog.png')}
-                />
-                <Text style={styles.heading}>WALK DOGGERS</Text>
-            </View>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
+                <View style={styles.header}>
+                    <Image
+                        style={styles.logo}
+                        source={require('../assets/images/logo_dog.png')}
+                    />
+                    <Text style={styles.heading}>WALK DOGGERS</Text>
+                </View>
 
 
-            <View style={styles.form}>
+                <View style={styles.form}>
 
-                <Text style={styles.login}>Log in</Text>
+                    <Text style={styles.login}>Login</Text>
 
-                <Text style={styles.label}>EMAIL</Text>
-                <FormTextInput
-                    setValue={setEmail}
-                    placeholder="Enter your email address"
-                    testId="email"
-                    secureTextEntry={false}
-                />
+                    <Text style={styles.label}>EMAIL</Text>
+                    <FormTextInput
+                        setValue={setEmail}
+                        placeholder="Enter your email address"
+                        testId="email"
+                        secureTextEntry={false}
+                    />
 
-                <Text style={styles.label}>PASSWORD</Text>
-                <FormTextInput
-                    setValue={setPassword}
-                    placeholder="Enter your password"
-                    testId="pass"
-                    secureTextEntry={true}
-                />
+                    <Text style={styles.label}>PASSWORD</Text>
+                    <FormTextInput
+                        setValue={setPassword}
+                        placeholder="Enter your password"
+                        testId="pass"
+                        secureTextEntry={true}
+                    />
 
-                <View style={styles.separator}></View>
-                <ButtonForm
-                    title={"Login"}
-                    onClickHandler={onPressLogin}
-                    primary={true}
-                    testId={"log"}
-                />
-                <ButtonForm
-                    title={"Register"}
-                    onClickHandler={onPressRegister}
-                    primary={false}
-                    testId="reg"
-                />
-            </View>
-        </View>
+                    <View style={styles.separator}/>
+                    <ButtonForm
+                        title={"Login"}
+                        onClickHandler={onPressLogin}
+                        primary={true}
+                        testId={"log"}
+                    />
+                    <ButtonForm
+                        title={"Sign Up"}
+                        onClickHandler={onPressRegister}
+                        primary={false}
+                        testId="reg"
+                    />
+                </View>
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
+
     );
 };
 
@@ -79,18 +83,21 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: PRIMARY,
+        alignItems: "center"
     },
     form: {
         backgroundColor: PRIMARY,
         justifyContent: 'center',
         padding: 20,
+        width: 460,
+        maxWidth: "100%"
     },
     title: {
         fontSize: 20,
         fontWeight: 'bold',
     },
     separator: {
-        marginBottom: 20,
+        marginBottom: 10,
     },
     button: {
         alignItems: "center",
@@ -104,21 +111,24 @@ const styles = StyleSheet.create({
     heading: {
         fontFamily: 'pecita',
         color: 'white',
-        fontSize: 40,
+        fontSize: 36,
     },
     logo: {
         width: 110,
         height: 110,
+        marginBottom: 10
     },
     login: {
-        fontFamily: 'red-hat-text-500',
+        // fontFamily: 'red-hat-text-500',
         color: 'white',
-        fontSize: 40,
+        fontSize: 30,
         marginBottom: 26,
     },
     label: {
         fontFamily: 'red-hat-text-500',
         color: 'white',
+        fontSize: 13,
+        marginBottom: 3,
     }
 
 });

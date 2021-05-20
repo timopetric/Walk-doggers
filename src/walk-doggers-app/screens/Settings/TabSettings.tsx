@@ -1,74 +1,112 @@
 import * as React from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 
 import {Text, View} from 'react-native';
 import {AntDesign, Ionicons, FontAwesome5, FontAwesome} from '@expo/vector-icons';
-import {Card} from "react-native-elements";
+import {Card, Rating} from "react-native-elements";
 import {useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
+import {DARK, GRAY_0, GRAY_00, GRAY_3, LIGHT_BG, RED, YELLOW} from "../../constants/Colors";
 // import { AuthContext } from '../../navigation/Providers/AuthProvider';
 
-const mainColor = '#303030';
+
+const SettingsItem = ({text, icon, color, last, onPress}) => {
+    return (
+        <TouchableOpacity onPress={onPress} style={styles.settingsItemContainer}>
+            <View style={[styles.settingsItem, {borderBottomWidth: last === true ? 0 : 1}]}>
+                <View style={{flexDirection: "row", alignItems: "center"}}>
+                    <View style={{width: 45, justifyContent: "center"}}>
+                        {icon}
+                    </View>
+                    <Text style={{color: color, fontSize: 17}}>{text}</Text>
+                </View>
+                <View style={{width: 24}}>
+                    {last || <Ionicons name={'chevron-forward'} size={24} color={color}/>}
+                </View>
+            </View>
+        </TouchableOpacity>
+    )
+}
 
 export default function TabSettings({navigation}: any) {
-    const {signOut, getJwt} = useContext(AuthContext);
+    const {signOut, getJwt, isReporter} = useContext(AuthContext);
     console.log(getJwt());
+    const showBecomeReporter = !isReporter();
+
     return (
         <View style={styles.container}>
-            <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
-                <View style={{flexDirection: 'row'}}>
-                    <Ionicons size={30} name="person" color={mainColor}/>
-                    <Text style={{marginLeft: 5}}>Profile</Text>
-                </View>
-                <AntDesign onPress={() => navigation.navigate('EditProfileScreen')} size={30} name="right"
-                           color={mainColor} style={{justifyContent: 'flex-end'}}/>
-            </Card>
+            <View>
 
-            <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
-                <View style={{flexDirection: 'row'}}>
-                    <FontAwesome5 size={30} name="dog" color={mainColor}/>
-                    <Text style={{marginLeft: 5}}>My Dogs</Text>
-                </View>
-                <AntDesign onPress={() => navigation.navigate('MyDogsScreen')} size={30} name="right" color={mainColor}
-                           style={{justifyContent: 'flex-end'}}/>
-            </Card>
+                <SettingsItem
+                    last={false}
+                    text={"Profile"} color={DARK}
+                    icon={<Ionicons color={DARK} name={'person-outline'} size={25}/>}
+                    onPress={() => navigation.navigate('EditProfileScreen')}
+                />
+                <SettingsItem
+                    last={false}
+                    text={"My Dogs"} color={DARK}
+                    icon={<FontAwesome5 size={25} name="dog" color={DARK}/>}
+                    onPress={() => navigation.navigate('MyDogsScreen')}
+                />
+                {showBecomeReporter &&
+                <SettingsItem
+                    last={false}
+                    text={"Become a reporter"} color={DARK}
+                    icon={<Ionicons color={DARK} name={'newspaper-outline'} size={25}/>}
+                    onPress={() => navigation.navigate('BecomeAReporterScreen')}
+                />
+                }
+                <SettingsItem
+                    text={"Logout"} color={RED}
+                    icon={<Ionicons color={RED} name={'log-out-outline'} size={25}/>}
+                    onPress={() => signOut()}
+                    last={true}
+                />
+            </View>
+            <View style={{alignItems: "center", height: 100}}>
+                <Text style={styles.myRating}>MY RATING</Text>
+                <Rating
+                    type='custom'
+                    ratingCount={5}
+                    startingValue={4}
+                    imageSize={40}
+                    readonly
+                    ratingBackgroundColor={GRAY_0}
+                    ratingColor={YELLOW}
+                    tintColor={LIGHT_BG}
+                />
+            </View>
 
-            <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
-                <View style={{flexDirection: 'row'}}>
-                    <FontAwesome size={30} name="newspaper-o" color={mainColor}/>
-                    <Text style={{marginLeft: 5}}>Become a Reporter</Text>
-                </View>
-                <AntDesign onPress={() => navigation.navigate('BecomeAReporterScreen')} size={30} name="right"
-                           color={mainColor} style={{justifyContent: 'flex-end'}}/>
-            </Card>
-
-            <Card wrapperStyle={styles.cardWrapper} containerStyle={styles.cardContainer}>
-                <View style={{flexDirection: 'row'}}>
-                    <Ionicons size={30} name="exit-outline" color={mainColor}/>
-                    <Text style={{marginLeft: 5}}>Logout</Text>
-                </View>
-                <AntDesign testID="logoutBtn" onPress={() => signOut()} size={30} name="right" color={mainColor}
-                           style={{justifyContent: 'flex-end'}}/>
-            </Card>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    cardContainer: {
-        width: '80%',
+    myRating: {
+        fontFamily: 'red-hat-text-500',
+        color: 'black',
+        fontSize: 13,
+        marginBottom: 12,
     },
-    cardWrapper: {
+    settingsItemContainer: {
+        paddingHorizontal: 30, flexDirection: "row", width: 800, maxWidth: "100%"
+    },
+    settingsItem: {
         flexDirection: "row",
+        flex: 1,
+        alignItems: "center",
+        borderBottomColor: GRAY_0,
+        borderBottomWidth: 1,
+        height: 66,
         justifyContent: "space-between"
     },
-    container: {
-        flex: 1,
-        alignItems: 'center',
+    container:
+        {
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: "space-between",
+            backgroundColor: LIGHT_BG,
+        },
 
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
 });

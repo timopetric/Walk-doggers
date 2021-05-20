@@ -1,9 +1,11 @@
 import {Button, Dimensions, Image, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY} from "../../constants/Colors";
-import { Input } from 'react-native-elements';
-import {Entypo} from "@expo/vector-icons";
+import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, GREEN} from "../../constants/Colors";
+import {Input} from 'react-native-elements';
+import {Entypo, Ionicons} from "@expo/vector-icons";
 import ButtonCustom from "../../components/ButtonCustom"
+import {useContext} from "react";
+import AuthContext from "../../navigation/AuthContext";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -34,18 +36,47 @@ const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do e
     "Amet mattis vulputate enim nulla aliquet porttitor lacus luctus accumsan. Dui id ornare arcu odio. Ut enim blandit volutpat maecenas volutpat blandit. Mi ipsum faucibus vitae aliquet nec. Phasellus vestibulum lorem sed risus ultricies. Iaculis urna id volutpat lacus laoreet non curabitur gravida. Cursus in hac habitasse platea dictumst. Sed vulputate odio ut enim blandit volutpat maecenas volutpat. Rhoncus est pellentesque elit ullamcorper dignissim. Sit amet aliquam id diam. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Ultrices sagittis orci a scelerisque purus semper eget duis at. Euismod in pellentesque massa placerat duis ultricies lacus sed. Malesuada proin libero nunc consequat interdum varius sit. Feugiat in ante metus dictum at. Egestas maecenas pharetra convallis posuere morbi leo urna molestie. Sed odio morbi quis commodo odio aenean sed."
 
 
-function onPressBecomeAReporter(navigation : any) {
-    navigation.goBack();
-}
-
 export default function BecomeAReporterScreen({navigation}: any) {
+    const {getJwt, getRoles} = useContext(AuthContext);
+
+    const confirm = () => {
+        const jwt = getJwt();
+        fetch(process.env.BASE_API_URL + '/auth/roles/become_reporter', {
+            method: "POST",
+            headers: {
+                "accept": "application/json",
+                'Authorization': 'Bearer ' + jwt
+            },
+        }).then(async response => {
+            if (response.ok) {
+                getRoles().then(() => {
+                    alert("You are now a reporter");
+                    navigation.goBack();
+                })
+            } else {
+            }
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+
     return (
         <ScrollView>
             <View style={styles.container}>
                 <Text style={styles.title}>Terms & Conditions</Text>
                 <Text style={styles.content}>{lorem}</Text>
+                <View style={{flexDirection: "row", alignItems: "center", marginBottom: 8}}>
+                    <Ionicons size={24} style={{alignItems: "center", marginRight: 4}} name="checkbox"
+                              color={GREEN}/>
+                    <Text style={{fontWeight: "600"}}>
 
-                <ButtonCustom text='Save changes' onPress= {() => onPressBecomeAReporter(navigation) }color="purple"></ButtonCustom>
+                        I Accept and agree to the terms & conditions
+                    </Text>
+                </View>
+
+                <ButtonCustom text='Become a reporter' onPress={() => confirm()}
+                              color="purple"/>
             </View>
         </ScrollView>
     );

@@ -1,32 +1,41 @@
-import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
+import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View, FlatList, ListRenderItem} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
-import { Input } from 'react-native-elements';
-import {Entypo} from "@expo/vector-icons";
-import ButtonCustom from "../../components/ButtonCustom"
-
+import {BLUE, GRAY_0, GRAY_1, GRAY_3, LIGHT_BG, PRIMARY, tintColorLight} from "../../constants/Colors";
+import {useEffect, useState, useContext} from "react";
+import AuthContext from "../../navigation/AuthContext";
+import {useIsFocused} from "@react-navigation/native";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     miniDogCard: {
         flexDirection: "row",
-        margin: 20,
-        borderRadius: 14,
-        backgroundColor: GRAY_0,
-        overflow: "hidden",
+        marginHorizontal: 20,
+        marginBottom: 12,
+        backgroundColor: "white",
+        borderRadius: 5,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.10,
+        shadowRadius: 7,
+        elevation: 2,
     },
     subtitle: {
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 8,
-        marginBottom: 10,
+        fontSize: 18,
+        marginTop: 10,
+        marginBottom: 4,
+        fontFamily: "roboto-500",
     },
     miniImage: {
-        width: imgWidth / 4,
-        height: imgWidth / 4,
-        marginRight: 20,
-        flex: 1
+        borderTopLeftRadius: 5,
+        borderBottomLeftRadius: 5,
+        width: 130,
+        height: 100,
+        marginRight: 12,
+        // flex: 1,
     },
     textContainer: {
         flex: 4,
@@ -35,38 +44,94 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         flexWrap: "wrap",
         justifyContent: "flex-end",
-        flex: 1
+        textAlign: "right",
+        paddingRight: 10,
+        flex: 1,
     },
     editText: {
         color: BLUE,
         textTransform: "uppercase",
-        fontWeight: "bold",
         alignContent: "flex-end",
-    }
+        paddingBottom: 12,
+        fontFamily: "red-hat-text-500",
+    },
+    description: {
+        fontFamily: "red-hat-text",
+    },
+    scroller: {
+        backgroundColor: GRAY_0,
+        paddingTop: 20
+    },
 });
+
+type Dog = {
+    description: string;
+    id: string,
+    name: string;
+    photo: string;
+    size_category: number;
+}
 
 
 export default function MyDogsScreen() {
+    const isFocused = useIsFocused();
+    const {getJwt} = useContext(AuthContext);
+
+    const [dogs, setDogs] = useState<Object[]>([{
+        name: "string", id: "d",
+        description: "Dd",
+        size_category: 1,
+        photo: "dd"
+    }])
+
+    const renderItem = ({item}) => (
+        <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id}/>
+    );
+
+    useEffect(() => {
+        if (isFocused) {
+            fetch(process.env.BASE_API_URL + '/dogs/', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + getJwt()
+                },
+            }).then(async response => {
+                let json = await response.json();
+                console.log(json)
+                setDogs(json)
+            })
+        }
+    }, [isFocused])
+
     return (
-        <ScrollView>
-            <MiniDogCard name={'Buddy'}/>
-            <MiniDogCard name={'Snoop Dog'}/>
-        </ScrollView>
+        <View style={{alignItems: "center", backgroundColor: LIGHT_BG, flex: 1}}>
+
+            <FlatList
+                data={dogs}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+                style={[{paddingTop: 20, backgroundColor: "white", width: 800, maxWidth: "100%"}]}
+            />
+        </View>
     );
 }
+
 
 function MiniDogCard(props: any) {
     return (
         <View style={styles.miniDogCard}>
             <Image
                 style={styles.miniImage}
-                source={{uri: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*'}}
+                source={{uri: props.url}}
+                resizeMode={'cover'}
             />
 
-            <View style={{justifyContent: 'flex-end', flexDirection: 'row', flex: 2}}>
+            <View style={{justifyContent: 'flex-end', flexDirection: 'row', flex: 1}}>
                 <View style={styles.textContainer}>
                     <Text style={styles.subtitle}>{props.name}</Text>
-                    <Text>Golden retriever</Text>
+                    <Text style={styles.description}>{props.description}</Text>
                 </View>
 
                 <View style={styles.editContainer}>

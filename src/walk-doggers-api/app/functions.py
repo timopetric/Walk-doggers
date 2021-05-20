@@ -45,6 +45,19 @@ def check_if_user_can_apply_to_listing(user_id: str, listing: Listing):
             raise HTTPException(status_code=HTTP_410_GONE, detail="Applications not available anymore.")
 
 
+def check_if_listing_is_active(listing: Listing):
+    if listing is None:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
+
+    application: Application
+    for application in listing.applications:
+        if application.status in "completed":
+            return False
+
+    return True
+
+
+
 def check_if_user_is_author_of_listing(user_id: str, listing: Listing):
     if listing is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")

@@ -1,51 +1,15 @@
 import {Button, Dimensions, Image, Platform, Pressable, ScrollView, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
-import {BLUE, GRAY_0, GRAY_1, GRAY_3, PRIMARY, tintColorLight} from "../../constants/Colors";
-import {Card, Input} from 'react-native-elements';
-import {Entypo} from "@expo/vector-icons";
+
 import {useEffect, useState, useContext} from "react";
 import {categories} from "../../constants/Values";
-import * as ImagePicker from 'expo-image-picker';
-import {decode as atob, encode as btoa} from 'base-64';
-import mime from 'mime';
+
 import AuthContext from "../../navigation/AuthContext";
 import ImageUpload from "../../components/ImageUpload";
-
-const dimensions = Dimensions.get('window');
-const imgWidth = dimensions.width;
-const styles = StyleSheet.create({
-    container: {
-        padding: 20
-    },
-    distance: {
-        flex: 1
-    },
-    subtitle: {
-        textTransform: 'uppercase',
-        fontSize: 16,
-        fontWeight: "bold",
-        marginTop: 30,
-        marginBottom: 10,
-    },
-    selected: {
-        backgroundColor: '#747575'
-    },
-    notSelected: {
-        backgroundColor: '#e1e3e6'
-    },
-    touchable: {},
-    text: {},
-    sizesRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        marginBottom: 10
-    },
-    sizePickerBox: {
-        flexShrink: 1,
-        marginHorizontal: 2,
-        borderRadius: 5,
-    },
-});
+import SizeSelector from "../../components/SizeSelector";
+import FormItem from "../../components/FormItem";
+import ButtonCustom from "../../components/ButtonCustom";
+import ScrollViewContainer from "../../components/ScrollViewContainer";
 
 function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
     let jwt = getJwt()
@@ -101,70 +65,41 @@ type Dog = {
 
 
 export default function NewDogScreen({navigation}: any) {
-    const { getJwt } = useContext(AuthContext);
+    const {getJwt} = useContext(AuthContext);
 
     const [dog, setDog] = useState<Dog>({
         name: "",
         description: "",
-        size_category: -1,
+        size_category: 0,
         photo: "",
     });
+
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
+    useEffect(() => {
+        setDog({...dog, size_category: selectedIndex})
+    }, [selectedIndex]);
 
     const saveUrl = (url: string) => {
         setDog({...dog, photo: url})
         console.log(url)
     }
-    
+
     return (
-        <ScrollView>
-            <View style={styles.container}>
-                <Text style={styles.subtitle}>Dog's name</Text>
-                <Input onChangeText={(text) => setDog({ ...dog, name: text })}></Input>
-
-                <Text style={styles.subtitle}>Description</Text>
-                <Input onChangeText={(text) => setDog({ ...dog, description: text })}></Input>
-
-                <Text style={styles.subtitle}>Size</Text>
-                <SizePicker dog={dog} setDog={setDog} />
-
-                <Text style={styles.subtitle}>Image</Text>
-                <ImageUpload saveUrl={saveUrl} maxImages={10}/>
-                
-                <Text style={styles.subtitle}>Content</Text>
-                <Input></Input>
-
-                <Button title="Add" color={GRAY_3} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
-            </View>
-        </ScrollView>
+        <ScrollViewContainer>
+            <FormItem label={"NAME"} placeholder={"Enter dog's name"}
+                      getText={(text) => setDog({...dog, name: text})}/>
+            <FormItem label={"DESCRIPTION"} placeholder={"Describe your dog"}
+                      getText={(text) => setDog({...dog, description: text})}
+                      height={150}/>
+            <FormItem label={"SIZE"}>
+                <SizeSelector categories={categories} selectedIndex={selectedIndex}
+                              setSelectedIndex={setSelectedIndex} multiple={false}/>
+            </FormItem>
+            <FormItem label={"IMAGE"}>
+                <ImageUpload saveUrl={saveUrl} maxImages={10} showEdit={true}/>
+            </FormItem>
+            <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
+        </ScrollViewContainer>
     );
-}
-
-function SizePicker(props: any) {
-    const [selected, setSelected] = useState(0);
-
-    useEffect(() => {
-        props.setDog({ ...props.dog, size_category: selected })
-    }, [selected])
-
-    let sizePickerItems: any = [];
-    categories.forEach((category, index, arr) => {
-        sizePickerItems.push(
-            <SizePickerBox category={category} selected={selected} key={index} index={index} setSelected={setSelected}/>
-        )
-    })
-
-    return <View style={styles.sizesRow}>{sizePickerItems}</View>
-
-}
-
-function SizePickerBox(props: any) {
-    return (
-        <Pressable style={styles.touchable} onPress={() => props.setSelected(props.index)}>
-            <Card
-                containerStyle={[styles.sizePickerBox, props.selected == props.index ? styles.selected : styles.notSelected]}>
-                <Text style={styles.text}>{props.category}</Text>
-                <Text style={styles.text}>kg</Text>
-            </Card>
-        </Pressable>
-    )
 }
