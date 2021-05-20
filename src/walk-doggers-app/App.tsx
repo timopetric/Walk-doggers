@@ -36,9 +36,9 @@ export default function App() {
                 case 'SET_ROLES':
                     return {
                         ...prevState,
-                        admin: action.roles.admin,
-                        moderator: action.roles.moderator,
-                        reporter: action.roles.reporter,
+                        admin: action.roles?.admin,
+                        moderator: action.roles?.moderator,
+                        reporter: action.roles?.reporter,
                     };
             }
         },
@@ -75,7 +75,9 @@ export default function App() {
 
     React.useEffect(() => {
         // getRoles after loading jwt
-        authContext.getRoles(state.userToken).then(r => console.log(r))
+        if (state.userToken !== null) {
+            authContext.getRoles(state.userToken).then(r => console.log(r))
+        }
     }, [state.userToken]);
 
     const authContext = React.useMemo(
@@ -111,8 +113,11 @@ export default function App() {
                     },
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
-                const responseData = await response.json();
-                await dispatch({type: 'SET_ROLES', roles: responseData});
+                if (response.ok) {
+                    const responseData = await response.json();
+                    console.log(responseData) 
+                    await dispatch({type: 'SET_ROLES', roles: responseData});
+                }
             },
             signOut: async () => {
                 await AsyncStorage.removeItem("@user")
