@@ -109,7 +109,6 @@ class BlogPostActions(BaseActions[BlogPost, schemas.BlogPostCreate, schemas.Blog
         return db.query(self.model).filter(self.model.approved == approved).offset(skip).limit(limit).all()
 
 
-
 class ListingActions(BaseActions[Listing, schemas.ListingCreate, schemas.ListingUpdate]):
     """Post actions with basic CRUD operations"""
 
@@ -135,6 +134,10 @@ class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, sch
         db.commit()
         db.refresh(db_obj)
         return db_obj
+
+    def get_applications_by_listing_id_and_status(self, db: Session, listing_id: UUID4, status: str) -> Optional[ModelType]:
+        return db.query(self.model).filter(self.model.listing_id == listing_id).filter(
+            self.model.status == status).all()
 
 
 post = PostActions(Post)

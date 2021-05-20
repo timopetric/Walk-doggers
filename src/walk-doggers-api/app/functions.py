@@ -51,7 +51,7 @@ def check_if_listing_is_active(listing: Listing):
 
     application: Application
     for application in listing.applications:
-        if application.status in "completed":
+        if application.status in "confirmed":
             return False
 
     return True
