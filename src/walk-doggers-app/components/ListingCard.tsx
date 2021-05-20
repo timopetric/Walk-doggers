@@ -49,7 +49,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                 <TouchableOpacity>
                     <View style={styles.button}>
                         <View style={styles.iconNum}>
-                            <Text style={styles.iconText}>10</Text>
+                            <Text style={styles.iconText}>{this.props.numOfApplied}</Text>
                         </View>
                         <Text style={styles.btnText}>Applied Users</Text>
                         <View style={styles.ghost}>
