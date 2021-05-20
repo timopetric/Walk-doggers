@@ -37,7 +37,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                     <Text style={styles.status}>ACCEPTED</Text>
                     <Text style={styles.location}>{this.props.location}</Text>
                 </View>
-                <Text style={styles.dogName}>{this.props.dogName}</Text>
+                <Text style={styles.listingTitle}>{this.props.listingTitle}</Text>
                 <Text style={styles.description}>{this.props.descr}</Text>
                 <View style={styles.row}>
                     <View style={styles.dateRow}>
@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
         fontFamily: "red-hat-text",
         fontSize: 14
     },
-    dogName: {
+    listingTitle: {
         fontFamily: "red-hat-text-500",
         fontWeight: "500",
         fontSize: 28,

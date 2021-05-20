@@ -59,7 +59,7 @@ const Card = (props: any) => {
                         </View>
                     )}
                 </View>
-                <Text style={styles.dogName}>{title}</Text>
+                <Text style={styles.listingTitle}>{title}</Text>
                 <Text style={styles.description}>{content}</Text>
                 <View style={styles.imageRow}>
                     <Text style={[styles.distance, styles.date]}>{distance && distance.toFixed(2) + " km"}</Text>
@@ -72,7 +72,7 @@ const Card = (props: any) => {
     );
 }
 const styles = StyleSheet.create({
-    dogName: {
+    listingTitle: {
         fontSize: 23,
         fontFamily: "red-hat-text-500",
         marginTop: 6

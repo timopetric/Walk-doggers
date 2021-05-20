@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         height: Platform.OS === 'web' ? 300 : undefined,
         aspectRatio: 4 / 3,
     },
-    dogName: {
+    listingTitle: {
         fontSize: 26,
         fontWeight: "bold",
         fontFamily: "red-hat-text-500",
@@ -100,7 +100,7 @@ const ListingScreen = (props) => {
             </View>
 
             <View style={styles.container}>
-                <Text style={styles.dogName}>{listing?.dog?.name}</Text>
+                <Text style={styles.listingTitle}>{listing?.title}</Text>
                 <Text style={styles.description}>{listing?.description}</Text>
                 <Text style={styles.subtitle}>When</Text>
                 <Text style={styles.description}>{day_from} {time_from} - {time_to}</Text>
