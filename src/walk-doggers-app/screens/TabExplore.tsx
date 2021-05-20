@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Alert, FlatList, Pressable, ScrollView, StyleSheet} from 'react-native';
+import {ActivityIndicator, Alert, FlatList, Pressable, ScrollView, StyleSheet} from 'react-native';
 
 import EditScreenInfo from '../components/EditScreenInfo';
 import Card from "../components/Card";
@@ -11,7 +11,7 @@ import {store, toggleFilter} from "../redux/store";
 import {useContext, useEffect, useState} from "react";
 import * as Location from 'expo-location';
 import AuthContext from '../navigation/AuthContext';
-
+import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
 
@@ -223,50 +223,53 @@ export default function TabExplore({navigation}: any) {
     const [distance, setDistance] = useState(200);
     const [selectedIndexes, setSelectedIndexes] = useState(new Set([0,1,2,3,4]));
     const [listings, setListings] = useState<ListingsArray | null>(null)
-    // useEffect(() => {
-    // make api request for listings
-    // }, [distance, selectedIndexes])
+    const [isLoading, setIsLoading] = useState<Boolean>(true)
 
-    
-    
     const { getJwt } = useContext(AuthContext)
-    
-
     useEffect(() => {
-        const getData = async () => {
-
+        const getUserLocation = async () => {
             const location = await getLocation();
-
-            const props : FilteredListingParams = {
-                'user_lat': location?.coords.latitude || 0,
-                'user_lon': location?.coords.longitude || 0,
-                'user_dist': distance,
-                'user_dog_size0': selectedIndexes.has(0),	
-                'user_dog_size1': selectedIndexes.has(1),	
-                'user_dog_size2': selectedIndexes.has(2),	
-                'user_dog_size3': selectedIndexes.has(3),	
-                'user_dog_size4': selectedIndexes.has(4),	
-            }
-            console.log(props)
-            const listings = await getFilteredListings(getJwt, props);
-
-            
-            console.log("location", location)
-            console.log("listings", listings)
             if (location != undefined)
                 setLocation(location);
             else 
                 setErrorMsg('Permission to access location was denied');
+        }
+        getUserLocation()
+    }, [])
 
-            if (listings != null){
-                setListings(listings)
+    useEffect(() => {
+        const getData = async () => {
+            setIsLoading(true)
+
+            if(location != undefined) {
+                const props : FilteredListingParams = {
+                    'user_lat': location?.coords.latitude || 0,
+                    'user_lon': location?.coords.longitude || 0,
+                    'user_dist': distance,
+                    'user_dog_size0': selectedIndexes.has(0),	
+                    'user_dog_size1': selectedIndexes.has(1),	
+                    'user_dog_size2': selectedIndexes.has(2),	
+                    'user_dog_size3': selectedIndexes.has(3),	
+                    'user_dog_size4': selectedIndexes.has(4),	
+                }
+                console.log(props)
+                const listings = await getFilteredListings(getJwt, props);
+                
+                console.log("location", location)
+                console.log("listings", listings)
+    
+                if (listings != null){
+                    setListings(listings)
+                    setIsLoading(false)
+                }
+                else 
+                    setErrorMsg('No listings');
             }
-            else 
-                setErrorMsg('No listings');
+
         } 
         
         getData();
-      }, [distance, selectedIndexes]);
+      }, [location, distance, selectedIndexes]);
 
     let text = "Waiting..";
     if (errorMsg) {
@@ -321,13 +324,18 @@ export default function TabExplore({navigation}: any) {
                     onPress={onPress}
                 />
             </ScrollView> */}
-
+            {isLoading ? 
+            <View style={[styles.container, styles.horizontal]}>
+                <ActivityIndicator size="large" color={PRIMARY} />
+            </View>
+            :
             <FlatList
                 data={listings}
                 renderItem={renderItem}
                 keyExtractor={(item : any) => item.id}
                 style={[{paddingTop: 20}]}
             />
+        }
         </View>
     );
 }
@@ -372,4 +380,9 @@ const styles = StyleSheet.create({
         height: 1,
         width: '80%',
     },
+    horizontal: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: 10
+      }
 });
