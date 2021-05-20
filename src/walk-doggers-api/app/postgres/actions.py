@@ -71,7 +71,6 @@ class BaseActions(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
 
 class PostActions(BaseActions[Post, schemas.PostCreate, schemas.PostUpdate]):
     """Post actions with basic CRUD operations"""
-
     pass
 
 
@@ -80,8 +79,6 @@ class UserActions(BaseActions[User, schemas.UserRegister, schemas.UserRegister])
 
     def get_user_by_email(self, db: Session, email: str) -> Optional[ModelType]:
         return db.query(self.model).filter(self.model.email == email).first()
-
-    pass
 
 
 class DogActions(BaseActions[Dog, schemas.DogCreate, schemas.Dog]):
@@ -111,7 +108,6 @@ class BlogPostActions(BaseActions[BlogPost, schemas.BlogPostCreate, schemas.Blog
         ModelType]:
         return db.query(self.model).filter(self.model.approved == approved).offset(skip).limit(limit).all()
 
-    pass
 
 
 class ListingActions(BaseActions[Listing, schemas.ListingCreate, schemas.ListingUpdate]):
@@ -125,8 +121,6 @@ class ListingActions(BaseActions[Listing, schemas.ListingCreate, schemas.Listing
         db.commit()
         db.refresh(db_obj)
         return db_obj
-
-    pass
 
 
 class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, schemas.ApplicationUpdate]):

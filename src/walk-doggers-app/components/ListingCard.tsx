@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     },
     status: {
         flex:1, 
-        fontFamily: "red-hat-text", 
+        fontFamily: "red-hat-text-500", 
         fontSize: 12, 
         fontStyle: "normal", 
         color: GRAY_2

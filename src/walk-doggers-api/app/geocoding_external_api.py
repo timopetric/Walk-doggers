@@ -1,3 +1,4 @@
+import pytest
 from httpx import AsyncClient
 import json
 from pprint import pprint
@@ -19,23 +20,26 @@ async def _get_location_text_request(lat: float, lon: float) -> dict:
 
         try:
             resp_dict = json.loads(r.text)
+            return resp_dict
         except Exception as e:
             print("Something went wrong with geocoding api", traceback.print_exc())
-
-        return resp_dict
+            return None
 
 
 async def get_location_text(lat: float, lon: float) -> str:
     geocoding_dict = await _get_location_text_request(lat, lon)
 
     try:
-        city = geocoding_dict["city"]
-        street_address = geocoding_dict["staddress"]
-        street_number = geocoding_dict["stnumber"]
-        city = city if city else "-"
-        street_address = street_address if street_address else "-"
-        street_number = street_number if street_number else "-"
-        return f"{city}, {street_address} {street_number}"
+        if geocoding_dict:
+            city = geocoding_dict["city"]
+            street_address = geocoding_dict["staddress"]
+            street_number = geocoding_dict["stnumber"]
+            city = city if city else "-"
+            street_address = street_address if street_address else "-"
+            street_number = street_number if street_number else "-"
+            return f"{city}, {street_address} {street_number}"
+        else:
+            return "None"
     except Exception:
         print("Extracting street text from geocoding api json failed.", traceback.print_exc())
         print("got response:")
@@ -43,13 +47,13 @@ async def get_location_text(lat: float, lon: float) -> str:
         return "None"
 
 
-if __name__ == "__main__":
-    import asyncio
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
-    result = loop.run_until_complete(get_location_text(46.020052, 14.382740))
-    pprint(result)
-    result = loop.run_until_complete(get_location_text(46.05769025550722, 14.510479368879631))
-    pprint(result)
-    result = loop.run_until_complete(get_location_text(46.16289119572218, 14.544952475000815))
-    pprint(result)
+# if __name__ == "__main__":
+#     import asyncio
+#     loop = asyncio.new_event_loop()
+#     asyncio.set_event_loop(loop)
+#     result = loop.run_until_complete(get_location_text(46.020052, 14.382740))
+#     pprint(result)
+#     result = loop.run_until_complete(get_location_text(46.05769025550722, 14.510479368879631))
+#     pprint(result)
+#     result = loop.run_until_complete(get_location_text(46.16289119572218, 14.544952475000815))
+#     pprint(result)

@@ -12,7 +12,6 @@ import AuthContext, {LoginProps, RegisterProps} from './navigation/AuthContext';
 
 export default function App() {
     const isLoadingComplete = useCachedResources();
-    const colorScheme = useColorScheme();
     const [state, dispatch] = React.useReducer(
         (prevState: any, action: any) => {
             switch (action.type) {
@@ -34,12 +33,22 @@ export default function App() {
                         isSignout: true,
                         userToken: null,
                     };
+                case 'SET_ROLES':
+                    return {
+                        ...prevState,
+                        admin: action.roles?.admin,
+                        moderator: action.roles?.moderator,
+                        reporter: action.roles?.reporter,
+                    };
             }
         },
         {
             isLoading: true,
             isSignout: false,
             userToken: null,
+            admin: null,
+            moderator: null,
+            reporter: null
         }
     );
 
@@ -49,14 +58,11 @@ export default function App() {
             let userToken;
 
             try {
-                // userToken = await SecureStore.getItemAsync('userToken');
-                console.log("USERTOKEN")
                 userToken = await AsyncStorage.getItem("@user");
                 console.log(userToken);
             } catch (e) {
                 // Restoring token failed
             }
-
             // After restoring token, we may need to validate it in production apps
 
             // This will switch to the App screen or Auth screen and this loading
@@ -66,6 +72,13 @@ export default function App() {
 
         bootstrapAsync();
     }, []);
+
+    React.useEffect(() => {
+        // getRoles after loading jwt
+        if (state.userToken !== null) {
+            authContext.getRoles(state.userToken).then(r => console.log(r))
+        }
+    }, [state.userToken]);
 
     const authContext = React.useMemo(
         () => ({
@@ -79,13 +92,33 @@ export default function App() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"email": email, "password": password})
                 };
+                console.log("emv",process.env)
                 const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
-                const responseData = await response.json();
-                // return data;
-                console.log("data", responseData);
-                await AsyncStorage.setItem("@user", responseData?.jwt);
+                if (response.ok) {
+                    const responseData = await response.json();
+                    await AsyncStorage.setItem("@user", responseData?.jwt);
+                    await authContext.getRoles(responseData?.jwt);
+                    dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                } else {
+                    alert('Wrong email or password!')
+                }
 
-                dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+            },
+            getRoles: async (jwt: string) => {
+                const token = jwt || state.userToken
+                const requestOptions = {
+                    method: 'GET',
+                    headers: {
+                        "accept": "application/json",
+                        'Authorization': 'Bearer ' + token
+                    },
+                };
+                const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
+                if (response.ok) {
+                    const responseData = await response.json();
+                    console.log(responseData) 
+                    await dispatch({type: 'SET_ROLES', roles: responseData});
+                }
             },
             signOut: async () => {
                 await AsyncStorage.removeItem("@user")
@@ -103,17 +136,30 @@ export default function App() {
                     })
                 };
                 const response = await fetch(process.env.BASE_API_URL + '/auth/register', requestOptions);
-                const responseData = await response.json();
-                console.log("data", responseData);
-                await AsyncStorage.setItem("@user", responseData?.jwt);
-
-                dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                if (response.ok) {
+                    const responseData = await response.json();
+                    await AsyncStorage.setItem("@user", responseData?.jwt);
+                    await authContext.getRoles(responseData?.jwt);
+                    dispatch({type: 'SIGN_IN', token: responseData?.jwt});
+                } else {
+                    alert('Wrong email or password!')
+                }
             },
             getJwt: () => {
                 return state.userToken;
-            }
+            },
+            isAdmin: (): boolean => {
+                return state.admin;
+            },
+            isModerator: (): boolean => {
+                return state.moderator;
+            },
+            isReporter: (): boolean => {
+                return state.reporter;
+            },
+
         }),
-        [state.userToken, []]
+        [state.userToken, state.reporter, state.admin, state.morerator, []]
     );
     if (!isLoadingComplete) {
         return null;

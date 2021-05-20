@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
     height: 40,
     borderColor: "#fff",
     borderBottomWidth: StyleSheet.hairlineWidth,
-    marginBottom: 20
+    // marginBottom: 20
   },
   input: {
     height: 48,
     padding: 1,
-    marginBottom: 12,
+    marginBottom: 8,
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
     borderRadius: 3,
     paddingHorizontal: 10,

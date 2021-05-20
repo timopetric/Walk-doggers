@@ -16,7 +16,7 @@ const SizeSelectorBox = props => {
 
 const SizeSelector = props => {
 
-    const {selectedIndexes, categories, setSelectedIndexes, multiple, style} = props;
+    const {selectedIndex, selectedIndexes, categories, setSelectedIndexes, setSelectedIndex, multiple, style} = props;
 
     const onSelect = (index) => {
         if (multiple) {
@@ -30,13 +30,15 @@ const SizeSelector = props => {
                 }
             });
         } else {
-            setSelectedIndexes(new Set([index]));
+            setSelectedIndex(index);
         }
 
     }
 
     const itemComponents = categories.map((item, index) => {
-        return <SizeSelectorBox key={index} category={item} selected={selectedIndexes.has(index)} onSelect={() => onSelect(index)}/>
+        return <SizeSelectorBox key={index} category={item}
+                                selected={multiple ? selectedIndexes.has(index) : selectedIndex === index}
+                                onSelect={() => onSelect(index)}/>
     })
     return <View style={[styles.sizesRow, style]}>{itemComponents}</View>
 }

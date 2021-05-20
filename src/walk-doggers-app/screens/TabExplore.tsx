@@ -15,6 +15,10 @@ import AuthContext from '../navigation/AuthContext';
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
 
+function onPress(props: any, navigation: any) {
+    navigation.navigate('DogScreen');
+}
+
 type Listing = {
     title: string,
     description: string,
@@ -93,7 +97,7 @@ type FilteredListingParams = {
     user_lat: number
     user_lon: number
     user_dist: number
-    user_dog_size0: boolean	
+    user_dog_size0: boolean 
     user_dog_size1: boolean
     user_dog_size2: boolean
     user_dog_size3: boolean
@@ -188,9 +192,6 @@ async function getFilteredListings(getJwt: Function, params: any) {
     console.log("response: ",response.status)
     return await response.json();
 }
-function onPress(props: any, navigation: any){
-    navigation.navigate('DogScreen');
-}
 
 const categories = [
     "1-5",
@@ -270,18 +271,20 @@ export default function TabExplore({navigation}: any) {
 
     let text = "Waiting..";
     if (errorMsg) {
-      text = errorMsg;
+        text = errorMsg;
     } else if (location) {
-      text = JSON.stringify(location);
-      console.log(text)
+        text = JSON.stringify(location);
+        console.log(text)
     }
 
 
     return (
         <View style={styles.container}>
             <Provider store={store}>
-                <ExploreFilter distance={distance} setDistance={setDistance} selectedIndexes={selectedIndexes}
-                               setSelectedIndexes={setSelectedIndexes} multiple={true} categories={categories}/>
+                <View style={{width: 880, maxWidth: "100%"}}>
+                    <ExploreFilter distance={distance} setDistance={setDistance} selectedIndexes={selectedIndexes}
+                                   setSelectedIndexes={setSelectedIndexes} multiple={true} categories={categories}/>
+                </View>
             </Provider>
 
             {/* <ScrollView>

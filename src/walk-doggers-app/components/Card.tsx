@@ -11,7 +11,7 @@ import {
     TouchableOpacity,
     Platform
 } from "react-native";
-import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2} from '../constants/Colors';
+import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2, ORANGE} from '../constants/Colors';
 import {useNavigation} from "@react-navigation/native";
 
 
@@ -21,7 +21,7 @@ const imgWidth = dimensions.width * 0.85;
 
 const Card = (props: any) => {
     const navigation = useNavigation();
-    const {date, day, title, content, distance, imageUrl, author, onPress, callToActionText, time} = props;
+    const {date, day, title, content, distance, imageUrl, author, onPress, callToActionText, time, modConfirmed} = props;
     return (
       <View style={styles.card}>
         <Image style={styles.image} source={{ uri: imageUrl }} />
@@ -29,7 +29,14 @@ const Card = (props: any) => {
           <View
             style={{ justifyContent: "space-between", flexDirection: "row" }}
           >
-            {author && <Text style={styles.date}>{author}</Text>}
+            {author &&
+              <View style={styles.fstRow}>
+                <Text style={styles.date}>{author}</Text>
+                {!modConfirmed && author && <Text style={styles.wait}>WAITING FOR APPROVAL</Text>}
+              </View>
+            }
+
+
             {date && (
               <View style={styles.row}>
                 <View style={styles.dateRow}>
@@ -128,6 +135,15 @@ const styles = StyleSheet.create({
         fontSize: 15,
         color: GRAY_3,
     },
+    fstRow: {
+      flexDirection: "row",
+      flex: 1,
+      justifyContent: "space-between"
+    },
+    wait: {
+      fontFamily: "red-hat-text-500",
+      color: ORANGE
+    }
 
 });
 export default Card;
