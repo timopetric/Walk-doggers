@@ -12,7 +12,6 @@ import AuthContext, {LoginProps, RegisterProps} from './navigation/AuthContext';
 
 export default function App() {
     const isLoadingComplete = useCachedResources();
-    const colorScheme = useColorScheme();
     const [state, dispatch] = React.useReducer(
         (prevState: any, action: any) => {
             switch (action.type) {
@@ -35,7 +34,6 @@ export default function App() {
                         userToken: null,
                     };
                 case 'SET_ROLES':
-                    console.log("XXX: " + action.roles.admin)
                     return {
                         ...prevState,
                         admin: action.roles.admin,
@@ -60,14 +58,11 @@ export default function App() {
             let userToken;
 
             try {
-                // userToken = await SecureStore.getItemAsync('userToken');
-                console.log("USERTOKEN")
                 userToken = await AsyncStorage.getItem("@user");
                 console.log(userToken);
             } catch (e) {
                 // Restoring token failed
             }
-
             // After restoring token, we may need to validate it in production apps
 
             // This will switch to the App screen or Auth screen and this loading
@@ -77,6 +72,11 @@ export default function App() {
 
         bootstrapAsync();
     }, []);
+
+    React.useEffect(() => {
+        // getRoles after loading jwt
+        authContext.getRoles(state.userToken).then(r => console.log(r))
+    }, [state.userToken]);
 
     const authContext = React.useMemo(
         () => ({

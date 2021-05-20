@@ -21,13 +21,6 @@ function onPress(props: any, navigation: any) {
 }
 
 export default function TabBlog() {
-    const {getRoles} = useContext(AuthContext);
-
-
-    useEffect(() => {
-        getRoles().then(null);
-    }, [])
-
     return (
         <View style={styles.container}>
             <ScrollView>
