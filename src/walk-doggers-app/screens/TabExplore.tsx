@@ -163,7 +163,6 @@ async function getFilteredListings(getJwt: Function, params: any) {
         method: 'GET',
         headers: {
             'accept': 'application/json',
-            'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + jwt
         },
     };
@@ -240,7 +239,7 @@ export default function TabExplore({navigation}: any) {
 
             const props : FilteredListingParams = {
                 'user_lat': location?.coords.latitude || 0,
-                'user_lon': location?.coords.latitude || 0,
+                'user_lon': location?.coords.longitude || 0,
                 'user_dist': distance,
                 'user_dog_size0': selectedIndexes.has(0),	
                 'user_dog_size1': selectedIndexes.has(1),	
