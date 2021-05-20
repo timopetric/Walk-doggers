@@ -77,7 +77,7 @@ const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
-    margin: 20
+    margin: 16
   },
 
   icon: {
@@ -90,14 +90,14 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "white",
-    borderRadius: 5,
+    borderRadius: 12,
     shadowColor: "#000",
     shadowOffset: {
-      width: 0,
-      height: 1,
+      width: 2,
+      height: 2,
     },
-    shadowOpacity: 0.22,
-    shadowRadius: 2.22,
+    shadowOpacity: 0.12,
+    shadowRadius: 8,
     elevation: 1,
     marginTop: 5
   },
@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
     fontSize: 16
     },
   miniImage: {
-    width: 70,
-    height: 70,
+    width: 60,
+    height: 60,
     borderRadius: imgWidth / 6,
     marginRight: 20
   },

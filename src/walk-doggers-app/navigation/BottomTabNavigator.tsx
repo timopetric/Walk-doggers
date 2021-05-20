@@ -30,7 +30,7 @@ import {Button} from 'react-native-elements';
 
 import {Provider} from "react-redux";
 import {store, toggleFilter} from "../redux/store";
-import DogScreen from "../screens/DogScreen";
+import ListingScreen from "../screens/ListingScreen";
 import NewBlogPostScreen from "../screens/Blog/NewBlogPostScreen";
 import EditProfileScreen from "../screens/Settings/EditProfileScreen";
 import BecomeAReporterScreen from "../screens/Settings/BecomeAReporterScreen";
@@ -128,8 +128,8 @@ function ExploreNavigator() {
                     }}
                 />
                 <ExploreStack.Screen
-                    name="DogScreen"
-                    component={DogScreen}
+                    name="ListingScreen"
+                    component={ListingScreen}
                     options={{
                         headerTitle: ''
                     }}

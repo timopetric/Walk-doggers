@@ -13,13 +13,14 @@ import * as Location from 'expo-location';
 import AuthContext from '../navigation/AuthContext';
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
 import {format} from "date-fns";
+import {useNavigation} from "@react-navigation/native";
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
 
-function onPress(props: any, navigation: any) {
-    navigation.navigate('DogScreen');
-}
+// function navigateToListingScreen(props: any, navigation: any) {
+//     navigation.navigate('DogScreen');
+// }
 
 type Listing = {
     title: string,
@@ -361,7 +362,9 @@ function renderItem({item}: any) {
             day={daysOfWeek[date_from.getDay()]}
             distance={item.distance}
             time={hours}
-            onPress={onPress}/>
+            listing={item}
+            // onPress={() => navigation.navigate('ListingScreen', item)}
+        />
     );
 };
 

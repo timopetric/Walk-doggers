@@ -1,25 +1,26 @@
-import {Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, Platform} from "react-native";
+import {Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity, Platform, Alert} from "react-native";
 import {Ionicons} from '@expo/vector-icons';
 import * as React from "react";
 import {PRIMARY} from "../constants/Colors";
 import AboutMeCard from "../components/AboutMeCard";
-import { categories } from "../constants/Values";
+import {categories} from "../constants/Values";
+import {useEffect} from "react";
+import {format} from "date-fns";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
 const styles = StyleSheet.create({
     container: {
-      paddingHorizontal: 35,
-      paddingTop: 15,
-      paddingBottom: 50,
-      maxWidth: 900
+        paddingHorizontal: 20,
+        paddingTop: 15,
+        paddingBottom: 50,
+        maxWidth: 900,
+        backgroundColor: 'white'
     },
     image: {
         width: "100%",
         height: Platform.OS === 'web' ? 300 : undefined,
         aspectRatio: 4 / 3,
-        borderTopLeftRadius: 12,
-        borderTopRightRadius: 12,
     },
     dogName: {
         fontSize: 26,
@@ -29,9 +30,8 @@ const styles = StyleSheet.create({
     },
 
     description: {
-        paddingTop: 5,
         paddingBottom: 10,
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: "red-hat-text"
     },
     imageRow: {
@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
         flex: 1
     },
     subtitle: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: "bold",
         marginTop: 15,
+        marginBottom: 5,
         fontFamily: "red-hat-text-500"
     },
     miniImage: {
@@ -56,52 +57,69 @@ const styles = StyleSheet.create({
         flexDirection: "row"
     },
     appButtonContainer: {
-        elevation: 8,
+        elevation: 2,
         backgroundColor: PRIMARY,
         borderRadius: 10,
-        paddingVertical: 15,
+        paddingVertical: 12,
         paddingHorizontal: 20,
         marginTop: -25,
         width: 160,
-
-      },
-      appButtonText: {
+        shadowOpacity: 0.25,
+        shadowRadius: 5,
+        marginBottom: 5,
+    },
+    appButtonText: {
         fontSize: 16,
         color: "#fff",
         fontFamily: "red-hat-text-500",
         alignSelf: "center"
-      }
+    }
 });
 
+const ListingScreen = (props) => {
+    const {route} = props;
+    const {params} = route;
+    const {listing} = params
+    console.log(listing);
 
-export default function DogScreen() {
+    const day_from = format(new Date(listing?.date_from), 'iiii');
+    const time_from = format(new Date(listing?.date_from), 'HH:mm');
+    const time_to = format(new Date(listing?.date_to), 'HH:mm');
+
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: 'white'}}>
             <Image
                 style={styles.image}
-                source={{uri: 'https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg'}}
+                source={{uri: listing?.dog?.photo}}
                 resizeMode="cover"
             />
-            <View style={[{flex:1, alignItems: "flex-end", right: 25}]}> 
+            <View style={[{flex: 1, alignItems: "flex-end", right: 25}]}>
                 <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.9}>
                     <Text style={styles.appButtonText}>I’m Interested</Text>
                 </TouchableOpacity>
             </View>
 
             <View style={styles.container}>
-                <Text style={styles.dogName}>Very Good Boy</Text>
-                <Text style={styles.description}>I'm a very good boy. Just as my 6'1 owner. Please take me for a walk</Text>
+                <Text style={styles.dogName}>{listing?.dog?.name}</Text>
+                <Text style={styles.description}>{listing?.description}</Text>
                 <Text style={styles.subtitle}>When</Text>
-                <Text style={styles.description}>Tuesday 14:00 - 15:00</Text>
+                <Text style={styles.description}>{day_from} {time_from} - {time_to}</Text>
                 <Text style={styles.subtitle}>Where</Text>
-                <Text style={styles.description}>Ljubljana</Text>
+                <Text style={styles.description}>{listing?.location_text}</Text>
                 <Text style={styles.subtitle}>About Me</Text>
 
-                    <AboutMeCard image={"https://www.rd.com/wp-content/uploads/2021/01/GettyImages-1257560163-scaled-e1610062322469.jpg"} name={"bailey"} descr={"opis"} isDog={true} value={0} ></AboutMeCard>
-                    
+                <AboutMeCard
+                    image={listing?.dog?.photo}
+                    name={listing?.dog?.name} descr={listing?.dog?.description} isDog={true} value={0}/>
+
                 <Text style={styles.subtitle}>About Owner</Text>
-                   <AboutMeCard image={"https://beta.finance.si//pics//cache_ch/challe-salle-foto-bruno-sedevcic-5b40a7709a46f.jpg.cut.1530963962-5b40a7fa5a7dc.jpg"} name={"bailey"} descr={"opis"} isDog={false} value={3} ></AboutMeCard>
+                <AboutMeCard
+                    image={listing?.author?.image_url}
+                    name={listing?.author?.first_name + " " + listing?.author?.last_name} descr={listing?.author?.description} isDog={false}
+                    value={3}/>
             </View>
         </ScrollView>
     );
 }
+
+export default ListingScreen

@@ -29,7 +29,7 @@ const Card = (props: any) => {
         distance,
         imageUrl,
         author,
-        onPress,
+        listing,
         callToActionText,
         time,
         modConfirmed
@@ -63,7 +63,7 @@ const Card = (props: any) => {
                 <Text style={styles.description}>{content}</Text>
                 <View style={styles.imageRow}>
                     <Text style={[styles.distance, styles.date]}>{distance && distance.toFixed(2) + " km"}</Text>
-                    <TouchableOpacity onPress={() => onPress(props, navigation)}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ListingScreen', {listing: listing})}>
                         <Text style={styles.takeMeWalk}>{callToActionText}</Text>
                     </TouchableOpacity>
                 </View>
