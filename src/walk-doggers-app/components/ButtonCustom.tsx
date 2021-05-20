@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
+import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
 
 const styles = StyleSheet.create({
   center: {
@@ -34,8 +34,8 @@ class ButtonCustom extends React.Component<IButtonProps> {
         
         return (
             <TouchableOpacity onPress={this.props.onPress} style={this.props.style}>
-                    <View style={[styles.button, (this.props.color === "purple") ? { backgroundColor: PRIMARY} : {}]}>
-                        <Text style={[styles.btnText, (this.props.color === "purple") ? { color: PINKISH_WHITE} : {}]}>{this.props.text}</Text>
+                    <View style={[styles.button, (this.props.color === "purple") ? { backgroundColor: PRIMARY} : {}, (this.props.color === "red") ? { backgroundColor: RED} : {}, (this.props.color === "green") ? { backgroundColor: GREEN} : {}]}>
+                        <Text style={[styles.btnText, (this.props.color === "purple") ? { color: PINKISH_WHITE} : {color: "#fff"} ]}>{this.props.text}</Text>
                     </View>
             </TouchableOpacity>
         )
