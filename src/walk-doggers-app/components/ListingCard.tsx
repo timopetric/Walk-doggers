@@ -27,7 +27,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
 
     
     render() {
-        return <Card containerStyle={{padding: 0, borderRadius: 12}}>
+        return <View style={styles.card}>
             <Image 
                 style={styles.img}
                 source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}
@@ -59,7 +59,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                 
             </View>
 
-        </Card>
+        </View>
     }
 }
 
@@ -157,6 +157,22 @@ const styles = StyleSheet.create({
     },
     ghost: {
         width: 25
-    }
+    },
+    card: {
+        width: 800,
+        maxWidth: "92%",
+        backgroundColor: "#fff",
+        shadowOpacity: 0.1,
+        shadowRadius: 5,
+        shadowOffset: {
+            height: 2,
+            width: 2,
+        },
+        elevation: 1,
+        // flex: 1,
+        // padding: 10,
+        margin: 15,
+        borderRadius: 12,
+    },
 
 });

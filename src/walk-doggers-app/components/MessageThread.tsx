@@ -18,7 +18,6 @@ interface IMessageThreadState {
 }
 
 class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadState> {
-
     render() {
         return (
             <TouchableOpacity onPress={this.props.onPress}>
@@ -67,7 +66,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     status: {
-        marginTop: Platform.OS === 'web' ? 0 : 16,
+        marginTop: Platform.OS === 'web' ? 16 : 16,
         fontWeight: "500",
         fontSize: 12,
         textTransform: "uppercase",

@@ -374,44 +374,24 @@ function renderItem({item}: any) {
 
 
 const styles = StyleSheet.create({
-container:
-{
+  container: {
     backgroundColor: "white",
-        flex
-:
-    1,
-        alignItems
-:
-    'center',
-        justifyContent
-:
-    'center',
-},
-title:
-{
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  title: {
     fontSize: 20,
-        fontWeight
-:
-    'bold',
-},
-separator:
-{
+    fontWeight: "bold",
+  },
+  separator: {
     marginVertical: 30,
-        height
-:
-    1,
-        width
-:
-    '80%',
-},
-horizontal:
-{
+    height: 1,
+    width: "80%",
+  },
+  horizontal: {
     flexDirection: "row",
-        justifyContent
-:
-    "space-around",
-        padding
-:
-    10
-}
+    justifyContent: "space-around",
+    padding: 10,
+  },
 });
