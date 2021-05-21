@@ -58,6 +58,19 @@ class BlogPost(Base):
     author = relationship("User", back_populates="blog_posts")
 
 
+class Application(Base):
+    __tablename__ = "application"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    listing_id = Column('listing_id', UUID(), ForeignKey('listing.id'), nullable=False)
+    applied_user_id = Column('applied_user_id', UUID(), ForeignKey('user.id'), nullable=False)
+    status = Column(String, default='normal')  # soft, normal, rejected, confirmed
+    listing_author_to_applied_user_left_rating = Column(Boolean, default=False)
+    applied_user_to_listing_author_left_rating = Column(Boolean, default=False)
+
+    listing = relationship("Listing", back_populates='applications', foreign_keys=[listing_id])
+    applied_user = relationship("User", back_populates='applications')
+
+
 class Listing(Base):
     __tablename__ = "listing"
 
@@ -80,23 +93,10 @@ class Listing(Base):
     dog = relationship("Dog", back_populates="listings")
     applications = relationship("Application", back_populates='listing',
                                 primaryjoin='Listing.id == Application.listing_id',
-                                foreign_keys=["application.listing_id"])
+                                foreign_keys=[Application.listing_id])
     confirmed_application = relationship("Application", uselist=False,
                                          primaryjoin='Application.id == Listing.confirmed_application_id',
                                          foreign_keys=[confirmed_application_id])
-
-
-class Application(Base):
-    __tablename__ = "application"
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    listing_id = Column('listing_id', UUID(), ForeignKey('listing.id'), nullable=False)
-    applied_user_id = Column('applied_user_id', UUID(), ForeignKey('user.id'), nullable=False)
-    status = Column(String, default='normal')  # soft, normal, rejected, confirmed
-    listing_author_to_applied_user_left_rating = Column(Boolean, default=False)
-    applied_user_to_listing_author_left_rating = Column(Boolean, default=False)
-
-    listing = relationship("Listing", back_populates='applications', foreign_keys=[listing_id])
-    applied_user = relationship("User", back_populates='applications')
 
 
 class Rating(Base):
