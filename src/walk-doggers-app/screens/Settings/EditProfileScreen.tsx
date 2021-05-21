@@ -3,29 +3,86 @@ import * as React from "react";
 import ButtonCustom from "../../components/ButtonCustom"
 import ImageUpload from "../../components/ImageUpload";
 import FormItem from "../../components/FormItem";
-import {useState} from "react";
+import {useState, useEffect, useContext} from "react";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
+import {useIsFocused} from "@react-navigation/native";
+import AuthContext from "../../navigation/AuthContext";
 
 
-function onPressSaveChanges(navigation: any) {
-    navigation.goBack()
+type User = {
+    first_name: string;
+    last_name: string;
+    description: string;
+    image_url: string | undefined;
+}
+
+
+const updateUserProfile = (getJwt: any, user: User) => {
+    let jwt = getJwt()
+    fetch(process.env.BASE_API_URL + '/auth/update_user', {
+        method: "PUT",
+        headers: {
+            "accept": "application/json",
+            "Content-Type": "application/json",
+            'Authorization': 'Bearer ' + jwt
+        },
+        body: JSON.stringify(user)
+    })
 }
 
 export default function EditProfileScreen({navigation}: any) {
+    const isFocused = useIsFocused();
+    const {getJwt} = useContext(AuthContext);
+    const [imageUrl, setImageUrl] = useState()
+    const [fstName, setFstName] = useState("")
+    const [lstName, setLstName] = useState("")
+    const [email, setEmail] = useState("")
+    const [about, setAbout] = useState("")
 
-    const [imageUrl, setImageUrl] = useState('https://beta.finance.si//pics//cache_ch/challe-salle-foto-bruno-sedevcic-5b40a7709a46f.jpg.cut.1530963962-5b40a7fa5a7dc.jpg')
+    useEffect(() => {
+        if (isFocused) {
+            fetch(process.env.BASE_API_URL + '/auth/protected', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + getJwt()
+                },
+            }).then(async response => {
+                let json = await response.json();
+                console.log(json)
+                setFstName(json.first_name)
+                setLstName(json.last_name)
+                setAbout(json.description)
+                setEmail(json.email)
+                setImageUrl(json.image_url)
+            })
+        }
+    }, [isFocused])
+
+    const onPressUpdate = () => {
+        const user = {
+            first_name: fstName,
+            last_name: lstName,
+            description: about,
+            image_url: imageUrl
+        }
+        updateUserProfile( getJwt, user);
+        navigation.goBack()
+    }
+
 
     return (
         <ScrollViewContainer>
             <View style={{alignItems: "center", justifyContent: "center", height: 150}}>
                 <ImageUpload circle={true} size={100} showEdit={true}
-                             defaultUrl={imageUrl} saveUrl={setImageUrl}/>
+                             defaultUrl={imageUrl} saveUrl={setImageUrl} url={imageUrl}/>
             </View>
-            <FormItem label={"FIRST NAME"} placeholder={"Enter your first name"}/>
-            <FormItem label={"LAST NAME"} placeholder={"Enter your last name"}/>
-            <FormItem label={"EMAIL"}/>
-            <FormItem label={"ABOUT ME"} placeholder={"Describe yourself"} height={120}/>
-            <ButtonCustom text='Save changes' onPress={() => onPressSaveChanges(navigation)} color="purple"
+            <FormItem label={"FIRST NAME"} placeholder={"Enter your first name"} setText={fstName} getText={x => setFstName(x)}/>
+            <FormItem label={"LAST NAME"} placeholder={"Enter your last name"}setText={lstName} getText={x => setLstName(x)}/>
+            <FormItem label={"EMAIL"} setText={email} editable={false}/>
+            <FormItem label={"ABOUT ME"} placeholder={"Describe yourself"} height={120} setText={about} getText={x => setAbout(x)}/>
+            <ButtonCustom text='Save changes' onPress={onPressUpdate} color="purple"
                           style={{marginBottom: 20}}/>
         </ScrollViewContainer>
 

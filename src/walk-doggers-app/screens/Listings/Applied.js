@@ -57,6 +57,7 @@ export function Applied(props) {
         //message owner
     //ACCEPTED - oglas potrjen 
         //message  owner
+    //REJECTED - oglas 
     //COMPLETED - oglas je bil potrjen in je potekel
         //message owner
         //leave feedback
