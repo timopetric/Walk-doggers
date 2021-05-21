@@ -37,12 +37,15 @@ async def get_conversations(db: Session = Depends(get_db),
 
     conversation_user_list = []
     for conv in conversations:
-        userIdOther = conv.user1Id if conv.user1Id == user_id else conv.user2Id
-        user_other: User = get_user_from_id(db, userIdOther)
+        user_id_other = str(conv.user2Id) if str(conv.user1Id) == str(user_id) else str(conv.user1Id)
+        user_other: User = get_user_from_id(db, user_id_other)
+        msgs = await engine.find(Message, Message.convId == conv.id, Message.senderId == user_other.id, skip=skip, limit=limit)
+
         conversation_user_list.append(
             {
                 "user_other": user_other,
-                "id_conv": str(conv.id)
+                "id_conv": str(conv.id),
+                "last_message_text": msgs[-1].text if len(msgs) > 0 else "User hasn't written a thing yet."
             }
         )
 
