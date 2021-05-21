@@ -97,9 +97,9 @@ type Location = {
 }
 
 type FilteredListingParams = {
-    user_lat: number
-    user_lon: number
-    user_dist: number
+    user_lat?: number
+    user_lon?: number
+    user_dist?: number
     user_dog_size0: boolean
     user_dog_size1: boolean
     user_dog_size2: boolean
@@ -111,7 +111,9 @@ const setParams = (params: any) => {
     let urlBuilder = new URLSearchParams(process.env.BASE_API_URL + "/listings/");
     console.log(urlBuilder.toString())
     for (const [key, value] of Object.entries(params)) {
-        urlBuilder.append(key, value)
+        if (value) {
+            urlBuilder.append(key, value)
+        }
     }
     //console.log(urlBuilder.toString())
     return urlBuilder.toString()
@@ -246,9 +248,9 @@ export default function TabExplore({navigation}: any) {
 
             if (location != undefined) {
                 const props: FilteredListingParams = {
-                    'user_lat': location.coords.latitude || 0,
-                    'user_lon': location.coords.longitude || 0,
-                    'user_dist': distance,
+                    'user_lat': location?.coords?.latitude || undefined,
+                    'user_lon': location?.coords?.longitude || undefined,
+                    'user_dist': distance || undefined,
                     'user_dog_size0': selectedIndexes.has(0),
                     'user_dog_size1': selectedIndexes.has(1),
                     'user_dog_size2': selectedIndexes.has(2),
