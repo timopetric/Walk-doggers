@@ -79,9 +79,11 @@ class Listing(Base):
     author = relationship("User", back_populates="listings")
     dog = relationship("Dog", back_populates="listings")
     applications = relationship("Application", back_populates='listing',
-                                primaryjoin='Listing.id == Application.listing_id')
+                                primaryjoin='Listing.id == Application.listing_id',
+                                foreign_keys=["application.listing_id"])
     confirmed_application = relationship("Application", uselist=False,
-                                         primaryjoin='Application.id == Listing.confirmed_application_id')
+                                         primaryjoin='Application.id == Listing.confirmed_application_id',
+                                         foreign_keys=[confirmed_application_id])
 
 
 class Application(Base):
