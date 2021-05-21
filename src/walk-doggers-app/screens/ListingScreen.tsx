@@ -6,6 +6,8 @@ import AboutMeCard from "../components/AboutMeCard";
 import {categories} from "../constants/Values";
 import {useEffect} from "react";
 import {format} from "date-fns";
+import AuthContext from "../navigation/AuthContext";
+
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -77,9 +79,10 @@ const styles = StyleSheet.create({
 });
 
 const ListingScreen = (props) => {
-    const {route} = props;
-    const {params} = route;
+    const {route} = props
+    const {params} = route
     const {listing} = params
+    const { getJwt } = React.useContext(AuthContext);
     console.log(listing);
 
     let day_from = ""
@@ -93,6 +96,22 @@ const ListingScreen = (props) => {
 
     }
 
+    const imInterested = () => {
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + getJwt(),
+            },
+            body: JSON.stringify({
+                listing_id: listing.id,
+            }),
+        };
+        fetch(process.env.BASE_API_URL + '/applications/', reqOptions);
+
+      };
+
     console.log(day_from, listing?.date_from);
     return (
         <ScrollView style={{backgroundColor: 'white'}}>
@@ -102,7 +121,7 @@ const ListingScreen = (props) => {
                 resizeMode="cover"
             />
             <View style={[{flex: 1, alignItems: "flex-end", right: 25}]}>
-                <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.9}>
+                <TouchableOpacity style={styles.appButtonContainer} activeOpacity={0.9} onPress={imInterested}>
                     <Text style={styles.appButtonText}>I’m Interested</Text>
                 </TouchableOpacity>
             </View>
