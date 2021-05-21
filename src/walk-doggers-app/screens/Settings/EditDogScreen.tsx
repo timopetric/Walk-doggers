@@ -93,7 +93,7 @@ export default function EditDogScreen(props: any) {
                               setSelectedIndex={setSelectedIndex} multiple={false}/>
             </FormItem>
             <FormItem label={"IMAGE"}>
-                <ImageUpload saveUrl={saveUrl} maxImages={10} showEdit={true}/>
+                <ImageUpload defaultUrl={dog.photo} saveUrl={saveUrl} maxImages={10} showEdit={true}/>
             </FormItem>
             <ButtonCustom text="Save Changes" color={"purple"} onPress={() => onPressUpdate(navigation, dog, getJwt)}/>
         </ScrollViewContainer>
