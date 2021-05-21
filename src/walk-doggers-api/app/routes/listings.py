@@ -1,4 +1,4 @@
-from typing import Any, List
+from typing import Any, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import UUID4
@@ -30,33 +30,34 @@ def get_users_listings(db: Session = Depends(get_db), user_id=Depends(auth_handl
 @ListingsRouter.get("/explore", response_model=List[schemas.ListingExplore],
                     description="Get listings on explore page")
 def get_listings_filtered(*, db: Session = Depends(get_db),
-                          user_lat: float, user_lon: float,
-                          user_dist: float,
-                          user_dog_size0: bool,
-                          user_dog_size1: bool,
-                          user_dog_size2: bool,
-                          user_dog_size3: bool,
-                          user_dog_size4: bool) -> Any:
+                          user_lat: float = 46.0,
+                          user_lon: float = 15.0,
+                          user_dist: float = 10000,
+                          user_dog_size0: bool = True,
+                          user_dog_size1: bool = True,
+                          user_dog_size2: bool = True,
+                          user_dog_size3: bool = True,
+                          user_dog_size4: bool = True) -> Any:
     listings = actions.listing.get_all(db=db, skip=0, limit=9999999)
     if listings is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
-    rez = list()
+    categories = [0 if user_dog_size0 else None,
+                  1 if user_dog_size1 else None,
+                  2 if user_dog_size2 else None,
+                  3 if user_dog_size3 else None,
+                  4 if user_dog_size4 else None]
+
+    filtered_listings = list()
     for listing in listings:
         lon, lat = listing.lon, listing.lat
         dist = float(distance.distance((user_lat, user_lon), (lat, lon)).km)
 
-        if dist <= user_dist \
-                and listing.dog.size_category in [0 if user_dog_size0 else None,
-                                                  1 if user_dog_size1 else None,
-                                                  2 if user_dog_size2 else None,
-                                                  3 if user_dog_size3 else None,
-                                                  4 if user_dog_size4 else None] \
-                and check_if_listing_is_active(listing):
+        if dist <= user_dist and listing.dog.size_category in categories and check_if_listing_is_active(listing):
             listing.distance = dist
-            rez.append(listing)
+            filtered_listings.append(listing)
 
-    return rez
+    return filtered_listings
 
 
 @ListingsRouter.get("/{id}", response_model=schemas.Listing)
@@ -89,5 +90,3 @@ async def add_new_listing(*, db: Session = Depends(get_db), listing_in: schemas.
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
     return dog
-
-

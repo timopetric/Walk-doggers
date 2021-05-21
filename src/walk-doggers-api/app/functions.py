@@ -49,13 +49,14 @@ def check_if_listing_is_active(listing: Listing):
     if listing is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
-    application: Application
-    for application in listing.applications:
-        if application.status in "confirmed":
-            return False
+    return listing.confirmed_application is None
 
-    return True
-
+    # application: Application
+    # for application in listing.applications:
+    #     if application.status in "confirmed":
+    #         return False
+    #
+    # return True
 
 
 def check_if_user_is_author_of_listing(user_id: str, listing: Listing):
