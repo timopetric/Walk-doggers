@@ -9,12 +9,15 @@ import Constants from "../constants/Colors"
 interface IListingCardProps {
     status?: string;
     location?: string;
-    dogName?: string;
+    title?: string;
     descr?: string;
     dateDay?: string;
     date?: string;
     time?: string;
     numOfApplied?: string;
+    leaveFeedback?: boolean;
+    appliedUsers?: boolean;
+    messageOwner?: boolean;
 }
 
 interface IListingCardState {
@@ -27,39 +30,44 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
 
     
     render() {
-        return <View style={styles.card}>
-            <Image 
-                style={styles.img}
-                source={{uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg"}}
+        return (
+          <View style={styles.card}>
+            <Image
+              style={styles.img}
+              source={{
+                uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg",
+              }}
             />
             <View style={styles.listingCard}>
-                <View style={styles.row}>
-                    <Text style={styles.status}>ACCEPTED</Text>
-                    <Text style={styles.location}>{this.props.location}</Text>
+              <View style={styles.row}>
+                <Text style={styles.status}>ACCEPTED</Text>
+                <Text style={styles.location}>{this.props.location}</Text>
+              </View>
+              <Text style={styles.listingTitle}>{this.props.title}</Text>
+              <Text style={styles.description}>{this.props.descr}</Text>
+              <View style={styles.row}>
+                <View style={styles.dateRow}>
+                  <Text style={styles.dateDay}>{this.props.dateDay}</Text>
+                  <Text style={styles.date}>{this.props.date}</Text>
                 </View>
-                <Text style={styles.listingTitle}>{this.props.listingTitle}</Text>
-                <Text style={styles.description}>{this.props.descr}</Text>
-                <View style={styles.row}>
-                    <View style={styles.dateRow}>
-                        <Text style={styles.dateDay}>{this.props.dateDay}</Text>
-                        <Text style={styles.date}>{this.props.date}</Text>
-                    </View>
-                    <Text style={styles.time}>{this.props.time}</Text>
-                </View>
+                <Text style={styles.time}>{this.props.time}</Text>
+              </View>
+              {this.props.numOfApplied != null && (
                 <TouchableOpacity>
-                    <View style={styles.button}>
-                        <View style={styles.iconNum}>
-                            <Text style={styles.iconText}>{this.props.numOfApplied}</Text>
-                        </View>
-                        <Text style={styles.btnText}>Applied Users</Text>
-                        <View style={styles.ghost}>
-                        </View>
+                  <View style={styles.button}>
+                    <View style={styles.iconNum}>
+                      <Text style={styles.iconText}>
+                        {this.props.numOfApplied}
+                      </Text>
                     </View>
+                    <Text style={styles.btnText}>Applied Users</Text>
+                    <View style={styles.ghost}></View>
+                  </View>
                 </TouchableOpacity>
-                
+              )}
             </View>
-
-        </View>
+          </View>
+        );
     }
 }
 
