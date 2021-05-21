@@ -7,7 +7,7 @@ import {
     Text, TextInput,
 } from "react-native";
 
-const FormItem = ({label, placeholder, getText, height, children}: any) => {
+const FormItem = ({label, placeholder, getText, setText, editable, height, children}: any) => {
     return (
         <View style={styles.container}>
             <Text style={styles.label}>{label}</Text>
@@ -22,6 +22,8 @@ const FormItem = ({label, placeholder, getText, height, children}: any) => {
                     placeholder={placeholder}
                     placeholderTextColor={GRAY_PURPLE_1}
                     multiline={height !== undefined}
+                    value={setText}
+                    editable={editable}
                 />
                 : children}
         </View>

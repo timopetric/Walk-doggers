@@ -3,7 +3,7 @@ import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, LIGHT_BG, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {useEffect, useState, useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
-import {useIsFocused} from "@react-navigation/native";
+import {useIsFocused, useNavigation} from "@react-navigation/native";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -76,13 +76,9 @@ type Dog = {
 export default function MyDogsScreen() {
     const isFocused = useIsFocused();
     const {getJwt} = useContext(AuthContext);
+    const navigation = useNavigation()
 
-    const [dogs, setDogs] = useState<Object[]>([{
-        name: "string", id: "d",
-        description: "Dd",
-        size_category: 1,
-        photo: "dd"
-    }])
+    const [dogs, setDogs] = useState<Object[]>([])
 
     const renderItem = ({item}) => (
         <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id}/>
