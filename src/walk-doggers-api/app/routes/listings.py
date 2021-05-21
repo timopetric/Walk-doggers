@@ -1,6 +1,6 @@
 from typing import Any, List, Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import UUID4
 from sqlalchemy.orm import Session
 from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
@@ -30,6 +30,10 @@ def get_users_listings(db: Session = Depends(get_db), user_id=Depends(auth_handl
 @ListingsRouter.get("/explore", response_model=List[schemas.ListingExplore],
                     description="Get listings on explore page")
 def get_listings_filtered(*, db: Session = Depends(get_db),
+                          credentials: Optional[str] = Header(None,
+                                                              description="If JWT is supplied, user will be taken "
+                                                                          "into account and his listings will not be "
+                                                                          "returned"),
                           user_lat: float = 46.0,
                           user_lon: float = 15.0,
                           user_dist: float = 10000,
@@ -38,6 +42,18 @@ def get_listings_filtered(*, db: Session = Depends(get_db),
                           user_dog_size2: bool = True,
                           user_dog_size3: bool = True,
                           user_dog_size4: bool = True) -> Any:
+
+    # if credentials (= JWT) is supplied: find user and do not return his listings
+    user_listing_ids = []
+    if credentials:
+        user_id = auth_handler.decode_token(credentials)
+        user = actions.user.get(db=db, id=user_id)
+        if user is None:
+            raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
+        listing: Listing
+        for listing in user.listings:
+            user_listing_ids.append(listing.id)
+
     listings = actions.listing.get_all(db=db, skip=0, limit=9999999)
     if listings is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
@@ -53,7 +69,10 @@ def get_listings_filtered(*, db: Session = Depends(get_db),
         lon, lat = listing.lon, listing.lat
         dist = float(distance.distance((user_lat, user_lon), (lat, lon)).km)
 
-        if dist <= user_dist and listing.dog.size_category in categories and check_if_listing_is_active(listing):
+        if dist <= user_dist \
+                and listing.dog.size_category in categories \
+                and check_if_listing_is_active(listing) \
+                and listing.id not in user_listing_ids:
             listing.distance = dist
             filtered_listings.append(listing)
 
