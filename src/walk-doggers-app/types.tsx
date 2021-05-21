@@ -44,7 +44,8 @@ export type SettingsParamList = {
   EditProfileScreen: undefined;
   BecomeAReporterScreen: undefined;
   MyDogsScreen: undefined;
-  NewDogScreen: undefined
+  NewDogScreen: undefined;
+  EditDogScreen: undefined
 };
 
 export type LoginParamList = {

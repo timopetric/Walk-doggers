@@ -39,6 +39,7 @@ import NewDogScreen from "../screens/Settings/NewDogScreen";
 import MessageScreen from '../screens/MessageScreen';
 import BlogPostScreen from "../screens/Blog/BlogPostScreen";
 import NewListingScreen from "../screens/Listings/NewListingScreen";
+import EditDogScreen from "../screens/Settings/EditDogScreen"
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -314,6 +315,13 @@ function SettingsNavigator({navigation}: any) {
                 component={NewDogScreen}
                 options={{
                     headerTitle: 'New Dog', headerTitleAlign: 'center', ...headerWhiteBackground,
+                }}
+            />
+            <SettingsStack.Screen
+                name="EditDogScreen"
+                component={EditDogScreen}
+                options={{
+                    headerTitle: 'Edit Dog', headerTitleAlign: 'center', ...headerWhiteBackground,
                 }}
             />
         </SettingsStack.Navigator>

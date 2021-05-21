@@ -9,8 +9,9 @@ import SizeSelector from "../../components/SizeSelector";
 import FormItem from "../../components/FormItem";
 import ButtonCustom from "../../components/ButtonCustom";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
+import {useNavigation} from "@react-navigation/native";
 
-function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
+function onPressUpdate(navigation: any, dog: Dog, getJwt: any) {
     let jwt = getJwt()
 
     let reqBody: any = {}
@@ -20,12 +21,8 @@ function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
     if (dog.size_category !== -1) reqBody.size_category = dog.size_category;
     if (dog.photo !== "") reqBody.photo = dog.photo;
 
-    // console.log(JSON.stringify(reqBody))
-    // console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
-    // console.log(JSON.stringify(dog))
-
-    fetch(process.env.BASE_API_URL + '/dogs/', {
-        method: "POST",
+    fetch(process.env.BASE_API_URL + '/dogs/' + dog.id, {
+        method: "PUT",
         headers: {
             "accept": "application/json",
             "Content-Type": "application/json",
@@ -34,16 +31,14 @@ function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
         body: JSON.stringify(reqBody)
     }).then(async response => {
         let json = await response.json();
-        console.log(json)
         const statusCode = response.status;
         switch (statusCode) {
-            case 201:
-                // successfully created dog
+            case 200:
+                // successfully updated dog
                 navigation.goBack();
                 break;
             case 422:
-                // TODO: notify user about validation error
-                // description missing, ...
+                alert("Inputs should not be empty!")
                 break;
 
             default:
@@ -60,36 +55,38 @@ type Dog = {
     description: string;
     size_category: number;
     photo: string;
+    id: string;
 }
 
 
-export default function NewDogScreen({navigation}: any) {
+export default function EditDogScreen(props: any) {
     const {getJwt} = useContext(AuthContext);
-
-    const [dog, setDog] = useState<Dog>({
-        name: "",
-        description: "",
-        size_category: 0,
-        photo: "",
-    });
-
+    const [dog, setDog] = useState<Dog>({});
     const [selectedIndex, setSelectedIndex] = useState(0);
+    const navigation = useNavigation()
 
     useEffect(() => {
         setDog({...dog, size_category: selectedIndex})
+        console.log(dog)
     }, [selectedIndex]);
+
+    useEffect(() => {
+        const dog = props.route.params
+        setSelectedIndex(dog.size_category)
+        setDog(dog)
+    }, []);
 
     const saveUrl = (url: string) => {
         setDog({...dog, photo: url})
-        console.log(url)
     }
 
     return (
         <ScrollViewContainer>
             <FormItem label={"NAME"} placeholder={"Enter dog's name"}
-                      getText={(text) => setDog({...dog, name: text})}/>
+                      getText={(text) => setDog({...dog, name: text})} setText={dog.name}/>
             <FormItem label={"DESCRIPTION"} placeholder={"Describe your dog"}
                       getText={(text) => setDog({...dog, description: text})}
+                      setText={dog.description}
                       height={150}/>
             <FormItem label={"SIZE"}>
                 <SizeSelector categories={categories} selectedIndex={selectedIndex}
@@ -98,7 +95,7 @@ export default function NewDogScreen({navigation}: any) {
             <FormItem label={"IMAGE"}>
                 <ImageUpload saveUrl={saveUrl} maxImages={10} showEdit={true}/>
             </FormItem>
-            <ButtonCustom text="Add" color={"purple"} onPress={() => onPressAdd(navigation, dog, getJwt)}/>
+            <ButtonCustom text="Save Changes" color={"purple"} onPress={() => onPressUpdate(navigation, dog, getJwt)}/>
         </ScrollViewContainer>
     );
 }
