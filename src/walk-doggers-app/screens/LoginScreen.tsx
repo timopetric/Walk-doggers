@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Keyboard, KeyboardAvoidingView, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Image, Text, View, TextInput, TouchableOpacity} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
@@ -27,7 +27,7 @@ const LoginScreen = ({navigation, route}: AuthNavProps<"Login">) => {
     };
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Platform.OS !== 'web' && Keyboard.dismiss()}>
 
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <View style={styles.header}>

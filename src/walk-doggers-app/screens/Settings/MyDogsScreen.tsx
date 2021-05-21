@@ -81,7 +81,7 @@ export default function MyDogsScreen() {
     const [dogs, setDogs] = useState<Object[]>([])
 
     const renderItem = ({item}) => (
-        <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id}/>
+        <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id} navigation={navigation} payload={item}/>
     );
 
     useEffect(() => {
@@ -95,7 +95,6 @@ export default function MyDogsScreen() {
                 },
             }).then(async response => {
                 let json = await response.json();
-                console.log(json)
                 setDogs(json)
             })
         }
@@ -131,7 +130,7 @@ function MiniDogCard(props: any) {
                 </View>
 
                 <View style={styles.editContainer}>
-                    <Pressable onPress={() => alert('TODO implement')}>
+                    <Pressable onPress={() => props.navigation.navigate('EditDogScreen', props.payload)}>
                         <Text style={styles.editText}>Edit</Text>
                     </Pressable>
                 </View>

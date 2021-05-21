@@ -92,7 +92,7 @@ export default function App() {
                     headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify({"email": email, "password": password})
                 };
-                console.log("emv",process.env)
+                console.log("emv", process.env)
                 const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
@@ -116,7 +116,7 @@ export default function App() {
                 const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
-                    console.log(responseData) 
+                    console.log(responseData)
                     await dispatch({type: 'SET_ROLES', roles: responseData});
                 }
             },

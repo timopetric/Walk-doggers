@@ -92,7 +92,7 @@ export default function ImageUpload({saveUrl, defaultUrl, circle, size, showEdit
         if (defaultUrl !== undefined) {
             setImageUrl(defaultUrl);
         }
-    }, []);
+    },[defaultUrl]);
 
     function DataURIToBlob(dataurl: any) {
         const arr = dataurl.split(',');
