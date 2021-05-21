@@ -69,9 +69,13 @@ def become_reporter(*, user_id=Depends(auth_handler.auth_wrapper), db: Session =
     return user
 
 
-@AuthRouter.get('/protected', description="Return currently logged in user id. (From jwt)")
-def protected(user_id=Depends(auth_handler.auth_wrapper)):
-    return {'user_id': user_id}
+@AuthRouter.get('/protected', description="Return currently logged in user id. (From jwt)", response_model=schemas.User)
+def protected(db: Session = Depends(get_db), user_id=Depends(auth_handler.auth_wrapper)):
+    user = actions.user.get(db=db, id=user_id)
+    if not user:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND)
+
+    return user
 
 
 @AuthRouter.get('/protected/admin', dependencies=[Depends(auth_handler.is_admin)])
