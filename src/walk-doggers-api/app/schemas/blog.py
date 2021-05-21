@@ -1,13 +1,13 @@
 from typing import Optional
 
-from pydantic import UUID4, BaseModel
+from pydantic import UUID4, BaseModel, Field
 
 
 # Shared properties
 class BlogPostBase(BaseModel):
     title: Optional[str] = None
     content: Optional[str] = None
-    photo: Optional[str] = None
+    photo: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/Dog_silhouette.png")
 
 
 # Properties to receive via API on creation

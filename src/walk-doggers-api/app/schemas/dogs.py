@@ -7,7 +7,7 @@ class DogBase(BaseModel):
     name: str = Field(..., example="Koki")
     description: Optional[str] = Field(..., example="My beautiful dog")
     size_category: int = Field(..., example=0, ge=0, le=4)
-    photo: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/Dog_silhouette.png", example="-")
+    photo: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/Dog_silhouette.png")
 
 
 class DogInDBBase(DogBase):
