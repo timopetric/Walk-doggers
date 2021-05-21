@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     }
 });
 
-async function acceptPost (blogId: String, getJwt: Function){
+async function moderate (blogId: String, approved: Boolean, getJwt: Function){
     let jwt = getJwt();
     const reqOptions = {
         method: 'PUT',
@@ -54,12 +54,11 @@ async function acceptPost (blogId: String, getJwt: Function){
             'Authorization': 'Bearer ' + jwt,
         },
         body: JSON.stringify({
-            "approved": true
+            "approved": approved
         }),
     };
     let response = await fetch(process.env.BASE_API_URL + '/blog/' + blogId, reqOptions);
     return await response.json();
-
 }
 
 async function deletePost (blogId: String, getJwt: Function) {
@@ -83,13 +82,13 @@ const BlogPostScreen = (props: any) => {
     const navigation = useNavigation();
 
     const onPressAcceptPost = async () => {
-        const response = await acceptPost(blogId, getJwt)
+        const response = await moderate(blogId,true, getJwt)
         console.log(response);
         navigation.goBack()
     };
 
     const onPressDeletePost = async () => {
-        const response = await deletePost(blogId, getJwt)
+        const response = await moderate(blogId,false, getJwt)
         console.log(response);
         navigation.goBack()
     };
@@ -112,6 +111,7 @@ const BlogPostScreen = (props: any) => {
               text={"Reject"}
               color={"red"}
               style={{ flex: 1, paddingHorizontal: 15 }}
+              onPress={onPressDeletePost}
             />
             <ButtonCustom
               text={"Accept"}

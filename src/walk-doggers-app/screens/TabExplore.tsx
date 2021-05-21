@@ -168,7 +168,8 @@ async function getFilteredListings(getJwt: Function, params: any) {
         method: 'GET',
         headers: {
             'accept': 'application/json',
-            'Authorization': 'Bearer ' + jwt
+            'Authorization': 'Bearer ' + jwt,
+            'Credentials': jwt
         },
     };
 
