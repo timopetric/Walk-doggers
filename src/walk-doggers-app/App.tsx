@@ -11,7 +11,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext, {LoginProps, RegisterProps} from './navigation/AuthContext';
 
 export default function App() {
-    require('dotenv').config()
     const isLoadingComplete = useCachedResources();
     const [state, dispatch] = React.useReducer(
         (prevState: any, action: any) => {
