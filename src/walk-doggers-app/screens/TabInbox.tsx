@@ -17,7 +17,8 @@ type ConversationsType = {
         description: string,
         email: string,
     },
-    id_conv: string
+    id_conv: string,
+    last_message_text: string
 }
 
 async function getUserConvos(getJwt: Function) {
@@ -91,8 +92,9 @@ export default function TabInbox({navigation}: any) {
                 {convos.length ? convos.map(convo => (
                    <MessageThread 
                         name={convo?.user_other?.first_name || "error"} 
-                        lastMessage="PLACEHOLDER GET MESSAGES"
+                        lastMessage={convo.last_message_text}
                         key={convo?.id_conv || "error"}
+                        imageUrl={convo.user_other.image_url}
                         onPress={onPress}
                     />)
                 ) : <Text>ERROR</Text>}
