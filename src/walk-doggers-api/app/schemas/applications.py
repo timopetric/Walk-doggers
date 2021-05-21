@@ -34,7 +34,6 @@ class ApplicationInDBBase(ApplicationBase):
 class ApplicationBrief(ApplicationInDBBase):
     listing_author_to_applied_user_left_rating: Optional[bool] = False
     applied_user_to_listing_author_left_rating: Optional[bool] = False
-    pass
 
 
 class Application(ApplicationInDBBase):
@@ -42,6 +41,11 @@ class Application(ApplicationInDBBase):
     listing_author_to_applied_user_left_rating: Optional[bool] = False
     applied_user_to_listing_author_left_rating: Optional[bool] = False
 
+
+class ApplicationWithUserBrief(ApplicationInDBBase):
+    applied_user: "User"
+    listing_author_to_applied_user_left_rating: Optional[bool] = False
+    applied_user_to_listing_author_left_rating: Optional[bool] = False
     pass
 
 
@@ -51,5 +55,7 @@ class ApplicationInDB(ApplicationInDBBase):
 
 
 from .listings import ListingBrief
+from .users import User
 
 Application.update_forward_refs()
+ApplicationWithUserBrief.update_forward_refs()

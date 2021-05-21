@@ -5,6 +5,7 @@ from typing import Any, Dict, Generic, List, Optional, Type, TypeVar, Union
 from fastapi.encoders import jsonable_encoder
 from pydantic import UUID4, BaseModel
 from sqlalchemy.orm import Session
+from sqlalchemy import update, and_
 
 from app.postgres import Base
 from app import schemas
@@ -135,9 +136,15 @@ class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, sch
         db.refresh(db_obj)
         return db_obj
 
-    def get_applications_by_listing_id_and_status(self, db: Session, listing_id: UUID4, status: str) -> Optional[ModelType]:
+    def get_applications_by_listing_id_and_status(self, db: Session, listing_id: UUID4, status: str) -> Optional[
+        ModelType]:
         return db.query(self.model).filter(self.model.listing_id == listing_id).filter(
             self.model.status == status).all()
+
+    def reject_unconfirmed_applications(self, db: Session, listing_id: UUID4) -> Optional[ModelType]:
+        db.query(self.model).filter(self.model.listing_id == listing_id).filter(
+            self.model.status != "confirmed").update({"status": "rejected"}, synchronize_session="fetch")
+        db.commit()
 
 
 post = PostActions(Post)

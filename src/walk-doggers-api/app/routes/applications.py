@@ -39,18 +39,34 @@ def apply_to_listing(*, db: Session = Depends(get_db), application_in: schemas.A
 
 
 @ApplicationsRouter.put("/{application_id}", response_model=schemas.Application)
-def confirm_reject_application(*, db: Session = Depends(get_db), application_in: schemas.ApplicationUpdate, application_id: int,
-                     user_id=Depends(auth_handler.auth_wrapper)) -> Any:
+def confirm_reject_application(*, db: Session = Depends(get_db), application_in: schemas.ApplicationUpdate,
+                               application_id: int,
+                               user_id=Depends(auth_handler.auth_wrapper)) -> Any:
     application: Application = actions.application.get(db=db, id=application_id)
 
+    # check if user is author of the listing of which he is confirming or rejecting an application
     if application.listing.author_id != user_id:
         raise HTTPException(status_code=403)
 
+    # prevents author from accepting soft applied applications
+    if application.status == "soft":
+        raise HTTPException(status_code=403, detail="Cannot confirm or reject soft applied applications")
+
+    listing_id = application.listing_id
     confirmed_applications = actions.application.get_applications_by_listing_id_and_status(db=db,
-                                                                                           listing_id=application.listing_id,
+                                                                                           listing_id=listing_id,
                                                                                            status='confirmed')
-    if not len(confirmed_applications) != 0:
+    # if any application on this listing is already confirmed, throw an error
+    if len(confirmed_applications) != 0:
         raise HTTPException(status_code=409, detail="You can't accept or reject applications for confirmed listing")
 
+    # update application status with either confirmed or rejectet
     actions.application.update(db=db, db_obj=application, obj_in=application_in)
+
+    if application_in.status == "confirmed":
+        # if new status is confirmed, set confirmed application id of listing to is of confirmed application
+        actions.listing.update(db=db, db_obj=application.listing, obj_in={"confirmed_application_id": application_id})
+        # reject all other applications of this listing
+        actions.application.reject_unconfirmed_applications(db=db, listing_id=listing_id)
+
     return application

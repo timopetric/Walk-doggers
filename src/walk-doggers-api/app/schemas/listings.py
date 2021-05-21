@@ -54,6 +54,7 @@ class Listing(ListingInDBBase):
     dog: "Dog"
     location_text: str
     applications: "List[ApplicationBrief]"
+    confirmed_application: Optional["ApplicationWithUserBrief"] = None
 
     # Additional properties stored in DB
 
@@ -77,7 +78,7 @@ class ListingInDB(ListingInDBBase):
 
 from .users import User
 from .dogs import Dog
-from .applications import ApplicationBrief
+from .applications import ApplicationBrief, ApplicationWithUserBrief
 
 Listing.update_forward_refs()
 ListingExplore.update_forward_refs()

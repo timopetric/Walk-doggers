@@ -74,10 +74,14 @@ class Listing(Base):
 
     author_id = Column('author_id', UUID(), ForeignKey('user.id'), nullable=False)
     dog_id = Column('dog_id', UUID(), ForeignKey('dog.id'), nullable=False)
+    confirmed_application_id = Column('confirmed_application_id', Integer, ForeignKey('application.id'))
 
     author = relationship("User", back_populates="listings")
     dog = relationship("Dog", back_populates="listings")
-    applications = relationship("Application", back_populates='listing')
+    applications = relationship("Application", back_populates='listing',
+                                primaryjoin='Listing.id == Application.listing_id')
+    confirmed_application = relationship("Application", uselist=False,
+                                         primaryjoin='Application.id == Listing.confirmed_application_id')
 
 
 class Application(Base):
@@ -85,11 +89,11 @@ class Application(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     listing_id = Column('listing_id', UUID(), ForeignKey('listing.id'), nullable=False)
     applied_user_id = Column('applied_user_id', UUID(), ForeignKey('user.id'), nullable=False)
-    status = Column(String, default='normal') # soft, normal, rejected, confirmed
+    status = Column(String, default='normal')  # soft, normal, rejected, confirmed
     listing_author_to_applied_user_left_rating = Column(Boolean, default=False)
     applied_user_to_listing_author_left_rating = Column(Boolean, default=False)
 
-    listing = relationship("Listing", back_populates='applications')
+    listing = relationship("Listing", back_populates='applications', foreign_keys=[listing_id])
     applied_user = relationship("User", back_populates='applications')
 
 

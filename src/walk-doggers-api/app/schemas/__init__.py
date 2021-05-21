@@ -5,5 +5,5 @@ from .users import UserRolesUpdate, UserBase, User, UserInDBBase, UserRoles, Use
 from .jwt import JwtToken
 from .errors import HTTPError
 from .listings import Listing, ListingInDBBase, ListingInDB, ListingCreate, ListingUpdate, ListingBase, ListingModifyApplication, ListingExplore, ListingBrief
-from .applications import ApplicationBrief, ApplicationInDBBase, ApplicationCreate, ApplicationUpdate, ApplicationInDB, Application
+from .applications import ApplicationBrief, ApplicationInDBBase, ApplicationCreate, ApplicationUpdate, ApplicationInDB, Application, ApplicationWithUserBrief
 from .dogs import DogBase, Dog, DogCreate, DogUpdate
