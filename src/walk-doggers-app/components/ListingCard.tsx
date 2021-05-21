@@ -8,6 +8,7 @@ import Constants from "../constants/Colors"
 
 interface IListingCardProps {
     status?: string;
+    urlImage?: string;
     location?: string;
     title?: string;
     descr?: string;
@@ -35,7 +36,7 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
             <Image
               style={styles.img}
               source={{
-                uri: "https://www.cesarsway.com/wp-content/uploads/2019/10/AdobeStock_190562703.jpeg",
+                uri: this.props.urlImage,
               }}
             />
             <View style={styles.listingCard}>

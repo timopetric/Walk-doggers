@@ -69,6 +69,7 @@ export function Applied(props) {
         location={item.location_text}
         title={item.title}
         descr={item.description}
+        urlImage={item.dog.photo}
         date={date_item}
         dateDay={daysOfWeek[date_from.getDay()]}
         time={hours}

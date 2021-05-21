@@ -66,6 +66,7 @@ export function MyListings(props) {
         title={item.title}
         descr={item.description}
         date={date_item}
+        urlImage={item.dog.photo}
         dateDay={daysOfWeek[date_from.getDay()]}
         time={hours}
         numOfApplied={item.applications.length}
