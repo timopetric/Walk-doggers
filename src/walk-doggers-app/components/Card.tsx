@@ -29,10 +29,11 @@ const Card = (props: any) => {
         distance,
         imageUrl,
         author,
-        listing,
         callToActionText,
         time,
-        modConfirmed
+        modConfirmed,
+        navigateTo,
+        payload,
     } = props;
     return (
         <View style={styles.card}>
@@ -63,7 +64,7 @@ const Card = (props: any) => {
                 <Text style={styles.description}>{content}</Text>
                 <View style={styles.imageRow}>
                     <Text style={[styles.distance, styles.date]}>{distance && distance.toFixed(2) + " km"}</Text>
-                    <TouchableOpacity onPress={() => navigation.navigate('ListingScreen', {listing: listing})}>
+                    <TouchableOpacity onPress={() => navigation.navigate(navigateTo, payload)}>
                         <Text style={styles.takeMeWalk}>{callToActionText}</Text>
                     </TouchableOpacity>
                 </View>
@@ -90,10 +91,11 @@ const styles = StyleSheet.create({
     },
     imageRow: {
         flexDirection: "row",
-        flexWrap: "wrap",
+        justifyContent: "space-between",
+        // flexWrap: "wrap",
     },
     distance: {
-        flex: 1
+        // flex: 1
     },
     takeMeWalk: {
         color: BLUE,
@@ -102,6 +104,8 @@ const styles = StyleSheet.create({
         fontFamily: "red-hat-text-500",
     },
     card: {
+        width: 800,
+        maxWidth: "92%",
         backgroundColor: "#fff",
         shadowOpacity: 0.1,
         shadowRadius: 5,
@@ -110,7 +114,7 @@ const styles = StyleSheet.create({
             width: 2,
         },
         elevation: 1,
-        flex: 1,
+        // flex: 1,
         // padding: 10,
         margin: 15,
         borderRadius: 12,
@@ -126,13 +130,12 @@ const styles = StyleSheet.create({
     },
     dateRow: {
         flexDirection: "row",
-        justifyContent: "flex-start",
-        flex: 1
+        // flex: 1
     },
     row: {
         flexDirection: "row",
         flex: 1,
-        justifyContent: "space-around",
+        justifyContent: "space-between",
         alignItems: "center"
     },
     dateDay: {
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     },
     fstRow: {
         flexDirection: "row",
-        flex: 1,
+        // flex: 1,
         justifyContent: "space-between"
     },
     wait: {

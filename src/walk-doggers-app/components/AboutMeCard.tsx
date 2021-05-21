@@ -3,7 +3,6 @@ import React from "react";
 import {Ionicons} from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity} from "react-native";
-import { Card } from "react-native-elements/dist/card/Card";
 import {categories} from "../constants/Values";
 // import StarRating from 'react-native-star-rating'
 import {GRAY_STAR, YELLOW} from "../constants/Colors";

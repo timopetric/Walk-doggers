@@ -82,10 +82,18 @@ const ListingScreen = (props) => {
     const {listing} = params
     console.log(listing);
 
-    const day_from = format(new Date(listing?.date_from), 'iiii');
-    const time_from = format(new Date(listing?.date_from), 'HH:mm');
-    const time_to = format(new Date(listing?.date_to), 'HH:mm');
+    let day_from = ""
+    let time_from = ""
+    let time_to = ""
 
+    if (listing?.date_from) {
+        day_from = format(new Date(listing?.date_from), 'iiii');
+        time_from = format(new Date(listing?.date_from), 'HH:mm');
+        time_to = format(new Date(listing?.date_to), 'HH:mm');
+
+    }
+
+    console.log(day_from, listing?.date_from);
     return (
         <ScrollView style={{backgroundColor: 'white'}}>
             <Image
@@ -115,7 +123,8 @@ const ListingScreen = (props) => {
                 <Text style={styles.subtitle}>About Owner</Text>
                 <AboutMeCard
                     image={listing?.author?.image_url}
-                    name={listing?.author?.first_name + " " + listing?.author?.last_name} descr={listing?.author?.description} isDog={false}
+                    name={listing?.author?.first_name + " " + listing?.author?.last_name}
+                    descr={listing?.author?.description} isDog={false}
                     value={3}/>
             </View>
         </ScrollView>

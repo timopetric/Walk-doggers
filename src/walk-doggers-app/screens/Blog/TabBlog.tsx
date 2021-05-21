@@ -4,32 +4,14 @@ import {Text, View} from 'react-native';
 import Card from "../../components/Card";
 import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../navigation/AuthContext";
-import { FlatList } from 'react-native-gesture-handler';
+import {FlatList} from 'react-native-gesture-handler';
 import {useIsFocused} from "@react-navigation/native";
-
-const imageUrl = 'https://images.theconversation.com/files/319375/original/file-20200309-118956-1cqvm6j.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=900.0&fit=crop';
-const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.';
-const title = 'The best dog food according to experts';
-
-function onPress(props: any, navigation: any) {
-    const {date, title, content, distance, imageUrl, author, modConfirmed, blogId} = props;
-    navigation.navigate('BlogPostScreen', {
-        date: date,
-        title: title,
-        content: content,
-        imageUrl: imageUrl,
-        author: author,
-        modConfirmed: modConfirmed,
-        blogId: blogId
-    });
-}
 
 
 export default function TabBlog() {
     const {getJwt} = useContext(AuthContext);
     const isFocused = useIsFocused();
-    const [blogs, setBlogs] = useState<Object[]>([
-    ])
+    const [blogs, setBlogs] = useState<Object[]>([])
 
     useEffect(() => {
         if (isFocused) {
@@ -61,15 +43,25 @@ export default function TabBlog() {
             if (data2.status == 200) {
                 var json2 = await data2.json()
             }
-            var merged = json2 != undefined ? json1.concat(json2): json1
+            var merged = json2 != undefined ? json1.concat(json2) : json1
             setBlogs(merged)
-    
+
         })
     }
 
     const renderItem = ({item}) => (
-        <Card title={item.title} content={item.content} author={item.author.first_name.concat(" " + item.author.last_name)} modConfirmed={item.approved} blogId={item.id}
-        imageUrl={item.photo} callToActionText={'Read more'} onPress={onPress}/>
+        <Card title={item.title} content={item.content}
+              author={item.author.first_name.concat(" " + item.author.last_name)} modConfirmed={item.approved}
+              blogId={item.id}
+              imageUrl={item.photo} callToActionText={'Read more'} navigateTo={'BlogPostScreen'}
+              payload={{
+                  title: item.title,
+                  content: item.content,
+                  imageUrl: item.photo,
+                  author: item.author.first_name.concat(" " + item.author.last_name),
+                  modConfirmed: item.approved,
+                  blogId: item.id
+              }}/>
     );
 
     return (

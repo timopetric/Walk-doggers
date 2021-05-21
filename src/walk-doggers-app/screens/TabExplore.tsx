@@ -337,7 +337,8 @@ export default function TabExplore({navigation}: any) {
                     data={listings}
                     renderItem={renderItem}
                     keyExtractor={(item: any) => item.id}
-                    style={[{paddingTop: 20}]}
+                    style={[{paddingTop: 20, flex: 1}]}
+                    contentContainerStyle={{alignItems: "center"}}
                 />
             }
         </View>
@@ -364,7 +365,8 @@ function renderItem({item}: any) {
             day={daysOfWeek[date_from.getDay()]}
             distance={item.distance}
             time={hours}
-            listing={item}
+            navigateTo={'ListingScreen'}
+            payload={{listing: item}}
             // onPress={() => navigation.navigate('ListingScreen', item)}
         />
     );
@@ -372,24 +374,44 @@ function renderItem({item}: any) {
 
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "white",
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    separator: {
-        marginVertical: 30,
-        height: 1,
-        width: '80%',
-    },
-    horizontal: {
-        flexDirection: "row",
-        justifyContent: "space-around",
-        padding: 10
-    }
+container:
+{
+    backgroundColor: "white",
+        flex
+:
+    1,
+        alignItems
+:
+    'center',
+        justifyContent
+:
+    'center',
+},
+title:
+{
+    fontSize: 20,
+        fontWeight
+:
+    'bold',
+},
+separator:
+{
+    marginVertical: 30,
+        height
+:
+    1,
+        width
+:
+    '80%',
+},
+horizontal:
+{
+    flexDirection: "row",
+        justifyContent
+:
+    "space-around",
+        padding
+:
+    10
+}
 });
