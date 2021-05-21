@@ -12,9 +12,11 @@ from typing import List
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import UUID4
 
-from app.postgres import actions
 from app.routes.auth import auth_handler
 from sqlalchemy.orm import Session
+
+from app.schemas import User
+from app.schemas.conversations import ConversationsBase
 
 ConversationRouter = APIRouter()
 
@@ -22,7 +24,7 @@ database_mongo_uri = os.environ["DATABASE_URL_MONGODB"]
 engine = AIOEngine(motor_client=AsyncIOMotorClient(database_mongo_uri))
 
 
-@ConversationRouter.get("", response_model=List[Conversation],
+@ConversationRouter.get("", response_model=List[ConversationsBase],
                         description="Get a list of conversations from user in JWT.")
 async def get_conversations(db: Session = Depends(get_db),
                             user_id=Depends(auth_handler.auth_wrapper),
@@ -32,7 +34,19 @@ async def get_conversations(db: Session = Depends(get_db),
                                       query.or_(Conversation.user1Id == user.id,
                                                 Conversation.user2Id == user.id),
                                       skip=skip, limit=limit)
-    return conversations
+
+    conversation_user_list = []
+    for conv in conversations:
+        userIdOther = conv.user1Id if conv.user1Id == user_id else conv.user2Id
+        user_other: User = get_user_from_id(db, userIdOther)
+        conversation_user_list.append(
+            {
+                "user_other": user_other,
+                "id_conv": str(conv.id)
+            }
+        )
+
+    return conversation_user_list
 
 
 @ConversationRouter.get("/{conv_id}", response_model=Conversation,
