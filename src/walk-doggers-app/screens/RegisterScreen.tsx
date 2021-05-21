@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Keyboard, KeyboardAvoidingView, StyleSheet, TouchableWithoutFeedback} from 'react-native';
+import {Keyboard, KeyboardAvoidingView, Platform, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import {Image, Text, View} from 'react-native';
 import {createStackNavigator, StackScreenProps} from '@react-navigation/stack';
 import {RootStackParamList} from '../types';
@@ -27,7 +27,7 @@ const RegisterScreen = ({navigation, route}: AuthNavProps<"Register">) => {
 
     return (
 
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+        <TouchableWithoutFeedback onPress={() => Platform.OS !== 'web' && Keyboard.dismiss()}>
             <View style={styles.container}>
 
 
