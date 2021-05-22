@@ -11,7 +11,8 @@ class PostBase(BaseModel):
 
 # Properties to receive via API on creation
 class PostCreate(PostBase):
-    title: str
+    message: str
+    receiver_id: str
     # body: str
 
 
