@@ -24,8 +24,6 @@ async def upload_image(image_data: UploadFile = File(...)):
             "message": f"Server error. Please ask administrator to set the environment variables for AWS image upload."
         }
 
-    print(image_data.type)
-
     s3 = boto3.resource(
         's3',
         aws_access_key_id=AWS_ACCESS_KEY_ID,
