@@ -15,7 +15,8 @@ import {BASE_API_URL} from "../localConstants";
 export default function ChatScreen(props: any) {
     const [messages, setMessages] = useState([]);
     const navigation = useNavigation()
-    const [conversation, setConversation] = useState(props.route.params)
+    // const [conversation, setConversation] = useState(props.route.params)
+    const [user, setUser] = useState(props.route.params)
     const {getJwt} = useContext(AuthContext)
     const [imageUrl, setImageUrl] = useState()
     const [fstName, setFstName] = useState("")
@@ -31,14 +32,14 @@ export default function ChatScreen(props: any) {
     }, []);
 
     const setName = () => {
-        setImageUrl(conversation.user.image_url)
-        setFstName(conversation.user.first_name)
-        setLstName(conversation.user.last_name)
+        setImageUrl(user.image_url)
+        setFstName(user.first_name)
+        setLstName(user.last_name)
     }
 
     const getConversationMessages = () => {
         let jwt = getJwt();
-        fetch(BASE_API_URL + "/inbox/" + conversation.user.id, {
+        fetch(BASE_API_URL + "/inbox/" + user.id, {
             method: "GET",
             headers: {
                 accept: "application/json",
@@ -63,7 +64,7 @@ export default function ChatScreen(props: any) {
     };
 
     const formatConversationMessages = (json) => {
-        const otherUser = conversation.user.id
+        const otherUser = user.id
         var array = []
         for (let message of Object.keys(json)) {
             var newMessage = {
@@ -72,7 +73,7 @@ export default function ChatScreen(props: any) {
                 createdAt: json[message].date,
                 user: {
                     _id: otherUser != json[message].senderId ? 1 : 2,
-                    avatar: conversation.user.image_url,
+                    avatar: user.image_url,
                 }
             }
             array.unshift(newMessage)
@@ -92,7 +93,7 @@ export default function ChatScreen(props: any) {
         let jwt = getJwt();
         // let reqBody = {}
         // reqBody.text = message.text
-        const reqBody = {receiver_id: conversation.user.id, message: message.text}
+        const reqBody = {receiver_id: user.id, message: message.text}
 
         fetch(
             BASE_API_URL + "/inbox",
