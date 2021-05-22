@@ -54,7 +54,7 @@ async def get_conversations_from_jwt_user(user_id_filter: Optional[str] = None,
 
 
 @InboxRouter.post("", response_model=Message, responses={HTTP_404_NOT_FOUND: {"model": ""}})
-async def send_message_to_user(message_in: schemas.PostCreate,
+async def send_message_to_user(message_in: schemas.InboxMessage,
                                db: Session = Depends(get_db),
                                user_id=Depends(auth_handler.auth_wrapper)):
     # double check if jwt user is valid

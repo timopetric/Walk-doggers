@@ -10,3 +10,7 @@ class InboxBase(BaseModel):
     user: User
     last_message_text: str
 
+
+class InboxMessage(BaseModel):
+    message: str
+    receiver_id: str
