@@ -183,6 +183,7 @@ async function getFilteredListings(getJwt: Function, params: any) {
     switch (statusCode) {
         case 200:
             // successfully created dog
+            return await response.json();
             break;
         case 403:
             Alert.alert("You need to be authorized to see listings")
@@ -195,7 +196,6 @@ async function getFilteredListings(getJwt: Function, params: any) {
     }
 
     console.log("response: ", response.status)
-    return await response.json();
 }
 
 const categories = [
@@ -293,42 +293,6 @@ export default function TabExplore({navigation}: any) {
                                    setSelectedIndexes={setSelectedIndexes} multiple={true} categories={categories}/>
                 </View>
             </Provider>
-
-            {/* <ScrollView>
-                <Card
-                    content={content}
-                    callToActionText={'Take me for a walk'}
-                    imageUrl={imageUrl}
-                    title="Smol Husky Woofer"
-                    date=" 6.4.2020"
-                    day="TUESDAY"
-                    distance="1.8 km"
-                    time="7:00 - 21:00"
-                    onPress={onPress}
-                />
-                <Card
-                    content={content}
-                    callToActionText={'Take me for a walk'}
-                    imageUrl={imageUrl}
-                    title="Very Good Boy"
-                    date=" 6.4.2020"
-                    day="TUESDAY"
-                    distance="1.8 km"
-                    time="7:00 - 21:00"
-                    onPress={onPress}
-                />
-                <Card
-                    content={content}
-                    callToActionText={'Take me for a walk'}
-                    imageUrl={imageUrl}
-                    title="Snoop Dog"
-                    date=" 6.4.2020"
-                    day="TUESDAY"
-                    distance="1.8 km"
-                    time="7:00 - 21:00"
-                    onPress={onPress}
-                />
-            </ScrollView> */}
             {isLoading ?
                 <View style={[styles.container, styles.horizontal]}>
                     <ActivityIndicator size="large" color={PRIMARY}/>
@@ -375,24 +339,24 @@ function renderItem({item}: any) {
 
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "white",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: "80%",
-  },
-  horizontal: {
-    flexDirection: "row",
-    justifyContent: "space-around",
-    padding: 10,
-  },
+    container: {
+        backgroundColor: "white",
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    title: {
+        fontSize: 20,
+        fontWeight: "bold",
+    },
+    separator: {
+        marginVertical: 30,
+        height: 1,
+        width: "80%",
+    },
+    horizontal: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        padding: 10,
+    },
 });

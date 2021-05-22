@@ -1,4 +1,15 @@
-import {Button, Dimensions, Image, Pressable, ScrollView, StyleSheet, Text, View, FlatList, ListRenderItem} from "react-native";
+import {
+    Button,
+    Dimensions,
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    View,
+    FlatList,
+    ListRenderItem
+} from "react-native";
 import * as React from "react";
 import {BLUE, GRAY_0, GRAY_1, GRAY_3, LIGHT_BG, PRIMARY, tintColorLight} from "../../constants/Colors";
 import {useEffect, useState, useContext} from "react";
@@ -81,7 +92,8 @@ export default function MyDogsScreen() {
     const [dogs, setDogs] = useState<Object[]>([])
 
     const renderItem = ({item}) => (
-        <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id} navigation={navigation} payload={item}/>
+        <MiniDogCard name={item.name} url={item.photo} description={item.description} id={item.id}
+                     navigation={navigation} payload={item}/>
     );
 
     useEffect(() => {
@@ -94,8 +106,10 @@ export default function MyDogsScreen() {
                     'Authorization': 'Bearer ' + getJwt()
                 },
             }).then(async response => {
-                let json = await response.json();
-                setDogs(json)
+                if (response.ok) {
+                    let json = await response.json();
+                    setDogs(json)
+                }
             })
         }
     }, [isFocused])

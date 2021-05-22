@@ -28,9 +28,11 @@ export function MyListings(props) {
         Authorization: "Bearer " + getJwt(),
       },
     }).then(async (response) => {
-      let json = await response.json();
+      if (response.ok){
+          let json = await response.json();
+        setMyListings(json);
+      }
       //console.log(json);
-      setMyListings(json);
     });
   };
 
@@ -58,7 +60,7 @@ export function MyListings(props) {
     //COMPLETED - oglas potekel in je imel potrjenega sprehajalca
         //applied users in feedback
     //EXPIRED - oglas potekel in ni imel potrjenega sprehajalca
-    
+
     return (
       <ListingCard
         status="accepted"

@@ -51,8 +51,10 @@ const DogSelect = ({onSelectId, navigation}: any) => {
                     'Authorization': 'Bearer ' + getJwt()
                 },
             }).then(async response => {
-                let json = await response.json();
-                setDogs(json)
+                if (response.ok) {
+                    let json = await response.json();
+                    setDogs(json)
+                }
             })
         }
     }, [isFocused]);
