@@ -2,9 +2,9 @@ import React from "react";
 
 import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity,Platform} from "react-native";
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
-
-import {Card, normalize} from "react-native-elements";
-import Constants from "../constants/Colors"
+import StatusListing from "../components/StatusListing"
+import LeaveFeedback from "../components/LeaveFeedback"
+import ButtonCustom from "../components/ButtonCustom"
 
 interface IListingCardProps {
     status?: string;
@@ -19,6 +19,8 @@ interface IListingCardProps {
     leaveFeedback?: boolean;
     appliedUsers?: boolean;
     messageOwner?: boolean;
+    listing: any;
+    application: any;
 }
 
 interface IListingCardState {
@@ -41,7 +43,11 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
             />
             <View style={styles.listingCard}>
               <View style={styles.row}>
-                <Text style={styles.status}>ACCEPTED</Text>
+                <StatusListing
+                  listing={this.props.listing}
+                  style={styles.status}
+                  application={this.props.application}
+                ></StatusListing>
                 <Text style={styles.location}>{this.props.location}</Text>
               </View>
               <Text style={styles.listingTitle}>{this.props.title}</Text>
@@ -65,6 +71,18 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                     <View style={styles.ghost}></View>
                   </View>
                 </TouchableOpacity>
+              )}
+              <LeaveFeedback
+                listing={this.props.listing}
+                application={this.props.application}
+              />
+
+              {this.props.application && (
+                <ButtonCustom
+                  text={"Message Owner"}
+                  color={"green"}
+                  style={{ flex: 1 }}
+                />
               )}
             </View>
           </View>

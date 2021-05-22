@@ -11,6 +11,7 @@ const logo = require("../assets/images/image.jpg");
 interface IMessageThreadProps {
     name?: string;
     lastMessage?: string;
+    imageUrl?: string;
     onPress?: any;
 }
 
@@ -22,7 +23,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
         return (
             <TouchableOpacity onPress={this.props.onPress}>
                 <View style={styles.imageRow}>
-                    <Image source={logo} style={styles.image}></Image>
+                    <Image source={{uri: this.props.imageUrl}} style={styles.image}></Image>
                     <View style={styles.textContainer}>
                         <Text style={styles.name}>{this.props.name}</Text>
                         <Text style={styles.lastMessage} numberOfLines={1}
