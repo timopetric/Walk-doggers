@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback, Component} from 'react';
+import React, {useState, useContext, useCallback, useEffect} from 'react';
 import {View, ScrollView, Text, Button, StyleSheet, Dimensions, Image, Modal, TouchableOpacity} from 'react-native';
 import {Bubble, GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -7,34 +7,78 @@ import Colors, {PRIMARY, PINKISH_WHITE, GRAY_BUBLE, PINKISH_BUBLE, PRIMARY_DARK}
 import CarouselCards from '../components/CarouselCards'
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Ionicons} from "@expo/vector-icons";
+import {useNavigation} from "@react-navigation/native";
+import AuthContext from '../navigation/AuthContext';
 
-export default function ChatScreen({navigation}: any) {
+
+
+export default function ChatScreen(props: any) {
     const [messages, setMessages] = useState([]);
+    const navigation = useNavigation()
+    var conversation
+    const {getJwt} = useContext(AuthContext)
+    const [imageUrl, setImageUrl] = useState()
+    const [fstName, setFstName] = useState("")
+    const [lstName, setLstName] = useState("")
 
     useEffect(() => {
-        setMessages([
-            {
-                _id: 1,
-                text: 'Hello developer',
-                createdAt: new Date(),
-                user: {
-                    _id: 2,
-                    name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
-                },
-            },
-            {
-                _id: 2,
-                text: 'Hello world',
-                createdAt: new Date(),
-                user: {
-                    _id: 1,
-                    name: 'React Native',
-                    avatar: 'https://placeimg.com/140/140/any',
-                },
-            },
-        ]);
+        conversation = (props.route.params)
+        setName()
+        getConversationMessages()
     }, []);
+
+    const setName = () => {
+        setImageUrl(conversation.user_other.image_url)
+        setFstName(conversation.user_other.first_name)
+        setLstName(conversation.user_other.last_name)
+    }
+
+    const getConversationMessages = () => {
+      let jwt = getJwt();
+      console.log(conversation)
+  
+      fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
+        method: "GET",
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + jwt,
+        },
+      })
+        .then(async (response) => {
+          let json = await response.json();
+          const statusCode = response.status;
+          console.log(json);
+          formatConversationMessages(json)
+          switch (statusCode) {
+            case 200:
+              break;
+            case 422:
+              break;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
+
+    const formatConversationMessages= (json) => {
+        const otherUser = conversation.user_other.id
+        var array = []
+        for (let message of Object.keys(json)) {
+            var newMessage = {
+                _id: json[message].id,
+                text: json[message].text,
+                createdAt: json[message].date,
+                user: {
+                    _id: otherUser != json[message].senderId ? 1 : 2,
+                    avatar: conversation.user_other.image_url,
+                }
+            }
+            array.unshift(newMessage)
+        }
+        setMessages(array)
+    }
 
     const onSend = useCallback((messages = []) => {
         setMessages((previousMessages) =>
@@ -123,9 +167,9 @@ export default function ChatScreen({navigation}: any) {
                 </View>
                 <View style={styles.container1}>
                     <Image
-                        source={{uri: 'https://beta.finance.si//pics//cache_ch/challe-salle-foto-bruno-sedevcic-5b40a7709a46f.jpg.cut.1530963962-5b40a7fa5a7dc.jpg'}}
+                        source={{uri: imageUrl}}
                         style={styles.miniImage}/>
-                    <Text style={styles.name}>Saša Petrovič</Text>
+                    <Text style={styles.name}>{fstName} {lstName}</Text>
                 </View>
                 <View style={{flex: 1}}></View>
             </View>

@@ -68,8 +68,9 @@ export default function TabInbox({navigation}: any) {
 
 
     
-    const onPress = () => {
-        navigation.navigate('MessageScreen')
+    const onPress = (convo:any) => {
+        console.log(convo)
+        navigation.navigate('MessageScreen', convo)
     };
 
     useEffect(() => {
@@ -85,7 +86,7 @@ export default function TabInbox({navigation}: any) {
           getUserConversations();
         }
     }, [])
-
+ 
     return (
         <View style={styles.containter}>
             <CarouselCards inChat={false}/>
@@ -97,7 +98,7 @@ export default function TabInbox({navigation}: any) {
                         lastMessage={convo.last_message_text}
                         key={convo?.id_conv || "error"}
                         imageUrl={convo.user_other.image_url}
-                        onPress={onPress}
+                        onPress={() => navigation.navigate('MessageScreen', convo)}
                     />)
                 ) : <Text>ERROR</Text>}
             </ScrollView>
