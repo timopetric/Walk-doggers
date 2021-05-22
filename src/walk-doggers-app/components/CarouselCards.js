@@ -92,11 +92,12 @@ const CarouselCards = (props) => {
 
     const onSnap = index => {
         setIndex(index);
-        if (data.allMessages) {
+        console.log(index);
+        if (data[index]?.allMessages === true) {
             filterUsers([], false)
-            return;
+        } else {
+            filterUsers(data[index]?.user_ids, true)
         }
-        filterUsers(data[index]?.user_ids, true)
     }
 
     useEffect(() => {

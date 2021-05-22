@@ -121,7 +121,7 @@ export default function TabInbox({navigation}: any) {
 
     const filterUsers = (userIds, filter) => {
         setFilter(filter);
-        setShownUsersIds(userIds)
+        setShownUsersIds(userIds || [])
     }
 
     return (
