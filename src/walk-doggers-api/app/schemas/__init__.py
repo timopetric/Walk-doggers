@@ -9,3 +9,4 @@ from .listings import Listing, ListingInDBBase, ListingInDB, ListingCreate, List
 from .applications import ApplicationBrief, ApplicationInDBBase, ApplicationCreate, ApplicationUpdate, ApplicationInDB, Application, ApplicationWithUserBrief
 from .dogs import DogBase, Dog, DogCreate, DogUpdate
 from .rating import RatingBase, RatingCreate, Rating, RateByListing, RatingAverage
+from .inbox import InboxBase
