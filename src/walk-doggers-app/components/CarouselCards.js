@@ -5,6 +5,7 @@ import CarouselCardItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselCardItem'
 import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 import AuthContext from "../navigation/AuthContext";
 import {format} from "date-fns";
+import {BASE_API_URL} from "../localConstants";
 
 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const data1 = [
@@ -176,7 +177,7 @@ const CarouselCards = (props) => {
     const fetchListingsApplications = () => {
         const jwt = getJwt();
         Promise.all([
-            fetch(process.env.BASE_API_URL + '/listings/', {
+            fetch(BASE_API_URL + '/listings/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
@@ -184,7 +185,7 @@ const CarouselCards = (props) => {
                     'Authorization': 'Bearer ' + jwt
                 },
             }),
-            fetch(process.env.BASE_API_URL + '/applications/', {
+            fetch(BASE_API_URL + '/applications/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

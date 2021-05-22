@@ -7,6 +7,7 @@ import {ScrollView, TouchableHighlight, TouchableOpacity} from 'react-native-ges
 import CarouselCards from '../components/CarouselCards'
 import AuthContext from '../navigation/AuthContext';
 import {useIsFocused} from "@react-navigation/native";
+import {BASE_API_URL} from "../localConstants";
 
 type ConversationsType = {
     user_other: {
@@ -35,7 +36,7 @@ async function getUserConvos(getJwt: Function) {
     };
 
 
-    const url = process.env.BASE_API_URL + '/conversations';
+    const url = BASE_API_URL + '/conversations';
 
     let response = await fetch(url, reqOptions);
     const statusCode = response.status;
@@ -71,7 +72,7 @@ async function getConversations(getJwt: Function) {
     };
 
 
-    const url = process.env.BASE_API_URL + '/inbox';
+    const url = BASE_API_URL + '/inbox';
 
     let response = await fetch(url, reqOptions);
     const statusCode = response.status;

@@ -9,6 +9,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {Ionicons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import AuthContext from '../navigation/AuthContext';
+import {BASE_API_URL} from "../localConstants";
 
 
 export default function ChatScreen(props: any) {
@@ -37,7 +38,7 @@ export default function ChatScreen(props: any) {
 
     const getConversationMessages = () => {
         let jwt = getJwt();
-        fetch(process.env.BASE_API_URL + "/inbox/" + conversation.user.id, {
+        fetch(BASE_API_URL + "/inbox/" + conversation.user.id, {
             method: "GET",
             headers: {
                 accept: "application/json",
@@ -94,7 +95,7 @@ export default function ChatScreen(props: any) {
         const reqBody = {receiver_id: conversation.user.id, message: message.text}
 
         fetch(
-            process.env.BASE_API_URL + "/inbox",
+            BASE_API_URL + "/inbox",
             {
                 method: "POST",
                 headers: {

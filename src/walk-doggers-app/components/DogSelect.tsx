@@ -12,6 +12,7 @@ import {Ionicons} from "@expo/vector-icons";
 import {useIsFocused} from "@react-navigation/native";
 import AuthContext from "../navigation/AuthContext";
 import {useNavigation} from '@react-navigation/native';
+import {BASE_API_URL} from "../localConstants";
 
 const DogCircle = ({dog, selected, onPress, plusIcon}: any) => {
     return (
@@ -43,7 +44,7 @@ const DogSelect = ({onSelectId, navigation}: any) => {
 
     useEffect(() => {
         if (isFocused) {
-            fetch(process.env.BASE_API_URL + '/dogs/', {
+            fetch(BASE_API_URL + '/dogs/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

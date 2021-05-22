@@ -7,6 +7,7 @@ import ListingCard from "../../components/ListingCard";
 import AuthContext from "../../navigation/AuthContext";
 import {useEffect, useState, useContext} from "react";
 import {format} from "date-fns";
+import {BASE_API_URL} from "../../localConstants";
 
 
 export function Applied(props) {
@@ -20,7 +21,7 @@ export function Applied(props) {
     }, [props.isFocused]);
 
     const getApplied = () => {
-        fetch(process.env.BASE_API_URL + "/applications/", {
+        fetch(BASE_API_URL + "/applications/", {
             method: "GET",
             headers: {
                 accept: "application/json",

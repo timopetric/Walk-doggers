@@ -10,6 +10,7 @@ import FormItem from "../../components/FormItem";
 import ButtonCustom from "../../components/ButtonCustom";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
 import {useNavigation} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 
 function onPressUpdate(navigation: any, dog: Dog, getJwt: any) {
     let jwt = getJwt()
@@ -21,7 +22,7 @@ function onPressUpdate(navigation: any, dog: Dog, getJwt: any) {
     if (dog.size_category !== -1) reqBody.size_category = dog.size_category;
     if (dog.photo !== "") reqBody.photo = dog.photo;
 
-    fetch(process.env.BASE_API_URL + '/dogs/' + dog.id, {
+    fetch(BASE_API_URL + '/dogs/' + dog.id, {
         method: "PUT",
         headers: {
             "accept": "application/json",
