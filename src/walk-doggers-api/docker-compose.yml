@@ -22,8 +22,8 @@ services:
 
   server:
     build:
-      context: ./
-      dockerfile: Dockerfile
+      context: ../../
+      dockerfile: ./src/walk-doggers-api/Dockerfile
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
     depends_on:
@@ -32,7 +32,8 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./:/app
+      - ../../src/walk-doggers-api/:/app
+      - ../../test/api_test/:/app/app/tests
     env_file:
       - .env
     command: /start-reload.sh
