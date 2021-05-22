@@ -6,7 +6,6 @@ from app.postgres.session import SessionLocal
 from app.routes.applications import ApplicationsRouter
 from app.routes.image_upload import ImageRouter
 from app.routes.inbox import InboxRouter
-from app.routes.posts import PostRouter
 from app.routes.conversations import ConversationRouter
 from app.routes.auth import AuthRouter
 from app.routes.dogs import DogsRouter
@@ -43,7 +42,6 @@ def index() -> Any:
     return {"message": "Hello world!"}
 
 
-app.include_router(PostRouter, tags=["Posts"], prefix="/posts")
 app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")
 app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")
 app.include_router(DogsRouter, tags=["Dogs"], prefix="/dogs")

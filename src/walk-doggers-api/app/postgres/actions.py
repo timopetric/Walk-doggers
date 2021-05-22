@@ -70,10 +70,6 @@ class BaseActions(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return obj
 
 
-class PostActions(BaseActions[Post, schemas.PostCreate, schemas.PostUpdate]):
-    """Post actions with basic CRUD operations"""
-    pass
-
 
 class UserActions(BaseActions[User, schemas.UserRegister, schemas.UserRegister]):
     """Users actions with basic CRUD operations"""
@@ -163,7 +159,6 @@ class RatingActions(BaseActions[Rating, schemas.RatingCreate, schemas.RatingCrea
     pass
 
 
-post = PostActions(Post)
 user = UserActions(User)
 dog = DogActions(Dog)
 blog_post = BlogPostActions(BlogPost)
