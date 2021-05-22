@@ -34,9 +34,7 @@ export default function ChatScreen(props: any) {
     }
 
     const getConversationMessages = () => {
-      let jwt = getJwt();
-      console.log(conversation)
-  
+      let jwt = getJwt();  
       fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
         method: "GET",
         headers: {
@@ -48,7 +46,6 @@ export default function ChatScreen(props: any) {
         .then(async (response) => {
           let json = await response.json();
           const statusCode = response.status;
-          console.log(json);
           formatConversationMessages(json)
           switch (statusCode) {
             case 200:
@@ -81,10 +78,44 @@ export default function ChatScreen(props: any) {
     }
 
     const onSend = useCallback((messages = []) => {
+        console.log(messages)
+        sendMessage(messages[0])
         setMessages((previousMessages) =>
             GiftedChat.append(previousMessages, messages),
         );
+
     }, []);
+
+    const sendMessage = (message) => {
+      let jwt = getJwt();
+      let reqBody = {}
+      reqBody.text = message.text
+      fetch(
+        process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages",
+        {
+          method: "POST",
+          headers: {
+            accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + jwt,
+          },
+          body: JSON.stringify(reqBody),
+        }
+      )
+        .then(async (response) => {
+          let json = await response.json();
+          const statusCode = response.status;
+          switch (statusCode) {
+            case 200:
+              break;
+            case 422:
+              break;
+          }
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    };
 
     const renderSend = (props) => {
         return (
