@@ -115,6 +115,7 @@ const CarouselCards = (props) => {
         fetchListingsApplications()
     }, [])
 
+
     useEffect(() => {
         const date_now = new Date()
         const notRejected = applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected"))
@@ -131,6 +132,8 @@ const CarouselCards = (props) => {
                 imgUrl: item.listing.dog.photo,
                 inChat: props.inChat,
                 application: true,
+                listingId: item.listing.id,
+                applicationId: item.id,
                 user_ids: [item.listing.author_id]
             }
             if (item.status === "soft") {
@@ -177,6 +180,7 @@ const CarouselCards = (props) => {
     }, [listings])
 
     const fetchListingsApplications = () => {
+        console.log("ff");
         const jwt = getJwt();
         Promise.all([
             fetch(BASE_API_URL + '/listings/', {
@@ -218,7 +222,8 @@ const CarouselCards = (props) => {
                 layoutCardOffset={0}
                 ref={isCarousel}
                 data={data}
-                renderItem={CarouselListingItem}
+                renderItem={({item}) => <CarouselListingItem item={item} getJwt={getJwt}
+                                                             refresh={fetchListingsApplications}/>} // getJwt
                 containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}
