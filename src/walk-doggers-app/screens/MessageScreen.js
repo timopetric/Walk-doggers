@@ -11,20 +11,22 @@ import {useNavigation} from "@react-navigation/native";
 import AuthContext from '../navigation/AuthContext';
 
 
-
 export default function ChatScreen(props: any) {
     const [messages, setMessages] = useState([]);
     const navigation = useNavigation()
-    var conversation
+    const [conversation, setConversation] = useState(props.route.params)
     const {getJwt} = useContext(AuthContext)
     const [imageUrl, setImageUrl] = useState()
     const [fstName, setFstName] = useState("")
     const [lstName, setLstName] = useState("")
 
     useEffect(() => {
-        conversation = (props.route.params)
         setName()
         getConversationMessages()
+        const interval = setInterval(() => {
+            getConversationMessages()
+        }, 1000);
+        return () => clearInterval(interval);
     }, []);
 
     const setName = () => {
@@ -34,32 +36,32 @@ export default function ChatScreen(props: any) {
     }
 
     const getConversationMessages = () => {
-      let jwt = getJwt();  
-      fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
-        method: "GET",
-        headers: {
-          accept: "application/json",
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + jwt,
-        },
-      })
-        .then(async (response) => {
-          let json = await response.json();
-          const statusCode = response.status;
-          formatConversationMessages(json)
-          switch (statusCode) {
-            case 200:
-              break;
-            case 422:
-              break;
-          }
+        let jwt = getJwt();
+        fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
+            method: "GET",
+            headers: {
+                accept: "application/json",
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + jwt,
+            },
         })
-        .catch((e) => {
-          console.log(e);
-        });
+            .then(async (response) => {
+                let json = await response.json();
+                const statusCode = response.status;
+                formatConversationMessages(json)
+                switch (statusCode) {
+                    case 200:
+                        break;
+                    case 422:
+                        break;
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     };
 
-    const formatConversationMessages= (json) => {
+    const formatConversationMessages = (json) => {
         const otherUser = conversation.user_other.id
         var array = []
         for (let message of Object.keys(json)) {
@@ -87,34 +89,34 @@ export default function ChatScreen(props: any) {
     }, []);
 
     const sendMessage = (message) => {
-      let jwt = getJwt();
-      let reqBody = {}
-      reqBody.text = message.text
-      fetch(
-        process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages",
-        {
-          method: "POST",
-          headers: {
-            accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + jwt,
-          },
-          body: JSON.stringify(reqBody),
-        }
-      )
-        .then(async (response) => {
-          let json = await response.json();
-          const statusCode = response.status;
-          switch (statusCode) {
-            case 200:
-              break;
-            case 422:
-              break;
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+        let jwt = getJwt();
+        let reqBody = {}
+        reqBody.text = message.text
+        fetch(
+            process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages",
+            {
+                method: "POST",
+                headers: {
+                    accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: "Bearer " + jwt,
+                },
+                body: JSON.stringify(reqBody),
+            }
+        )
+            .then(async (response) => {
+                let json = await response.json();
+                const statusCode = response.status;
+                switch (statusCode) {
+                    case 200:
+                        break;
+                    case 422:
+                        break;
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            });
     };
 
     const renderSend = (props) => {
