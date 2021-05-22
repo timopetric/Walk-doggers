@@ -64,8 +64,6 @@ class Application(Base):
     listing_id = Column('listing_id', UUID(), ForeignKey('listing.id'), nullable=False)
     applied_user_id = Column('applied_user_id', UUID(), ForeignKey('user.id'), nullable=False)
     status = Column(String, default='normal')  # soft, normal, rejected, confirmed
-    listing_author_to_applied_user_left_rating = Column(Boolean, default=False)
-    applied_user_to_listing_author_left_rating = Column(Boolean, default=False)
 
     listing = relationship("Listing", back_populates='applications', foreign_keys=[listing_id])
     applied_user = relationship("User", back_populates='applications')
@@ -84,6 +82,9 @@ class Listing(Base):
     lat = Column(Float)
     location_text = Column(String)
     distance: float
+
+    author_left_review = Column(Boolean, default=False)
+    walker_left_review = Column(Boolean, default=False)
 
     author_id = Column('author_id', UUID(), ForeignKey('user.id'), nullable=False)
     dog_id = Column('dog_id', UUID(), ForeignKey('dog.id'), nullable=False)
