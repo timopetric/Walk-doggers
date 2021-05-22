@@ -55,7 +55,7 @@ class Listing(ListingInDBBase):
     location_text: str
     applications: "List[ApplicationWithUserBrief]"
     confirmed_application: Optional["ApplicationWithUserBrief"] = None
-
+ 
     # Additional properties stored in DB
 
 

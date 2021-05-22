@@ -4,10 +4,9 @@ import Carousel, {Pagination} from 'react-native-snap-carousel'
 import CarouselCardItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselCardItem'
 import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 import AuthContext from "../navigation/AuthContext";
-import daysOfWeek from "../constants/Colors"
 import {format} from "date-fns";
 
-
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 const data1 = [
     {
         allMessages: true
@@ -148,7 +147,6 @@ const CarouselCards = (props) => {
         const list = listings.filter(item => (date_now < new Date(item.date_to.toString())))
 
         var listingsFormatted = []
-        console.log(list);
         for (const item of list) {
             const date_from = new Date(item.date_from.toString());
             const date_to = new Date(item.date_to.toString());
