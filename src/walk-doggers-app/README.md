@@ -29,3 +29,10 @@ docker run -it --rm \
     --name=walk-doggers-expo-web kerbe/expo start:web
 # now scan the qr code with your device
 ```
+
+add API url to walk-doggers-app/localConstants.js
+
+for example:
+```
+export const BASE_API_URL='https://walk-doggers.herokuapp.com';
+```
