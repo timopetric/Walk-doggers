@@ -20,21 +20,22 @@ export default function TabBlog() {
     }, [isFocused]);
 
     const fetchData = () => {
+        const jwt = getJwt();
         Promise.all([
             fetch(process.env.BASE_API_URL + '/blog/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
                     "Content-Type": "application/json",
-                    'Authorization': 'Bearer ' + getJwt()
+                    'Authorization': 'Bearer ' + jwt
                 },
             }),
-            fetch(process.env.BASE_API_URL + '/blog/unpublished/', {
+            fetch(process.env.BASE_API_URL + '/blog/unpublished', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
                     "Content-Type": "application/json",
-                    'Authorization': 'Bearer ' + getJwt()
+                    'Authorization': 'Bearer ' + jwt
                 },
             })
         ]).then(async ([data1, data2]) => {
