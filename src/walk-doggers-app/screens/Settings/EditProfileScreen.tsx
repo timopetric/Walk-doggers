@@ -19,7 +19,7 @@ type User = {
 
 const updateUserProfile = (getJwt: any, user: User) => {
     let jwt = getJwt()
-    fetch(process.env.BASE_API_URL + '/auth/update_user', {
+    fetch(process.env.BASE_API_URL + '/profile', {
         method: "PUT",
         headers: {
             "accept": "application/json",
@@ -41,7 +41,7 @@ export default function EditProfileScreen({navigation}: any) {
 
     useEffect(() => {
         if (isFocused) {
-            fetch(process.env.BASE_API_URL + '/auth/protected', {
+            fetch(process.env.BASE_API_URL + '/profile', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
@@ -67,7 +67,7 @@ export default function EditProfileScreen({navigation}: any) {
             description: about,
             image_url: imageUrl
         }
-        updateUserProfile( getJwt, user);
+        updateUserProfile(getJwt, user);
         navigation.goBack()
     }
 
@@ -78,10 +78,13 @@ export default function EditProfileScreen({navigation}: any) {
                 <ImageUpload circle={true} size={100} showEdit={true}
                              defaultUrl={imageUrl} saveUrl={setImageUrl} url={imageUrl}/>
             </View>
-            <FormItem label={"FIRST NAME"} placeholder={"Enter your first name"} setText={fstName} getText={x => setFstName(x)}/>
-            <FormItem label={"LAST NAME"} placeholder={"Enter your last name"}setText={lstName} getText={x => setLstName(x)}/>
+            <FormItem label={"FIRST NAME"} placeholder={"Enter your first name"} setText={fstName}
+                      getText={x => setFstName(x)}/>
+            <FormItem label={"LAST NAME"} placeholder={"Enter your last name"} setText={lstName}
+                      getText={x => setLstName(x)}/>
             <FormItem label={"EMAIL"} setText={email} editable={false}/>
-            <FormItem label={"ABOUT ME"} placeholder={"Describe yourself"} height={120} setText={about} getText={x => setAbout(x)}/>
+            <FormItem label={"ABOUT ME"} placeholder={"Describe yourself"} height={120} setText={about}
+                      getText={x => setAbout(x)}/>
             <ButtonCustom text='Save changes' onPress={onPressUpdate} color="purple"
                           style={{marginBottom: 20}}/>
         </ScrollViewContainer>
