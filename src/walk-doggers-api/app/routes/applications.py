@@ -31,11 +31,41 @@ def get_users_applications(db: Session = Depends(get_db), user_id=Depends(auth_h
 def apply_to_listing(*, db: Session = Depends(get_db), application_in: schemas.ApplicationCreate,
                      user_id=Depends(auth_handler.auth_wrapper)) -> Any:
     listing: Listing = actions.listing.get(db=db, id=application_in.listing_id)
-    check_if_user_can_apply_to_listing(user_id, listing)
-    application = actions.application.apply_to_listing(db=db, applied_user_id=user_id,
-                                                       listing_id=str(application_in.listing_id),
-                                                       soft=application_in.soft)
+
+    if listing is None:
+        raise HTTPException(status_code=404, detail="Listing does not exist.")
+
+    if listing.confirmed_application is not None:
+        raise HTTPException(status_code=410, detail="Applications not available anymore.")
+
+    application = actions.application.get_applications_by_listing_id_and_user_id(db=db, listing_id=str(listing.id),
+                                                                                 user_id=user_id)
+    if application:
+        if application.status == "soft" and application_in.soft is False:
+            application = actions.application.update(db=db, obj_in={"status": "normal"}, db_obj=application)
+    else:
+        # check_if_user_can_apply_to_listing(user_id, listing)
+        application = actions.application.apply_to_listing(db=db, applied_user_id=user_id,
+                                                           listing_id=str(application_in.listing_id),
+                                                           soft=application_in.soft)
     return application
+
+
+@ApplicationsRouter.delete("/{application_id}")
+def cancel_application(*, db: Session = Depends(get_db),
+                       application_id: int,
+                       user_id=Depends(auth_handler.auth_wrapper)) -> Any:
+    application: Application = actions.application.get(db=db, id=application_id)
+
+    # check if user is owner of application
+    if application.applied_user_id != user_id:
+        raise HTTPException(status_code=403)
+
+    if application.status != "normal":
+        raise HTTPException(status_code=403)
+
+    actions.application.remove_application(db=db, id=application_id)
+    return
 
 
 @ApplicationsRouter.put("/{application_id}", response_model=schemas.Application)

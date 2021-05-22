@@ -141,10 +141,21 @@ class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, sch
         return db.query(self.model).filter(self.model.listing_id == listing_id).filter(
             self.model.status == status).all()
 
+    def get_applications_by_listing_id_and_user_id(self, db: Session, listing_id: UUID4, user_id: UUID4) -> Optional[
+        ModelType]:
+        return db.query(self.model).filter(self.model.listing_id == listing_id).filter(
+            self.model.applied_user_id == user_id).first()
+
     def reject_unconfirmed_applications(self, db: Session, listing_id: UUID4) -> Optional[ModelType]:
         db.query(self.model).filter(self.model.listing_id == listing_id).filter(
             self.model.status != "confirmed").update({"status": "rejected"}, synchronize_session="fetch")
         db.commit()
+
+    def remove_application(self, db: Session, *, id: int) -> ModelType:
+        obj = db.query(self.model).get(id)
+        db.delete(obj)
+        db.commit()
+        return obj
 
 
 class RatingActions(BaseActions[Rating, schemas.RatingCreate, schemas.RatingCreate]):

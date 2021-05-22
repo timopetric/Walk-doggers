@@ -11,7 +11,7 @@ class ApplicationBase(BaseModel):
 
 # Properties to receive via API on creation
 class ApplicationCreate(ApplicationBase):
-    listing_id: UUID4
+    listing_id: str
     soft: Optional[bool] = False
 
     # body: str
