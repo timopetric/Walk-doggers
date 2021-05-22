@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useState} from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import {View, useWindowDimensions} from "react-native"
 import Carousel, {Pagination} from 'react-native-snap-carousel'
 import CarouselCardItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselCardItem'
@@ -6,7 +6,6 @@ import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 import AuthContext from "../navigation/AuthContext";
 import daysOfWeek from "../constants/Colors"
 import {format} from "date-fns";
-
 
 
 const data1 = [
@@ -64,6 +63,7 @@ const data1 = [
 ]
 
 const CarouselCards = (props) => {
+    const {filterUsers} = props;
     const [index, setIndex] = React.useState(0)
     const isCarousel = React.useRef(null)
     const {getJwt} = useContext(AuthContext);
@@ -89,13 +89,23 @@ const CarouselCards = (props) => {
     //
     //
     //
-    useEffect(() => {
-        if (!props.inChat) {
-            setData([{allMessages: true}, ...applicationsFiltered, ...listingsFiltered])
-        } else {
-            setData([...applicationsFiltered, ...listingsFiltered])
+
+    const onSnap = index => {
+        setIndex(index);
+        if (data.allMessages) {
+            filterUsers([], false)
+            return;
         }
-        
+        filterUsers(data[index]?.user_ids, true)
+    }
+
+    useEffect(() => {
+        if (props.inChat) {
+            setData([...applicationsFiltered, ...listingsFiltered])
+        } else {
+            setData([{allMessages: true}, ...applicationsFiltered, ...listingsFiltered])
+        }
+
     }, [applicationsFiltered, listingsFiltered])
 
     useEffect(() => {
@@ -104,11 +114,10 @@ const CarouselCards = (props) => {
 
     useEffect(() => {
         const date_now = new Date()
-        var applic = applications
-        applic = applic.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status != "rejected"))
+        const notRejected = applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected"))
 
         var applicationsFormatted = []
-        for (const item of applic) {
+        for (const item of notRejected) {
             const date_from = new Date(item.listing.date_from.toString());
             const date_to = new Date(item.listing.date_to.toString());
             const hours = `${format(date_from, "HH:mm")} - ${format(date_to, "HH:mm")}`;
@@ -117,45 +126,48 @@ const CarouselCards = (props) => {
                 date: daysOfWeek[date_from.getDay()],
                 time: hours,
                 imgUrl: item.listing.dog.photo,
-                inChat: props.inChat
+                inChat: props.inChat,
+                application: true,
+                user_ids: [item.listing.author_id]
             }
-            if (item.status == "soft") {
-                obj.application = true
+            if (item.status === "soft") {
                 obj.reqBtn = true
-            } else if (item.status == "normal") {
-                obj.application = true
+            } else if (item.status === "normal") {
                 obj.reqText = true
-            } else if (item.status == "confirmed") {
-                obj.application = true
+            } else if (item.status === "confirmed") {
                 obj.accText = true
             }
             applicationsFormatted.push(obj)
         }
         setApplicationsFiltered(applicationsFormatted);
-    },[applications])
+    }, [applications])
 
     useEffect(() => {
         const date_now = new Date()
-        var list = listings
-        //listings.filter(item => date_now < item.date_to)
-        list = list.filter(item => (date_now < new Date(item.date_to.toString())))
+        const list = listings.filter(item => (date_now < new Date(item.date_to.toString())))
 
         var listingsFormatted = []
+        console.log(list);
         for (const item of list) {
             const date_from = new Date(item.date_from.toString());
             const date_to = new Date(item.date_to.toString());
             const hours = `${format(date_from, "HH:mm")} - ${format(date_to, "HH:mm")}`;
+            const ids = item.applications.map(application => {
+                return application?.applied_user?.id
+            });
             let obj = {
                 title: item.title,
                 date: daysOfWeek[date_from.getDay()],
                 time: hours,
                 imgUrl: item.dog.photo,
-                inChat: props.inChat
+                inChat: props.inChat,
+                user_ids: ids
+
             }
 
             if (item.confirmed_application == null) {
                 obj.accBtn = true
-            }            
+            }
             listingsFormatted.push(obj)
         }
         setListingFiltered(listingsFormatted)
@@ -173,7 +185,7 @@ const CarouselCards = (props) => {
                     'Authorization': 'Bearer ' + jwt
                 },
             }),
-            fetch(process.env.BASE_API_URL + '/applications', {
+            fetch(process.env.BASE_API_URL + '/applications/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
@@ -183,14 +195,13 @@ const CarouselCards = (props) => {
             })
         ]).then(async ([data1, data2]) => {
             //.log(listings)
-            let listings = await data1.json()
-            let applications = await data2.json()
+            const listingsData = await data1.json()
+            const applicationsData = await data2.json()
 
-            setApplications(applications)
-            setListings(listings)
+            // console.log(applicationsData)
+            setApplications(applicationsData)
+            setListings(listingsData)
 
-
-        
 
         })
     }
@@ -206,10 +217,10 @@ const CarouselCards = (props) => {
                 ref={isCarousel}
                 data={data}
                 renderItem={CarouselCardItem}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
+                containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}
-                onSnapToItem={(index) => setIndex(index)}
+                onSnapToItem={(index) => onSnap(index)}
                 // useScrollView={true}
 
             />

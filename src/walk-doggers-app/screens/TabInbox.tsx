@@ -83,9 +83,15 @@ export default function TabInbox({navigation}: any) {
         }
     }, [])
 
+
+    const filterUsers = (userIds, filter) => {
+        console.log(filter);
+        console.log(userIds);
+    }
+
     return (
         <View style={styles.containter}>
-            <CarouselCards inChat={false}/>
+            <CarouselCards inChat={false} filterUsers={filterUsers}/>
             <ScrollView>
                 <View style={{height: 10}}/>
                 {convos.length ? convos.map(convo => (
