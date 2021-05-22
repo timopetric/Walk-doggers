@@ -6,6 +6,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../navigation/AuthContext";
 import {FlatList} from 'react-native-gesture-handler';
 import {useIsFocused} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 
 
 export default function TabBlog() {
@@ -22,7 +23,7 @@ export default function TabBlog() {
     const fetchData = () => {
         const jwt = getJwt();
         Promise.all([
-            fetch(process.env.BASE_API_URL + '/blog/', {
+            fetch(BASE_API_URL + '/blog/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
@@ -30,7 +31,7 @@ export default function TabBlog() {
                     'Authorization': 'Bearer ' + jwt
                 },
             }),
-            fetch(process.env.BASE_API_URL + '/blog/unpublished', {
+            fetch(BASE_API_URL + '/blog/unpublished', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

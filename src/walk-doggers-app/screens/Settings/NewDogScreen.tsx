@@ -9,6 +9,7 @@ import SizeSelector from "../../components/SizeSelector";
 import FormItem from "../../components/FormItem";
 import ButtonCustom from "../../components/ButtonCustom";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
+import {BASE_API_URL} from "../../localConstants";
 
 function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
     let jwt = getJwt()
@@ -21,10 +22,10 @@ function onPressAdd(navigation: any, dog: Dog, getJwt: any) {
     if (dog.photo !== "") reqBody.photo = dog.photo;
 
     // console.log(JSON.stringify(reqBody))
-    // console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
+    // console.log('env BASE_API_URL: ', BASE_API_URL);
     // console.log(JSON.stringify(dog))
 
-    fetch(process.env.BASE_API_URL + '/dogs/', {
+    fetch(BASE_API_URL + '/dogs/', {
         method: "POST",
         headers: {
             "accept": "application/json",

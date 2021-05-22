@@ -7,6 +7,7 @@ import {useState, useEffect, useContext} from "react";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
 import {useIsFocused} from "@react-navigation/native";
 import AuthContext from "../../navigation/AuthContext";
+import {BASE_API_URL} from "../../localConstants";
 
 
 type User = {
@@ -19,7 +20,7 @@ type User = {
 
 const updateUserProfile = (getJwt: any, user: User) => {
     let jwt = getJwt()
-    fetch(process.env.BASE_API_URL + '/profile', {
+    fetch(BASE_API_URL + '/profile', {
         method: "PUT",
         headers: {
             "accept": "application/json",
@@ -41,7 +42,7 @@ export default function EditProfileScreen({navigation}: any) {
 
     useEffect(() => {
         if (isFocused) {
-            fetch(process.env.BASE_API_URL + '/profile', {
+            fetch(BASE_API_URL + '/profile', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

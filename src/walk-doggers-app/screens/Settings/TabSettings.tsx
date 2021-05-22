@@ -8,6 +8,7 @@ import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../navigation/AuthContext";
 import {DARK, GRAY_0, GRAY_00, GRAY_3, LIGHT_BG, RED, YELLOW} from "../../constants/Colors";
 import {useIsFocused} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 // import { AuthContext } from '../../navigation/Providers/AuthProvider';
 
 
@@ -39,7 +40,7 @@ export default function TabSettings({navigation}: any) {
 
     useEffect(() => {
         if (isFocused) {
-            fetch(process.env.BASE_API_URL + '/profile', {
+            fetch(BASE_API_URL + '/profile', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

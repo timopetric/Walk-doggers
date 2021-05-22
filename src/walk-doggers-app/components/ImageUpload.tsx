@@ -17,6 +17,7 @@ import {useEffect, useState} from "react";
 import * as ImagePicker from 'expo-image-picker';
 import {decode as atob, encode as btoa} from 'base-64';
 import mime from 'mime';
+import {BASE_API_URL} from "../localConstants";
 
 const styles = StyleSheet.create({
     miniImage: {
@@ -145,9 +146,9 @@ export default function ImageUpload({saveUrl, defaultUrl, circle, size, showEdit
                 });
             }
 
-            console.log('env BASE_API_URL: ', process.env.BASE_API_URL);
+            console.log('env BASE_API_URL: ', BASE_API_URL);
 
-            fetch(process.env.BASE_API_URL + '/image_upload/', {
+            fetch(BASE_API_URL + '/image_upload/', {
                 method: "POST",
                 body: formData
             }).then(async response => {

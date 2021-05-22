@@ -5,6 +5,7 @@ import ButtonCustom from "../../components/ButtonCustom";
 import AuthContext from "../../navigation/AuthContext";
 import {useContext} from "react";
 import {useNavigation} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 
 
 const dimensions = Dimensions.get('window');
@@ -57,7 +58,7 @@ async function moderate (blogId: String, approved: Boolean, getJwt: Function){
             "approved": approved
         }),
     };
-    let response = await fetch(process.env.BASE_API_URL + '/blog/' + blogId, reqOptions);
+    let response = await fetch(BASE_API_URL + '/blog/' + blogId, reqOptions);
     return await response.json();
 }
 
@@ -71,7 +72,7 @@ async function deletePost (blogId: String, getJwt: Function) {
             'Authorization': 'Bearer ' + jwt,
         },
     };
-    let response = await fetch(process.env.BASE_API_URL + '/blog/' + blogId, reqOptions);
+    let response = await fetch(BASE_API_URL + '/blog/' + blogId, reqOptions);
     return await response.json();
 
 }
