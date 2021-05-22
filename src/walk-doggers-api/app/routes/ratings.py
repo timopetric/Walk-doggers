@@ -19,6 +19,15 @@ RatingsRouter = APIRouter()
 auth_handler = AuthHandler()
 
 
+@RatingsRouter.get("", response_model=schemas.RatingAverage)
+def get_my_rating(db: Session = Depends(get_db), user_id=Depends(auth_handler.auth_wrapper)) -> Any:
+    user = actions.user.get(db=db, id=user_id)
+    print(user.rating)
+    if user is None:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
+    return user
+
+
 @RatingsRouter.post("", response_model=schemas.Rating, status_code=HTTP_201_CREATED)
 async def rate_user(*, db: Session = Depends(get_db), rating_in: schemas.RateByListing,
                     user_id=Depends(auth_handler.auth_wrapper)) -> Any:

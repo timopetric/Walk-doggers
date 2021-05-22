@@ -32,6 +32,10 @@ class Rating(RatingInDBBase):
     rating: int
 
 
+class RatingAverage(RatingInDBBase):
+    rating: float
+
+
 # Additional properties stored in DB
 class RatingInDB(RatingInDBBase):
     pass
