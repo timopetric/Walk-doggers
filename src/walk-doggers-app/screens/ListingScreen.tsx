@@ -9,6 +9,7 @@ import {format} from "date-fns";
 import AuthContext from "../navigation/AuthContext";
 import {useNavigation} from "@react-navigation/core";
 import {BASE_API_URL} from "../localConstants";
+import MessageThread from "../components/MessageThread";
 
 
 const dimensions = Dimensions.get('window');
@@ -134,14 +135,18 @@ const ListingScreen = (props) => {
 
     const apply = () => {
         imInterested()
-        createConversation().then(response => {
-            if (response.ok) {
-                return response.json()
-            }
-        }).then(json => {
-            console.log(json);
-        });
-        navigation.goBack()
+        navigation.navigate('Inbox', {screen: 'MessageScreen'}, listing.author)
+
+        navigation.navigate('MessageScreen', listing.author);
+
+        // createConversation().then(response => {
+        //     if (response.ok) {
+        //         return response.json()
+        //     }
+        // }).then(json => {
+        //     console.log(json);
+        // });
+        // navigation.goBack()
     }
 
 
