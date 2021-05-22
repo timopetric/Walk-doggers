@@ -3,7 +3,8 @@ from typing import Any, List, Optional
 from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import UUID4
 from sqlalchemy.orm import Session
-from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND
+from starlette.responses import Response
+from starlette.status import HTTP_201_CREATED, HTTP_404_NOT_FOUND, HTTP_204_NO_CONTENT
 
 from app.auth import AuthHandler
 from app.postgres import actions
@@ -109,3 +110,20 @@ async def add_new_listing(*, db: Session = Depends(get_db), listing_in: schemas.
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
     return dog
+
+
+@ListingsRouter.delete("/{id}",
+                       responses={HTTP_204_NO_CONTENT: {"model": {}, "description": "Administrator successfully deleted the listing post."},
+                                  HTTP_404_NOT_FOUND: {"model": schemas.HTTPError}
+                                  },
+                       dependencies=[Depends(auth_handler.is_admin)])
+def administrator_delete_listing(*, db: Session = Depends(get_db), id: UUID4) -> Any:
+    listing = actions.listing.get(db=db, id=id)
+    if listing is None:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error, listing does not exist")
+
+    listing = actions.listing.remove(db=db, id=listing.id)
+    if listing:
+        return Response(status_code=HTTP_204_NO_CONTENT)
+    else:
+        raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error, listing does not exist")
