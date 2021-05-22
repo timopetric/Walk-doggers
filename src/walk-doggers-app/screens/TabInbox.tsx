@@ -67,34 +67,33 @@ export default function TabInbox({navigation}: any) {
     const isFocused = useIsFocused();
 
 
-    
-    const onPress = (convo:any) => {
+    const onPress = (convo: any) => {
         console.log(convo)
         navigation.navigate('MessageScreen', convo)
     };
 
     useEffect(() => {
         if (isFocused) {
-          const getUserConversations = async () => {
-            const conversations = await getUserConvos(getJwt);
-            console.log("conversations :", conversations);
-            if (!conversations.length || conversations == undefined)
-              setError("No Conversations");
-            else if (conversations.length) setConvos(conversations);
-            else setError("Error upsi...");
-          };
-          getUserConversations();
+            const getUserConversations = async () => {
+                const conversations = await getUserConvos(getJwt);
+                console.log("conversations :", conversations);
+                if (!conversations.length || conversations == undefined)
+                    setError("No Conversations");
+                else if (conversations.length) setConvos(conversations);
+                else setError("Error upsi...");
+            };
+            getUserConversations();
         }
     }, [])
- 
+
     return (
         <View style={styles.containter}>
             <CarouselCards inChat={false}/>
             <ScrollView>
                 <View style={{height: 10}}/>
                 {convos.length ? convos.map(convo => (
-                   <MessageThread 
-                        name={convo?.user_other?.first_name || "error"} 
+                    <MessageThread
+                        name={convo?.user_other?.first_name + " " + convo?.user_other?.last_name || "error"}
                         lastMessage={convo.last_message_text}
                         key={convo?.id_conv || "error"}
                         imageUrl={convo.user_other.image_url}
