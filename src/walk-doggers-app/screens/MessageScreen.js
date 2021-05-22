@@ -80,7 +80,6 @@ export default function ChatScreen(props: any) {
     }
 
     const onSend = useCallback((messages = []) => {
-        console.log(messages)
         sendMessage(messages[0])
         setMessages((previousMessages) =>
             GiftedChat.append(previousMessages, messages),

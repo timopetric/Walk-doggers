@@ -38,9 +38,17 @@ export default function statusListing (props: any) {
         }
     } else {
     
-        const date_from = new Date(application.date_from);
-        const date_to = new Date(application.date_to);
+        const date_from = new Date(application.listing.date_from);
+        const date_to = new Date(application.listing.date_to);
+        /*
         console.log(application)
+        console.log("date_now")
+        console.log(date_now)
+        console.log("date_from")
+        console.log(date_from)
+        console.log("date_to")
+        console.log(date_to)
+        */
         //render status for applied listing
         //PENDING - cakanje na potrditev
         if (application.status == "normal" && date_now < date_to) {

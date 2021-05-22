@@ -32,6 +32,16 @@ export const GRAY_PURPLE_1 = GRAY_1;
 // export const GRAY_PURPLE_00 = '#e6e4ef';
 // export const GRAY_PURPLE_1 = '#b9b1d2';
 
+export const daysOfWeek = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
 
 export default {
     light: {

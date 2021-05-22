@@ -36,11 +36,9 @@ async function getUserConvos(getJwt: Function) {
 
 
     const url = process.env.BASE_API_URL + '/conversations';
-    console.log(url)
 
     let response = await fetch(url, reqOptions);
     const statusCode = response.status;
-    console.log("status: ", statusCode)
     switch (statusCode) {
         case 200:
             // successfully created dog
@@ -68,7 +66,6 @@ export default function TabInbox({navigation}: any) {
 
 
     const onPress = (convo: any) => {
-        console.log(convo)
         navigation.navigate('MessageScreen', convo)
     };
 
