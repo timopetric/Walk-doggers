@@ -17,6 +17,7 @@ import DateSelect from "../../components/DateSelect";
 import * as Location from "expo-location";
 import AuthContext from "../../navigation/AuthContext";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
+import {BASE_API_URL} from "../../localConstants";
 
 
 type Listing = {
@@ -28,7 +29,7 @@ type Listing = {
 const addListing = (navigation: any, listing: Listing, getJwt: any) => {
     let jwt = getJwt()
     console.log("JWT " + jwt);
-    fetch(process.env.BASE_API_URL + '/listings/', {
+    fetch(BASE_API_URL + '/listings/', {
         method: "POST",
         headers: {
             "accept": "application/json",

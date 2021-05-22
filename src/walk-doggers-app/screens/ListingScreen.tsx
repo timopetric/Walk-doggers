@@ -8,6 +8,7 @@ import {useEffect} from "react";
 import {format} from "date-fns";
 import AuthContext from "../navigation/AuthContext";
 import {useNavigation} from "@react-navigation/core";
+import {BASE_API_URL} from "../localConstants";
 
 
 const dimensions = Dimensions.get('window');
@@ -110,7 +111,7 @@ const ListingScreen = (props) => {
                 soft: true
             }),
         };
-        fetch(process.env.BASE_API_URL + "/applications/", reqOptions);
+        fetch(BASE_API_URL + "/applications/", reqOptions);
     };
 
     const createConversation = async () => {
@@ -125,7 +126,7 @@ const ListingScreen = (props) => {
                 user2Id: listing.author_id,
             }),
         };
-        const response = await fetch(process.env.BASE_API_URL + "/conversations", reqOptions);
+        const response = await fetch(BASE_API_URL + "/conversations", reqOptions);
         if (response.ok) {
             return response.json();
         }

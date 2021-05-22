@@ -6,6 +6,7 @@ import {Entypo, Ionicons} from "@expo/vector-icons";
 import ButtonCustom from "../../components/ButtonCustom"
 import {useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
+import {BASE_API_URL} from "../../localConstants";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -41,7 +42,7 @@ export default function BecomeAReporterScreen({navigation}: any) {
 
     const confirm = () => {
         const jwt = getJwt();
-        fetch(process.env.BASE_API_URL + '/auth/roles/become_reporter', {
+        fetch(BASE_API_URL + '/auth/roles/become_reporter', {
             method: "POST",
             headers: {
                 "accept": "application/json",

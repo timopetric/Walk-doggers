@@ -14,6 +14,7 @@ import AuthContext from '../navigation/AuthContext';
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
 import {format} from "date-fns";
 import {useNavigation} from "@react-navigation/native";
+import {BASE_API_URL} from "../localConstants";
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
@@ -108,7 +109,7 @@ type FilteredListingParams = {
 }
 
 const setParams = (params: any) => {
-    let urlBuilder = new URLSearchParams(process.env.BASE_API_URL + "/listings/");
+    let urlBuilder = new URLSearchParams(BASE_API_URL + "/listings/");
     console.log(urlBuilder.toString())
     for (const [key, value] of Object.entries(params)) {
         if (value) {
@@ -137,7 +138,7 @@ async function getListings(getJwt: Function) {
         'jou': 3
     }
     console.log("jwt: ", jwt, '\n')
-    let response = await fetch(process.env.BASE_API_URL + '/listings/', reqOptions);
+    let response = await fetch(BASE_API_URL + '/listings/', reqOptions);
 
     console.log("urlbuilder: ", setParams(params));
     const statusCode = response.status;
@@ -174,7 +175,7 @@ async function getFilteredListings(getJwt: Function, params: any) {
     };
 
     let query = setParams(params)
-    const url = process.env.BASE_API_URL + '/listings/explore/?' + query;
+    const url = BASE_API_URL + '/listings/explore/?' + query;
     console.log(url)
     console.log("jwt: ", jwt, '\n')
     let response = await fetch(url, reqOptions);

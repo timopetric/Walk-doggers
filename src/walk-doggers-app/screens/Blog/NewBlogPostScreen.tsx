@@ -7,6 +7,7 @@ import ButtonCustom from "../../components/ButtonCustom";
 import ScrollViewContainer from "../../components/ScrollViewContainer";
 import { useState } from "react";
 import AuthContext from "../../navigation/AuthContext";
+import {BASE_API_URL} from "../../localConstants";
 
 
 
@@ -39,7 +40,7 @@ async function postBlog({title, content, photo}: Blog, getJwt: Function, navigat
         photo
     }));
     console.log("jwt: ",jwt,'\n')
-    let response = await fetch(process.env.BASE_API_URL + '/blog/', reqOptions);
+    let response = await fetch(BASE_API_URL + '/blog/', reqOptions);
     const statusCode = response.status;
         switch (statusCode) {
             case 201:
