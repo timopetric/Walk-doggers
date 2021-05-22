@@ -96,6 +96,8 @@ export default function TabInbox({navigation}: any) {
     const [error, setError] = useState<string | null>(null)
     const {getJwt} = useContext(AuthContext)
     const isFocused = useIsFocused();
+    const [shownUsersIds, setShownUsersIds] = useState([]);
+    const [filter, setFilter] = useState(false);
 
 
     const onPress = (convo: any) => {
@@ -118,8 +120,8 @@ export default function TabInbox({navigation}: any) {
 
 
     const filterUsers = (userIds, filter) => {
-        console.log(filter);
-        console.log(userIds);
+        setFilter(filter);
+        setShownUsersIds(userIds)
     }
 
     return (
@@ -127,14 +129,17 @@ export default function TabInbox({navigation}: any) {
             <CarouselCards inChat={false} filterUsers={filterUsers}/>
             <ScrollView>
                 <View style={{height: 10}}/>
-                {convos.length ? convos.map(convo => (
-                    <MessageThread
-                        name={convo?.user?.first_name + " " + convo?.user?.last_name || "error"}
-                        lastMessage={convo.last_message_text}
-                        key={convo?.user?.id || "error"}
-                        imageUrl={convo.user.image_url}
-                        onPress={() => navigation.navigate('MessageScreen', convo)}
-                    />)
+                {convos.length ? convos.map(convo => {
+                        if (!filter || shownUsersIds.includes(convo?.user?.id)) {
+                            return <MessageThread
+                                name={convo?.user?.first_name + " " + convo?.user?.last_name || "error"}
+                                lastMessage={convo.last_message_text}
+                                key={convo?.user?.id || "error"}
+                                imageUrl={convo.user.image_url}
+                                onPress={() => navigation.navigate('MessageScreen', convo)}
+                            />
+                        }
+                    }
                 ) : <Text>ERROR</Text>}
             </ScrollView>
         </View>
