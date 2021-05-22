@@ -30,14 +30,14 @@ export default function ChatScreen(props: any) {
     }, []);
 
     const setName = () => {
-        setImageUrl(conversation.user_other.image_url)
-        setFstName(conversation.user_other.first_name)
-        setLstName(conversation.user_other.last_name)
+        setImageUrl(conversation.user.image_url)
+        setFstName(conversation.user.first_name)
+        setLstName(conversation.user.last_name)
     }
 
     const getConversationMessages = () => {
         let jwt = getJwt();
-        fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
+        fetch(process.env.BASE_API_URL + "/inbox/" + conversation.user.id, {
             method: "GET",
             headers: {
                 accept: "application/json",
@@ -62,7 +62,7 @@ export default function ChatScreen(props: any) {
     };
 
     const formatConversationMessages = (json) => {
-        const otherUser = conversation.user_other.id
+        const otherUser = conversation.user.id
         var array = []
         for (let message of Object.keys(json)) {
             var newMessage = {
@@ -71,7 +71,7 @@ export default function ChatScreen(props: any) {
                 createdAt: json[message].date,
                 user: {
                     _id: otherUser != json[message].senderId ? 1 : 2,
-                    avatar: conversation.user_other.image_url,
+                    avatar: conversation.user.image_url,
                 }
             }
             array.unshift(newMessage)
@@ -89,10 +89,12 @@ export default function ChatScreen(props: any) {
 
     const sendMessage = (message) => {
         let jwt = getJwt();
-        let reqBody = {}
-        reqBody.text = message.text
+        // let reqBody = {}
+        // reqBody.text = message.text
+        const reqBody = {receiver_id: conversation.user.id, message: message.text}
+
         fetch(
-            process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages",
+            process.env.BASE_API_URL + "/inbox",
             {
                 method: "POST",
                 headers: {

@@ -57,6 +57,39 @@ async function getUserConvos(getJwt: Function) {
     return await response.json();
 }
 
+async function getConversations(getJwt: Function) {
+
+    let jwt = getJwt();
+
+    const reqOptions = {
+        method: 'GET',
+        headers: {
+            'accept': 'application/json',
+            'Authorization': 'Bearer ' + jwt,
+            'Credentials': jwt
+        },
+    };
+
+
+    const url = process.env.BASE_API_URL + '/inbox';
+
+    let response = await fetch(url, reqOptions);
+    const statusCode = response.status;
+    switch (statusCode) {
+        case 200:
+            return await response.json();
+            break;
+        case 403:
+            Alert.alert("You need to be authorized to see listings")
+            break;
+
+        default:
+            // TODO: notify user about error
+            Alert.alert("Error occured upsi...")
+            break;
+    }
+    return []
+}
 
 export default function TabInbox({navigation}: any) {
     const [convos, setConvos] = useState<ConversationsType[]>([])
@@ -72,7 +105,7 @@ export default function TabInbox({navigation}: any) {
     useEffect(() => {
         if (isFocused) {
             const getUserConversations = async () => {
-                const conversations = await getUserConvos(getJwt);
+                const conversations = await getConversations(getJwt);
                 console.log("conversations :", conversations);
                 if (!conversations.length || conversations == undefined)
                     setError("No Conversations");
@@ -96,10 +129,10 @@ export default function TabInbox({navigation}: any) {
                 <View style={{height: 10}}/>
                 {convos.length ? convos.map(convo => (
                     <MessageThread
-                        name={convo?.user_other?.first_name + " " + convo?.user_other?.last_name || "error"}
+                        name={convo?.user?.first_name + " " + convo?.user?.last_name || "error"}
                         lastMessage={convo.last_message_text}
-                        key={convo?.id_conv || "error"}
-                        imageUrl={convo.user_other.image_url}
+                        key={convo?.user?.id || "error"}
+                        imageUrl={convo.user.image_url}
                         onPress={() => navigation.navigate('MessageScreen', convo)}
                     />)
                 ) : <Text>ERROR</Text>}
