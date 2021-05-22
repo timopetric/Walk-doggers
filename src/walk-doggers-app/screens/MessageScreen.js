@@ -4,17 +4,19 @@ import {Bubble, GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Colors, {PRIMARY, PINKISH_WHITE, GRAY_BUBLE, PINKISH_BUBLE, PRIMARY_DARK} from '../constants/Colors';
-import CarouselCards from '../components/CarouselCards'
+import CarouselListings from '../components/CarouselCards'
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Ionicons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
 import AuthContext from '../navigation/AuthContext';
+import {BASE_API_URL} from "../localConstants";
 
 
 export default function ChatScreen(props: any) {
     const [messages, setMessages] = useState([]);
     const navigation = useNavigation()
-    const [conversation, setConversation] = useState(props.route.params)
+    // const [conversation, setConversation] = useState(props.route.params)
+    const [user, setUser] = useState(props.route.params)
     const {getJwt} = useContext(AuthContext)
     const [imageUrl, setImageUrl] = useState()
     const [fstName, setFstName] = useState("")
@@ -30,14 +32,14 @@ export default function ChatScreen(props: any) {
     }, []);
 
     const setName = () => {
-        setImageUrl(conversation.user_other.image_url)
-        setFstName(conversation.user_other.first_name)
-        setLstName(conversation.user_other.last_name)
+        setImageUrl(user?.image_url)
+        setFstName(user?.first_name)
+        setLstName(user?.last_name)
     }
 
     const getConversationMessages = () => {
         let jwt = getJwt();
-        fetch(process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages", {
+        fetch(BASE_API_URL + "/inbox/" + user.id, {
             method: "GET",
             headers: {
                 accept: "application/json",
@@ -62,7 +64,7 @@ export default function ChatScreen(props: any) {
     };
 
     const formatConversationMessages = (json) => {
-        const otherUser = conversation.user_other.id
+        const otherUser = user.id
         var array = []
         for (let message of Object.keys(json)) {
             var newMessage = {
@@ -71,7 +73,7 @@ export default function ChatScreen(props: any) {
                 createdAt: json[message].date,
                 user: {
                     _id: otherUser != json[message].senderId ? 1 : 2,
-                    avatar: conversation.user_other.image_url,
+                    avatar: user.image_url,
                 }
             }
             array.unshift(newMessage)
@@ -80,7 +82,6 @@ export default function ChatScreen(props: any) {
     }
 
     const onSend = useCallback((messages = []) => {
-        console.log(messages)
         sendMessage(messages[0])
         setMessages((previousMessages) =>
             GiftedChat.append(previousMessages, messages),
@@ -90,10 +91,12 @@ export default function ChatScreen(props: any) {
 
     const sendMessage = (message) => {
         let jwt = getJwt();
-        let reqBody = {}
-        reqBody.text = message.text
+        // let reqBody = {}
+        // reqBody.text = message.text
+        const reqBody = {receiver_id: user.id, message: message.text}
+
         fetch(
-            process.env.BASE_API_URL + "/conversations/" + conversation.id_conv + "/messages",
+            BASE_API_URL + "/inbox",
             {
                 method: "POST",
                 headers: {
@@ -207,7 +210,7 @@ export default function ChatScreen(props: any) {
                 <View style={{flex: 1}}></View>
             </View>
             <View style={{flex: 1, borderRadius: 30, backgroundColor: "white"}}>
-                <CarouselCards inChat={true}/>
+                <CarouselListings inChat={true}/>
                 <GiftedChat
                     messages={messages}
                     onSend={(messages) => onSend(messages)}

@@ -1,65 +1,78 @@
-import React from 'react'
+import React, {useEffect, useContext, useState} from 'react'
 import {View, useWindowDimensions} from "react-native"
 import Carousel, {Pagination} from 'react-native-snap-carousel'
-import CarouselCardItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselCardItem'
+import CarouselListingItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselListingItem'
 import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
+import AuthContext from "../navigation/AuthContext";
+import {format} from "date-fns";
+import {BASE_API_URL} from "../localConstants";
 
-const data = [
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const data1 = [
     {
         allMessages: true
     },
+    /* application soft apply*/
     {
         title: "Very good boy",
         date: "Tuesday",
         time: "14:00",
         imgUrl: "https://picsum.photos/id/11/200/300",
-        appliedListing: true,
+        application: true,
         reqBtn: true,
         accText: false,
         reqText: false
     },
+    /*application, ki se ni potrjen*/
     {
         title: "Very bad boy",
         date: "Tuesday",
         time: "14:00",
         imgUrl: "https://picsum.photos/id/10/200/300",
-        appliedListing: true,
+        application: true,
         reqBtn: false,
         accText: false,
         reqText: true
     },
+    /*application, ki je potrjen*/
     {
         title: "Very bad boy",
         date: "Tuesday",
         time: "14:00",
         imgUrl: "https://picsum.photos/id/10/200/300",
-        appliedListing: true,
+        application: true,
         reqBtn: false,
         accText: true,
         reqText: false
     },
+    /*listing, ki se ni potrjen*/
     {
         title: "Very bad boy",
         date: "Tuesday",
         time: "14:00",
         imgUrl: "https://picsum.photos/id/10/200/300",
-        appliedListing: false,
         accBtn: true
     },
+    /*listing, ki je potrjen*/
     {
         title: "Very bad boy",
         date: "Tuesday",
         time: "14:00",
         imgUrl: "https://picsum.photos/id/10/200/300",
-        appliedListing: false,
-        accBtn: false
     }
 ]
 
 const CarouselCards = (props) => {
+    const {filterUsers} = props;
     const [index, setIndex] = React.useState(0)
     const isCarousel = React.useRef(null)
+    const {getJwt} = useContext(AuthContext);
+    const [data, setData] = useState([])
 
+    const [listings, setListings] = useState([])
+    const [applications, setApplications] = useState([])
+    const [applicationsFiltered, setApplicationsFiltered] = useState([])
+    const [listingsFiltered, setListingFiltered] = useState([])
     // TODO
     // - pridobi vse moje listinge
     // - prodobi vse moje applications
@@ -77,9 +90,125 @@ const CarouselCards = (props) => {
     //
     //
 
-    data.forEach(function (arrayItem) {
-        arrayItem.inChat = props.inChat
-    })
+    const onSnap = index => {
+        setIndex(index);
+        console.log(index);
+        if (filterUsers) {
+            if (data[index]?.allMessages === true) {
+                filterUsers([], false)
+            } else {
+                filterUsers(data[index]?.user_ids, true)
+            }
+        }
+    }
+
+    useEffect(() => {
+        if (props.inChat) {
+            setData([...applicationsFiltered, ...listingsFiltered])
+        } else {
+            setData([{allMessages: true}, ...applicationsFiltered, ...listingsFiltered])
+        }
+
+    }, [applicationsFiltered, listingsFiltered])
+
+    useEffect(() => {
+        fetchListingsApplications()
+    }, [])
+
+    useEffect(() => {
+        const date_now = new Date()
+        const notRejected = applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected"))
+
+        var applicationsFormatted = []
+        for (const item of notRejected) {
+            const date_from = new Date(item.listing.date_from.toString());
+            const date_to = new Date(item.listing.date_to.toString());
+            const hours = `${format(date_from, "HH:mm")} - ${format(date_to, "HH:mm")}`;
+            let obj = {
+                title: item.listing.title,
+                date: daysOfWeek[date_from.getDay()],
+                time: hours,
+                imgUrl: item.listing.dog.photo,
+                inChat: props.inChat,
+                application: true,
+                user_ids: [item.listing.author_id]
+            }
+            if (item.status === "soft") {
+                obj.reqBtn = true
+            } else if (item.status === "normal") {
+                obj.reqText = true
+            } else if (item.status === "confirmed") {
+                obj.accText = true
+            }
+            applicationsFormatted.push(obj)
+        }
+        setApplicationsFiltered(applicationsFormatted);
+    }, [applications])
+
+    useEffect(() => {
+        const date_now = new Date()
+        const list = listings.filter(item => (date_now < new Date(item.date_to.toString())))
+
+        var listingsFormatted = []
+        for (const item of list) {
+            const date_from = new Date(item.date_from.toString());
+            const date_to = new Date(item.date_to.toString());
+            const hours = `${format(date_from, "HH:mm")} - ${format(date_to, "HH:mm")}`;
+            const ids = item.applications.map(application => {
+                return application?.applied_user?.id
+            });
+            let obj = {
+                title: item.title,
+                date: daysOfWeek[date_from.getDay()],
+                time: hours,
+                imgUrl: item.dog.photo,
+                inChat: props.inChat,
+                user_ids: ids
+
+            }
+
+            if (item.confirmed_application == null) {
+                obj.accBtn = true
+            }
+            listingsFormatted.push(obj)
+        }
+        setListingFiltered(listingsFormatted)
+
+    }, [listings])
+
+    const fetchListingsApplications = () => {
+        const jwt = getJwt();
+        Promise.all([
+            fetch(BASE_API_URL + '/listings/', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + jwt
+                },
+            }),
+            fetch(BASE_API_URL + '/applications/', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + jwt
+                },
+            })
+        ]).then(async ([data1, data2]) => {
+            //.log(listings)
+            const listingsData = await data1.json()
+            const applicationsData = await data2.json()
+
+            // console.log(applicationsData)
+            setApplications(applicationsData)
+            setListings(listingsData)
+
+
+        })
+    }
+
+
     const windowWidth = useWindowDimensions().width;
 
     return (
@@ -89,11 +218,11 @@ const CarouselCards = (props) => {
                 layoutCardOffset={0}
                 ref={isCarousel}
                 data={data}
-                renderItem={CarouselCardItem}
-                containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0.75)' }}
+                renderItem={CarouselListingItem}
+                containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}
-                onSnapToItem={(index) => setIndex(index)}
+                onSnapToItem={(index) => onSnap(index)}
                 // useScrollView={true}
 
             />
@@ -114,7 +243,7 @@ const CarouselCards = (props) => {
                     backgroundColor: GRAY_1,
                 }}
                 tappableDots={true}
-                containerStyle={{paddingVertical: 0, marginTop: -36}}
+                containerStyle={{paddingVertical: 0, marginTop: -36, marginBottom: 26}}
 
             />
         </View>

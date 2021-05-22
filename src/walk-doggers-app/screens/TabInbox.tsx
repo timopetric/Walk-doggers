@@ -7,6 +7,7 @@ import {ScrollView, TouchableHighlight, TouchableOpacity} from 'react-native-ges
 import CarouselCards from '../components/CarouselCards'
 import AuthContext from '../navigation/AuthContext';
 import {useIsFocused} from "@react-navigation/native";
+import {BASE_API_URL} from "../localConstants";
 
 type ConversationsType = {
     user_other: {
@@ -35,12 +36,10 @@ async function getUserConvos(getJwt: Function) {
     };
 
 
-    const url = process.env.BASE_API_URL + '/conversations';
-    console.log(url)
+    const url = BASE_API_URL + '/conversations';
 
     let response = await fetch(url, reqOptions);
     const statusCode = response.status;
-    console.log("status: ", statusCode)
     switch (statusCode) {
         case 200:
             // successfully created dog
@@ -59,23 +58,57 @@ async function getUserConvos(getJwt: Function) {
     return await response.json();
 }
 
+async function getConversations(getJwt: Function) {
+
+    let jwt = getJwt();
+
+    const reqOptions = {
+        method: 'GET',
+        headers: {
+            'accept': 'application/json',
+            'Authorization': 'Bearer ' + jwt,
+            'Credentials': jwt
+        },
+    };
+
+
+    const url = BASE_API_URL + '/inbox';
+
+    let response = await fetch(url, reqOptions);
+    const statusCode = response.status;
+    switch (statusCode) {
+        case 200:
+            return await response.json();
+            break;
+        case 403:
+            Alert.alert("You need to be authorized to see listings")
+            break;
+
+        default:
+            // TODO: notify user about error
+            Alert.alert("Error occured upsi...")
+            break;
+    }
+    return []
+}
 
 export default function TabInbox({navigation}: any) {
     const [convos, setConvos] = useState<ConversationsType[]>([])
     const [error, setError] = useState<string | null>(null)
     const {getJwt} = useContext(AuthContext)
     const isFocused = useIsFocused();
+    const [shownUsersIds, setShownUsersIds] = useState([]);
+    const [filter, setFilter] = useState(false);
 
 
     const onPress = (convo: any) => {
-        console.log(convo)
         navigation.navigate('MessageScreen', convo)
     };
 
     useEffect(() => {
         if (isFocused) {
             const getUserConversations = async () => {
-                const conversations = await getUserConvos(getJwt);
+                const conversations = await getConversations(getJwt);
                 console.log("conversations :", conversations);
                 if (!conversations.length || conversations == undefined)
                     setError("No Conversations");
@@ -86,19 +119,28 @@ export default function TabInbox({navigation}: any) {
         }
     }, [])
 
+
+    const filterUsers = (userIds, filter) => {
+        setFilter(filter);
+        setShownUsersIds(userIds || [])
+    }
+
     return (
         <View style={styles.containter}>
-            <CarouselCards inChat={false}/>
+            <CarouselCards inChat={false} filterUsers={filterUsers}/>
             <ScrollView>
                 <View style={{height: 10}}/>
-                {convos.length ? convos.map(convo => (
-                    <MessageThread
-                        name={convo?.user_other?.first_name + " " + convo?.user_other?.last_name || "error"}
-                        lastMessage={convo.last_message_text}
-                        key={convo?.id_conv || "error"}
-                        imageUrl={convo.user_other.image_url}
-                        onPress={() => navigation.navigate('MessageScreen', convo)}
-                    />)
+                {convos.length ? convos.map(convo => {
+                        if (!filter || shownUsersIds.includes(convo?.user?.id)) {
+                            return <MessageThread
+                                name={convo?.user?.first_name + " " + convo?.user?.last_name || "error"}
+                                lastMessage={convo.last_message_text}
+                                key={convo?.user?.id || "error"}
+                                imageUrl={convo.user.image_url}
+                                onPress={() => navigation.navigate('MessageScreen', convo.user)}
+                            />
+                        }
+                    }
                 ) : <Text>ERROR</Text>}
             </ScrollView>
         </View>

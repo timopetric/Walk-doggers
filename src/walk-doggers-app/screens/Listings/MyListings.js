@@ -8,6 +8,7 @@ import { useIsFocused } from "@react-navigation/native";
 import AuthContext from "../../navigation/AuthContext";
 import { useEffect, useState, useContext } from "react";
 import { format } from "date-fns";
+import {BASE_API_URL} from "../../localConstants";
 
 export function MyListings(props) {
   const { getJwt } = useContext(AuthContext);
@@ -20,7 +21,7 @@ export function MyListings(props) {
   }, [props.isFocused]);
 
   const getMyListings = () => {
-    fetch(process.env.BASE_API_URL + "/listings/", {
+    fetch(BASE_API_URL + "/listings/", {
       method: "GET",
       headers: {
         accept: "application/json",

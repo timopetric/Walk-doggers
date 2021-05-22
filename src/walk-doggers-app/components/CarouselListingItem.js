@@ -6,7 +6,7 @@ import {GRAY_3, GREEN, ORANGE, RED} from '../constants/Colors';
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
-const CarouselCardItem = ({ item, index, inChat }) => {
+const CarouselListingItem = ({ item, index, inChat }) => {
   return (
 
     <View style={styles.container} key={index}>
@@ -33,40 +33,40 @@ const CarouselCardItem = ({ item, index, inChat }) => {
             <Text style={styles.date}>{item.time}</Text>
           </View>
           {/* prijavljen oglas, ki je potrjen*/}
-          {item.appliedListing && item.accText && <View style={[styles.accView, {backgroundColor: GREEN}]}>
+          {item.application && item.accText && <View style={[styles.accView, {backgroundColor: GREEN}]}>
               <Text style={styles.accText}>ACCEPTED</Text>
           </View> }
 
           {/* prijavljen oglas, ki ni potrjen*/}
-          {item.appliedListing &&  item.reqText && <View style={[styles.accView, {backgroundColor: ORANGE}]}>
+          {item.application &&  item.reqText && <View style={[styles.accView, {backgroundColor: ORANGE}]}>
               <Text style={styles.accText}>REQUESTED</Text>
           </View> }
 
-          {item.appliedListing &&  item.reqText && <View style={[styles.btnReq, {backgroundColor: RED}]}>
+          {item.application &&  item.reqText && <View style={[styles.btnReq, {backgroundColor: RED}]}>
             <TouchableOpacity>
               <Text style={styles.btnText}>Cancel</Text>
             </TouchableOpacity>
           </View>}
 
           {/* soft apply */}
-          {item.appliedListing &&  item.reqBtn && <View style={[styles.btnReq, {backgroundColor: GREEN}]}>
+          {item.application &&  item.reqBtn && <View style={[styles.btnReq, {backgroundColor: GREEN}]}>
             <TouchableOpacity>
               <Text style={styles.btnText}>Request</Text>
             </TouchableOpacity>
           </View>}
 
           {/* objavljen oglas, ki še ni potrjen*/}
-          {item.inChat && !item.appliedListing && item.accBtn && <View style={[styles.btnReq, {backgroundColor: GREEN}]}>
+          {item.inChat && !item.application && item.accBtn && <View style={[styles.btnReq, {backgroundColor: GREEN}]}>
             <TouchableOpacity>
               <Text style={styles.btnText}>Accept</Text>
             </TouchableOpacity>
           </View>}
-          {item.inChat && !item.appliedListing &&  item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
+          {item.inChat && !item.application &&  item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
               <Text style={[styles.accText, {color: ORANGE}]}>REQUESTED</Text>
           </View> }
 
           {/* objavljen oglas, ki je potrjen*/}
-          {!item.appliedListing && !item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
+          {!item.application && !item.accBtn && <View style={[styles.accView, {backgroundColor: "white"}]}>
               <Text style={[styles.accText, {color: GREEN}]}>ARRANGED</Text>
           </View> }
         </View>
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CarouselCardItem
+export default CarouselListingItem

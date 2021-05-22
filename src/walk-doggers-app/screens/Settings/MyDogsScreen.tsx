@@ -15,6 +15,7 @@ import {BLUE, GRAY_0, GRAY_1, GRAY_3, LIGHT_BG, PRIMARY, tintColorLight} from ".
 import {useEffect, useState, useContext} from "react";
 import AuthContext from "../../navigation/AuthContext";
 import {useIsFocused, useNavigation} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 
 const dimensions = Dimensions.get('window');
 const imgWidth = dimensions.width;
@@ -98,7 +99,7 @@ export default function MyDogsScreen() {
 
     useEffect(() => {
         if (isFocused) {
-            fetch(process.env.BASE_API_URL + '/dogs/', {
+            fetch(BASE_API_URL + '/dogs/', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",

@@ -8,6 +8,8 @@ import {useEffect} from "react";
 import {format} from "date-fns";
 import AuthContext from "../navigation/AuthContext";
 import {useNavigation} from "@react-navigation/core";
+import {BASE_API_URL} from "../localConstants";
+import MessageThread from "../components/MessageThread";
 
 
 const dimensions = Dimensions.get('window');
@@ -107,12 +109,13 @@ const ListingScreen = (props) => {
             },
             body: JSON.stringify({
                 listing_id: listing.id,
+                soft: true
             }),
         };
-        fetch(process.env.BASE_API_URL + "/applications/", reqOptions);
+        fetch(BASE_API_URL + "/applications/", reqOptions);
     };
 
-    const createConversation = () => {
+    const createConversation = async () => {
         const reqOptions = {
             method: "POST",
             headers: {
@@ -124,13 +127,26 @@ const ListingScreen = (props) => {
                 user2Id: listing.author_id,
             }),
         };
-        fetch(process.env.BASE_API_URL + "/conversations", reqOptions);
+        const response = await fetch(BASE_API_URL + "/conversations", reqOptions);
+        if (response.ok) {
+            return response.json();
+        }
     }
 
     const apply = () => {
         imInterested()
-        createConversation()
-        navigation.goBack()
+        navigation.navigate('Inbox', {screen: 'MessageScreen'}, listing.author)
+
+        navigation.navigate('MessageScreen', listing.author);
+
+        // createConversation().then(response => {
+        //     if (response.ok) {
+        //         return response.json()
+        //     }
+        // }).then(json => {
+        //     console.log(json);
+        // });
+        // navigation.goBack()
     }
 
 

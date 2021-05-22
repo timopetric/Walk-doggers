@@ -35,6 +35,9 @@ def check_if_user_can_apply_to_listing(user_id: str, listing: Listing):
     if listing is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error")
 
+    if listing.author_id == user_id:
+        raise HTTPException(status_code=403, detail="You can't apply to your own listing.")
+
     application: Application
     for application in listing.applications:
         # check if user already applied to listing

@@ -4,9 +4,11 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {Text, View} from 'react-native';
 import {AntDesign, Ionicons, FontAwesome5, FontAwesome} from '@expo/vector-icons';
 import {Card, Rating} from "react-native-elements";
-import {useContext} from "react";
+import {useContext, useEffect, useState} from "react";
 import AuthContext from "../../navigation/AuthContext";
 import {DARK, GRAY_0, GRAY_00, GRAY_3, LIGHT_BG, RED, YELLOW} from "../../constants/Colors";
+import {useIsFocused} from "@react-navigation/native";
+import {BASE_API_URL} from "../../localConstants";
 // import { AuthContext } from '../../navigation/Providers/AuthProvider';
 
 
@@ -29,10 +31,29 @@ const SettingsItem = ({text, icon, color, last, onPress}) => {
 }
 
 export default function TabSettings({navigation}: any) {
+    const isFocused = useIsFocused();
+
     const {signOut, getJwt, isReporter} = useContext(AuthContext);
     console.log(getJwt());
     const showBecomeReporter = !isReporter();
+    const [rating, setRating] = useState(0.0)
 
+    useEffect(() => {
+        if (isFocused) {
+            fetch(BASE_API_URL + '/profile', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    "Content-Type": "application/json",
+                    'Authorization': 'Bearer ' + getJwt()
+                },
+            }).then(async response => {
+                let json = await response.json();
+                console.log(json)
+                setRating(json.rating)
+            })
+        }
+    }, [isFocused])
     return (
         <View style={styles.container}>
             <View>
@@ -69,7 +90,7 @@ export default function TabSettings({navigation}: any) {
                 <Rating
                     type='custom'
                     ratingCount={5}
-                    startingValue={4}
+                    startingValue={rating}
                     imageSize={40}
                     readonly
                     ratingBackgroundColor={GRAY_0}

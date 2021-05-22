@@ -38,7 +38,7 @@ def register(*, db: Session = Depends(get_db), auth_details: schemas.UserRegiste
     return {'jwt': jwt}
 
 
-@AuthRouter.put("/update_user", response_model=schemas.User, status_code=HTTP_200_OK)
+@AuthRouter.put("/update_user", response_model=schemas.User, status_code=HTTP_200_OK, deprecated=True)
 def update_user(*, db: Session = Depends(get_db), user_in: schemas.UserUpdate,
                 user_id=Depends(auth_handler.auth_wrapper)) -> Any:
     # double check if user exists

@@ -9,6 +9,7 @@ import AuthStack from "./navigation/AuthStack/AuthStack";
 import {NavigationContainer} from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthContext, {LoginProps, RegisterProps} from './navigation/AuthContext';
+import {BASE_API_URL} from "./localConstants";
 
 export default function App() {
     const isLoadingComplete = useCachedResources();
@@ -93,7 +94,7 @@ export default function App() {
                     body: JSON.stringify({"email": email, "password": password})
                 };
                 console.log("emv", process.env)
-                const response = await fetch(process.env.BASE_API_URL + '/auth/login', requestOptions);
+                const response = await fetch(BASE_API_URL + '/auth/login', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
                     await AsyncStorage.setItem("@user", responseData?.jwt);
@@ -113,7 +114,7 @@ export default function App() {
                         'Authorization': 'Bearer ' + token
                     },
                 };
-                const response = await fetch(process.env.BASE_API_URL + '/auth/roles', requestOptions);
+                const response = await fetch(BASE_API_URL + '/auth/roles', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
                     console.log(responseData)
@@ -135,7 +136,7 @@ export default function App() {
                         "password": password
                     })
                 };
-                const response = await fetch(process.env.BASE_API_URL + '/auth/register', requestOptions);
+                const response = await fetch(BASE_API_URL + '/auth/register', requestOptions);
                 if (response.ok) {
                     const responseData = await response.json();
                     await AsyncStorage.setItem("@user", responseData?.jwt);
