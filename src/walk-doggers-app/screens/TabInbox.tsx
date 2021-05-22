@@ -10,7 +10,7 @@ import {useIsFocused} from "@react-navigation/native";
 import {BASE_API_URL} from "../localConstants";
 
 type ConversationsType = {
-    user_other: {
+    user: {
         id: string,
         last_name: string,
         image_url: string,
@@ -117,7 +117,7 @@ export default function TabInbox({navigation}: any) {
             };
             getUserConversations();
         }
-    }, [])
+    }, [isFocused])
 
 
     const filterUsers = (userIds, filter) => {

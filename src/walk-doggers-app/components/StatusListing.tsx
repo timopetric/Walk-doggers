@@ -51,7 +51,7 @@ export default function statusListing (props: any) {
         */
         //render status for applied listing
         //PENDING - cakanje na potrditev
-        if (application.status == "normal" && date_now < date_to) {
+        if ((application.status == "normal" || application.status == "soft") && date_now < date_to) {
             text = "PENDING"
             color = GRAY_2
         //ACCEPTED - oglas potrjen 
