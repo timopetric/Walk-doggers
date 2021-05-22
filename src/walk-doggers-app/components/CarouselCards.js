@@ -64,6 +64,7 @@ const data1 = [
 
 const CarouselCards = (props) => {
     const {filterUsers} = props;
+    const {user} = props
     const [index, setIndex] = React.useState(0)
     const isCarousel = React.useRef(null)
     const {getJwt} = useContext(AuthContext);
@@ -116,7 +117,6 @@ const CarouselCards = (props) => {
     useEffect(() => {
         const date_now = new Date()
         const notRejected = applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected"))
-
         var applicationsFormatted = []
         for (const item of notRejected) {
             const date_from = new Date(item.listing.date_from.toString());
@@ -138,9 +138,16 @@ const CarouselCards = (props) => {
             } else if (item.status === "confirmed") {
                 obj.accText = true
             }
-            applicationsFormatted.push(obj)
+            if (user == undefined)
+                applicationsFormatted.push(obj)
+            else if (user.id == item.listing.author_id) {
+                applicationsFormatted.push(obj)
+            }
         }
         setApplicationsFiltered(applicationsFormatted);
+        
+
+
     }, [applications])
 
     useEffect(() => {
@@ -168,7 +175,13 @@ const CarouselCards = (props) => {
             if (item.confirmed_application == null) {
                 obj.accBtn = true
             }
-            listingsFormatted.push(obj)
+
+            if(user == undefined) {
+                listingsFormatted.push(obj)
+            } else if (item.applications.filter(application => application.applied_user.id == user.id).length > 0) {
+                listingsFormatted.push(obj)
+            }
+            
         }
         setListingFiltered(listingsFormatted)
 

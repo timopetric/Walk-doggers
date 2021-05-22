@@ -210,7 +210,7 @@ export default function ChatScreen(props: any) {
                 <View style={{flex: 1}}></View>
             </View>
             <View style={{flex: 1, borderRadius: 30, backgroundColor: "white"}}>
-                <CarouselCards inChat={true}/>
+                <CarouselCards inChat={true} user={user}/>
                 <GiftedChat
                     messages={messages}
                     onSend={(messages) => onSend(messages)}
