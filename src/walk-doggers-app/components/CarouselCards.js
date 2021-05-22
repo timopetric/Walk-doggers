@@ -1,7 +1,7 @@
 import React, {useEffect, useContext, useState} from 'react'
 import {View, useWindowDimensions} from "react-native"
 import Carousel, {Pagination} from 'react-native-snap-carousel'
-import CarouselCardItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselCardItem'
+import CarouselListingItem, {SLIDER_WIDTH, ITEM_WIDTH} from './CarouselListingItem'
 import {GRAY_0, GRAY_1, GRAY_2, PRIMARY} from "../constants/Colors";
 import AuthContext from "../navigation/AuthContext";
 import {format} from "date-fns";
@@ -93,10 +93,12 @@ const CarouselCards = (props) => {
     const onSnap = index => {
         setIndex(index);
         console.log(index);
-        if (data[index]?.allMessages === true) {
-            filterUsers([], false)
-        } else {
-            filterUsers(data[index]?.user_ids, true)
+        if (filterUsers) {
+            if (data[index]?.allMessages === true) {
+                filterUsers([], false)
+            } else {
+                filterUsers(data[index]?.user_ids, true)
+            }
         }
     }
 
@@ -216,7 +218,7 @@ const CarouselCards = (props) => {
                 layoutCardOffset={0}
                 ref={isCarousel}
                 data={data}
-                renderItem={CarouselCardItem}
+                renderItem={CarouselListingItem}
                 containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}

@@ -6,7 +6,7 @@ import {GRAY_3, GREEN, ORANGE, RED} from '../constants/Colors';
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
-const CarouselCardItem = ({ item, index, inChat }) => {
+const CarouselListingItem = ({ item, index, inChat }) => {
   return (
 
     <View style={styles.container} key={index}>
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default CarouselCardItem
+export default CarouselListingItem

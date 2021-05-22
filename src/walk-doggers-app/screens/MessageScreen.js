@@ -4,7 +4,7 @@ import {Bubble, GiftedChat, Send, InputToolbar} from 'react-native-gifted-chat';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Colors, {PRIMARY, PINKISH_WHITE, GRAY_BUBLE, PINKISH_BUBLE, PRIMARY_DARK} from '../constants/Colors';
-import CarouselCards from '../components/CarouselCards'
+import CarouselListings from '../components/CarouselCards'
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Ionicons} from "@expo/vector-icons";
 import {useNavigation} from "@react-navigation/native";
@@ -210,7 +210,7 @@ export default function ChatScreen(props: any) {
                 <View style={{flex: 1}}></View>
             </View>
             <View style={{flex: 1, borderRadius: 30, backgroundColor: "white"}}>
-                <CarouselCards inChat={true}/>
+                <CarouselListings inChat={true}/>
                 <GiftedChat
                     messages={messages}
                     onSend={(messages) => onSend(messages)}
