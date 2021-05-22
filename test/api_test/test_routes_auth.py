@@ -31,7 +31,7 @@ def database_clear_postgres(_app: FastAPI):
 
     # drop postgres database
     close_all_sessions()
-    Base.metadata.drop_all(engine)
+    # Base.metadata.drop_all(engine)
     Base.metadata.create_all(bind=engine)
 
     # create admin user
