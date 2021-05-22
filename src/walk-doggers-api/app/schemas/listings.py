@@ -53,7 +53,7 @@ class Listing(ListingInDBBase):
     author: "User"
     dog: "Dog"
     location_text: str
-    applications: "List[ApplicationBrief]"
+    applications: "List[ApplicationWithUserBrief]"
     confirmed_application: Optional["ApplicationWithUserBrief"] = None
 
     # Additional properties stored in DB
