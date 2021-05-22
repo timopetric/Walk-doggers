@@ -1,6 +1,7 @@
 from uuid import uuid4
 
 from sqlalchemy import Column, String, Text, Boolean, ForeignKey, Integer, DateTime, Float
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship
 from sqlalchemy.dialects.postgresql import UUID
 
@@ -31,6 +32,13 @@ class User(Base):
     listings = relationship("Listing", back_populates="author")
     ratings = relationship("Rating", back_populates="user")
     applications = relationship("Application", back_populates="applied_user")
+
+    @hybrid_property
+    def rating(self) -> float:
+        ratings_count = len(self.ratings)
+        if ratings_count > 0:
+            return sum(rating.rating for rating in self.ratings) / ratings_count
+        return 0
 
 
 class Dog(Base):

@@ -30,21 +30,26 @@ async def rate_user(*, db: Session = Depends(get_db), rating_in: schemas.RateByL
     if listing.confirmed_application is None:
         raise HTTPException(status_code=403, detail="You can't leave rating for this listing")
 
-    rating_obj = schemas.RatingCreate(user_id=user_id, rating=rating_in.rating)
-    # rating_obj.rating = rating_in.rating
-    # rating_obj.user_id = user_id
+    application: Application = listing.confirmed_application
 
     # listing author to walker rating
     if listing.author_id == user_id and not listing.author_left_review:
+        rated_user_id = application.applied_user_id
+        rating_obj = schemas.RatingCreate(user_id=rated_user_id, rating=rating_in.rating)
+
         actions.listing.update(db=db, db_obj=listing, obj_in={"author_left_review": True})
         rating = actions.rating.create(db=db, obj_in=rating_obj)
+
         return rating
 
     # walker to listing author rating
-    application: Application = listing.confirmed_application
     if application.applied_user_id == user_id and not listing.walker_left_review:
+        rated_user_id = listing.author_id
+        rating_obj = schemas.RatingCreate(user_id=rated_user_id, rating=rating_in.rating)
+
         actions.listing.update(db=db, db_obj=listing, obj_in={"walker_left_review": True})
         rating = actions.rating.create(db=db, obj_in=rating_obj)
+
         return rating
 
     raise HTTPException(status_code=403, detail="You can't leave rating for this listing")
