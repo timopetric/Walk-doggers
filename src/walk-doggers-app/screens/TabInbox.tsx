@@ -99,6 +99,7 @@ export default function TabInbox({navigation}: any) {
     const isFocused = useIsFocused();
     const [shownUsersIds, setShownUsersIds] = useState([]);
     const [filter, setFilter] = useState(false);
+    const [refresh, setRefresh] = useState(true)
 
 
     const onPress = (convo: any) => {
@@ -107,6 +108,7 @@ export default function TabInbox({navigation}: any) {
 
     useEffect(() => {
         if (isFocused) {
+            setRefresh(!refresh)
             const getUserConversations = async () => {
                 const conversations = await getConversations(getJwt);
                 console.log("conversations :", conversations);
@@ -127,7 +129,7 @@ export default function TabInbox({navigation}: any) {
 
     return (
         <View style={styles.containter}>
-            <CarouselCards inChat={false} filterUsers={filterUsers}/>
+            <CarouselCards inChat={false} filterUsers={filterUsers} refresh={refresh}/>
             <ScrollView>
                 <View style={{height: 10}}/>
                 {convos.length ? convos.map(convo => {

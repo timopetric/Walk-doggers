@@ -63,7 +63,7 @@ const data1 = [
 ]
 
 const CarouselCards = (props) => {
-    const {filterUsers} = props;
+    const {filterUsers, refresh} = props;
     const {user} = props
     const [index, setIndex] = React.useState(0)
     const isCarousel = React.useRef(null)
@@ -115,6 +115,10 @@ const CarouselCards = (props) => {
     useEffect(() => {
         fetchListingsApplications()
     }, [])
+
+    useEffect(() => {
+        fetchListingsApplications()
+    }, [refresh])
 
 
     useEffect(() => {
