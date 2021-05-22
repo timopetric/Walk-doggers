@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, StyleSheet, TouchableOpacity} from 'react-native';
-import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../constants/Colors';
+import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN, PINK} from '../constants/Colors';
 
 const styles = StyleSheet.create({
   center: {
@@ -30,12 +30,13 @@ interface IButtonProps {
 }
 
 class ButtonCustom extends React.Component<IButtonProps> {
+    
     render() {
-        
+        const color = this.props.color    
         return (
             <TouchableOpacity onPress={this.props.onPress} style={this.props.style}>
-                    <View style={[styles.button, (this.props.color === "purple") ? { backgroundColor: PRIMARY} : {}, (this.props.color === "red") ? { backgroundColor: RED} : {}, (this.props.color === "green") ? { backgroundColor: GREEN} : {}]}>
-                        <Text style={[styles.btnText, (this.props.color === "purple") ? { color: PINKISH_WHITE} : {color: "#fff"} ]}>{this.props.text}</Text>
+                    <View style={[styles.button, (color === "purple") ? { backgroundColor: PRIMARY} : {}, (color === "red") ? { backgroundColor: RED} : {}, (color === "green") ? { backgroundColor: GREEN} : {}, (color === "pink") ? { backgroundColor: PINK} : {}]}>
+                        <Text style={[styles.btnText, (color === "purple") ? { color: PINKISH_WHITE} : {color: "#fff"} ]}>{this.props.text}</Text>
                     </View>
             </TouchableOpacity>
         )

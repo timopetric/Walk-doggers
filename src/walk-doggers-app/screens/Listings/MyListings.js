@@ -29,7 +29,7 @@ export function MyListings(props) {
       },
     }).then(async (response) => {
       let json = await response.json();
-      console.log(json);
+      //console.log(json);
       setMyListings(json);
     });
   };
@@ -70,6 +70,7 @@ export function MyListings(props) {
         dateDay={daysOfWeek[date_from.getDay()]}
         time={hours}
         numOfApplied={item.applications.length}
+        listing={item}
       />
     );
   }

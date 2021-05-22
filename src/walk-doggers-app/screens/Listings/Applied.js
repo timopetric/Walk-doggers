@@ -30,12 +30,13 @@ export function Applied(props) {
       },
     }).then(async (response) => {
       let json = await response.json();
-      console.log(json);
+      //console.log(json);
       setApplied(json);
     });
   };
 
   function renderItem({ item }) {
+    var application = item
     item = item.listing
     var daysOfWeek = [
       "Sunday",
@@ -74,6 +75,7 @@ export function Applied(props) {
         date={date_item}
         dateDay={daysOfWeek[date_from.getDay()]}
         time={hours}
+        application={application}
       />
     );
   }
