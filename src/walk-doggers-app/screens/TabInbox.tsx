@@ -1,12 +1,12 @@
 import {useContext, useEffect, useState} from 'react';
 import {Alert, StyleSheet} from 'react-native';
 import * as React from 'react';
-import EditScreenInfo from '../components/EditScreenInfo';
 import MessageThread from '../components/MessageThread'
 import {Text, View} from 'react-native';
 import {ScrollView, TouchableHighlight, TouchableOpacity} from 'react-native-gesture-handler';
 import CarouselCards from '../components/CarouselCards'
 import AuthContext from '../navigation/AuthContext';
+import {useIsFocused} from "@react-navigation/native";
 
 type ConversationsType = {
     user_other: {
@@ -64,6 +64,8 @@ export default function TabInbox({navigation}: any) {
     const [convos, setConvos] = useState<ConversationsType[]>([])
     const [error, setError] = useState<string | null>(null)
     const {getJwt} = useContext(AuthContext)
+    const isFocused = useIsFocused();
+
 
     
     const onPress = () => {
@@ -71,17 +73,17 @@ export default function TabInbox({navigation}: any) {
     };
 
     useEffect(() => {
-        const getUserConversations = async () => {
+        if (isFocused) {
+          const getUserConversations = async () => {
             const conversations = await getUserConvos(getJwt);
-            console.log("conversations :", conversations)
+            console.log("conversations :", conversations);
             if (!conversations.length || conversations == undefined)
-                setError('No Conversations');
-            else if (conversations.length)
-                setConvos(conversations);
-            else
-                setError('Error upsi...');
+              setError("No Conversations");
+            else if (conversations.length) setConvos(conversations);
+            else setError("Error upsi...");
+          };
+          getUserConversations();
         }
-        getUserConversations()
     }, [])
 
     return (
