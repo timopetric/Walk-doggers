@@ -8,7 +8,7 @@ from app.mongo.models import Conversation, Message, MessageAdd, ConversationAdd
 
 from fastapi import APIRouter, HTTPException, Depends
 from odmantic import AIOEngine, ObjectId, query
-from typing import List
+from typing import List, Optional
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import UUID4
 
@@ -26,9 +26,11 @@ engine = AIOEngine(motor_client=AsyncIOMotorClient(database_mongo_uri))
 
 @ConversationRouter.get("", response_model=List[ConversationsBase],
                         description="Get a list of conversations from user in JWT.")
-async def get_conversations(db: Session = Depends(get_db),
-                            user_id=Depends(auth_handler.auth_wrapper),
-                            skip: int = 0, limit: int = 100):
+async def get_conversations_from_jwt_user(user_id_filter: Optional[str] = None,
+                                          db: Session = Depends(get_db),
+                                          user_id=Depends(auth_handler.auth_wrapper),
+                                          skip: int = 0, limit: int = 100):
+
     user = get_user_from_id(db, user_id)
     conversations = await engine.find(Conversation,
                                       query.or_(Conversation.user1Id == user.id,
@@ -39,28 +41,51 @@ async def get_conversations(db: Session = Depends(get_db),
     for conv in conversations:
         user_id_other = str(conv.user2Id) if str(conv.user1Id) == str(user_id) else str(conv.user1Id)
         user_other: User = get_user_from_id(db, user_id_other)
-        msgs = await engine.find(Message, Message.convId == conv.id, Message.senderId == user_other.id, skip=skip, limit=limit)
+        msgs = await engine.find(Message, Message.convId == conv.id, Message.senderId == user_other.id, skip=skip,
+                                 limit=limit)
 
-        conversation_user_list.append(
-            {
-                "user_other": user_other,
-                "id_conv": str(conv.id),
-                "last_message_text": msgs[-1].text if len(msgs) > 0 else "User hasn't written a thing yet."
-            }
-        )
+        if user_id_filter and user_id_filter == user_id_other or not user_id_filter:
+            conversation_user_list.append(
+                {
+                    "user_other": user_other,
+                    "id_conv": str(conv.id),
+                    "last_message_text": msgs[-1].text if len(msgs) > 0 else "User hasn't written a thing yet."
+                }
+            )
 
     return conversation_user_list
 
 
-@ConversationRouter.get("/{conv_id}", response_model=Conversation,
+@ConversationRouter.get("/user/{user_id}", response_model=ConversationsBase,
                         dependencies=[Depends(auth_handler.auth_wrapper)],
-                        description="Get a conversation by id, if it exists.")
-async def get_conversation_by_id(conv_id: ObjectId):
-    conversation = await engine.find_one(Conversation,
-                                         Conversation.id == conv_id)
-    if conversation is None:
-        raise HTTPException(404)
-    return conversation
+                        description="Use GET /conversations with user_id_filter query instead! Get conversation "
+                                    "info by id of the other user, if he/she exists.",
+                        deprecated=True)
+async def get_conversation_by_user_id(user_id_other: str, db: Session = Depends(get_db),
+                                      user_id=Depends(auth_handler.auth_wrapper)):
+    user = get_user_from_id(db, user_id)
+    user_other = get_user_from_id(db, user_id_other)
+
+    conv = await engine.find_one(Conversation,
+                                 query.or_(
+                                     query.and_(Conversation.user1Id == user.id,
+                                                Conversation.user2Id == user_other.id),
+                                     query.and_(Conversation.user2Id == user.id,
+                                                Conversation.user1Id == user_other.id)
+                                 )
+                                 )
+    if conv:
+        user_id_other = str(conv.user2Id) if str(conv.user1Id) == str(user_id) else str(conv.user1Id)
+        user_other: User = get_user_from_id(db, user_id_other)
+        msgs = await engine.find(Message, Message.convId == conv.id, Message.senderId == user_other.id)
+        return {
+            "user_other": user_other,
+            "id_conv": str(conv.id),
+            "last_message_text": msgs[-1].text if len(msgs) > 0 else "User hasn't written a thing yet."
+        }
+        # return await get_conversation_messages(conv.id, db, user_id)
+    else:
+        return HTTPException(HTTP_404_NOT_FOUND, "Error, conversation with this user does not yet exist.")
 
 
 @ConversationRouter.post("", response_model=Conversation,
@@ -93,7 +118,7 @@ async def create_conversation(conversation: ConversationAdd,
     return conv
 
 
-@ConversationRouter.post("/{conv_id}/messages", response_model=Message)
+@ConversationRouter.post("/{conv_id}/messages", response_model=Message, responses={HTTP_404_NOT_FOUND: {"model": ""}})
 async def add_message_to_a_conversation(conv_id: ObjectId,
                                         message: MessageAdd,
                                         db: Session = Depends(get_db),
