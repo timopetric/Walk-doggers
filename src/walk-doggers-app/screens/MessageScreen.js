@@ -32,9 +32,9 @@ export default function ChatScreen(props: any) {
     }, []);
 
     const setName = () => {
-        setImageUrl(user.image_url)
-        setFstName(user.first_name)
-        setLstName(user.last_name)
+        setImageUrl(user?.image_url)
+        setFstName(user?.first_name)
+        setLstName(user?.last_name)
     }
 
     const getConversationMessages = () => {

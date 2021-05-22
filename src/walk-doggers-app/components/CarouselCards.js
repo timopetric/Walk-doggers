@@ -241,7 +241,7 @@ const CarouselCards = (props) => {
                     backgroundColor: GRAY_1,
                 }}
                 tappableDots={true}
-                containerStyle={{paddingVertical: 0, marginTop: -36}}
+                containerStyle={{paddingVertical: 0, marginTop: -36, marginBottom: 26}}
 
             />
         </View>
