@@ -60,6 +60,23 @@ const CarouselCards = (props) => {
     const [index, setIndex] = React.useState(0)
     const isCarousel = React.useRef(null)
 
+    // TODO
+    // - pridobi vse moje listinge
+    // - prodobi vse moje applications
+    // - ce je props userId (pomeni, da je prikazan v chatu z urserjev) prikazi:
+    //      - vse MOJE listinge, kjer listing.applications vsebujejo userID
+    //      - vse listinge MOJIH prijav, kjer je application.listing.author_id === userID
+    // - sicer:
+    //      - all messages
+    //      - vse MOJE listinge, kjer datum konca se ni bil
+    //      - vse MOJE applications, kjer application.listing.datum se ni bil in application.status ni rejected
+    //
+    //      - ko slidas na item, ki je listing, vrni Id-je userjev vseh prijav
+    //      - ko slidas na item, ki je application, vrni application.listing.author
+    //
+    //
+    //
+
     data.forEach(function (arrayItem) {
         arrayItem.inChat = props.inChat
     })
