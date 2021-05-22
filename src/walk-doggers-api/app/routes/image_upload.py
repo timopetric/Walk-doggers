@@ -31,6 +31,8 @@ async def upload_image(image_data: UploadFile = File(...)):
     )
 
     content = await image_data.read()
+
+    # print(content)
     size = len(content)
     if size > 2e6:
         return {
@@ -38,11 +40,19 @@ async def upload_image(image_data: UploadFile = File(...)):
         }
 
     letters = string.ascii_lowercase
-    rnd_name = ''.join(random.choice(letters) for i in range(15))
+    upload_filename_random = ''.join(random.choice(letters) for i in range(15))
+    upload_filename_ending = ".jpg" if image_data.content_type == "image/jpg" else \
+        ".jpeg" if image_data.content_type == "image/jpeg" else \
+        ".png" if image_data.content_type == "image/png" else \
+        ".gif" if image_data.content_type == "image/gif" else \
+        ".bmp" if image_data.content_type == "image/bmp" else \
+        ".gif" if image_data.content_type == "image/gif" else ""
+    upload_filename = f"{upload_filename_random}{upload_filename_ending}"
+    print(f"saving image as: {upload_filename}")
 
     try:
-        response = s3.Object('walk-doggers', rnd_name).put(ACL='public-read', Body=io.BytesIO(content))
-        image_uri = AWS_URL_PREFIX + rnd_name
+        response = s3.Object('walk-doggers', upload_filename).put(ACL='public-read', Body=io.BytesIO(content))
+        image_uri = AWS_URL_PREFIX + upload_filename
 
         return {
             "message": f"Uploaded successfully",
