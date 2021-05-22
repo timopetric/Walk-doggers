@@ -20,6 +20,7 @@ from app.auth import AuthHandler
 # Create all tables in database.
 # Comment this out if you using migrations.
 # models.Base.metadata.create_all(bind=engine)
+from app.routes.ratings import RatingsRouter
 
 DEBUG = os.environ.get("DEBUG", False)
 app = FastAPI(title="Walk doggers API", debug=DEBUG)
@@ -48,6 +49,7 @@ app.include_router(BlogRouter, tags=["Blog"], prefix="/blog")
 app.include_router(ListingsRouter, tags=["Listings"], prefix="/listings")
 app.include_router(ImageRouter, tags=["ImageUpload"], prefix="/image_upload")
 app.include_router(ApplicationsRouter, tags=["Applications"], prefix="/applications")
+app.include_router(RatingsRouter, tags=["Ratings"], prefix="/ratings")
 
 
 auth_handler = AuthHandler()

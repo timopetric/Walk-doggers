@@ -9,7 +9,7 @@ from sqlalchemy import update, and_
 
 from app.postgres import Base
 from app import schemas
-from app.postgres.models import Post, User, Dog, BlogPost, Listing, Application
+from app.postgres.models import Post, User, Dog, BlogPost, Listing, Application, Rating
 
 # Define custom types for SQLAlchemy model, and Pydantic schemas
 ModelType = TypeVar("ModelType", bound=Base)
@@ -147,9 +147,15 @@ class ApplicationActions(BaseActions[Application, schemas.ApplicationCreate, sch
         db.commit()
 
 
+class RatingActions(BaseActions[Rating, schemas.RatingCreate, schemas.RatingCreate]):
+    """Post actions with basic CRUD operations"""
+    pass
+
+
 post = PostActions(Post)
 user = UserActions(User)
 dog = DogActions(Dog)
 blog_post = BlogPostActions(BlogPost)
 listing = ListingActions(Listing)
 application = ApplicationActions(Application)
+rating = RatingActions(Rating)
