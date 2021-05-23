@@ -1,16 +1,18 @@
 import React from "react";
 import {GRAY_2, ORANGE, GREEN, RED, PINK} from '../constants/Colors';
 import ButtonCustom from "../components/ButtonCustom";
+import {useNavigation} from "@react-navigation/core";
 
 
-function onPressLeaveFeedback (props: any) {
-  
+function onPressLeaveFeedback (props: any, navigation: any) {
+  navigation.navigate('LeaveFeedbackScreen');
 }
 
 export default function leaveFeedback(props: any) {
+  const navigation = useNavigation();
   const { listing, style, application } = props;
-  var text;
-  var color;
+  let text;
+  let color;
   const date_now = new Date();
 
   if (listing) {
@@ -32,7 +34,7 @@ export default function leaveFeedback(props: any) {
   }
 
   if (text) {
-    return <ButtonCustom text={text} color={color} style={{ flex: 1 }} onPress={() => onPressLeaveFeedback(props)} />;
+    return <ButtonCustom text={text} color={color} style={{ flex: 1 }} onPress={() => onPressLeaveFeedback(props, navigation)} />;
   }
   return null;
 }

@@ -5,6 +5,7 @@ import {useIsFocused} from "@react-navigation/native";
 import {MyListings} from "./MyListings"
 import {Applied} from "./Applied"
 import {GRAY_0, GRAY_1, PRIMARY, PRIMARY_DARKER} from "../../constants/Colors";
+import LeaveFeedbackScreen from "./LeaveFeedbackScreen";
 
 const Tab = createMaterialTopTabNavigator();
 

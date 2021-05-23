@@ -37,6 +37,7 @@ export type BlogParamList = {
 export type ListingsParamList = {
   ListingsScreen: undefined;
   NewListingScreen: undefined;
+  LeaveFeedbackScreen: undefined;
 };
 
 export type SettingsParamList = {
