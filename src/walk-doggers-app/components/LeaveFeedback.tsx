@@ -26,7 +26,7 @@ export default function leaveFeedback(props: any) {
   } else {
     const date_from = new Date(application.listing.date_from);
     const date_to = new Date(application.listing.date_to);
-    if (true/*application.status == "confirmed" && date_now > date_to*/) {
+    if (application.status == "confirmed" && date_now > date_to) {
       text = "Leave feedback";
       color = "pink";
     }

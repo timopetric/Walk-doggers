@@ -58,7 +58,7 @@ export default function LeaveFeedbackScreen({navigation, route}: any){
 
             </View>
             <Rating
-                style={styles.rating}
+                style={{flex: 2}}
                 type='custom'
                 ratingCount={5}
                 startingValue={0}
@@ -89,9 +89,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flex: 2,
         paddingHorizontal: 20,
-    },
-    rating: {
-        flex: 2,
     },
     image: {
         height: 50,
