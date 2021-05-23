@@ -30,7 +30,6 @@ interface IButtonProps {
 }
 
 class ButtonCustom extends React.Component<IButtonProps> {
-    
     render() {
         const color = this.props.color    
         return (
@@ -40,10 +39,6 @@ class ButtonCustom extends React.Component<IButtonProps> {
                     </View>
             </TouchableOpacity>
         )
-            
-        
-
-
     }
 }
 
