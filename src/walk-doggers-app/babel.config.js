@@ -4,7 +4,7 @@ module.exports = function (api) {
         presets: ['babel-preset-expo'],
         "plugins": [["inline-dotenv", {
             path: '.env' // See motdotla/dotenv for more options
-        }]]
+        }], "istanbul"]
     };
 };
 ///
