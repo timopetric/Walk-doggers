@@ -16,6 +16,7 @@ import RegisterScreen from '../screens/RegisterScreen';
 import { RootStackParamList } from '../types';
 import BottomTabNavigator from './BottomTabNavigator';
 import LinkingConfiguration from './LinkingConfiguration';
+import LeaveFeedbackScreen from "../screens/Listings/LeaveFeedbackScreen";
 
 // export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
 //   return (
@@ -39,6 +40,7 @@ export default function RootNavigator() {
       <Stack.Screen name="Register" component={RegisterScreen} />   */}
       <Stack.Screen name="Root" component={BottomTabNavigator} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+
     </Stack.Navigator>
   );
 }
