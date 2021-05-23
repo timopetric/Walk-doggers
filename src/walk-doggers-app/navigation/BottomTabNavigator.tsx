@@ -122,7 +122,7 @@ function ExploreNavigator() {
                         headerRight: () => (
                             <Button
                                 onPress={() => store.dispatch(toggleFilter())}
-                                icon={<Ionicons size={23} style={{marginBottom: -3}} name="filter" color={PRIMARY}/>}
+                                icon={<Ionicons size={23} style={{marginBottom: -3, marginRight: 6}} name="filter" color={PRIMARY}/>}
                                 type="clear"
                             />
                         ),
@@ -132,7 +132,8 @@ function ExploreNavigator() {
                     name="ListingScreen"
                     component={ListingScreen}
                     options={{
-                        headerTitle: ''
+                        headerTitle: 'Listing details',
+                        ...headerWhiteBackground,
                     }}
                 />
             </ExploreStack.Navigator>
@@ -144,18 +145,30 @@ const InboxStack = createStackNavigator<InboxParamList>();
 const headerPrimaryBackground =
     {
         headerStyle: {
-            backgroundColor: PRIMARY
+            backgroundColor: PRIMARY,
+            shadowOpacity: 0.00,
+            borderBottomWidth: 0
         }
         ,
         headerTitleStyle: {
             color: "white"
-        }
+        },
+        headerTintColor: "white",
+
     };
 
 const headerWhiteBackground =
     {
         headerStyle: {
-            backgroundColor: 'white'
+            backgroundColor: 'white',
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 3,
+            },
+            shadowOpacity: 0.08,
+            shadowRadius: 10,
+            borderBottomWidth: 0
         }
         ,
         headerTitleStyle: {
@@ -163,6 +176,22 @@ const headerWhiteBackground =
         },
         headerTintColor: PRIMARY,
     };
+
+const headerWhiteBackgroundNoShaddow =
+    {
+        headerStyle: {
+            backgroundColor: 'white',
+            shadowOpacity: 0,
+            borderBottomWidth: 0,
+            elevation: 0
+        }
+        ,
+        headerTitleStyle: {
+            color: PRIMARY
+        },
+        headerTintColor: PRIMARY,
+    };
+
 
 function InboxNavigator() {
     return (
@@ -199,7 +228,8 @@ function BlogNavigator({navigation}: any) {
                     headerRight: () => (
                         <Button
                             onPress={() => navigation.navigate('NewBlogPostScreen')}
-                            icon={<Entypo size={26} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
+                            icon={<Ionicons size={30} style={{marginBottom: 0, marginRight: 4}} name="add"
+                                            color={PRIMARY}/>}
                             type="clear"
                         />
                     ),
@@ -238,11 +268,13 @@ function ListingsNavigator({navigation}: any) {
                 options={{
                     headerTitle: 'Listings',
                     headerTitleAlign: 'center',
-                    ...headerWhiteBackground,
+                    ...headerWhiteBackgroundNoShaddow,
+
                     headerRight: () => (
                         <Button
                             onPress={() => navigation.navigate('NewListingScreen')}
-                            icon={<Entypo size={30} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
+                            icon={<Ionicons size={30} style={{marginBottom: 0, marginRight: 4}} name="add"
+                                            color={PRIMARY}/>}
                             type="clear"
                         />
                     ),
@@ -297,7 +329,8 @@ function SettingsNavigator({navigation}: any) {
                     headerRight: () => (
                         <Button
                             onPress={() => navigation.navigate('NewDogScreen')}
-                            icon={<Entypo size={30} style={{marginBottom: -3}} name="plus" color={PRIMARY}/>}
+                            icon={<Ionicons size={30} style={{marginBottom: 0, marginRight: 4}} name="add"
+                                            color={PRIMARY}/>}
                             type="clear"
                         />
                     ),
