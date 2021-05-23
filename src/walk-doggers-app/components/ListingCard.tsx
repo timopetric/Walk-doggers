@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity,Platform} from "react-native";
+import {Image, StyleSheet, View, Text, Dimensions, TouchableOpacity, Platform} from "react-native";
 import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK} from '../constants/Colors';
 import StatusListing from "../components/StatusListing"
 import LeaveFeedback from "../components/LeaveFeedback"
@@ -21,6 +21,7 @@ interface IListingCardProps {
     messageOwner?: boolean;
     listing: any;
     application: any;
+    navigation: any;
 }
 
 interface IListingCardState {
@@ -31,62 +32,66 @@ const imgWidth = dimensions.width;
 
 class ListingCard extends React.Component<IListingCardProps, IListingCardState> {
 
-    
+
     render() {
         return (
-          <View style={styles.card}>
-            <Image
-              style={styles.img}
-              source={{
-                uri: this.props.urlImage,
-              }}
-            />
-            <View style={styles.listingCard}>
-              <View style={styles.row}>
-                <StatusListing
-                  listing={this.props.listing}
-                  style={styles.status}
-                  application={this.props.application}
-                ></StatusListing>
-                <Text style={styles.location}>{this.props.location}</Text>
-              </View>
-              <Text style={styles.listingTitle}>{this.props.title}</Text>
-              <Text style={styles.description}>{this.props.descr}</Text>
-              <View style={styles.row}>
-                <View style={styles.dateRow}>
-                  <Text style={styles.dateDay}>{this.props.dateDay}</Text>
-                  <Text style={styles.date}>{this.props.date}</Text>
-                </View>
-                <Text style={styles.time}>{this.props.time}</Text>
-              </View>
-              {this.props.numOfApplied != null && (
-                <TouchableOpacity>
-                  <View style={styles.button}>
-                    <View style={styles.iconNum}>
-                      <Text style={styles.iconText}>
-                        {this.props.numOfApplied}
-                      </Text>
-                    </View>
-                    <Text style={styles.btnText}>Applied Users</Text>
-                    <View style={styles.ghost}></View>
-                  </View>
-                </TouchableOpacity>
-              )}
-
-              {this.props.application && (
-                <ButtonCustom
-                  text={"Message Owner"}
-                  color={"green"}
-                  style={{ flex: 1 }}
+            <View style={styles.card}>
+                <Image
+                    style={styles.img}
+                    source={{
+                        uri: this.props.urlImage,
+                    }}
                 />
-              )}
+                <View style={styles.listingCard}>
+                    <View style={styles.row}>
+                        <StatusListing
+                            listing={this.props.listing}
+                            style={styles.status}
+                            application={this.props.application}
+                        ></StatusListing>
+                        <Text style={styles.location}>{this.props.location}</Text>
+                    </View>
+                    <Text style={styles.listingTitle}>{this.props.title}</Text>
+                    <Text style={styles.description}>{this.props.descr}</Text>
+                    <View style={styles.row}>
+                        <View style={styles.dateRow}>
+                            <Text style={styles.dateDay}>{this.props.dateDay}</Text>
+                            <Text style={styles.date}>{this.props.date}</Text>
+                        </View>
+                        <Text style={styles.time}>{this.props.time}</Text>
+                    </View>
+                    {this.props.numOfApplied != null && (
+                        <TouchableOpacity>
+                            <View style={styles.button}>
+                                <View style={styles.iconNum}>
+                                    <Text style={styles.iconText}>
+                                        {this.props.numOfApplied}
+                                    </Text>
+                                </View>
+                                <Text style={styles.btnText}>Applied Users</Text>
+                                <View style={styles.ghost}></View>
+                            </View>
+                        </TouchableOpacity>
+                    )}
 
-              <LeaveFeedback
-                listing={this.props.listing}
-                application={this.props.application}
-              />
+                    {this.props.application && (
+                        <ButtonCustom
+                            text={"Message Owner"}
+                            color={"green"}
+                            style={{flex: 1}}
+                            onPress={() => this.props.navigation.navigate('Inbox', {
+                                screen: 'MessageScreen',
+                                params: this.props?.application?.listing?.author
+                            })}
+                        />
+                    )}
+
+                    <LeaveFeedback
+                        listing={this.props.listing}
+                        application={this.props.application}
+                    />
+                </View>
             </View>
-          </View>
         );
     }
 }
@@ -103,10 +108,10 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 12
     },
     status: {
-        flex:1, 
-        fontFamily: "red-hat-text-500", 
-        fontSize: 12, 
-        fontStyle: "normal", 
+        flex: 1,
+        fontFamily: "red-hat-text-500",
+        fontSize: 12,
+        fontStyle: "normal",
         color: GRAY_2
     },
     location: {
@@ -127,8 +132,8 @@ const styles = StyleSheet.create({
     },
     row: {
         flexDirection: "row",
-        flex:1,
-        justifyContent:"space-around",
+        flex: 1,
+        justifyContent: "space-around",
         alignItems: "center"
     },
     listingCard: {
@@ -176,7 +181,7 @@ const styles = StyleSheet.create({
     },
     iconText: {
         fontFamily: "roboto",
-        padding:3,
+        padding: 3,
         paddingLeft: 10,
         paddingRight: 10,
         color: PINKISH_WHITE,
