@@ -1,18 +1,44 @@
-import React from "react";
-import {ScrollView, View, Text, Image, StyleSheet, Platform} from "react-native";
+import React, {useContext} from "react";
+import {ScrollView, View, Text, Image, StyleSheet, Platform, Dimensions} from "react-native";
 import MessageThread from "../../components/MessageThread";
 import {GRAY_0, GRAY_2, LIGHT_BG, LIGHT_BG2, ORANGE, PINKISH_WHITE, PRIMARY, YELLOW} from "../../constants/Colors";
 import ButtonCustom from "../../components/ButtonCustom";
 import {Rating} from "react-native-elements";
+import {BASE_API_URL} from "../../localConstants";
+import AuthContext from "../../navigation/AuthContext";
 
+const scrWidth = Dimensions.get('window').width;
+
+let ratingValue = -1;
 
 export default function LeaveFeedbackScreen({navigation, route}: any){
     const listing = route.params.listing;
     const author = listing.author;
-    console.log(author);
+    const {getJwt, getRoles} = useContext(AuthContext);
+    //console.log(author);
+
+    console.log(listing);
 
     const onPressLeaveFeedback = () => {
-        alert('TODO submit feedback')
+        if (ratingValue > -1){
+            let reqBody = {"listing_id": listing.id, "rating": ratingValue}
+            const jwt = getJwt();
+            fetch(BASE_API_URL + '/ratings', {
+                method: "POST",
+                headers: {
+                    "accept": "application/json",
+                    'Authorization': 'Bearer ' + jwt
+                },
+                body: JSON.stringify(reqBody)
+            }).then(async response => {
+                if (response.ok) {
+                    navigation.goBack();
+                } else {
+                }
+            }).catch(e => {
+                console.log(e);
+            })
+        }
     };
 
     return (
@@ -33,15 +59,16 @@ export default function LeaveFeedbackScreen({navigation, route}: any){
                 style={styles.rating}
                 type='custom'
                 ratingCount={5}
-                startingValue={4}
+                startingValue={0}
                 imageSize={40}
-                readonly
+                readonly={false}
                 ratingBackgroundColor={GRAY_2}
                 ratingColor={YELLOW}
                 tintColor={LIGHT_BG2}
+                onFinishRating={(value) => ratingValue = value}
             />
 
-            <View style={{flexDirection: "row", flex: 1}}>
+            <View style={{flexDirection: "row", flex: 1, width: scrWidth * 0.7, }}>
                 <ButtonCustom text={'Submit feedback'} color={'purple'} style={{ flex: 1, marginTop: 50, }} onPress={onPressLeaveFeedback} />;
             </View>
         </View>
