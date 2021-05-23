@@ -8,7 +8,7 @@ import AuthContext from "../navigation/AuthContext";
 export const SLIDER_WIDTH = Dimensions.get('window').width
 export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.9)
 
-const CarouselListingItem = ({item, index, getJwt, refresh}) => {
+const CarouselListingItem = ({item, index, getJwt, refresh, user}) => {
     // console.log(item);
     const jwt = getJwt();
     // console.log(jwt)
@@ -64,6 +64,40 @@ const CarouselListingItem = ({item, index, getJwt, refresh}) => {
         })
     }
 
+    const acceptApplication = () => {
+        const application = item.applications.find(app => app?.applied_user?.id === user.id)
+        let reqBody = {"status": "confirmed"}
+        const jwt = getJwt();
+
+        fetch(`${BASE_API_URL}/applications/${application.id}`, {
+            method: "PUT",
+            headers: {
+                "accept": "application/json",
+                "Content-Type": "application/json",
+                'Authorization': 'Bearer ' + jwt
+            },
+            body: JSON.stringify(reqBody)
+        }).then(async response => {
+            let json = await response.json();
+            console.log(json)
+            if (response.ok) {
+                alert("Walk is arranged");
+                refresh();
+            }
+        }).catch(e => {
+            console.log(e);
+        })
+    }
+
+    const showAccept = () => {
+        if (item?.applications) {
+            const application = item.applications.find(app => app?.applied_user?.id === user.id)
+            return (application.status === 'normal')
+        }
+        return false;
+    }
+
+
     return (
         <View style={styles.container} key={index}>
 
@@ -89,13 +123,13 @@ const CarouselListingItem = ({item, index, getJwt, refresh}) => {
                         <Text style={styles.date}>{item.time}</Text>
                     </View>
                     {/* prijavljen oglas, ki je potrjen*/}
-                    {item.application && item.accText && <View style={[styles.accView, {backgroundColor: GREEN}]}>
-                        <Text style={styles.accText}>ACCEPTED</Text>
+                    {item.application && item.accText && <View style={[styles.accView, {backgroundColor: "white"}]}>
+                        <Text style={[styles.accText, {color: GREEN}]}>ACCEPTED</Text>
                     </View>}
 
                     {/* prijavljen oglas, ki ni potrjen*/}
-                    {item.application && item.reqText && <View style={[styles.accView, {backgroundColor: ORANGE}]}>
-                        <Text style={styles.accText}>REQUESTED</Text>
+                    {item.application && item.reqText && <View style={[styles.accView, {backgroundColor: "white"}]}>
+                        <Text style={[styles.accText, {color: ORANGE}]}>APPLIED</Text>
                     </View>}
 
                     {item.application && item.reqText && <View style={[styles.btnReq, {backgroundColor: RED}]}>
@@ -112,13 +146,13 @@ const CarouselListingItem = ({item, index, getJwt, refresh}) => {
                     </View>}
 
                     {/* objavljen oglas, ki še ni potrjen*/}
-                    {item.inChat && !item.application && item.accBtn &&
+                    {item.inChat && !item.application && item.accBtn && showAccept() &&
                     <View style={[styles.btnReq, {backgroundColor: GREEN}]}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={acceptApplication}>
                             <Text style={styles.btnText}>Accept</Text>
                         </TouchableOpacity>
                     </View>}
-                    {item.inChat && !item.application && item.accBtn &&
+                    {item.inChat && !item.application && item.accBtn && showAccept() &&
                     <View style={[styles.accView, {backgroundColor: "white"}]}>
                         <Text style={[styles.accText, {color: ORANGE}]}>REQUESTED</Text>
                     </View>}
@@ -219,8 +253,8 @@ const styles = StyleSheet.create({
         // fontFamily: "roboto",
         fontWeight: "600",
         color: "white",
-        fontSize: 10,
-        padding: 5,
+        fontSize: 11,
+        padding: 4,
     },
     allMessages: {
         height: 55,

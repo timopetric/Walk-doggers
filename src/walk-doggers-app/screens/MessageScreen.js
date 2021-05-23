@@ -13,6 +13,7 @@ import {BASE_API_URL} from "../localConstants";
 
 
 export default function ChatScreen(props: any) {
+    const {route} = props;
     const [messages, setMessages] = useState([]);
     const navigation = useNavigation()
     // const [conversation, setConversation] = useState(props.route.params)
@@ -23,13 +24,17 @@ export default function ChatScreen(props: any) {
     const [lstName, setLstName] = useState("")
 
     useEffect(() => {
-        setName()
-        getConversationMessages()
-        const interval = setInterval(() => {
+        console.log("params")
+        console.log(route.params)
+        if (route?.params) {
+            setName()
             getConversationMessages()
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
+            const interval = setInterval(() => {
+                getConversationMessages()
+            }, 1000);
+            return () => clearInterval(interval);
+        }
+    }, [route.params]);
 
     const setName = () => {
         setImageUrl(user?.image_url)

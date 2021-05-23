@@ -154,7 +154,6 @@ const CarouselCards = (props) => {
             }
         }
         setApplicationsFiltered(applicationsFormatted);
-        
 
 
     }, [applications])
@@ -177,7 +176,8 @@ const CarouselCards = (props) => {
                 time: hours,
                 imgUrl: item.dog.photo,
                 inChat: props.inChat,
-                user_ids: ids
+                user_ids: ids,
+                applications: item?.applications
 
             }
 
@@ -185,12 +185,12 @@ const CarouselCards = (props) => {
                 obj.accBtn = true
             }
 
-            if(user == undefined) {
+            if (user == undefined) {
                 listingsFormatted.push(obj)
             } else if (item.applications.filter(application => application.applied_user.id == user.id).length > 0) {
                 listingsFormatted.push(obj)
             }
-            
+
         }
         setListingFiltered(listingsFormatted)
 
@@ -240,7 +240,7 @@ const CarouselCards = (props) => {
                 ref={isCarousel}
                 data={data}
                 renderItem={({item}) => <CarouselListingItem item={item} getJwt={getJwt}
-                                                             refresh={fetchListingsApplications}/>} // getJwt
+                                                             refresh={fetchListingsApplications} user={user}/>} // getJwt
                 containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}
