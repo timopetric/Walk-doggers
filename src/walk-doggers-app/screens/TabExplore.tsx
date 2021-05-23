@@ -15,6 +15,8 @@ import {GRAY_2, PRIMARY, PINKISH_WHITE, PRIMARY_DARK, RED, GREEN} from '../const
 import {format} from "date-fns";
 import {useNavigation} from "@react-navigation/native";
 import {BASE_API_URL} from "../localConstants";
+import {useIsFocused} from "@react-navigation/native";
+
 
 const imageUrl = 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*';
 const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod empor incididunt ut labore et dolore magna aliqua.'
@@ -231,6 +233,8 @@ export default function TabExplore({navigation}: any) {
     const [selectedIndexes, setSelectedIndexes] = useState(new Set([0, 1, 2, 3, 4]));
     const [listings, setListings] = useState<ListingsArray | null>(null)
     const [isLoading, setIsLoading] = useState<Boolean>(true)
+    const isFocused = useIsFocused();
+
 
     const {getJwt} = useContext(AuthContext)
     useEffect(() => {
@@ -275,7 +279,7 @@ export default function TabExplore({navigation}: any) {
         }
 
         getData();
-    }, [location, distance, selectedIndexes]);
+    }, [location, distance, selectedIndexes, isFocused]);
 
     let text = "Waiting..";
     if (errorMsg) {

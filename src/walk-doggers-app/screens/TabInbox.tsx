@@ -158,7 +158,7 @@ export default function TabInbox({navigation}: any) {
                             return <MessageThread
                                 name={convo?.user?.first_name + " " + convo?.user?.last_name || "error"}
                                 lastMessage={convo.last_message_text}
-                                key={convo?.user?.id || "error"}
+                                key={convo?.user?.id}
                                 imageUrl={convo.user.image_url}
                                 onPress={() => navigation.navigate('MessageScreen', convo.user)}
                             />

@@ -72,10 +72,6 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                   </View>
                 </TouchableOpacity>
               )}
-              <LeaveFeedback
-                listing={this.props.listing}
-                application={this.props.application}
-              />
 
               {this.props.application && (
                 <ButtonCustom
@@ -84,6 +80,11 @@ class ListingCard extends React.Component<IListingCardProps, IListingCardState> 
                   style={{ flex: 1 }}
                 />
               )}
+
+              <LeaveFeedback
+                listing={this.props.listing}
+                application={this.props.application}
+              />
             </View>
           </View>
         );

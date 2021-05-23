@@ -31,7 +31,7 @@ export default function statusListing (props: any) {
             color = GREEN
         } else if(listing.confirmed_application != null && date_now > date_to) {
             text = "COMPLETED"
-            color = ORANGE
+            color = GRAY_2
         } else {
             text = "EXPIRED"
             color = RED

@@ -13,6 +13,7 @@ interface IMessageThreadProps {
     lastMessage?: string;
     imageUrl?: string;
     onPress?: any;
+    requested: any;
 }
 
 interface IMessageThreadState {
@@ -27,7 +28,7 @@ class MessageThread extends React.Component<IMessageThreadProps, IMessageThreadS
                     <View style={styles.textContainer}>
                         <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                             <Text style={styles.name}>{this.props.name}</Text>
-                            <Text style={styles.status}>Requested</Text>
+                            {this.props.requested && <Text style={styles.status}>Requested</Text>}
                         </View>
                         <Text style={styles.lastMessage} numberOfLines={1}
                               ellipsizeMode='tail'>{this.props.lastMessage}</Text>

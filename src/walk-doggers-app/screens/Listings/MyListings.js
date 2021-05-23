@@ -73,7 +73,7 @@ export function MyListings(props) {
         urlImage={item.dog.photo}
         dateDay={daysOfWeek[date_from.getDay()]}
         time={hours}
-        numOfApplied={item.applications.length}
+        numOfApplied={item.applications.filter((application) => application.status != "soft").length}
         listing={item}
       />
     );
