@@ -296,7 +296,7 @@ export default function TabExplore({navigation}: any) {
             </Provider>
             {isLoading ?
                 <View style={[styles.container, styles.horizontal]}>
-                    <ActivityIndicator size="large" color={PRIMARY}/>
+                    <ActivityIndicator  color={PRIMARY}/>
                 </View>
                 :
                 <FlatList

@@ -123,7 +123,7 @@ const CarouselCards = (props) => {
 
     useEffect(() => {
         const date_now = new Date()
-        const notRejected = applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected"))
+        const notRejected = Array.isArray(applications) ? applications.filter(item => (date_now < new Date(item.listing.date_to.toString()) && item.status !== "rejected")) : []
         var applicationsFormatted = []
         for (const item of notRejected) {
             const date_from = new Date(item.listing.date_from.toString());
@@ -160,7 +160,7 @@ const CarouselCards = (props) => {
 
     useEffect(() => {
         const date_now = new Date()
-        const list = listings.filter(item => (date_now < new Date(item.date_to.toString())))
+        const list = Array.isArray(listings) ? listings.filter(item => (date_now < new Date(item.date_to.toString()))) : []
 
         var listingsFormatted = []
         for (const item of list) {
@@ -246,7 +246,8 @@ const CarouselCards = (props) => {
                 ref={isCarousel}
                 data={data}
                 renderItem={({item}) => <CarouselListingItem item={item} getJwt={getJwt}
-                                                             refresh={fetchListingsApplications} user={user}/>} // getJwt
+                                                             refresh={fetchListingsApplications}
+                                                             user={user}/>} // getJwt
                 containerStyle={{backgroundColor: 'rgba(0, 0, 0, 0.75)'}}
                 sliderWidth={windowWidth}
                 itemWidth={windowWidth - 40}

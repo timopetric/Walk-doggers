@@ -28,7 +28,7 @@ export const PINKISH_WHITE = '#ECE8FF'
 export const LIGHT_BG = '#fff';
 export const GRAY_PURPLE_00 = GRAY_00;
 export const GRAY_PURPLE_1 = GRAY_1;
-// export const LIGHT_BG = '#f6f6f8';
+export const LIGHT_BG2 = '#f6f6f8';
 // export const GRAY_PURPLE_00 = '#e6e4ef';
 // export const GRAY_PURPLE_1 = '#b9b1d2';
 

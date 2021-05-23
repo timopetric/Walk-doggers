@@ -8,6 +8,7 @@ import AuthContext from "../../navigation/AuthContext";
 import {useEffect, useState, useContext} from "react";
 import {format} from "date-fns";
 import {BASE_API_URL} from "../../localConstants";
+import {LIGHT_BG2} from "../../constants/Colors";
 
 
 export function Applied(props) {
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: LIGHT_BG2
     },
     title: {
         fontSize: 20,

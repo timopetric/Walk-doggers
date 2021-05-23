@@ -1,5 +1,5 @@
 import {useContext, useEffect, useState} from 'react';
-import {Alert, StyleSheet} from 'react-native';
+import {ActivityIndicator, Alert, RefreshControl, StyleSheet} from 'react-native';
 import * as React from 'react';
 import MessageThread from '../components/MessageThread'
 import {Text, View} from 'react-native';
@@ -8,6 +8,8 @@ import CarouselCards from '../components/CarouselCards'
 import AuthContext from '../navigation/AuthContext';
 import {useIsFocused} from "@react-navigation/native";
 import {BASE_API_URL} from "../localConstants";
+import {PRIMARY} from "../constants/Colors";
+import CarouselListings from "../components/CarouselCards";
 
 type ConversationsType = {
     user: {
@@ -100,6 +102,7 @@ export default function TabInbox({navigation}: any) {
     const [shownUsersIds, setShownUsersIds] = useState([]);
     const [filter, setFilter] = useState(false);
     const [refresh, setRefresh] = useState(true)
+    const [refreshing, setRefreshing] = useState(false)
 
 
     const onPress = (convo: any) => {
@@ -121,6 +124,19 @@ export default function TabInbox({navigation}: any) {
         }
     }, [isFocused])
 
+    const onRefresh = () => {
+        setRefreshing(true);
+        const getUserConversations = async () => {
+            const conversations = await getConversations(getJwt);
+            console.log("conversations :", conversations);
+            if (!conversations.length || conversations == undefined)
+                setError("No Conversations");
+            else if (conversations.length) setConvos(conversations);
+            else setError("Error upsi...");
+        };
+        getUserConversations().then(() => setRefreshing(false));
+    }
+
 
     const filterUsers = (userIds, filter) => {
         setFilter(filter);
@@ -129,9 +145,14 @@ export default function TabInbox({navigation}: any) {
 
     return (
         <View style={styles.containter}>
-            <CarouselCards inChat={false} filterUsers={filterUsers} refresh={refresh}/>
-            <ScrollView>
-                <View style={{height: 10}}/>
+            {/*<CarouselCards inChat={false} filterUsers={filterUsers} refresh={refresh}/>*/}
+            <ScrollView refreshControl={
+                <RefreshControl
+                    refreshing={refreshing}
+                    onRefresh={onRefresh}
+                />
+            }>
+                <View style={{height: 120}}/>
                 {convos.length ? convos.map(convo => {
                         if (!filter || shownUsersIds.includes(convo?.user?.id)) {
                             return <MessageThread
@@ -143,8 +164,17 @@ export default function TabInbox({navigation}: any) {
                             />
                         }
                     }
-                ) : <Text>ERROR</Text>}
+                ) : <View style={styles.activity}><ActivityIndicator/></View>}
             </ScrollView>
+
+            <View style={{
+                position: "absolute", shadowOpacity: 0.0, shadowRadius: 10, shadowColor: PRIMARY, shadowOffset: {
+                    width: 2,
+                    height: 3,
+                },
+            }}>
+                <CarouselCards inChat={false} filterUsers={filterUsers} refresh={refresh}/>
+            </View>
         </View>
     );
 }
@@ -153,5 +183,11 @@ const styles = StyleSheet.create({
     containter: {
         backgroundColor: "white",
         flex: 1
+    },
+    activity: {
+        flex: 1,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: 'center'
     }
 });

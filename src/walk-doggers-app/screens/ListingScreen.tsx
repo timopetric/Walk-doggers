@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 20,
         marginTop: -25,
         width: 160,
+        zIndex: 10,
         shadowOpacity: 0.25,
         shadowRadius: 5,
         marginBottom: 5,
@@ -152,50 +153,55 @@ const ListingScreen = (props) => {
 
     console.log(day_from, listing?.date_from);
     return (
-        <ScrollView style={{backgroundColor: "white"}}>
-            <Image
-                style={styles.image}
-                source={{uri: listing?.dog?.photo}}
-                resizeMode="cover"
-            />
-            <View style={[{flex: 1, alignItems: "flex-end", right: 25}]}>
-                <TouchableOpacity
-                    style={styles.appButtonContainer}
-                    activeOpacity={0.9}
-                    onPress={apply}
-                >
-                    <Text style={styles.appButtonText}>I’m Interested</Text>
-                </TouchableOpacity>
+        <ScrollView style={{backgroundColor: "white"}}
+                    contentContainerStyle={{alignItems: 'center'}}>
+            <View style={{width: 1200, maxWidth: "100%"}}>
+
+                <Image
+                    style={styles.image}
+                    source={{uri: listing?.dog?.photo}}
+                    resizeMode="cover"
+                />
+                <View style={[{alignItems: "flex-end", right: 25}]}>
+                    <TouchableOpacity
+                        style={styles.appButtonContainer}
+                        activeOpacity={0.9}
+                        onPress={apply}
+                    >
+                        <Text style={styles.appButtonText}>I’m Interested</Text>
+                    </TouchableOpacity>
+                </View>
+
+                <View style={styles.container}>
+                    <Text style={styles.listingTitle}>{listing?.title}</Text>
+                    <Text style={styles.description}>{listing?.description}</Text>
+                    <Text style={styles.subtitle}>When</Text>
+                    <Text style={styles.description}>
+                        {day_from} {time_from} - {time_to}
+                    </Text>
+                    <Text style={styles.subtitle}>Where</Text>
+                    <Text style={styles.description}>{listing?.location_text}</Text>
+                    <Text style={styles.subtitle}>About Me</Text>
+
+                    <AboutMeCard
+                        image={listing?.dog?.photo}
+                        name={listing?.dog?.name}
+                        descr={listing?.dog?.description}
+                        isDog={true}
+                        value={0}
+                    />
+
+                    <Text style={styles.subtitle}>About Owner</Text>
+                    <AboutMeCard
+                        image={listing?.author?.image_url}
+                        name={listing?.author?.first_name + " " + listing?.author?.last_name}
+                        descr={listing?.author?.description}
+                        isDog={false}
+                        value={3}
+                    />
+                </View>
             </View>
 
-            <View style={styles.container}>
-                <Text style={styles.listingTitle}>{listing?.title}</Text>
-                <Text style={styles.description}>{listing?.description}</Text>
-                <Text style={styles.subtitle}>When</Text>
-                <Text style={styles.description}>
-                    {day_from} {time_from} - {time_to}
-                </Text>
-                <Text style={styles.subtitle}>Where</Text>
-                <Text style={styles.description}>{listing?.location_text}</Text>
-                <Text style={styles.subtitle}>About Me</Text>
-
-                <AboutMeCard
-                    image={listing?.dog?.photo}
-                    name={listing?.dog?.name}
-                    descr={listing?.dog?.description}
-                    isDog={true}
-                    value={0}
-                />
-
-                <Text style={styles.subtitle}>About Owner</Text>
-                <AboutMeCard
-                    image={listing?.author?.image_url}
-                    name={listing?.author?.first_name + " " + listing?.author?.last_name}
-                    descr={listing?.author?.description}
-                    isDog={false}
-                    value={3}
-                />
-            </View>
         </ScrollView>
     );
 }
