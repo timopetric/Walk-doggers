@@ -18,27 +18,49 @@ describe('Register', () => {
 })
 
 describe('Log in', () => {
-  it('Go on login page', () => {
-    cy.visit("http://localhost:19006/")
-    cy.contains("Sign Up", { timeout: 10000 }).click()
-    cy.contains("FIRST NAME")
-    cy.contains("LAST NAME")
-  })
-  it("Enter login data", () => {
+  // LOGIN USER
+  it("Go on login and enter login data", () => {
     cy.visit("http://localhost:19006/")
     cy.get('input[placeholder="Enter your email address"]').first().click({ force: true }).type('aaa@a.a');
     cy.get('input[placeholder="Enter your password"]').first().click({ force: true }).type('Dobr0$Geslo');
     cy.get('div[data-testid="log"]').click()
-    // cy.get('div[data-testid="log"]').first().click({force: true})
     cy.contains("Dogs for rent nearby")
   })
 })
-  // it("Signing out...", () => {
-  //   cy.contains('Settings').click();
-  //   cy.get('div[data-testid="logoutBtn"]').first().click({force: true})
-  //   cy.contains("Login")
-  // })
 
+describe('Settings - Profile', () => {
+  it('Go on settings page', () => {
+    cy.get('[href="/Root/Settings"]').click()
+    cy.contains("Profile")
+  })
+
+  it('Change user name and description', () => {
+    cy.get(':nth-child(1) > .r-borderBottomColor-uuzew').click()
+    cy.get(':nth-child(2) > .css-textinput-11aywtz').should("have.value", "Anja").type(" Teja")
+    cy.get(':nth-child(3) > .css-textinput-11aywtz').should("have.value", "Novak")
+    cy.get(':nth-child(5) > .css-textinput-11aywtz').type("Prijazna punca")
+    cy.get('[style="margin-bottom: 20px; transition-duration: 0s;"] > .css-view-1dbjc4n').click()
+    cy.contains("Profile")
+  })
+
+  it('Check if user name and description really saved and revert changes', () => {
+    cy.get(':nth-child(1) > .r-borderBottomColor-uuzew').click()
+    cy.get(':nth-child(2) > .css-textinput-11aywtz').should("have.value", "Anja Teja").type("{backspace}{backspace}{backspace}{backspace}{backspace}")
+    cy.get(':nth-child(3) > .css-textinput-11aywtz').should("have.value", "Novak")
+    cy.get(':nth-child(5) > .css-textinput-11aywtz').should("have.value", "Prijazna punca").type("{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}")
+    cy.get('[style="margin-bottom: 20px; transition-duration: 0s;"] > .css-view-1dbjc4n').click()
+    cy.contains("Profile")
+  })
+
+  // it('', () => {
+  //   cy.get(':nth-child(2) > .r-borderBottomColor-uuzew').click()
+  //   cy.get('[style="margin-right: 72px; margin-left: 72px;"] > .css-reset-4rbku5').contains("My Dogs")
+
+  // })
+  // it('Change user name and description', () => {})
+  // it('Change user name and description', () => {})
+
+})
 
 
 /*
