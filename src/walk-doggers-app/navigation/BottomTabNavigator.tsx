@@ -40,6 +40,7 @@ import MessageScreen from '../screens/MessageScreen';
 import BlogPostScreen from "../screens/Blog/BlogPostScreen";
 import NewListingScreen from "../screens/Listings/NewListingScreen";
 import EditDogScreen from "../screens/Settings/EditDogScreen"
+import LeaveFeedbackScreen from "../screens/Listings/LeaveFeedbackScreen";
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -287,6 +288,15 @@ function ListingsNavigator({navigation}: any) {
                     headerTitle: 'New Listing',
                     headerTitleAlign: 'center',
                     ...headerWhiteBackground,
+                }}
+            />
+            <ListingsStack.Screen
+                name="LeaveFeedbackScreen"
+                component={LeaveFeedbackScreen}
+                options={{
+                    headerTitle: 'Leave Feedback',
+                    headerTitleAlign: 'center',
+                    ...headerPrimaryBackground,
                 }}
             />
             <ListingsStack.Screen

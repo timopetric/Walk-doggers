@@ -87,7 +87,7 @@ const ListingScreen = (props) => {
     const {params} = route;
     const {listing} = params;
     const {getJwt} = React.useContext(AuthContext);
-    const navigation = useNavigation()
+    const navigation = useNavigation();
     console.log(listing);
 
     let day_from = "";
