@@ -73,29 +73,25 @@ async function deletePost (blogId: String, getJwt: Function) {
         },
     };
     let response = await fetch(BASE_API_URL + '/blog/' + blogId, reqOptions);
-    return await response.json();
+    return await response;
 
 }
 
 const BlogPostScreen = (props: any) => {
     const {author, content, date, imageUrl, title, modConfirmed, blogId} = props.route.params;
-    const {isAdmin, getJwt} = useContext(AuthContext)
+    const {isAdmin, getJwt, isModerator} = useContext(AuthContext)
     const navigation = useNavigation();
 
-    const onPressAcceptPost = async () => {
-        const response = await moderate(blogId,true, getJwt)
-        console.log(response);
+    const onPressDelete = async () => {
+        const response = await deletePost(blogId, getJwt)
         navigation.goBack()
     };
 
-    const onPressDeletePost = async () => {
-        const response = await moderate(blogId,false, getJwt)
+    const onPressModerate = async (mod: boolean) => {
+        const response = await moderate(blogId,mod, getJwt)
         console.log(response);
         navigation.goBack()
     };
-
-    console.log("isadmin: " + isAdmin())
-
     
     return (
       <ScrollView>
@@ -106,19 +102,19 @@ const BlogPostScreen = (props: any) => {
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.content}>{content}</Text>
         </View>
-        {!modConfirmed && (
+        {!modConfirmed && isModerator() && (
           <View style={styles.moderatorBtn}>
             <ButtonCustom
               text={"Reject"}
               color={"red"}
               style={{ flex: 1, paddingHorizontal: 15 }}
-              onPress={onPressDeletePost}
+              onPress={() => onPressModerate(false)}
             />
             <ButtonCustom
               text={"Accept"}
               color={"green"}
               style={{ flex: 1, paddingHorizontal: 15 }}
-              onPress={onPressAcceptPost}
+              onPress={() => onPressModerate(true)}
             />
           </View>
         )}
@@ -127,7 +123,7 @@ const BlogPostScreen = (props: any) => {
           text={"Remove Blog Post"}
           color={"red"}
           style={{ flex: 1, paddingHorizontal: 15 }}
-          onPress={onPressDeletePost}
+          onPress={onPressDelete}
         />
 }
       </ScrollView>

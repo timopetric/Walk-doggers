@@ -52,6 +52,7 @@ const Card = (props: any) => {
     modConfirmed,
     navigateTo,
     payload,
+    blogId,
     listing_id
   } = props;
   return (
@@ -91,7 +92,7 @@ const Card = (props: any) => {
           </TouchableOpacity>
         </View>
       </View>
-      {isAdmin() && <TouchableOpacity style={styles.delete} onPress={() => deleteListing(getJwt, listing_id)}>
+      {isAdmin() && !blogId && <TouchableOpacity style={styles.delete} onPress={() => deleteListing(getJwt, listing_id)}>
         <Ionicons name="trash-outline" size={50} style={{color: RED}}></Ionicons>
       </TouchableOpacity>}
     </View>
@@ -177,7 +178,7 @@ const styles = StyleSheet.create({
   },
   fstRow: {
     flexDirection: "row",
-    // flex: 1,
+    flex: 1,
     justifyContent: "space-between",
   },
   wait: {
