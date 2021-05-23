@@ -296,7 +296,7 @@ function ListingsNavigator({navigation}: any) {
                 options={{
                     headerTitle: 'Leave Feedback',
                     headerTitleAlign: 'center',
-                    ...headerWhiteBackground,
+                    ...headerPrimaryBackground,
                 }}
             />
             <ListingsStack.Screen

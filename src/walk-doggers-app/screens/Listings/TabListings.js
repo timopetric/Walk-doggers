@@ -9,7 +9,6 @@ import LeaveFeedbackScreen from "./LeaveFeedbackScreen";
 import {createStackNavigator} from "@react-navigation/stack";
 
 const Tab = createMaterialTopTabNavigator();
-const Feedback = createStackNavigator();
 
 export default function TabListings() {
     const isFocused = useIsFocused();

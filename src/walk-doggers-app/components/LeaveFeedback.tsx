@@ -11,7 +11,7 @@ export default function leaveFeedback(props: any) {
   const date_now = new Date();
 
   const onPressLeaveFeedback = () => {
-    navigation.navigate('LeaveFeedbackScreen');
+    navigation.navigate('LeaveFeedbackScreen', {listing: application.listing});
   };
 
   if (listing) {
