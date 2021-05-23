@@ -154,7 +154,7 @@ const ListingScreen = (props) => {
     console.log(day_from, listing?.date_from);
     return (
         <ScrollView style={{backgroundColor: "white"}}
-                    contentContainerStyle={{alignItems: 'center', flex: 1}}>
+                    contentContainerStyle={{alignItems: 'center'}}>
             <View style={{width: 1200, maxWidth: "100%"}}>
 
                 <Image
