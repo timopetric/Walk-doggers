@@ -70,7 +70,6 @@ class BaseActions(Generic[ModelType, CreateSchemaType, UpdateSchemaType]):
         return obj
 
 
-
 class UserActions(BaseActions[User, schemas.UserRegister, schemas.UserRegister]):
     """Users actions with basic CRUD operations"""
 

@@ -42,7 +42,7 @@ def index() -> Any:
     return {"message": "Hello world!"}
 
 
-app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations")
+app.include_router(ConversationRouter, tags=["Conversations"], prefix="/conversations", deprecated=True)
 app.include_router(AuthRouter, tags=["Auth"], prefix="/auth")
 app.include_router(DogsRouter, tags=["Dogs"], prefix="/dogs")
 app.include_router(BlogRouter, tags=["Blog"], prefix="/blog")

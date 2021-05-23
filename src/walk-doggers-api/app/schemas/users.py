@@ -15,7 +15,7 @@ class UserBase(BaseModel):
     first_name: str = Field(..., example="Janez")
     last_name: str = Field(..., example="Novak")
     description: Optional[str] = Field("", example="I love long walks in nature.")
-    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/download.png",
+    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/khrdepznqsxnqhk.jpeg",
                                      example="image_url")
 
 
@@ -23,7 +23,7 @@ class UserUpdate(BaseModel):
     first_name: str = Field(..., example="Janez")
     last_name: str = Field(..., example="Novak")
     description: Optional[str] = Field("", example="I love long walks in nature.")
-    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/download.png")
+    image_url: Optional[str] = Field("https://walk-doggers.s3.eu-central-1.amazonaws.com/khrdepznqsxnqhk.jpeg")
 
 
 class UserInDBBase(UserBase):
