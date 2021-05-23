@@ -102,8 +102,7 @@ class Listing(Base):
     dog = relationship("Dog", back_populates="listings")
     applications = relationship("Application", back_populates='listing',
                                 primaryjoin='Listing.id == Application.listing_id',
-                                foreign_keys=[Application.listing_id],
-                                children=relationship("Child", cascade="all,delete", backref="parent"))
+                                foreign_keys=[Application.listing_id])
     confirmed_application = relationship("Application", uselist=False,
                                          primaryjoin='Application.id == Listing.confirmed_application_id',
                                          foreign_keys=[confirmed_application_id])
