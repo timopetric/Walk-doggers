@@ -1,4 +1,6 @@
-import React from "react";
+import * as React from 'react';
+import {useContext, useEffect, useState} from "react";
+import AuthContext from '../navigation/AuthContext';
 
 import {
   Image,
@@ -11,21 +13,32 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import {
-  BLUE,
-  GRAY_3,
-  GRAY_0,
-  GRAY_1,
-  GRAY_2,
-  ORANGE,
-} from "../constants/Colors";
+import {BLUE, GRAY_3, GRAY_0, GRAY_1, GRAY_2,ORANGE, RED} from "../constants/Colors";
 import { useNavigation } from "@react-navigation/native";
+import {Ionicons} from '@expo/vector-icons';
+import {BASE_API_URL} from "../localConstants";
+
 
 const dimensions = Dimensions.get("window");
 const imgWidth = dimensions.width * 0.85;
 
+const deleteListing = (getJwt: any, listing_id: any) => {
+  console.log(getJwt() + " " + listing_id)
+  fetch(BASE_API_URL + "/listings/" + listing_id, {
+    method: "DELETE",
+    headers: {
+      accept: "application/json",
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + getJwt(),
+    },
+  }).then(async (response) => {
+    
+  });
+};
+
 const Card = (props: any) => {
   const navigation = useNavigation();
+  const {getJwt, isAdmin} = useContext(AuthContext);
   const {
     date,
     day,
@@ -39,6 +52,7 @@ const Card = (props: any) => {
     modConfirmed,
     navigateTo,
     payload,
+    listing_id
   } = props;
   return (
     <View style={styles.card}>
@@ -77,6 +91,9 @@ const Card = (props: any) => {
           </TouchableOpacity>
         </View>
       </View>
+      {isAdmin() && <TouchableOpacity style={styles.delete} onPress={() => deleteListing(getJwt, listing_id)}>
+        <Ionicons name="trash-outline" size={50} style={{color: RED}}></Ionicons>
+      </TouchableOpacity>}
     </View>
   );
 };
@@ -167,5 +184,10 @@ const styles = StyleSheet.create({
     fontFamily: "red-hat-text-500",
     color: ORANGE,
   },
+  delete: {
+    position: "absolute",
+    right:5,
+    top:5
+  }
 });
 export default Card;

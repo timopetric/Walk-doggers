@@ -167,9 +167,15 @@ const CarouselCards = (props) => {
             const date_from = new Date(item.date_from.toString());
             const date_to = new Date(item.date_to.toString());
             const hours = `${format(date_from, "HH:mm")} - ${format(date_to, "HH:mm")}`;
-            const ids = item.applications.map(application => {
-                return application?.applied_user?.id
-            });
+            let ids = []
+            if (item.confirmed_application == null) {
+                ids = item.applications.map(application => {
+                    return application?.applied_user?.id
+                });
+            } else {
+                ids = [item?.confirmed_application?.applied_user?.id]
+            }
+
             let obj = {
                 title: item.title,
                 date: daysOfWeek[date_from.getDay()],

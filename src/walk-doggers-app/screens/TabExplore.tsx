@@ -330,6 +330,7 @@ function renderItem({item}: any) {
             date={date_item}
             day={daysOfWeek[date_from.getDay()]}
             distance={item.distance}
+            listing_id={item.id}
             time={hours}
             navigateTo={'ListingScreen'}
             payload={{listing: item}}
