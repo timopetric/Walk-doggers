@@ -11,3 +11,8 @@ Vsaka skupina, ki je sestavljena iz 4 oz. 5 članov, mora razviti lastni projekt
 * **2. LP** - [Zajem zahtev](docs/zajem-zahtev),
 * **3. LP** - [Načrt rešitve](docs/nacrt) in
 * **4. LP** - [Implementacija](src).
+
+Za namestitev aplikacije potrebujete nameščen [Expo](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US) iz Google Play. V Expo lahko skenirate spodnjo QR kodo, ki vam bo naložil našo aplikacijo [Wallk Doggers](https://expo.io/@walk-doggers).
+
+
+![alt text](https://cdn.discordapp.com/attachments/811599453785686016/846165152494518272/unknown.png)
