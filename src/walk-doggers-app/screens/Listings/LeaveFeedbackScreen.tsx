@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {ScrollView, View, Text, Image, StyleSheet, Platform, Dimensions} from "react-native";
 import MessageThread from "../../components/MessageThread";
 import {GRAY_0, GRAY_2, LIGHT_BG, LIGHT_BG2, ORANGE, PINKISH_WHITE, PRIMARY, YELLOW} from "../../constants/Colors";
@@ -9,15 +9,14 @@ import AuthContext from "../../navigation/AuthContext";
 
 const scrWidth = Dimensions.get('window').width;
 
-let ratingValue = -1;
-
 export default function LeaveFeedbackScreen({navigation, route}: any){
     const listing = route.params.listing;
     const author = listing.author;
     const {getJwt, getRoles} = useContext(AuthContext);
+    const [ratingValue, setRatingValue] = useState(-1);
     //console.log(author);
 
-    console.log(listing);
+    //console.log(listing);
 
     const onPressLeaveFeedback = () => {
         if (ratingValue > -1){
@@ -55,6 +54,9 @@ export default function LeaveFeedbackScreen({navigation, route}: any){
 
             <Text style={styles.rateText}>Rate {author.first_name} {author.last_name}</Text>
 
+            <View>
+
+            </View>
             <Rating
                 style={styles.rating}
                 type='custom'
@@ -65,11 +67,17 @@ export default function LeaveFeedbackScreen({navigation, route}: any){
                 ratingBackgroundColor={GRAY_2}
                 ratingColor={YELLOW}
                 tintColor={LIGHT_BG2}
-                onFinishRating={(value) => ratingValue = value}
+                onFinishRating={(value) => setRatingValue(value)}
             />
 
             <View style={{flexDirection: "row", flex: 1, width: scrWidth * 0.7, }}>
-                <ButtonCustom text={'Submit feedback'} color={'purple'} style={{ flex: 1, marginTop: 50, }} onPress={onPressLeaveFeedback} />;
+                <ButtonCustom
+                    text={'Submit feedback'}
+                    color={ratingValue == -1 ? 'gray': 'purple'}
+                    style={{ flex: 1, marginTop: 50, }}
+                    onPress={onPressLeaveFeedback}
+                    disabled={ratingValue == -1}
+                />
             </View>
         </View>
     )
