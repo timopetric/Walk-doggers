@@ -135,9 +135,9 @@ const ListingScreen = (props) => {
 
     const apply = () => {
         imInterested()
-        navigation.navigate('Inbox', {screen: 'MessageScreen'}, listing.author)
+        navigation.navigate('Inbox', {screen: 'MessageScreen', params: listing.author})
 
-        navigation.navigate('MessageScreen', listing.author);
+        // navigation.navigate('MessageScreen', listing.author);
 
         // createConversation().then(response => {
         //     if (response.ok) {
