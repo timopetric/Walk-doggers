@@ -9,10 +9,13 @@ import {useEffect, useState, useContext} from "react";
 import {format} from "date-fns";
 import {BASE_API_URL} from "../../localConstants";
 import {LIGHT_BG2} from "../../constants/Colors";
+import {useNavigation} from "@react-navigation/core";
 
 
 export function Applied(props) {
     const {getJwt} = useContext(AuthContext);
+    const navigation = useNavigation();
+
     const [applied, setApplied] = useState([]);
 
     useEffect(() => {
@@ -80,6 +83,7 @@ export function Applied(props) {
                 dateDay={daysOfWeek[date_from.getDay()]}
                 time={hours}
                 application={application}
+                navigation={navigation}
             />
         );
     }
