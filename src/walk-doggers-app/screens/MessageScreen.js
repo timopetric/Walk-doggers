@@ -149,7 +149,7 @@ export default function ChatScreen(props: any) {
                 wrapperStyle={{
                     right: {
                         backgroundColor: PINKISH_BUBLE,
-                        padding: 5
+                        padding: 5,
                     },
                     left: {
                         backgroundColor: GRAY_BUBLE,
@@ -214,8 +214,14 @@ export default function ChatScreen(props: any) {
                 </View>
                 <View style={{flex: 1}}></View>
             </View>
-            <View style={{flex: 1, borderRadius: 30, backgroundColor: "white"}}>
-                <CarouselListings inChat={true} user={user}/>
+            <View style={{
+                flex: 1,
+                borderTopLeftRadius: 30,
+                borderTopRightRadius: 30,
+                backgroundColor: "white",
+                overflow: "hidden"
+            }}>
+
                 <GiftedChat
                     messages={messages}
                     onSend={(messages) => onSend(messages)}
@@ -229,9 +235,28 @@ export default function ChatScreen(props: any) {
                     scrollToBottomComponent={scrollToBottomComponent}
                     timeTextStyle={{left: {color: 'black'}, right: {color: 'black'}}}
                     textInputStyle={{paddingTop: 10}}
+                    // minInputToolbarHeight={25}
+                    // bottomOffset={-10}
                     // minInputToolbarHeight={100}
                     //renderInputToolbar={renderInputToolbar}
                 />
+                <View style={{
+                    height: 120,
+                    backgroundColor: 'rgba(255,255,255,0.88)',
+                    position: 'absolute',
+                    // borderRadius: 30,
+                    borderTopLeftRadius: 30,
+                    borderTopRightRadius: 30,
+                    width: "100%"
+                }}/>
+                <View style={{
+                    position: "absolute", shadowOpacity: 0.0, shadowRadius: 10, shadowColor: PRIMARY, shadowOffset: {
+                        width: 2,
+                        height: 3,
+                    },
+                }}>
+                    <CarouselListings inChat={true} user={user}/>
+                </View>
             </View>
         </SafeAreaView>
     );
