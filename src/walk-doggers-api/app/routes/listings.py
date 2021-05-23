@@ -122,6 +122,9 @@ def administrator_delete_listing(*, db: Session = Depends(get_db), id: UUID4) ->
     if listing is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail="Error, listing does not exist")
 
+    for application in listing.applications:
+        appl = actions.application.remove(db=db, id=application.id)
+
     listing = actions.listing.remove(db=db, id=listing.id)
     if listing:
         return Response(status_code=HTTP_204_NO_CONTENT)
