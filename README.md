@@ -12,14 +12,30 @@ Vsaka skupina, ki je sestavljena iz 4 oz. 5 članov, mora razviti lastni projekt
 * **3. LP** - [Načrt rešitve](docs/nacrt) in
 * **4. LP** - [Implementacija](src).
 
-Za namestitev aplikacije potrebujete nameščen [Expo](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US) iz Google Play. V Expo lahko skenirate spodnjo QR kodo, ki vam bo naložil našo aplikacijo [Walk Doggers](https://expo.io/@walk-doggers).
+<br>
+
+## Expo testiranje aplikacije na android napravah
+
+Za namestitev aplikacije potrebujete nameščeno [**EXPO aplikacijo**](https://play.google.com/store/apps/details?id=host.exp.exponent&hl=en&gl=US) iz Google Play. V Expo lahko skenirate spodnjo QR kodo, ki vam bo naložil našo aplikacijo [Walk Doggers](https://expo.io/@walk-doggers).
 
 
 ![alt text](https://cdn.discordapp.com/attachments/811599453785686016/846165152494518272/unknown.png)
 
 <br>
 
-### Navodila v angleščini za namestitev in testiranje na lokalnem okolju:
+### Posnetki zaslona
+
+<p float="left"> 
+  <img src="/docs/zajem-zahtev/images/zaslonske-maske/explore-listing.png" width="300" />
+  <img src="/docs/zajem-zahtev/images/zaslonske-maske/listings-applied-short.png" width="300" />
+  <img src="/docs/zajem-zahtev/images/zaslonske-maske/inbox-chat-completed.png" width="300" />
+</p>
+
+[Več posnetkov zaslona najdete s klikom na ta naslov](https://github.com/tpo-2020-2021/LP234-21/tree/master/docs/zajem-zahtev#7-osnutki-zaslonskih-mask)
+
+<br>
+
+## Navodila v angleščini za namestitev in testiranje na lokalnem okolju:
 
 *prerequisites: Installed node, npm, docker, docker-compose, ubuntu linux recommended*
 
