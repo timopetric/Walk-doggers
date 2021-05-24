@@ -1,4 +1,7 @@
 {
+  "title": "walk-doggers",
+  "description": "walk doggers description",
+  "primaryColor": "#000000",
   "expo": {
     "name": "walk-doggers-app",
     "slug": "walk-doggers-app",
@@ -21,14 +24,17 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSPhotoLibraryUsageDescription": ["Uploading dog photos"]
+        "NSPhotoLibraryUsageDescription": [
+          "Uploading dog photos"
+        ]
       }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.WalkDoggers.si"
     },
     "web": {
       "favicon": "./assets/images/favicon.png"

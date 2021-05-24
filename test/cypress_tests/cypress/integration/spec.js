@@ -1,22 +1,22 @@
 // REGISTER USER
-// describe('Register', () => {
-//   it('Go on register page', () => {
-//     cy.visit("http://localhost:19006/")
-//     cy.contains("Sign Up", { timeout: 10000 }).click()
-//     cy.contains("FIRST NAME")
-//     cy.contains("LAST NAME")
-//   })
-//   it("Entering register data...", () => {
-//     cy.get('input[placeholder="Enter your firstname"]').first().click({ force: true }).type('Anja');
-//     cy.get('input[data-testid="ln"]').first().click({ force: true }).type('Novak');
-//     cy.get('.r-marginBottom-8d26hk > [data-testid=email]').first({ force: true }).click({ force: true }).type('aaa@a.a', { force: true });
-//     // cy.get('input[placeholder*="email"]').first().click({ force: true }).type('aaa@a.a');
-//     cy.get('.r-marginBottom-8d26hk > [data-testid=pass]').first().click({ force: true }).type('Dobr0$Geslo');
-//     cy.get('.r-marginBottom-8d26hk > [data-testid=reg]').first().click()
-//     // cy.get('div[data-testid="log"]').first().click({force: true})
-//     cy.contains("Dogs for rent nearby")
-//   })
-// })
+describe('Register', () => {
+  it('Go on register page', () => {
+    cy.visit("http://localhost:19006/")
+    cy.contains("Sign Up", { timeout: 10000 }).click()
+    cy.contains("FIRST NAME")
+    cy.contains("LAST NAME")
+  })
+  it("Entering register data...", () => {
+    cy.get('input[placeholder="Enter your firstname"]').first().click({ force: true }).type('Anja');
+    cy.get('input[data-testid="ln"]').first().click({ force: true }).type('Novak');
+    cy.get('.r-marginBottom-8d26hk > [data-testid=email]').first({ force: true }).click({ force: true }).type('aaa@a.a', { force: true });
+    // cy.get('input[placeholder*="email"]').first().click({ force: true }).type('aaa@a.a');
+    cy.get('.r-marginBottom-8d26hk > [data-testid=pass]').first().click({ force: true }).type('Dobr0$Geslo');
+    cy.get('.r-marginBottom-8d26hk > [data-testid=reg]').first().click()
+    // cy.get('div[data-testid="log"]').first().click({force: true})
+    cy.contains("Dogs for rent nearby")
+  })
+})
 
 // LOGIN USER
 describe('Log in', () => {
@@ -38,7 +38,7 @@ describe('Log in', () => {
   })
 })
 
-/*
+
 /////////////////////////////////////// SETTINGS START ///////////////////////////////////////////////////////////
 // SETTINGS - PROFILE
 describe('Settings - Profile', () => {
@@ -94,15 +94,17 @@ describe('Settings - Become a reporter', () => {
     cy.get(':nth-child(3) > .r-borderBottomColor-uuzew').click()
     cy.get('.r-padding-1pcd2l5 > .r-cursor-1loqt21 > .css-view-1dbjc4n > .css-text-901oao').contains("Become a reporter")
   })
-  it('Become a reporter', () => {
+  it('agree', () => {
     cy.get('.r-padding-1pcd2l5 > .r-cursor-1loqt21 > .css-view-1dbjc4n').scrollIntoView().click()
-    cy.get('[style="transition-duration: 0.25s;"] > .r-borderBottomColor-uuzew').should('not.exist');
   })
+  // it('done', () => {
+  //   cy.get('[style="transition-duration: 0.25s;"] > .r-borderBottomColor-uuzew').should('not.exist');
+  // })
 })
 /////////////////////////////////////// SETTINGS END ///////////////////////////////////////////////////////////
-*/
+//*/
 
-/*
+
 /////////////////////////////////////// BLOG START ///////////////////////////////////////////////////////////
 // BLOG - ADD NEW BLOG POST
 describe('Blog - Add new blog post', () => {
@@ -123,7 +125,7 @@ describe('Blog - Add new blog post', () => {
   it("Login with moderator account to check if listing is unpublished", () => {
     // cy.visit("http://localhost:19006/")
     cy.visit('http://localhost:19006/', {
-      onBeforeLoad (win) {
+      onBeforeLoad(win) {
         const latitude = 46.38879;
         const longitude = 14.15899;
         cy.stub(win.navigator.geolocation, 'getCurrentPosition').callsFake((cb) => {
@@ -148,7 +150,7 @@ describe('Blog - Add new blog post', () => {
   it("Login back in with user account to check if listing is now published", () => {
     // cy.visit("http://localhost:19006/")
     cy.visit('http://localhost:19006/', {
-      onBeforeLoad (win) {
+      onBeforeLoad(win) {
         const latitude = 46.38879;
         const longitude = 14.15899;
         cy.stub(win.navigator.geolocation, 'getCurrentPosition').callsFake((cb) => {
@@ -167,4 +169,4 @@ describe('Blog - Add new blog post', () => {
   })
 })
 /////////////////////////////////////// BLOG  END///////////////////////////////////////////////////////////
-*/
+//*/
