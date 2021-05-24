@@ -46,6 +46,14 @@ jobs:
         working-directory: ./test/cypress_tests/
         run: docker run --rm -v $PWD:/e2e -w /e2e --network=host -e CYPRESS_screenshotOnRunFailure=false -e CYPRESS_VIDEO=false cypress/included:7.2.0
 
+      - name: Deploy on heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: ${{ secrets.HEROKU_PRODUCTION }}
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          branch: production
+
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
