@@ -53,5 +53,11 @@ jobs:
         with:
           expo-version: 4.x
           expo-token: ${{ secrets.EXPO_TOKEN }}
-      - run: yarn install
-      - run: expo publish
+
+      - name: Run yarn install
+        working-directory: ./src/walk-doggers-app/
+        run: yarn install
+
+      - name: Run expo publish
+        working-directory: ./src/walk-doggers-app/
+        run: expo publish
