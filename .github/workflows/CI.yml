@@ -16,13 +16,13 @@ jobs:
           repository: tpo-2020-2021/LP234-21
           ref: test
 
-#      - name: Create default .env file for api
-#        working-directory: ./src/walk-doggers-api/
-#        run: cp default.env .env
+      - name: Create default .env file for api
+        working-directory: ./src/walk-doggers-api/
+        run: cp default.env .env
 
-#      - name: Start API and databases with docker-compose
-#        working-directory: ./src/walk-doggers-api/
-#        run: docker-compose up -d
+      - name: Start API and databases with docker-compose
+        working-directory: ./src/walk-doggers-api/
+        run: docker-compose up -d
 
       - name: Run npm install for app
         working-directory: ./src/walk-doggers-app/
@@ -40,7 +40,7 @@ jobs:
         run: expo start:web &
 
       - name: wait-on page and echo hello and print page html
-        run: wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
+        run: wait-on http://localhost:80/docs && wait-on http://localhost:19006/ && echo hello && curl http://localhost:19006/
 
       - name: Cypress run frontend test
         working-directory: ./test/cypress_tests/
