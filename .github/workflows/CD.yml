@@ -54,6 +54,10 @@ jobs:
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
           branch: production
 
+      - name: Run expo publish
+        working-directory: ./src/walk-doggers-app/
+        run: echo "export const BASE_API_URL = 'https://walk-doggers.herokuapp.com/';" > localConstants.js
+
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
