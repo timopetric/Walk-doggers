@@ -1,5 +1,7 @@
 # Lastni projekt pri predmetu TPO
 
+**This project was created, build upon on and used as a learning tool for Software Engineering 2020/2021 course at Faculty of Computer and Information Science, University of Ljubljana**
+
 ## Status delovnih tokov
 
 ![](https://github.com/tpo-2020-2021/LP234-21/workflows/Neprekinjena%20integracija/badge.svg)<br>
